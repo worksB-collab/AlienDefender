@@ -49,9 +49,9 @@ public class Tower extends ActiveObject {
             }
             i -= 24;
         }
-        for (Point range : range) {
-            System.out.println(range);
-        }
+//        for (Point range : range) {
+//            System.out.println(range);
+//        }
         return range;
     }
 
@@ -61,7 +61,7 @@ public class Tower extends ActiveObject {
                     && alien.getY() >= range.getY() - 2 && alien.getY() <= range.getY() + 2) {
                 changeDirection(alien);
                 attack(alien);
-                System.out.println("555");
+                System.out.println("Attack");
             }
         }
     }

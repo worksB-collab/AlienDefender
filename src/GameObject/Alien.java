@@ -8,7 +8,6 @@ package GameObject;
 import java.awt.Graphics;
 import static Value.Global.*;
 import java.awt.Point;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -31,20 +30,21 @@ public class Alien extends ActiveObject {
         this.height = height;
         this.width = width;
         nextPosition = 0;
-        route = new LinkedList<Point>();
+        if(route == null)
+            route = new LinkedList<Point>();
     }
 
-    public static void setRoute(LinkedList <Point>r) {
+    public static void setRoute(LinkedList<Point> r) {
         for (int i = 0; i < r.size(); i++) {
-        route.add(r.get(i));
+            route.add(r.get(i));
         }
         for (int i = 0; i < 5; i++) {
             Point p = new Point((int) route.getLast().getX(), (int) route.getLast().getY() + SIZE_GRID);
             route.addLast(p);
         }
     }
-    
-    public int getAlienNum(){
+
+    public int getAlienNum() {
         return alienNum;
     }
 
@@ -54,19 +54,20 @@ public class Alien extends ActiveObject {
             return;
         }
         if (route.get(nextPosition) != null) {
-        }
-        Point p = route.get(nextPosition);
-        if (x != p.getX() || y != p.getY()) {
-            if (x < p.getX()) {
-                changeDirection(RIGHT);
-            }
-            if (y < p.getY()) {
-                changeDirection(DOWN);
-            }
-            if (x >= p.getX() - speed && x <= p.getX() + speed
-                    && y >= p.getY() - speed && y <= p.getY() + speed) {
-                Point last = route.getLast();
-                nextPosition++;
+
+            Point p = route.get(nextPosition);
+            if (x != p.getX() || y != p.getY()) {
+                if (x < p.getX()) {
+                    changeDirection(RIGHT);
+                }
+                if (y < p.getY()) {
+                    changeDirection(DOWN);
+                }
+                if (x >= p.getX() - speed && x <= p.getX() + speed
+                        && y >= p.getY() - speed && y <= p.getY() + speed) {
+                    Point last = route.getLast();
+                    nextPosition++;
+                }
             }
         }
         move(direction);

@@ -22,7 +22,6 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -39,6 +38,7 @@ public class GameScene1 extends Scene {
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
     private LinkedList<Alien> aliens;
+    private LinkedList<Alien> deadAliens; //
     private LinkedList<Tower> towers;
     private int count;
     private DelayCounter moveDelay, genDelay;
@@ -50,6 +50,7 @@ public class GameScene1 extends Scene {
         buttonList = new LinkedList();
         imageController = ImageController.genInstance();
         aliens = new LinkedList<Alien>();
+        deadAliens = new LinkedList<Alien>(); //
         towers = new LinkedList<Tower>();
         towers.add(new Tower1(50, 75));
         moveDelay = new DelayCounter(1);
@@ -106,7 +107,7 @@ public class GameScene1 extends Scene {
                 if (aliens.get(i).getY() >= 639) {
                     aliens.remove(i);
                 }
-                if (aliens.get(i).getHp() <= 0)// kill count, alien type yet updated
+                if (aliens.get(i).isDead())// kill count, alien type yet updated
                 {
                     switch (aliens.get(i).getAlienNum()) {
                         case 1:
@@ -281,7 +282,7 @@ public class GameScene1 extends Scene {
             }
         }
         for (int i = 0; i < setPoint.size(); i++) {
-            System.out.println("SetPoint " + (i + 1) + " :\t" + setPoint.get(i).getX() + "," + setPoint.get(i).getY());
+//            System.out.println("SetPoint " + (i + 1) + " :\t" + setPoint.get(i).getX() + "," + setPoint.get(i).getY());
         }
         genButton();
 
