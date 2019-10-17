@@ -10,6 +10,7 @@ import Controller.CommandSolver.CommandWrapper;
 import java.awt.Color;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 /**
@@ -29,7 +30,6 @@ public class GameJPanel extends JPanel{
     public void update(CommandWrapper commands) {
         sceneController.sceneUpdate(commands);
     }
-    
     @Override
     public void paintComponent(Graphics g) {
         sceneController.paint(g);

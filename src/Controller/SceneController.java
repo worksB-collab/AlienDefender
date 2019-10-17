@@ -35,6 +35,7 @@ public class SceneController {
     }
     
     public void paint(Graphics g){
+
         currentScene.paint(g);
     }
 }
