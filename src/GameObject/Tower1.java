@@ -18,18 +18,8 @@ public class Tower1 extends Tower {
     private TowerHelper tHelper;
 
     public Tower1(int x, int y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 10, 1 * Global.SPEED);
-        tHelper = new TowerHelper(5);
-    }
-
-    @Override
-    public void attack(Alien alien) {
-        alien.isAttacked(this);
-    }
-
-    @Override
-    public void update() {
-
+        super(x, y, SIZE_GRID, SIZE_GRID, 3, 1 * Global.SPEED);
+        tHelper = new TowerHelper(0);
     }
 
     @Override

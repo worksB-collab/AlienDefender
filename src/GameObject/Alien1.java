@@ -5,9 +5,9 @@
  */
 package GameObject;
 
-import Controller.DelayCounter;
 import java.awt.Graphics;
 import Value.Global;
+import static Value.Global.*;
 
 /**
  *
@@ -21,17 +21,17 @@ public class Alien1 extends Alien {
     
 
     public Alien1(int x, int y) {
-        super(x, y, 25, 25 ,10 , 1*Global.SPEED); //x, y, width, height, hp, speed
+        super(x, y, SIZE_GRID, SIZE_GRID ,10 , 1*Global.SPEED); //x, y, width, height, hp, speed
         aHelper = new AlienHelper(4);
         act = 0;
     }
 
     @Override
-    public void paint(Graphics g) { // new
-        if(isDead()){
-            aHelper.paint(g, x, y, width, height, DEAD[act]);
-            return;
-        }
+    public void paint(Graphics g) { 
+//        if(isDead()){
+//            aHelper.paint(g, x, y, width, height, DEAD[act]);
+//            return;
+//        }
         aHelper.paint(g, x, y, width, height, ACT[act]);
     }
 }

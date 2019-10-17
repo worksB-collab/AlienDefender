@@ -7,8 +7,10 @@ package GameObject;
 
 import Controller.ImageController;
 import Value.Global;
+import static Value.Global.*;
 import Value.Path;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -16,35 +18,36 @@ import java.awt.image.BufferedImage;
  * @author billy
  */
 public class TowerHelper {
+
     private BufferedImage img;
     private int actorPosition;
 
-    public TowerHelper(int actor) {    
-        img = getActor(actor);         
-        actorPosition = actor % 6;   
+    public TowerHelper(int actor) {
+        img = getActor(actor);
+        actorPosition = actor % 6;
     }
 
-    private BufferedImage getActor(int actor) { 
+    private BufferedImage getActor(int actor) {
         ImageController irc = ImageController.genInstance();
-        if (actor >= 0 && actor < 6) {  
-            return irc.tryGetImage(Path.Image.ALIEN1);
+        if (actor >= 0 && actor < 6) {
+            return irc.tryGetImage(Path.Image.TOWER1);
         }
-        if (actor < 12) {         
-            return irc.tryGetImage(Path.Image.ALIEN1); // not yet updated
+        if (actor < 12) {
+            return irc.tryGetImage(Path.Image.TOWER1); // not yet updated
         }
         return null;
     }
-                                                             
-    public void paint(Graphics g, int x, int y, int width, int height, int act){
-        if(img == null){    
-            return;                                               
-        }        
-        
-        int dy = 65 * (actorPosition); 
+
+    public void paint(Graphics g, int x, int y, int width, int height, int direction) {
+        if (img == null) {
+            return;
+        }
+        int dx = 65 * (actorPosition);
+        Graphics2D graphic = img.createGraphics();
+        graphic.rotate(direction);
+        graphic.rotate(Math.toRadians(direction), width / 2, height / 2);
         g.drawImage(img, x, y, x + width, y + height,
-                act * Global.SIZE_ALIEN, dy, 
-                65 + act * Global.SIZE_ALIEN, dy + Global.SIZE_ALIEN, null);  
+                dx, 0, dx+SIZE_OBJECT, SIZE_OBJECT, null);
+
     }
 }
-
-

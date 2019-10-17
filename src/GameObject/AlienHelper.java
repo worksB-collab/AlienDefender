@@ -43,8 +43,8 @@ public class AlienHelper {
 
         int dy = 65 * (actorPosition);
         g.drawImage(img, x, y, x + width, y + height,
-                act * Global.SIZE_ALIEN, dy,
-                65 + act * Global.SIZE_ALIEN, dy + Global.SIZE_ALIEN, null);
+                act * Global.SIZE_OBJECT, dy,
+                65 + act * Global.SIZE_OBJECT, dy + Global.SIZE_OBJECT, null);
     }
 
 }

@@ -7,7 +7,6 @@ package GameObject;
 
 import Controller.DelayCounter;
 import Value.Global;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -82,12 +81,9 @@ public class Button extends GameObject{
     
     @Override
     public void paint(Graphics g){
-        if(isClicked){
-            g.setXORMode(Color.ORANGE);
-        }
         g.drawImage(nowImage, x, y, width, height, null);
         g.drawRect(x, y, width, height);
-        g.setPaintMode();
+        
     }
     
     

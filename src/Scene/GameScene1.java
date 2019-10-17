@@ -38,7 +38,8 @@ public class GameScene1 extends Scene {
     private LinkedList<Point> route;
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
-    private LinkedList<Alien> aliens; // new
+    private LinkedList<Alien> aliens; 
+    private LinkedList<Tower> towers;
     private int count;
     private DelayCounter moveDelay, genDelay;
     private Point spot;
@@ -48,6 +49,8 @@ public class GameScene1 extends Scene {
         buttonList = new LinkedList();
         imageController = ImageController.genInstance();
         aliens = new LinkedList<Alien>();
+        towers = new LinkedList<Tower>();
+        towers.add(new Tower1(50, 75));
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
         mouseCommandListener = new MouseCommandListener() {
@@ -102,6 +105,13 @@ public class GameScene1 extends Scene {
             removeAlien();
             for (Alien alien : aliens) {
                 alien.update();
+            }
+            if (aliens.size() != 0) {
+                for (int i = 0; i < towers.size(); i++) {
+                    for (int j = 0; j < aliens.size(); j++) {
+                        towers.get(i).detection(aliens.get(j));
+                    }
+                }
             }
         }
         if (popWindow != null) {
