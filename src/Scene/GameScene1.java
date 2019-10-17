@@ -34,6 +34,7 @@ public class GameScene1 extends Scene {
     private ImageController imageController;
     private BufferedImage image;
     private PopUpWindow popWindow;
+    private LinkedList<Point> standardRoute;
     private LinkedList<Point> route;
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
@@ -96,6 +97,7 @@ public class GameScene1 extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
+        
         if (moveDelay.update()) {
             if (count < 50) { // first chapter > 50 aliens
                 if (genDelay.update()) {
@@ -171,7 +173,7 @@ public class GameScene1 extends Scene {
         if (popWindow != null) {
             popWindow.paint(g);
             g.setColor(Color.red);
-            g.drawRect((int) spot.getX(), (int) spot.getY(), 25, 25);
+            g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
         }
     }
@@ -183,7 +185,8 @@ public class GameScene1 extends Scene {
         }
         return mouseCommandListener;
     }
-
+    
+    //paint
     private void paintGrass(Graphics g) {
         BufferedImage imgG = imageController.tryGetImage("/Resources/Images/Background/grass.png");
         int x0, y0;
@@ -197,8 +200,22 @@ public class GameScene1 extends Scene {
             y0 += Global.MIN_PICTURE_SIZE;
         }
     }
+    
+    private void paintRoad(Graphics g) {
+        BufferedImage imgD = imageController.tryGetImage("/Resources/Images/Background/dirt.png");
+        for (Point p : route) {
+            g.drawImage(imgD, (int) p.getX(), (int) p.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+        }
+    }
 
-    private void genRoad() {
+    private void paintSetPoint(Graphics g) {
+        BufferedImage imgS = imageController.tryGetImage("/Resources/Images/Background/setPoint.png");
+        for (Point tmp : setPoint) {
+            g.drawImage(imgS, (int) tmp.getX(), (int) tmp.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+        }
+    }
+    //generate
+    private void genRandomRoad() {
         route = new LinkedList();
         setPoint = new LinkedList();
 
@@ -249,7 +266,13 @@ public class GameScene1 extends Scene {
         }
         genSetPoint();
     }
-
+    private void genStandardRoute(){
+        standardRoute = new LinkedList<Point>();
+        for(int i = 0; i < route.size(); i++){
+            Point p = route.get(i);
+            standardRoute.add(new Point((int)p.getX(), (int)p.getY()));
+        }
+    }
     private void genSetPoint() {
         int maxX = 31 * Global.MIN_PICTURE_SIZE;
         int maxY = 23 * Global.MIN_PICTURE_SIZE;
@@ -290,33 +313,16 @@ public class GameScene1 extends Scene {
 
     private void reCheckSetPoint() {
 
-        double d = Global.MIN_PICTURE_SIZE / route.get(0).distance(route.get(1));
-        for (int i = 0; i < route.size() - 1; i++) {
+        double d = Global.MIN_PICTURE_SIZE / (double)Global.STANDAR_MIN_SIZE;
+        for(int i = 0 ; i < route.size() - 1; i++){
             Point p = route.get(i);
-            p.x *= d;
-            p.y *= d;
-        }
-        System.out.println("Global Size: " + Global.MIN_PICTURE_SIZE);
-        for (int i = 0; i < route.size(); i++) {
-            Point p = route.get(i);
-            System.out.println("Route Point " + (i + 1) + "\t = " + p.getX() + " , " + p.getY());
+            Point ps = standardRoute.get(i);
+            System.out.println(ps.x);
+            p.x = (int)(ps.getX() * d);
+            System.out.println(p.x);
+            p.y = (int)(ps.getY() * d) ;
         }
         genSetPoint();
-
-    }
-
-    private void paintRoad(Graphics g) {
-        BufferedImage imgD = imageController.tryGetImage("/Resources/Images/Background/dirt.png");
-        for (Point p : route) {
-            g.drawImage(imgD, (int) p.getX(), (int) p.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
-        }
-    }
-
-    private void paintSetPoint(Graphics g) {
-        BufferedImage imgS = imageController.tryGetImage("/Resources/Images/Background/setPoint.png");
-        for (Point tmp : setPoint) {
-            g.drawImage(imgS, (int) tmp.getX(), (int) tmp.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
-        }
     }
 
     private void addSetPoint(int x, int y) {
@@ -325,15 +331,8 @@ public class GameScene1 extends Scene {
         setPoint.add(new Point(x, y + Global.MIN_PICTURE_SIZE));
         setPoint.add(new Point(x - Global.MIN_PICTURE_SIZE, y));
         setPoint.add(new Point(x + Global.MIN_PICTURE_SIZE, y));
-
-        //distance 50(2 square)
-//        setPoint.add(new Point(x, y - 50));
-//        setPoint.add(new Point(x, y + 50));
-//        setPoint.add(new Point(x - 50, y));
-//        setPoint.add(new Point(x + 50, y));
         setPoint.add(new Point(x + Global.MIN_PICTURE_SIZE, y - Global.MIN_PICTURE_SIZE));
         setPoint.add(new Point(x - Global.MIN_PICTURE_SIZE, y + Global.MIN_PICTURE_SIZE));
-
     }
 
     private void genButton() {
@@ -362,26 +361,6 @@ public class GameScene1 extends Scene {
             });
             buttonList.add(button);
         }
-    }
-
-    private void genTower(int x, int y, int index) {
-        Button button = new Button(x, y, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE,
-                imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png"),
-                imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png"),
-                imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png"));
-        button.setButtonListener(new ButtonListener() {
-
-            @Override
-            public void onClick(int x, int y) {
-
-            }
-
-            @Override
-            public void hover(int x, int y) {
-
-            }
-        });
-        buttonList.set(index, button);
     }
 
     private void genAlien() {

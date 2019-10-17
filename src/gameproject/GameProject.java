@@ -20,7 +20,7 @@ public class GameProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-;        JFrame frame = new JFrame("Alien Defender");
+        JFrame frame = new JFrame("Alien Defender");
         GameJPanel gPanel = new GameJPanel();
         frame.setBounds(400, 300, 816, 639);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,8 +51,9 @@ public class GameProject {
                 Double d1 = new Double(rw / rh);
                 Double d2 = new Double(8 / 6);
                 if(d1.floatValue() != d2.floatValue()){
-                    rw = rw / 4 * 4;
-                    rh = rh / 3 * 3;
+                    int r = rw / 4;
+                    rw = r * 4;
+                    rh = r * 3;
                 }
                 gPanel.setSize(rw , rh );
                 //calibration MIN SIZE
