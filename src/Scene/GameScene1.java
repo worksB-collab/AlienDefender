@@ -11,8 +11,8 @@ import Controller.CommandSolver.MouseState;
 import Controller.DelayCounter;
 import Controller.ImageController;
 import Controller.SceneController;
-import GameObject.*; // new
-import static Value.Global.*; // new
+import GameObject.*;
+import static Value.Global.*;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
 import Value.Global;
@@ -38,11 +38,12 @@ public class GameScene1 extends Scene {
     private LinkedList<Point> route;
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
-    private LinkedList<Alien> aliens; 
+    private LinkedList<Alien> aliens;
     private LinkedList<Tower> towers;
     private int count;
     private DelayCounter moveDelay, genDelay;
     private Point spot;
+    private ArrayList<Integer> kills;
 
     public GameScene1(SceneController sceneController) {
         super(sceneController);
@@ -53,6 +54,7 @@ public class GameScene1 extends Scene {
         towers.add(new Tower1(50, 75));
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
+        kills = new ArrayList<Integer>();
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -63,8 +65,8 @@ public class GameScene1 extends Scene {
                     for (Button tmp : buttonList) {
                         if (tmp.isRange(x, y)) {
                             tmp.click(x, y);
-                            
-                            spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE,(y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
+
+                            spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE, (y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
                         }
                     }
 
@@ -82,11 +84,11 @@ public class GameScene1 extends Scene {
 
     @Override
     public void sceneUpdate() {
-        if(buttonList.size() != 0){
-           
-            if(buttonList.get(0).getWidth() != Global.MIN_PICTURE_SIZE){
+        if (buttonList.size() != 0) {
+
+            if (buttonList.get(0).getWidth() != Global.MIN_PICTURE_SIZE) {
 //                reCheckSetPoint();
-                  genFixedRoad();
+                genFixedRoad();
 
             }
         }
@@ -100,22 +102,42 @@ public class GameScene1 extends Scene {
                 }
             }
             for (int i = 0; i < aliens.size(); i++) {
+                aliens.get(i).update();
                 if (aliens.get(i).getY() >= 639) {
                     aliens.remove(i);
                 }
-            }
-            removeAlien();
-            for (Alien alien : aliens) {
-                alien.update();
-            }
-            if (aliens.size() != 0) {
-                for (int i = 0; i < towers.size(); i++) {
-                    for (int j = 0; j < aliens.size(); j++) {
-                        towers.get(i).detection(aliens.get(j));
+                if (aliens.get(i).getHp() <= 0)// kill count, alien type yet updated
+                {
+                    switch (aliens.get(i).getAlienNum()) {
+                        case 1:
+                            kills.set(0, kills.get(0) + 1);
+                            break;
+                        case 2:
+                            kills.set(1, kills.get(1) + 1);
+                            break;
+                        case 3:
+                            kills.set(2, kills.get(2) + 1);
+                            break;
+                        case 4:
+                            kills.set(3, kills.get(3) + 1);
+                            break;
+                        case 5:
+                            kills.set(4, kills.get(4) + 1);
+                            break;
                     }
                 }
             }
         }
+        removeAlien();
+
+        if (aliens.size() != 0) {
+            for (int i = 0; i < towers.size(); i++) {
+                for (int j = 0; j < aliens.size(); j++) {
+                    towers.get(i).detection(aliens.get(j));
+                }
+            }
+        }
+
         if (popWindow != null) {
             popWindow.update();
             if (popWindow.isEnd()) {
@@ -134,18 +156,21 @@ public class GameScene1 extends Scene {
     public void paint(Graphics g) {
         paintGrass(g);
         paintRoad(g);
-        if(buttonList != null){  
-          for (Button button : buttonList) {
-              button.paint(g);
-          }
+        if (buttonList != null) {
+            for (Button button : buttonList) {
+                button.paint(g);
+            }
         }
         for (int i = 0; i < aliens.size(); i++) {
             aliens.get(i).paint(g);
         }
+        for (int i = 0; i < towers.size(); i++) {
+            towers.get(i).paint(g);
+        }
         if (popWindow != null) {
             popWindow.paint(g);
             g.setColor(Color.red);
-            g.drawRect((int)spot.getX(), (int)spot.getY(), 25, 25);
+            g.drawRect((int) spot.getX(), (int) spot.getY(), 25, 25);
             g.setColor(Color.BLACK);
         }
     }
@@ -179,7 +204,7 @@ public class GameScene1 extends Scene {
         int x = 0;
         int y = Global.MIN_PICTURE_SIZE * 2;
         route.add(new Point(x, y));
-        int maxX  = Global.MIN_PICTURE_SIZE * 30;
+        int maxX = Global.MIN_PICTURE_SIZE * 30;
         int maxY = Global.MIN_PICTURE_SIZE * 22;
         while (true) {
             int r = (int) (Math.random() * 2);
@@ -196,14 +221,15 @@ public class GameScene1 extends Scene {
         }
         genSetPoint();
     }
-    private void genFixedRoad(){
+
+    private void genFixedRoad() {
         route = new LinkedList();
         setPoint = new LinkedList();
 
         int x = 0;
         int y = Global.MIN_PICTURE_SIZE * 2;
         route.add(new Point(x, y));
-        int maxX  = Global.MIN_PICTURE_SIZE * 30;
+        int maxX = Global.MIN_PICTURE_SIZE * 30;
         int maxY = Global.MIN_PICTURE_SIZE * 22;
         int r = 0;
         while (true) {
@@ -222,14 +248,15 @@ public class GameScene1 extends Scene {
         }
         genSetPoint();
     }
+
     private void genSetPoint() {
         int maxX = 31 * Global.MIN_PICTURE_SIZE;
         int maxY = 23 * Global.MIN_PICTURE_SIZE;
-        if(setPoint != null){
+        if (setPoint != null) {
             setPoint = new LinkedList<Point>();
         }
-        for(Point p : route){
-            addSetPoint((int)p.getX(), (int)p.getY());
+        for (Point p : route) {
+            addSetPoint((int) p.getX(), (int) p.getY());
         }
         //delete route
         for (int i = 0; i < setPoint.size(); i++) {
@@ -253,27 +280,28 @@ public class GameScene1 extends Scene {
                 }
             }
         }
-        for(int i = 0; i < setPoint.size(); i++){
+        for (int i = 0; i < setPoint.size(); i++) {
             System.out.println("SetPoint " + (i + 1) + " :\t" + setPoint.get(i).getX() + "," + setPoint.get(i).getY());
         }
         genButton();
-        
+
     }
-    private void reCheckSetPoint(){
-        
+
+    private void reCheckSetPoint() {
+
         double d = Global.MIN_PICTURE_SIZE / route.get(0).distance(route.get(1));
-        for(int i = 0 ; i < route.size() - 1; i++){
+        for (int i = 0; i < route.size() - 1; i++) {
             Point p = route.get(i);
             p.x *= d;
             p.y *= d;
         }
         System.out.println("Global Size: " + Global.MIN_PICTURE_SIZE);
-       for(int i = 0 ; i < route.size(); i++){
-           Point p = route.get(i);
-           System.out.println("Route Point " + (i + 1) + "\t = " + p.getX() + " , " + p.getY());
-       }
-       genSetPoint();
-        
+        for (int i = 0; i < route.size(); i++) {
+            Point p = route.get(i);
+            System.out.println("Route Point " + (i + 1) + "\t = " + p.getX() + " , " + p.getY());
+        }
+        genSetPoint();
+
     }
 
     private void paintRoad(Graphics g) {
@@ -308,10 +336,10 @@ public class GameScene1 extends Scene {
     }
 
     private void genButton() {
-        if(buttonList.size() != 0){
+        if (buttonList.size() != 0) {
             buttonList = new LinkedList<Button>();
         }
-        
+
         for (Point tmp : setPoint) {
             int x0 = (int) tmp.getX();
             int y0 = (int) tmp.getY();
@@ -322,7 +350,7 @@ public class GameScene1 extends Scene {
             button.setButtonListener(new ButtonListener() {
                 @Override
                 public void onClick(int x, int y) {
-                    popWindow = new TowerSelectWindow(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, 2* Global.MIN_PICTURE_SIZE);
+                    popWindow = new TowerSelectWindow(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE);
                 }
 
                 @Override
@@ -355,7 +383,7 @@ public class GameScene1 extends Scene {
         buttonList.set(index, button);
     }
 
-    private void genAlien() { // new
+    private void genAlien() {
         if ((int) (Math.random() * 100) > 10) {
             aliens.add(new Alien1(-25, 50));
             Alien.setRoute(route);
@@ -363,7 +391,7 @@ public class GameScene1 extends Scene {
         }
     }
 
-    private void removeAlien() { // new
+    private void removeAlien() {
         for (int i = 0; i < aliens.size(); i++) {
             if (aliens.get(i).isDead()) {
                 aliens.remove(i--);

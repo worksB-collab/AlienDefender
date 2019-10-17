@@ -21,6 +21,7 @@ public class Alien extends ActiveObject {
     protected int hp;
     public int nextPosition;
     private static LinkedList<Point> route;
+    protected int alienNum;
 
     public Alien(int x, int y, int width, int height, int hp, int speed) {
         super(x, y, width, height, speed);
@@ -42,10 +43,14 @@ public class Alien extends ActiveObject {
             route.addLast(p);
         }
     }
+    
+    public int getAlienNum(){
+        return alienNum;
+    }
 
     @Override
     public void update() {
-        if (act == 3 && this.isDead()) {
+        if (this.isDead()) {
             return;
         }
         if (route.get(nextPosition) != null) {
@@ -61,10 +66,6 @@ public class Alien extends ActiveObject {
             if (x >= p.getX() - speed && x <= p.getX() + speed
                     && y >= p.getY() - speed && y <= p.getY() + speed) {
                 Point last = route.getLast();
-//                if (x >= last.getX() - speed && x <= last.getX() + speed
-//                        && y >= last.getY() - speed && y <= last.getY() + speed) {
-//                    hp = 0;
-//                }
                 nextPosition++;
             }
         }

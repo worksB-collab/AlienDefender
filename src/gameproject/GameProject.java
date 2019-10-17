@@ -56,7 +56,7 @@ public class GameProject {
                 }
                 gPanel.setSize(rw , rh );
                 //calibration MIN SIZE
-                Global.MIN_PICTURE_SIZE = (int)Math.sqrt((rh * rw) / 768d);
+//                Global.MIN_PICTURE_SIZE = (int)Math.sqrt((rh * rw) / 768d);
                 frame.repaint();
             }
             

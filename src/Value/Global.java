@@ -40,7 +40,7 @@ public class Global {
     public static final int TOWER4_ATKRANGE = 4* SIZE_GRID;
     public static final int TOWER5_ATKRANGE = 5* SIZE_GRID;
     //Cailbaration
-    public static int MIN_PICTURE_SIZE = 25;
+    public static final int MIN_PICTURE_SIZE = 25;
     //direction
     public static final int UP = 0;
     public static final int DOWN = 1;

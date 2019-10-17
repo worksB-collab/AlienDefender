@@ -11,7 +11,6 @@ import Controller.SceneController;
 import GameObject.Button;
 import Value.Path;
 import Controller.CommandSolver.MouseState;
-import Value.Global;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -50,11 +49,6 @@ public class LoadDataScene extends Scene{
 
     @Override
     public void sceneUpdate() {
-        if(backButton != null){
-            if(backButton.getHeight() != 6 * Global.MIN_PICTURE_SIZE){
-                genButton();
-            }
-        }
         backButton.update();
     }
 
@@ -66,7 +60,7 @@ public class LoadDataScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+        g.drawImage(image, 0, 0, null);
         backButton.paint(g);
     }
     
@@ -76,7 +70,7 @@ public class LoadDataScene extends Scene{
     }
     
     private void genButton(){
-        backButton = new Button( 2 * Global.MIN_PICTURE_SIZE , 2 * Global.MIN_PICTURE_SIZE,  6 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE,
+        backButton = new Button(50, 50,  150, 100,
                 imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT),
                 imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_CLICK),
                 imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_HOVER));
