@@ -35,7 +35,7 @@ public class TowerSelectWindow extends PopUpWindow{
         super.mouseCommandListener = new MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if(state == MouseState.CLICKED){
+                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
                     int x = e.getX();
                     int y = e.getY();
                     for(Button btn : buttonList){

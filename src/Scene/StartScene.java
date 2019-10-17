@@ -13,6 +13,7 @@ import GameObject.Button.ButtonListener;
 import Value.Path;
 import Controller.CommandSolver.MouseCommandListener;
 import Controller.CommandSolver.MouseState;
+import Value.Global;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
@@ -55,6 +56,9 @@ public class StartScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        if(buttonStart.getWidth() !=  7 * Global.MIN_PICTURE_SIZE){
+            genButton();
+        }
         buttonStart.update();
     }
 
@@ -76,7 +80,7 @@ public class StartScene extends Scene{
     
     public void genButton(){
         
-        buttonStart = new Button(250, 225, 450, 169
+        buttonStart = new Button(10 * Global.MIN_PICTURE_SIZE, 9 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_ROOT)
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER)
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER));

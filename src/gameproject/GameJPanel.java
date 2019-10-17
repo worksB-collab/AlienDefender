@@ -7,6 +7,7 @@ package gameproject;
 import Controller.SceneController;
 import Scene.StartScene;
 import Controller.CommandSolver.CommandWrapper;
+import java.awt.Color;
 
 import java.awt.Graphics;
 import javax.swing.JPanel;

@@ -23,8 +23,9 @@ public class Global {
     public static final int ANIMATE_DELAY_PER_SEC = UPDATE_PER_SEC / 15 ;
 
     //Delay
-    public static final int BUTTON_UPDATE_DELAY = 60;
-
+    public static final int BUTTON_UPDATE_DELAY = 30;
+    //FrameRatio
+    public static int MIN_PICTURE_SIZE = 25;
     //Alien
     public static final int SIZE_ALIEN =65; 
     

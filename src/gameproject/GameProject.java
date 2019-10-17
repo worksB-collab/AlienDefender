@@ -20,13 +20,12 @@ public class GameProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Alien Defender");
+;        JFrame frame = new JFrame("Alien Defender");
         GameJPanel gPanel = new GameJPanel();
         frame.setBounds(400, 300, 816, 639);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(gPanel);
         frame.setVisible(true);
-        
         long startTime = System.currentTimeMillis();
         long lastTime = System.currentTimeMillis();
         long UpdatedFrame = 0;
@@ -43,8 +42,21 @@ public class GameProject {
             }
             
             if((currentTime - lastTime) >= Global.MILLISEC_PER_UPDATE){
-                
                 lastTime = currentTime;
+                //check Frame Ratio
+                int w = frame.getWidth();
+                int h = frame.getHeight();
+                int rw = w - 16;
+                int rh = h - 39;
+                Double d1 = new Double(rw / rh);
+                Double d2 = new Double(8 / 6);
+                if(d1.floatValue() != d2.floatValue()){
+                    rw = rw / 4 * 4;
+                    rh = rh / 3 * 3;
+                }
+                gPanel.setSize(rw , rh );
+                //calibration MIN SIZE
+                Global.MIN_PICTURE_SIZE = (int)Math.sqrt((rh * rw) / 768d);
                 frame.repaint();
             }
             
