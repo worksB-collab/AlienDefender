@@ -38,14 +38,17 @@ public class TowerHelper {
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, int direction) {
+    public void paint(Graphics2D g, int x, int y, int width, int height, int direction) {
         if (img == null) {
             return;
         }
         int dx = 65 * (actorPosition);
-        Graphics2D graphic = img.createGraphics();
-        graphic.rotate(direction);
-        graphic.rotate(Math.toRadians(direction), width / 2, height / 2);
+//        Graphics2D graphic = img.createGraphics();
+//        graphic.rotate(direction);
+//        graphic.rotate(Math.toRadians(direction), width / 2, height / 2);
+        
+//        g.rotate(direction);
+//        g.rotate(Math.toRadians(direction));
         g.drawImage(img, x, y, x + width, y + height,
                 dx, 0, dx+SIZE_OBJECT, SIZE_OBJECT, null);
 

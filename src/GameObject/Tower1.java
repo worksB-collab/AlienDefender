@@ -8,6 +8,7 @@ package GameObject;
 import Value.Global;
 import static Value.Global.SIZE_GRID;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -24,6 +25,6 @@ public class Tower1 extends Tower {
 
     @Override
     public void paint(Graphics g) {
-        tHelper.paint(g, x, y, SIZE_GRID, SIZE_GRID, direction);
+        tHelper.paint((Graphics2D)g, x, y, SIZE_GRID, SIZE_GRID, direction);
     }
 }
