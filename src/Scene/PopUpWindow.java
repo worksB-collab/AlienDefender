@@ -15,6 +15,7 @@ import java.awt.Graphics;
  * @author user
  */
 public abstract class PopUpWindow extends GameObject{
+    public static final String TYPE = "PopUpWindow";
     protected CommandSolver.KeyCommandListener keyCommandListener;
     protected CommandSolver.MouseCommandListener mouseCommandListener;
     
@@ -38,8 +39,11 @@ public abstract class PopUpWindow extends GameObject{
     public CommandSolver.MouseCommandListener getMouseCommandListener(){
         return mouseCommandListener;
     }
-    public abstract Object getResult();
     public abstract boolean isEnd();
+    
+    public String getType(){
+        return TYPE;
+    }
     @Override
     public void update(){
         

@@ -11,6 +11,9 @@ import Controller.CommandSolver.MouseState;
 import Controller.ImageController;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
+import GameObject.Tower;
+import GameObject.Tower1;
+import Value.Global;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -21,16 +24,18 @@ import java.util.LinkedList;
  * @author user
  */
 public class TowerSelectWindow extends PopUpWindow{
+    public static final String TYPE = "TowerSelectWindow";
     private ImageController imageController;
     private BufferedImage image;
     private LinkedList<Button> buttonList;
-    private Object tower;
+    private Tower tower;
     private boolean isEnd;
     
     public TowerSelectWindow(int x, int y, int width, int height) {
-        super(x, y, width, height);
+        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height);
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
+        isEnd = false;
         
         super.mouseCommandListener = new MouseCommandListener(){
             @Override
@@ -47,10 +52,10 @@ public class TowerSelectWindow extends PopUpWindow{
                 }
             }    
         };
-        genButton();
+        genButton(x,y);
     }
-    @Override
-    public Object getResult(){
+
+    public Tower getResult(){
         return tower;
     }
     
@@ -58,7 +63,10 @@ public class TowerSelectWindow extends PopUpWindow{
     public boolean isEnd(){
         return isEnd;
     }
-    
+    @Override
+    public String getType(){
+        return TYPE;
+    }
     @Override
     public void update(){
         for(Button btn : buttonList){
@@ -69,25 +77,25 @@ public class TowerSelectWindow extends PopUpWindow{
     @Override
     public void paint(Graphics g){
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
-        int w = width / 25;
-        int h = height / 25;
+        int w = width / Global.MIN_PICTURE_SIZE;
+        int h = height / Global.MIN_PICTURE_SIZE;
         int x0 = 0;
         int y0 = 0;
         
         for(int i = 0; i < h; i++){
             for(int j = 0; j < w; j++){
-                g.drawImage(image, x + x0, y + y0, 25, 25, null);
-                x0 += 25;
+                g.drawImage(image, x + x0, y + y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+                x0 += Global.MIN_PICTURE_SIZE;
             }
             x0 = 0;
-            y0 += 25;
+            y0 += Global.MIN_PICTURE_SIZE;
         }
         for(Button btn : buttonList){
             btn.paint(g);
         }
     }
     
-    private void genButton(){
+    private void genButton(int x0, int y0){
         BufferedImage img[] = { imageController.tryGetImage("/Resources/Images/Label/Tower_Icon1.png"),
                                 imageController.tryGetImage("/Resources/Images/Label/Tower_Icon2.png"),
                                 imageController.tryGetImage("/Resources/Images/Label/Tower_Icon3.png"),
@@ -100,7 +108,8 @@ public class TowerSelectWindow extends PopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                
+                tower = new Tower1(x0, y0);
+                isEnd = true;
             }
 
             @Override
@@ -114,7 +123,8 @@ public class TowerSelectWindow extends PopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                
+                tower = new Tower1(x0, y0);
+                isEnd = true;
             }
 
             @Override
@@ -128,7 +138,8 @@ public class TowerSelectWindow extends PopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                
+                tower = new Tower1(x0, y0);
+                isEnd = true;
             }
 
             @Override
@@ -142,7 +153,8 @@ public class TowerSelectWindow extends PopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                
+                tower = new Tower1(x0, y0);
+                isEnd = true;
             }
 
             @Override
@@ -156,7 +168,8 @@ public class TowerSelectWindow extends PopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                
+                tower = new Tower1(x0, y0);
+                isEnd = true;
             }
 
             @Override
@@ -183,14 +196,14 @@ public class TowerSelectWindow extends PopUpWindow{
         int dx = 10;
         int dy = 5;
         int spece = 10;
-        int x0 = x + dx;
-        int y0 = y + dy;
+        int x1 = x + dx;
+        int y1 = y + dy;
         int w = (width - (2 * dx ) - (spece * (img.length - 1)) ) / img.length ;
         int h = height - (2 * dy);
         for(int i = 0; i < img.length; i++){
-            Button button = new Button(x0, y0, w, h,img[i], img[i], img[i]);
+            Button button = new Button(x1, y1, w, h,img[i], img[i], img[i]);
             button.setButtonListener(buttonListener[i]);
-            x0 += (w + dx);
+            x1 += (w + dx);
             buttonList.add(button);
         }
     }
