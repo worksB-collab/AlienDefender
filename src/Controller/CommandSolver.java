@@ -42,10 +42,17 @@ public class CommandSolver extends Thread {
     private static class KeyData extends Data {
 
         private Map<Byte, Boolean> map;
+        private char key;
 
         public KeyData(Map<Byte, Boolean> map, long time) {
             super(time);
             this.map = map;
+            this.key = 65535;
+        }
+        public KeyData(Map<Byte, Boolean> map, char key, long time) {
+            super(time);
+            this.map = map;
+            this.key = key;
         }
     }
 
@@ -67,6 +74,12 @@ public class CommandSolver extends Thread {
 
         public void keyReleased(int commandCode, long trigTime);
     }
+    
+    public interface TypedListener{
+        public void keyTyped(char c, long trigTime);
+    }
+    
+    public interface KeyListener extends KeyCommandListener, TypedListener{}
 
     public interface MouseCommandListener {
 
@@ -103,20 +116,41 @@ public class CommandSolver extends Thread {
             }
             listener.mouseTrig(mouseData.e, mouseData.state, mouseData.time);
         }
+        
+        public void actionCommand(TypedListener listener){
+            if (listener == null || keyData == null || keyData.key == 65535) {
+                return;
+            }
+            listener.keyTyped(keyData.key, keyData.time);
+        }
+        
+        public void actionCommand(KeyListener listener){
+            actionCommand((TypedListener)listener);
+            actionCommand((KeyCommandListener)listener);
+        }
     }
 
     public static class CommandConverter {
 
+        // add @ 20191018 start
+        private boolean isTrackChar;
+        private char currentChar;
+        // add @ 20191018 end
+        
         private boolean clear;// 是否在更新時清除上一幀指令
         private boolean isKeyDeletion;// 更新時連鍵值都完整清除(不會觸發released)
         private final Map<Integer, Byte> keyMap;// input to command
         private Map<Byte, Boolean> pressedMap;// command pressed/released
 
-        public CommandConverter(boolean clear, boolean isKeyDeletion) {
+        public CommandConverter(boolean clear, boolean isKeyDeletion, boolean isTrackChar) {
             keyMap = new ConcurrentHashMap<>();
             pressedMap = new ConcurrentHashMap<>();
             this.clear = clear;
             this.isKeyDeletion = isKeyDeletion;
+            this.isTrackChar = isTrackChar;
+            if(isTrackChar){
+                currentChar = 65535;
+            }
         }
 
         public void addKeyPair(int key, Byte command) {
@@ -128,6 +162,13 @@ public class CommandSolver extends Thread {
         }
 
         public void updateCommandByKey(int key, boolean pressed) {
+            if(isTrackChar){
+                if(pressed && key >= 0 && key <= 255){
+                    currentChar = (char)key;
+                }else{
+                    currentChar = (char)65535;
+                }
+            }
             if (!keyMap.containsKey(key)) {
                 return;
             }
@@ -141,7 +182,7 @@ public class CommandSolver extends Thread {
             return pressedMap.get(keyMap.get(key));
         }
 
-        public Map<Byte, Boolean> release() {
+        private Map<Byte, Boolean> getCurrentMap() {
             Map<Byte, Boolean> tmp = pressedMap;
             if (clear) {
                 pressedMap = new ConcurrentHashMap<>();
@@ -165,6 +206,24 @@ public class CommandSolver extends Thread {
             }
 
             return tmp;
+        }
+        
+        private char getCurrentKey(){
+            char tmp = currentChar;
+            currentChar = 65535;
+            return tmp;
+        }
+        
+        public KeyData release(long currentTime){
+            Map<Byte, Boolean> t = getCurrentMap();
+            if(isTrackChar){
+                return new KeyData(t, getCurrentKey(), currentTime);
+            }
+            return new KeyData(t, currentTime);
+        }
+        
+        public KeyData release(){
+            return release(0);
         }
     }
 
@@ -303,8 +362,8 @@ public class CommandSolver extends Thread {
         private CommandRecorder<KeyData> recorder;
 
         // 導入行為列表
-        private KeyTracker(boolean clear, boolean isKeyDeletion) {
-            commandList = new CommandConverter(clear, isKeyDeletion);
+        private KeyTracker(boolean clear, boolean isKeyDeletion, boolean isTrackChar) {
+            commandList = new CommandConverter(clear, isKeyDeletion, isTrackChar);
             recorder = new CommandRecorder<>();
         }
 
@@ -320,10 +379,11 @@ public class CommandSolver extends Thread {
 
         // 將當前的指令存入recorder並刷新指令集
         public void record(long time) {
-            recorder.add(new KeyData(commandList.release(), time));
+            recorder.add(commandList.release(time));
         }
 
         // 遊戲更新取得對應的指令
+        
         public KeyData update() {
             if (recorder.hasNext()) {
                 return recorder.next();
@@ -340,6 +400,7 @@ public class CommandSolver extends Thread {
         private MouseTracker mt;
         private boolean clear;
         private boolean isKeyDeletion;
+        private boolean isTrackChar;
 
         public Builder(long deltaTime) {
             clear = false;
@@ -382,9 +443,14 @@ public class CommandSolver extends Thread {
             }
             return this;
         }
+        
+        public Builder trackChar(){
+            isTrackChar = true;
+            return this;
+        }
 
         public CommandSolver gen() {
-            KeyTracker cm = new KeyTracker(clear, isKeyDeletion);
+            KeyTracker cm = new KeyTracker(clear, isKeyDeletion, isTrackChar);
             if (cmArray != null) {
                 for (int[] keyPair : cmArray) {
                     cm.add(keyPair[0], keyPair[1]);

@@ -80,7 +80,7 @@ public class StartScene extends Scene{
     
     public void genButton(){
         
-        buttonStart = new Button(10 * Global.MIN_PICTURE_SIZE, 9 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE
+        buttonStart = new Button(8 * Global.MIN_PICTURE_SIZE, 12 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_ROOT)
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER)
                 , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER));
@@ -96,5 +96,8 @@ public class StartScene extends Scene{
             }
         }
         );
+        
+        buttonStart.setFont(Global.FONT_01);
+        buttonStart.setText(new String("START"));
     }
 }

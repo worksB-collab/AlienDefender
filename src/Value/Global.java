@@ -5,6 +5,8 @@
  */
 package Value;
 
+import java.awt.Font;
+
 /**
  *
  * @author user
@@ -47,5 +49,8 @@ public class Global {
     public static final int DOWN = 1;
     public static final int LEFT = 2;
     public static final int RIGHT = 3;
+    
+    //Font
+    public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN,120);
 
 }

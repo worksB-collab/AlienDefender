@@ -5,11 +5,13 @@
  */
 package Scene;
 
+import Controller.BackgroundController;
 import Controller.CommandSolver;
 import Controller.CommandSolver.MouseCommandListener;
 import Controller.CommandSolver.MouseState;
 import Controller.DelayCounter;
 import Controller.ImageController;
+import Controller.PlayerController;
 import Controller.SceneController;
 import GameObject.*;
 import GameObject.Button;
@@ -30,6 +32,8 @@ import java.util.LinkedList;
 public class GameScene1 extends Scene {
 
     private CommandSolver.MouseCommandListener mouseCommandListener;
+    private PlayerController playerController;
+    private BackgroundController backgroundController;
     private ImageController imageController;
     private BufferedImage image;
     private TowerSelectWindow towerSelectWindow;
@@ -48,8 +52,11 @@ public class GameScene1 extends Scene {
 
     public GameScene1(SceneController sceneController) {
         super(sceneController);
-        buttonList = new LinkedList();
+        playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
+        backgroundController = new BackgroundController(1);
+        
+        buttonList = new LinkedList();
         aliens = new LinkedList<Alien>();
         deadAliens = new LinkedList<Alien>(); //
         towers = new LinkedList<Tower>();
@@ -172,7 +179,7 @@ public class GameScene1 extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        paintGrass(g);
+        backgroundController.paint(g);
         paintRoad(g);
         //Button paint
         if (buttonList != null) {
@@ -214,17 +221,7 @@ public class GameScene1 extends Scene {
     
     //paint
     private void paintGrass(Graphics g) {
-        BufferedImage imgG = imageController.tryGetImage("/Resources/Images/Background/grass.png");
-        int x0, y0;
-        x0 = y0 = 0;
-        for (int i = 0; i < 24; i++) {
-            for (int j = 0; j < 32; j++) {
-                g.drawImage(imgG, x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
-                x0 += Global.MIN_PICTURE_SIZE;
-            }
-            x0 = 0;
-            y0 += Global.MIN_PICTURE_SIZE;
-        }
+        
     }
     
     private void paintRoad(Graphics g) {

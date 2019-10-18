@@ -7,7 +7,9 @@ package GameObject;
 
 import Controller.DelayCounter;
 import Value.Global;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -25,6 +27,8 @@ public class Button extends GameObject{
     private BufferedImage nowImage;
     private DelayCounter delayCounter;
     private ButtonListener buttonListener;
+    private String text;
+    private Font font;
     private boolean isClicked;
     
     public Button(int x, int y , int width, int height,BufferedImage rootImage, BufferedImage clickImage, BufferedImage hoverImage){
@@ -33,12 +37,20 @@ public class Button extends GameObject{
         this.clickImage = clickImage;
         this.hoverImage = hoverImage;
         this.nowImage = rootImage;
+        this.text = "";
+        this.font = Global.FONT_01;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
     
     public void setButtonListener(ButtonListener buttonListener) {
         this.buttonListener = buttonListener;
+    }
+    public void setText(String text){
+        this.text = text;
+    }
+    public void setFont(Font font){
+        this.font = font;
     }
     public boolean isRange(int x, int y){
         if(x < this.x || x > this.x + width){
@@ -81,9 +93,11 @@ public class Button extends GameObject{
     
     @Override
     public void paint(Graphics g){
+       
         g.drawImage(nowImage, x, y, width, height, null);
         g.drawRect(x, y, width, height);
-        
+        g.setFont(Global.FONT_01);
+        g.drawString(text, x , y + height / 2);    
     }
     
     
