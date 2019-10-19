@@ -33,7 +33,7 @@ public class Tower extends ActiveObject {
         range = new LinkedList<Point>();
         for (int i = -TOWER1_ATKRANGE; i < TOWER1_ATKRANGE; i++) {
             for (int j = -TOWER1_ATKRANGE; j < TOWER1_ATKRANGE; j++) {
-                if (Math.abs(i + j) <= TOWER1_ATKRANGE) {
+                if (Math.abs(i) + Math.abs(j) <= TOWER1_ATKRANGE) {
                     range.add(new Point(x + i, y + j));
                 }
                 j += 24;
@@ -49,9 +49,9 @@ public class Tower extends ActiveObject {
             }
             i -= 24;
         }
-//        for (Point range : range) {
-//            System.out.println(range);
-//        }
+        for (Point range : range) {
+            System.out.println(range);
+        }
         return range;
     }
 
@@ -70,13 +70,39 @@ public class Tower extends ActiveObject {
         return attack;
     }
 
-    public int getDirection() {
-        return direction;
-    }
-
     public void changeDirection(Alien alien) {
-        direction = (int) (Math.pow(Math.tan(Math.abs(alien.getX() - this.getX())
-                / Math.abs(alien.getY() - this.getY())), -1));
+        double h = (alien.getY() - this.getY());
+        double w = (alien.getX() - this.getX());
+        if (h == 0) {
+            if (w > 0) {
+                direction = 90;
+            } else {
+                direction = 270;
+            }
+        }
+        if (w == 0) {
+            if (h > 0) {
+                direction = 180;
+            } else {
+                direction = 0;
+            }
+        }
+        if (w != 0 && h != 0) {
+            if (w > 0 && h < 0) {
+                direction = 90 - Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI);
+            }else if(w>0 && h > 0){
+                direction= 90 + Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI);
+            }else if(w<0 && h < 0){
+                direction= 270 + Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI);
+            }else{
+                direction= 270 - Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI);
+            }
+        }
+        System.out.println(direction);
     }
 
     public void attack(Alien alien) {

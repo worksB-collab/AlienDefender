@@ -58,9 +58,8 @@ public class GameScene1 extends Scene {
         
         buttonList = new LinkedList();
         aliens = new LinkedList<Alien>();
-        deadAliens = new LinkedList<Alien>(); //
+        deadAliens = new LinkedList<Alien>(); 
         towers = new LinkedList<Tower>();
-//        towers.add(new Tower1(50, 75));
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
         kills = new ArrayList<Integer>();
@@ -122,23 +121,23 @@ public class GameScene1 extends Scene {
                 }
                 if (aliens.get(i).isDead())// kill count, alien type yet updated
                 {
-                    switch (aliens.get(i).getAlienNum()) {
-                        case 1:
-                            kills.set(0, kills.get(0) + 1);
-                            break;
-                        case 2:
-                            kills.set(1, kills.get(1) + 1);
-                            break;
-                        case 3:
-                            kills.set(2, kills.get(2) + 1);
-                            break;
-                        case 4:
-                            kills.set(3, kills.get(3) + 1);
-                            break;
-                        case 5:
-                            kills.set(4, kills.get(4) + 1);
-                            break;
-                    }
+//                    switch (aliens.get(i).getAlienNum()) {
+//                        case 1:
+//                            kills.set(0, kills.get(0) + 1);
+//                            break;
+//                        case 2:
+//                            kills.set(1, kills.get(1) + 1);
+//                            break;
+//                        case 3:
+//                            kills.set(2, kills.get(2) + 1);
+//                            break;
+//                        case 4:
+//                            kills.set(3, kills.get(3) + 1);
+//                            break;
+//                        case 5:
+//                            kills.set(4, kills.get(4) + 1);
+//                            break;
+//                    }
                 }
             }
         }

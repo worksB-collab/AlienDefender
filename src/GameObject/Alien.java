@@ -94,8 +94,8 @@ public class Alien extends ActiveObject {
         return direction;
     }
 
-    public void move(int direction) {
-        switch (direction) {
+    public void move(double direction) {
+        switch ((int)(direction)) {
             case UP:
                 y -= speed;
             case DOWN:
