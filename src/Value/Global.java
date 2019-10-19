@@ -29,12 +29,14 @@ public class Global {
     //Delay
     public static final int BUTTON_UPDATE_DELAY = 30;
 
-    ///Objects
-    public static final int SIZE_OBJECT = 65;
-    public static final int DEVIATION = 2;
-    
+
     //Grid
     public static final int SIZE_GRID = 32;
+    
+    ///Objects
+    public static final int SIZE_OBJECT = 65;
+    public static final int DEVIATION = SIZE_GRID/11; // deviation for grid judgement
+    public static final int SIZE_BLOODLINE = SIZE_OBJECT/15;
     
     //Tower
     public static final int TOWER1_ATKRANGE = 1 * SIZE_GRID;

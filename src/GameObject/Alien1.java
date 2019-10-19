@@ -34,6 +34,6 @@ public class Alien1 extends Alien {
             aHelper.dead(g, x, y, alienNum);
             return;
         }
-        aHelper.paint(g, x, y, width, height, ACT[act]);
+        aHelper.paint(g, x, y, width, height, ACT[act], hp);
     }
 }

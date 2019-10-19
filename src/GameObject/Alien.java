@@ -78,7 +78,7 @@ public class Alien extends ActiveObject {
         if (hp <= 0) {
             return true;
         }
-        return false;
+            return false;
     }
 
     public int getHp() {
@@ -106,6 +106,7 @@ public class Alien extends ActiveObject {
                 x += speed;
         }
     }
+
 
     @Override
     public void paint(Graphics g) {

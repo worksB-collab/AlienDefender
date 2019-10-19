@@ -10,6 +10,7 @@ import Controller.ImageController;
 import Value.Global;
 import static Value.Global.*;
 import Value.Path;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -24,12 +25,15 @@ public class AlienHelper {
     private int actorPosition;
     private DelayCounter delay;
     private LinkedList<Alien> aliens;
+    private int orignHP;
+    private int currentHP;
 
     public AlienHelper(int alien) {
         img = getActor(alien);
         actorPosition = alien % 6;
         delay = new DelayCounter(3);
         aliens = new LinkedList<Alien>();
+        orignHP =-1;
     }
 
     private BufferedImage getActor(int alien) {
@@ -43,17 +47,38 @@ public class AlienHelper {
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, int act) {
+    public void paint(Graphics g, int x, int y, int width, int height, int act, int hp) {
+        setOrignHP(hp);
         if (img == null) {
             return;
         }
-
         int dy = 65 * (actorPosition);
         g.drawImage(img, x, y, x + width, y + height,
                 act * Global.SIZE_OBJECT, dy,
                 65 + act * Global.SIZE_OBJECT, dy + Global.SIZE_OBJECT, null);
+        bloodLine(g, x, y, width, height, hp);
+    }
+    
+    public void setOrignHP(int hp){
+        if (orignHP==-1){
+            orignHP = hp;
+        }
     }
 
+    public void bloodLine(Graphics g, int x, int y, int width, int height, int hp) {
+        g.setColor(Color.black);
+        g.drawRect(x, y, width, SIZE_BLOODLINE);
+        
+        double percentage = bloodPercentage(hp);
+        g.setColor(Color.red);
+        g.fillRect(x + 1, y + 1, (int)(percentage*width)-2, SIZE_BLOODLINE - 2);
+        g.setPaintMode();
+    }
+
+    public double bloodPercentage(double hp){
+        return (hp/orignHP);
+    }
+    
     public void dead(Graphics g, int x, int y, int alien) {
         actorPosition = alien;
         switch (alien) {

@@ -58,8 +58,8 @@ public class Tower extends ActiveObject {
 
     public void detection(Alien alien) {
         for (Point range : range) {
-            if (alien.getX() >= range.getX() - DEVIATION && alien.getX() <= range.getX() + SIZE_OBJECT
-                    && alien.getY() >= range.getY() - DEVIATION && alien.getY() <= range.getY() + SIZE_OBJECT) {
+            if (alien.getX()+SIZE_GRID-DEVIATION >= range.getX()  && alien.getX()+DEVIATION <= range.getX() + SIZE_GRID
+                    && alien.getY()+SIZE_GRID-DEVIATION >= range.getY()  && alien.getY()+DEVIATION <= range.getY() + SIZE_GRID) {
                 changeDirection(alien);
                 attack(alien);
             }
@@ -102,7 +102,7 @@ public class Tower extends ActiveObject {
                         / (w)) * 180 / Math.PI);
             }
         }
-        System.out.println(direction);
+//        System.out.println(direction);
     }
 
     public void attack(Alien alien) {

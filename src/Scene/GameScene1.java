@@ -13,6 +13,7 @@ import Controller.DelayCounter;
 import Controller.ImageController;
 import Controller.PlayerController;
 import Controller.SceneController;
+import Controller.ScoreController;
 import GameObject.*;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
@@ -43,26 +44,27 @@ public class GameScene1 extends Scene {
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
     private LinkedList<Alien> aliens;
-    private LinkedList<Alien> deadAliens; 
+    private LinkedList<Alien> deadAliens;
     private LinkedList<Tower> towers;
     private int count;
     private DelayCounter moveDelay, genDelay;
     private Point spot;
-    private ArrayList<Integer> kills;
+    private ScoreController scoreController;
+
 
     public GameScene1(SceneController sceneController) {
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(1);
-        
+
         buttonList = new LinkedList();
         aliens = new LinkedList<Alien>();
-        deadAliens = new LinkedList<Alien>(); 
+        deadAliens = new LinkedList<Alien>();
         towers = new LinkedList<Tower>();
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
-        kills = new ArrayList<Integer>();
+        scoreController = new ScoreController();
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -119,54 +121,39 @@ public class GameScene1 extends Scene {
                 }
             }
             for (int i = 0; i < aliens.size(); i++) {
-                aliens.get(i).update();
-                if (aliens.get(i).getY() >= 24 * Global.MIN_PICTURE_SIZE) {
+                Alien a = aliens.get(i);
+                a.update();
+                if (a.getY() >= 24 * Global.MIN_PICTURE_SIZE) {
                     aliens.remove(i);
                 }
-                if (aliens.get(i).isDead())// kill count, alien type yet updated
+                if (a.isDead())// kill count, alien type yet updated
                 {
-//                    switch (aliens.get(i).getAlienNum()) {
-//                        case 1:
-//                            kills.set(0, kills.get(0) + 1);
-//                            break;
-//                        case 2:
-//                            kills.set(1, kills.get(1) + 1);
-//                            break;
-//                        case 3:
-//                            kills.set(2, kills.get(2) + 1);
-//                            break;
-//                        case 4:
-//                            kills.set(3, kills.get(3) + 1);
-//                            break;
-//                        case 5:
-//                            kills.set(4, kills.get(4) + 1);
-//                            break;
-//                    }
+                    scoreController.scoreCount(a.getAlienNum());
                 }
+                
             }
         }
         removeAlien();
 
-        
         //TowerSelectWindow
         if (towerSelectWindow != null) {
             towerSelectWindow.update();
             if (towerSelectWindow.isEnd()) {
                 Tower tower = towerSelectWindow.getResult();
-                if(tower != null){
+                if (tower != null) {
                     towers.add(towerSelectWindow.getResult());
                 }
                 towerSelectWindow = null;
             }
         }
         //TowerInformationWindow
-        if(towerInformationWindow != null){
+        if (towerInformationWindow != null) {
             towerInformationWindow.update();
-            if(towerInformationWindow.isEnd()){
+            if (towerInformationWindow.isEnd()) {
                 towerInformationWindow = null;
             }
         }
-        
+
     }
 
     @Override
@@ -184,43 +171,43 @@ public class GameScene1 extends Scene {
                 button.paint(g);
             }
         }
-        //Alines paint
-        for (int i = 0; i < aliens.size(); i++) {
-            aliens.get(i).paint(g);
-        }
         //Tower paint
         for (int i = 0; i < towers.size(); i++) {
             towers.get(i).paint(g);
+        }
+        //Alines paint
+        for (int i = 0; i < aliens.size(); i++) {
+            aliens.get(i).paint(g);
         }
         if (towerSelectWindow != null) {
             towerSelectWindow.paint(g);
             g.setColor(Color.red);
             g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
-        }else if(towerInformationWindow != null){
+        } else if (towerInformationWindow != null) {
             towerInformationWindow.paint(g);
             g.setColor(Color.red);
             g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
         }
-        
+
     }
 
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener() {
         if (towerSelectWindow != null) {
             return towerSelectWindow.getMouseCommandListener();
-        }else if(towerInformationWindow != null){
+        } else if (towerInformationWindow != null) {
             return towerInformationWindow.getMouseCommandListener();
         }
         return mouseCommandListener;
     }
-    
+
     //paint
     private void paintGrass(Graphics g) {
-        
+
     }
-    
+
     private void paintRoad(Graphics g) {
         BufferedImage imgD = imageController.tryGetImage("/Resources/Images/Background/dirt.png");
         for (Point p : route) {
@@ -234,7 +221,9 @@ public class GameScene1 extends Scene {
             g.drawImage(imgS, (int) tmp.getX(), (int) tmp.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
         }
     }
+
     //generate
+
     private void genRandomRoad() {
         route = new LinkedList();
         setPoint = new LinkedList();
@@ -286,13 +275,15 @@ public class GameScene1 extends Scene {
         }
         genSetPoint();
     }
-    private void genStandardRoute(){
+
+    private void genStandardRoute() {
         standardRoute = new LinkedList<Point>();
-        for(int i = 0; i < route.size(); i++){
+        for (int i = 0; i < route.size(); i++) {
             Point p = route.get(i);
-            standardRoute.add(new Point((int)p.getX(), (int)p.getY()));
+            standardRoute.add(new Point((int) p.getX(), (int) p.getY()));
         }
     }
+
     private void genSetPoint() {
         int maxX = 31 * Global.MIN_PICTURE_SIZE;
         int maxY = 23 * Global.MIN_PICTURE_SIZE;
@@ -330,14 +321,14 @@ public class GameScene1 extends Scene {
 
     private void reCheckSetPoint() {
 
-        double d = Global.MIN_PICTURE_SIZE / (double)Global.STANDAR_MIN_SIZE;
-        for(int i = 0 ; i < route.size() - 1; i++){
+        double d = Global.MIN_PICTURE_SIZE / (double) Global.STANDAR_MIN_SIZE;
+        for (int i = 0; i < route.size() - 1; i++) {
             Point p = route.get(i);
             Point ps = standardRoute.get(i);
             System.out.println(ps.x);
-            p.x = (int)(ps.getX() * d);
+            p.x = (int) (ps.getX() * d);
             System.out.println(p.x);
-            p.y = (int)(ps.getY() * d) ;
+            p.y = (int) (ps.getY() * d);
         }
         genSetPoint();
     }
@@ -369,20 +360,19 @@ public class GameScene1 extends Scene {
                 public void onClick(int x, int y) {
                     boolean isBuilt = false;
                     Tower tower = null;
-                    for(int i = 0; i < towers.size(); i++){
+                    for (int i = 0; i < towers.size(); i++) {
                         tower = towers.get(i);
-                        if(tower.getX() == x0 && tower.getY() == y0){
+                        if (tower.getX() == x0 && tower.getY() == y0) {
                             isBuilt = true;
                             break;
                         }
                     }
-                    if(!isBuilt){
+                    if (!isBuilt) {
                         towerSelectWindow = new TowerSelectWindow(x0, y0, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE);
-                    }else{
-                        towerInformationWindow = new TowerInformationWindow(x0, y0,24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, tower);
+                    } else {
+                        towerInformationWindow = new TowerInformationWindow(x0, y0, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, tower);
                     }
-                    
-                    
+
                 }
 
                 @Override

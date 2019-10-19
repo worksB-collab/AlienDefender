@@ -20,7 +20,7 @@ public class Tower1 extends Tower {
 
     public Tower1(int x, int y) {
         super(x, y, SIZE_GRID, SIZE_GRID, 1, 1 * Global.SPEED);
-        tHelper = new TowerHelper(2);
+        tHelper = new TowerHelper(4);
     }
 
     @Override
