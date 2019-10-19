@@ -85,7 +85,7 @@ public class StartScene extends Scene{
     
     public void genButton(){
         
-        buttonStart = new Button(8 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE, "START");
+        buttonStart = new Button( (Global.FRAME_WIDTH - 18 * Global.MIN_PICTURE_SIZE) / 2, ((Global.FRAME_HEIGHT - 7 * Global.MIN_PICTURE_SIZE) / 2) + 8 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE, "START");
         
         buttonStart.setButtonListener(new ButtonListener(){
             @Override

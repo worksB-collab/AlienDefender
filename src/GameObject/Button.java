@@ -6,6 +6,7 @@
 package GameObject;
 
 import Controller.DelayCounter;
+import Value.DrawStringPoint;
 import Value.Global;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -29,6 +30,7 @@ public class Button extends GameObject{
     private ButtonListener buttonListener;
     private String text;
     private Font font;
+    private DrawStringPoint point;
     private boolean isClicked;
     
     public Button(int x, int y , int width, int height,BufferedImage rootImage, BufferedImage clickImage, BufferedImage hoverImage){
@@ -96,6 +98,9 @@ public class Button extends GameObject{
             nowImage = rootImage;
             isClicked = false;
         }
+        if(point != null){
+            point.update(width, height);
+        }
     }
     @Override
     public void paint(Graphics g){
@@ -104,8 +109,12 @@ public class Button extends GameObject{
             g.drawImage(nowImage, x, y, width, height, null);
             g.drawRect(x, y, width, height);
         }
+        
         g.setFont(Global.FONT_01);
-        g.drawString(text, x , y + height / 2);    
+        if(point == null){
+            point = new DrawStringPoint(x, y, g, font, text, width, height);
+        }
+        g.drawString(text, point.getX() , point.getY());    
     }
     
     
