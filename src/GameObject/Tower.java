@@ -36,32 +36,32 @@ public class Tower extends ActiveObject {
                 if (Math.abs(i) + Math.abs(j) <= TOWER1_ATKRANGE) {
                     range.add(new Point(x + i, y + j));
                 }
-                j += 24;
+                j += (SIZE_GRID-1);
             }
-            i += 24;
+            i += (SIZE_GRID-1);
         }
         for (int i = TOWER1_ATKRANGE; i >= 0; i--) {
             for (int j = TOWER1_ATKRANGE; j >= 0; j--) {
                 if (Math.abs(i + j) <= TOWER1_ATKRANGE) {
                     range.add(new Point(x + i, y + j));
                 }
-                j -= 24;
+                j -= (SIZE_GRID-1);
             }
-            i -= 24;
+            i -= (SIZE_GRID-1);
         }
         for (Point range : range) {
             System.out.println(range);
         }
         return range;
+        
     }
 
     public void detection(Alien alien) {
         for (Point range : range) {
-            if (alien.getX() >= range.getX() - 2 && alien.getX() <= range.getX() + 2
-                    && alien.getY() >= range.getY() - 2 && alien.getY() <= range.getY() + 2) {
+            if (alien.getX() >= range.getX() - DEVIATION && alien.getX() <= range.getX() + SIZE_OBJECT
+                    && alien.getY() >= range.getY() - DEVIATION && alien.getY() <= range.getY() + SIZE_OBJECT) {
                 changeDirection(alien);
                 attack(alien);
-                System.out.println("Attack");
             }
         }
     }

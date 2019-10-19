@@ -104,8 +104,12 @@ public class GameScene1 extends Scene {
             button.update();
         }
         //Tower update
-        for(int i = 0; i < towers.size(); i++){
-            towers.get(i).update();
+        if (aliens.size() != 0) {
+            for (int i = 0; i < towers.size(); i++) {
+                for (int j = 0; j < aliens.size(); j++) {
+                    towers.get(i).detection(aliens.get(j));
+                }
+            }
         }
         //Aliens update
         if (moveDelay.update()) {
@@ -143,13 +147,7 @@ public class GameScene1 extends Scene {
         }
         removeAlien();
 
-        if (aliens.size() != 0) {
-            for (int i = 0; i < towers.size(); i++) {
-                for (int j = 0; j < aliens.size(); j++) {
-                    towers.get(i).detection(aliens.get(j));
-                }
-            }
-        }
+        
         //TowerSelectWindow
         if (towerSelectWindow != null) {
             towerSelectWindow.update();

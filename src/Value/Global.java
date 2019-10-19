@@ -31,6 +31,7 @@ public class Global {
 
     ///Objects
     public static final int SIZE_OBJECT = 65;
+    public static final int DEVIATION = 2;
     
     //Grid
     public static final int SIZE_GRID = 32;

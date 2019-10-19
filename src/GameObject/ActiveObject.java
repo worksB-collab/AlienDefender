@@ -17,7 +17,7 @@ class ActiveObject extends GameObject {
 
     protected int speed;
     
-    protected int direction;
+    protected double direction;
 
     //constructor
     public ActiveObject(int x, int y, int width, int height, int speed) {
@@ -25,7 +25,7 @@ class ActiveObject extends GameObject {
         this.direction = RIGHT;
     }
 
-    public int getDirection() {
+    public double getDirection() {
         return direction;
     }
 
