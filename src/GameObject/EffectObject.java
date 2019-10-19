@@ -13,6 +13,7 @@ import java.awt.Graphics;
  */
 public class EffectObject extends GameObject{
     protected int state;
+    
     public EffectObject(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
@@ -22,6 +23,7 @@ public class EffectObject extends GameObject{
     public void update(){
         
     }
+    
     @Override
     public void paint(Graphics g){
         
