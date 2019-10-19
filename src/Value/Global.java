@@ -33,7 +33,7 @@ public class Global {
     public static final int SIZE_OBJECT = 65;
     
     //Grid
-    public static final int SIZE_GRID = 25;
+    public static final int SIZE_GRID = 32;
     
     //Tower
     public static final int TOWER1_ATKRANGE = 1 * SIZE_GRID;
@@ -42,8 +42,10 @@ public class Global {
     public static final int TOWER4_ATKRANGE = 4* SIZE_GRID;
     public static final int TOWER5_ATKRANGE = 5* SIZE_GRID;
     //Cailbaration
-    public static int MIN_PICTURE_SIZE = 25;
-    public static final int STANDAR_MIN_SIZE = 25;
+    public static int MIN_PICTURE_SIZE = 32;
+    public static final int STANDAR_MIN_SIZE = 32;
+    public static int FRAME_WIDTH = 1024;
+    public static int FRAME_HEIGHT = 768;
     //direction
     public static final int UP = 0;
     public static final int DOWN = 1;
@@ -51,6 +53,7 @@ public class Global {
     public static final int RIGHT = 3;
     
     //Font
-    public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN,120);
+    public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
+    public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
 
 }

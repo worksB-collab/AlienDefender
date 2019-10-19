@@ -16,6 +16,7 @@ import java.awt.Graphics;
 class ActiveObject extends GameObject {
 
     protected int speed;
+    
     protected int direction;
 
     //constructor

@@ -6,6 +6,7 @@
 package Scene;
 
 
+import Controller.BackgroundController;
 import Controller.ImageController;
 import Controller.SceneController;
 import GameObject.Button;
@@ -25,12 +26,14 @@ import java.awt.event.MouseEvent;
 public class StartScene extends Scene{
 
     private MouseCommandListener mouseCommandListener;
+    private BackgroundController backgroundController;
     private ImageController imageController;
     private Button buttonStart;
     
     
     public StartScene(SceneController sceneController) {
         super(sceneController);
+        backgroundController = new BackgroundController(0);
         imageController = ImageController.genInstance();
         mouseCommandListener = new MouseCommandListener(){
             @Override
@@ -56,6 +59,7 @@ public class StartScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        backgroundController.update();
         if(buttonStart.getWidth() !=  7 * Global.MIN_PICTURE_SIZE){
             genButton();
         }
@@ -71,6 +75,7 @@ public class StartScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
+        backgroundController.paint(g);
         buttonStart.paint(g);
     }   
 
@@ -80,10 +85,7 @@ public class StartScene extends Scene{
     
     public void genButton(){
         
-        buttonStart = new Button(8 * Global.MIN_PICTURE_SIZE, 12 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_ROOT)
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER)
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER));
+        buttonStart = new Button(8 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 18 * Global.MIN_PICTURE_SIZE, 7 * Global.MIN_PICTURE_SIZE, "START");
         
         buttonStart.setButtonListener(new ButtonListener(){
             @Override
@@ -96,8 +98,6 @@ public class StartScene extends Scene{
             }
         }
         );
-        
         buttonStart.setFont(Global.FONT_01);
-        buttonStart.setText(new String("START"));
     }
 }

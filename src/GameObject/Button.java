@@ -42,6 +42,13 @@ public class Button extends GameObject{
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
+    public Button(int x, int y , int width, int height, String text){
+        super(x, y, width, height);
+        this.text = text;
+        this.font = Global.FONT_01;
+        delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
+
+    }
     
     public void setButtonListener(ButtonListener buttonListener) {
         this.buttonListener = buttonListener;
@@ -90,12 +97,13 @@ public class Button extends GameObject{
             isClicked = false;
         }
     }
-    
     @Override
     public void paint(Graphics g){
        
-        g.drawImage(nowImage, x, y, width, height, null);
-        g.drawRect(x, y, width, height);
+        if(nowImage != null){
+            g.drawImage(nowImage, x, y, width, height, null);
+            g.drawRect(x, y, width, height);
+        }
         g.setFont(Global.FONT_01);
         g.drawString(text, x , y + height / 2);    
     }
