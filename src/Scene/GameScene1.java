@@ -79,7 +79,17 @@ public class GameScene1 extends Scene {
                             spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE, (y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
                         }
                     }
+                }
+                if(state == MouseState.MOVED){
+                    int x = e.getX();
+                    int y = e.getY();
+                    for (Button tmp : buttonList) {
+                        if (tmp.isRange(x, y)) {
+                            tmp.hover(x, y);
 
+                            spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE, (y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
+                        }
+                    }
                 }
             }
         };
@@ -179,16 +189,15 @@ public class GameScene1 extends Scene {
         for (int i = 0; i < aliens.size(); i++) {
             aliens.get(i).paint(g);
         }
+        if(spot != null){
+            g.setColor(Color.red);
+            g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
+            g.setColor(Color.BLACK);
+        }
         if (towerSelectWindow != null) {
             towerSelectWindow.paint(g);
-            g.setColor(Color.red);
-            g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
-            g.setColor(Color.BLACK);
         } else if (towerInformationWindow != null) {
             towerInformationWindow.paint(g);
-            g.setColor(Color.red);
-            g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
-            g.setColor(Color.BLACK);
         }
 
     }
@@ -353,7 +362,7 @@ public class GameScene1 extends Scene {
             int y0 = (int) tmp.getY();
             Button button = new Button(x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE,
                     imageController.tryGetImage("/Resources/Images/Background/setPoint.png"),
-                    imageController.tryGetImage("/Resources/Images/Background/setPoint_clicked.png"),
+                    imageController.tryGetImage("/Resources/Images/Background/setPoint.png"),
                     imageController.tryGetImage("/Resources/Images/Background/setPoint.png"));
             button.setButtonListener(new ButtonListener() {
                 @Override

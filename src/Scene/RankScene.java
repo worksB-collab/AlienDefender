@@ -34,7 +34,7 @@ public class RankScene extends Scene{
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if(state == MouseState.CLICKED){
+                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
                     if(backButton.isRange(e.getX(), e.getY())){
                         backButton.click(e.getX(), e.getY());
                     }

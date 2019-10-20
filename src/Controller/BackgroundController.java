@@ -64,29 +64,55 @@ public class BackgroundController {
     }
     public class Stage1 implements Stage{
         private ImageController imageController;
-        private BufferedImage image;
+        private BufferedImage image1;
+        private BufferedImage image2;
+        private int jupiterVar;
+        private int jupiterAce;
+        private int jupiterDir;
+        private int speed;
+        private DelayCounter delay;
+        
         public Stage1(){
             imageController = ImageController.genInstance();
-            image = imageController.tryGetImage("/Resources/Images/Background/grass.png");
+            image1 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-01.png");
+            image2 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-03.png");
+            jupiterVar = 0;
+            jupiterAce = 10;
+            jupiterDir = 1;
+            
+            speed = 10;
+            delay = new DelayCounter(2);
         }
         @Override
         public void update() {
+            if(delay.update()){
+                jupiterVar = jupiterVar + speed;
+                speed += 1 * jupiterDir * -1;
+                if(jupiterAce > 0){
+                    if(speed <= 0){
+                        jupiterAce *= -1;
+                        speed += jupiterAce;
+                        jupiterDir = -1;
+                    }
+                }else{
+                    if(speed >= 0){
+                        jupiterAce *= -1;
+                        speed += jupiterAce;
+                        jupiterDir = 1;
+                    }    
+                }
+            }
+
             
         }
 
         @Override
         public void paint(Graphics g) {
-            BufferedImage imgG = imageController.tryGetImage("/Resources/Images/Background/grass.png");
-            int x0, y0;
-            x0 = y0 = 0;
-            for (int i = 0; i < 24; i++) {
-                for (int j = 0; j < 32; j++) {
-                    g.drawImage(imgG, x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
-                    x0 += Global.MIN_PICTURE_SIZE;
-                }
-                x0 = 0;
-                y0 += Global.MIN_PICTURE_SIZE;
-            }
+            g.drawImage(image1, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            int width = (int)(32 * 0.807 * Global.MIN_PICTURE_SIZE);
+            int height = (int)(24 * 0.495 * Global.MIN_PICTURE_SIZE);
+            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + jupiterVar, width, height,  null);
+            
         }
         
     }

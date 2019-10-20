@@ -8,9 +8,9 @@ package GameObject;
 import Controller.DelayCounter;
 import Value.DrawStringPoint;
 import Value.Global;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -30,8 +30,10 @@ public class Button extends GameObject{
     private ButtonListener buttonListener;
     private String text;
     private Font font;
+    private Color color;
     private DrawStringPoint point;
     private boolean isClicked;
+    private boolean isHovered;
     
     public Button(int x, int y , int width, int height,BufferedImage rootImage, BufferedImage clickImage, BufferedImage hoverImage){
         super(x, y, width, height);
@@ -41,6 +43,7 @@ public class Button extends GameObject{
         this.nowImage = rootImage;
         this.text = "";
         this.font = Global.FONT_01;
+        this.color = Color.ORANGE;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
@@ -48,6 +51,7 @@ public class Button extends GameObject{
         super(x, y, width, height);
         this.text = text;
         this.font = Global.FONT_01;
+        this.color = Color.LIGHT_GRAY;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
@@ -60,6 +64,9 @@ public class Button extends GameObject{
     }
     public void setFont(Font font){
         this.font = font;
+    }
+    public void setFontColor(Color color){
+        this.color = color;
     }
     public boolean isRange(int x, int y){
         if(x < this.x || x > this.x + width){
@@ -83,6 +90,7 @@ public class Button extends GameObject{
             return;
         }
         nowImage = hoverImage;
+        isHovered = true;
         buttonListener.hover(x, y);
     }
     public boolean getState(){
@@ -97,6 +105,7 @@ public class Button extends GameObject{
         if(delayCounter.update()){
             nowImage = rootImage;
             isClicked = false;
+            isHovered = false;
         }
         if(point != null){
             point.update(width, height);
@@ -106,7 +115,11 @@ public class Button extends GameObject{
     public void paint(Graphics g){
        
         if(nowImage != null){
+            if(isHovered){
+                g.setXORMode(Color.yellow);
+            }
             g.drawImage(nowImage, x, y, width, height, null);
+            g.setPaintMode();
             g.drawRect(x, y, width, height);
         }
         
@@ -114,7 +127,9 @@ public class Button extends GameObject{
         if(point == null){
             point = new DrawStringPoint(x, y, g, font, text, width, height);
         }
-        g.drawString(text, point.getX() , point.getY());    
+        g.setColor(color);
+        g.drawString(text, point.getX() , point.getY());
+        g.setColor(Global.DEFAULT_FONT_COLOR);
     }
     
     

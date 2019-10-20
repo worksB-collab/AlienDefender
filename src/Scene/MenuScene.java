@@ -5,6 +5,7 @@
  */
 package Scene;
 
+import Controller.BackgroundController;
 import Controller.ImageController;
 import Controller.SceneController;
 import GameObject.Button;
@@ -27,19 +28,20 @@ public class MenuScene extends Scene{
     private MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private ArrayList<Button> buttonList;
+    private BackgroundController backgroundController;
     private BufferedImage image;
     
     public MenuScene(SceneController sceneController) {
         super(sceneController);
         imageController = ImageController.genInstance();
-        image = imageController.tryGetImage(Path.Image.Scene.MENU_SCENE);
+        backgroundController = new BackgroundController(1);
         buttonList = new ArrayList<Button>();
         
         //mouse listener
         mouseCommandListener = new MouseCommandListener(){
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 //check click
-                if(state == MouseState.CLICKED){
+                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
                     for(int i = 0; i < buttonList.size(); i++){
                         Button tmp = buttonList.get(i);
                         if(tmp.isRange(e.getX(), e.getY())){
@@ -70,6 +72,8 @@ public class MenuScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        backgroundController.update();
+        
         if(buttonList.size() != 0){
             if(buttonList.get(0).getHeight() != Global.MIN_PICTURE_SIZE * 4){
                 buttonList = new ArrayList();
@@ -89,7 +93,8 @@ public class MenuScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+        backgroundController.paint(g);
+        
         if(buttonList != null){
             for(int i = 0 ; i < buttonList.size(); i++){
             buttonList.get(i).paint(g);
@@ -105,11 +110,7 @@ public class MenuScene extends Scene{
     private void genButton(){
         int buttonParameter[] = {12 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE};
         //new Game Button
-        Button newGameButton = new Button(buttonParameter[0], buttonParameter[1], buttonParameter[2], buttonParameter[3]
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_ROOT)
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_CLICK)
-                , imageController.tryGetImage(Path.Image.Button.StartButton.START_BUTTON_HOVER));
-        
+        Button newGameButton = new Button(buttonParameter[0], buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW GAME");
         newGameButton.setButtonListener(new ButtonListener(){
 
             @Override
@@ -124,10 +125,7 @@ public class MenuScene extends Scene{
             
         });
         //Load Data Button
-        Button loadGameButton = new Button(buttonParameter[0], buttonParameter[1] +  6 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3]
-                , imageController.tryGetImage(Path.Image.Button.LoadGameButton.LOAD_GAME_BUTTON_ROOT)
-                , imageController.tryGetImage(Path.Image.Button.LoadGameButton.LOAD_GAME_BUTTON_CLICK)
-                , imageController.tryGetImage(Path.Image.Button.LoadGameButton.LOAD_GAME_BUTTON_HOVER));
+        Button loadGameButton = new Button(buttonParameter[0], buttonParameter[1] +  6 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "LOAD GAME");
         
         loadGameButton.setButtonListener(new ButtonListener(){
 
@@ -144,10 +142,7 @@ public class MenuScene extends Scene{
         });
         
         //Rank Game Button
-        Button rankButton = new Button(buttonParameter[0], buttonParameter[1] + 12 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3]
-                , imageController.tryGetImage(Path.Image.Button.RankButton.RANK_BUTTON_ROOT)
-                , imageController.tryGetImage(Path.Image.Button.RankButton.RANK_BUTTON_CLICK)
-                , imageController.tryGetImage(Path.Image.Button.RankButton.RANK_BUTTON_HOVER));
+        Button rankButton = new Button(buttonParameter[0], buttonParameter[1] + 12 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "RANK");
         
         rankButton.setButtonListener(new ButtonListener(){
 
@@ -163,10 +158,7 @@ public class MenuScene extends Scene{
             
         });
         //Exit Game Button
-        Button exitButton = new Button(buttonParameter[0], buttonParameter[1] + 18 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3]
-                , imageController.tryGetImage(Path.Image.Button.ExitButton.EXIT_BUTTON_ROOT)
-                , imageController.tryGetImage(Path.Image.Button.ExitButton.EXIT_BUTTON_CLICK)
-                , imageController.tryGetImage(Path.Image.Button.ExitButton.EXIT_BUTTON_HOVER));
+        Button exitButton = new Button(buttonParameter[0], buttonParameter[1] + 18 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "EXIT");
         
         exitButton.setButtonListener(new ButtonListener(){
 

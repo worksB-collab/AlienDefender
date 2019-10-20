@@ -39,7 +39,7 @@ public class StartScene extends Scene{
             @Override
             public void mouseTrig(MouseEvent e, MouseState state, long trigTime) {
                 
-                if(state == MouseState.CLICKED){
+                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
                     if(buttonStart.isRange(e.getX(), e.getY())){
                         buttonStart.click(e.getX(), e.getY());
                     }

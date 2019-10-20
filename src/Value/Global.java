@@ -5,6 +5,7 @@
  */
 package Value;
 
+import java.awt.Color;
 import java.awt.Font;
 
 /**
@@ -27,7 +28,7 @@ public class Global {
     public static final int ANIMATE_DELAY_PER_SEC = UPDATE_PER_SEC / 15;
 
     //Delay
-    public static final int BUTTON_UPDATE_DELAY = 30;
+    public static final int BUTTON_UPDATE_DELAY = 3;
 
 
     //Grid
@@ -60,5 +61,7 @@ public class Global {
     //Font
     public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
     public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
+    public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
+    
 
 }
