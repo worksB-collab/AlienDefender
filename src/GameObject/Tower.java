@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import Controller.DelayCounter;
 import static Value.Global.*;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -17,8 +18,11 @@ import java.util.LinkedList;
 public class Tower extends ActiveObject {
 
     protected int attack;
-    protected int attackRangeRight;
     protected LinkedList<Point> range;
+    protected LinkedList<Bullet> bullets;
+    protected int towerNum;
+    protected int towerRange;
+    private DelayCounter delay;
 
     public Tower(int x, int y, int width, int height, int attack, int speed) {
         super(x, y, width, height, speed);
@@ -26,40 +30,18 @@ public class Tower extends ActiveObject {
         this.height = height;
         this.attack = attack;
         this.speed = speed;
-        genRange();
-    }
 
-    public LinkedList genRange() {
-        range = new LinkedList<Point>();
-        for (int i = -TOWER1_ATKRANGE; i < TOWER1_ATKRANGE; i++) {
-            for (int j = -TOWER1_ATKRANGE; j < TOWER1_ATKRANGE; j++) {
-                if (Math.abs(i) + Math.abs(j) <= TOWER1_ATKRANGE) {
-                    range.add(new Point(x + i, y + j));
-                }
-                j += (SIZE_GRID-1);
-            }
-            i += (SIZE_GRID-1);
-        }
-        for (int i = TOWER1_ATKRANGE; i >= 0; i--) {
-            for (int j = TOWER1_ATKRANGE; j >= 0; j--) {
-                if (Math.abs(i + j) <= TOWER1_ATKRANGE) {
-                    range.add(new Point(x + i, y + j));
-                }
-                j -= (SIZE_GRID-1);
-            }
-            i -= (SIZE_GRID-1);
-        }
-        for (Point range : range) {
-            System.out.println(range);
-        }
-        return range;
+        bullets = new LinkedList<Bullet>();
+        delay = new DelayCounter(30);
         
     }
 
     public void detection(Alien alien) {
         for (Point range : range) {
-            if (alien.getX()+SIZE_GRID-DEVIATION >= range.getX()  && alien.getX()+DEVIATION <= range.getX() + SIZE_GRID
-                    && alien.getY()+SIZE_GRID-DEVIATION >= range.getY()  && alien.getY()+DEVIATION <= range.getY() + SIZE_GRID) {
+            if (alien.getX() + SIZE_GRID - DEVIATION >= range.getX() &&
+                    alien.getX() + DEVIATION <= range.getX() + SIZE_GRID&&
+                    alien.getY() + SIZE_GRID - DEVIATION >= range.getY() &&
+                    alien.getY() + DEVIATION <= range.getY() + SIZE_GRID) {
                 changeDirection(alien);
                 attack(alien);
             }
@@ -91,26 +73,45 @@ public class Tower extends ActiveObject {
             if (w > 0 && h < 0) {
                 direction = 90 - Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
-            }else if(w>0 && h > 0){
-                direction= 90 + Math.abs(Math.atan((h)
+            } else if (w > 0 && h > 0) {
+                direction = 90 + Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
-            }else if(w<0 && h < 0){
-                direction= 270 + Math.abs(Math.atan((h)
+            } else if (w < 0 && h < 0) {
+                direction = 270 + Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
-            }else{
-                direction= 270 - Math.abs(Math.atan((h)
+            } else {
+                direction = 270 - Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
             }
         }
-//        System.out.println(direction);
     }
 
     public void attack(Alien alien) {
-        alien.isAttacked(this);
+        if(delay.update()){
+            alien.isAttacked(this);
+            bullets.add(new Bullet(x, y, alien, this));
+        }
+    }
+
+    public int getTowerNum() {
+        return towerNum;
+    }
+    
+    public LinkedList<Bullet> getBullets(){
+        return bullets;
     }
 
     @Override
     public void update() {
+        for (int i = 0; i < bullets.size(); i++) 
+        {
+            if(bullets.get(i).isReached()){
+                bullets.remove(i);
+            }
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).update();
+        }
     }
 
     @Override

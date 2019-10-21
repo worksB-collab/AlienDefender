@@ -120,7 +120,15 @@ public class GameScene1 extends Scene {
             for (int i = 0; i < towers.size(); i++) {
                 for (int j = 0; j < aliens.size(); j++) {
                     towers.get(i).detection(aliens.get(j));
+                    towers.get(i).update();
                 }
+            }
+        }else{
+            for (int i = 0; i < towers.size(); i++) {
+                LinkedList<Bullet> bullets = towers.get(i).getBullets();
+                for (int j = 0; j <bullets.size(); j++) {
+                bullets.remove(j);
+            }
             }
         }
         //Aliens update
@@ -134,16 +142,17 @@ public class GameScene1 extends Scene {
                 Alien a = aliens.get(i);
                 a.update();
                 if (a.getY() >= 24 * Global.MIN_PICTURE_SIZE) {
+                    //player blood declination
                     aliens.remove(i);
                 }
-                if (a.isDead())// kill count, alien type yet updated
+                if (a.isDead())// kill counts
                 {
                     scoreController.scoreCount(a.getAlienNum());
+                    System.out.println(scoreController);
+                    aliens.remove(a);
                 }
-                
             }
         }
-        removeAlien();
 
         //TowerSelectWindow
         if (towerSelectWindow != null) {
@@ -399,14 +408,6 @@ public class GameScene1 extends Scene {
             aliens.add(new Alien1(-25, 50));
             Alien.setRoute(route);
             count++;
-        }
-    }
-
-    private void removeAlien() {
-        for (int i = 0; i < aliens.size(); i++) {
-            if (aliens.get(i).isDead()) {
-                aliens.remove(i--);
-            }
         }
     }
 

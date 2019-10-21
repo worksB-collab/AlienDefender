@@ -40,11 +40,11 @@ public class Global {
     public static final int SIZE_BLOODLINE = SIZE_OBJECT/15;
     
     //Tower
-    public static final int TOWER1_ATKRANGE = 1 * SIZE_GRID;
-    public static final int TOWER2_ATKRANGE = 2* SIZE_GRID;
-    public static final int TOWER3_ATKRANGE = 3* SIZE_GRID;
-    public static final int TOWER4_ATKRANGE = 4* SIZE_GRID;
-    public static final int TOWER5_ATKRANGE = 5* SIZE_GRID;
+    public static final int TOWER0_ATKRANGE = 1 * SIZE_GRID;
+    public static final int TOWER1_ATKRANGE = 2 * SIZE_GRID;
+    public static final int TOWER2_ATKRANGE = 3 * SIZE_GRID;
+    public static final int TOWER3_ATKRANGE = 4 * SIZE_GRID;
+    public static final int TOWER4_ATKRANGE = 5 * SIZE_GRID;
 
     //Cailbaration
     public static int MIN_PICTURE_SIZE = 32;

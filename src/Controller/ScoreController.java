@@ -40,9 +40,13 @@ public class ScoreController {
                 kills.set(4, kills.get(4) + 1);
                 break;
         }
-        for (Integer kills : kills) {
-            System.out.print(kills);
+    }
+    
+    public String toString(){
+        String str = "";
+        for(int kill: kills){
+            str+="Alien1 *" +kill +"\n";
         }
-        System.out.println("");
+        return str;
     }
 }
