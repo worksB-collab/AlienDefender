@@ -11,6 +11,7 @@ import Controller.CommandSolver.MouseCommandListener;
 import Controller.CommandSolver.TypedListener;
 import Value.DrawStringPoint;
 import Value.Global;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -23,11 +24,13 @@ import java.util.LinkedList;
 public class InputPopWindow extends PopUpWindow{
     private DrawStringPoint point;
     private Font font;
+     private String text;
     private boolean isEnd;
-    
-    private String text;
+   
     public InputPopWindow(int x, int y, int width, int height, LinkedList<Character> charList) {
         super(x, y, width, height);
+        font = Global.FONT_INPUT;
+        text = "";
         isEnd = false;
         super.setKeyCommandListener( new KeyCommandListener(){
 
@@ -37,12 +40,6 @@ public class InputPopWindow extends PopUpWindow{
 
             @Override
             public void keyReleased(int commandCode, long trigTime) {
-                switch(commandCode){
-                    case Global.KEY_ENTER :
-                        isEnd = true;
-                    case Global.KEY_BACK_SPACE:
-                        charList.removeLast();
-                }
             }
             
         });
@@ -50,8 +47,20 @@ public class InputPopWindow extends PopUpWindow{
         super.setTypedListener( new TypedListener(){
             @Override
             public void keyTyped(char c, long trigTime) {
-                charList.add(c);
-                text = charList.toString().replace('[', ' ').replace(']', ' ').replace(',', ' ');
+
+                if(c == KeyEvent.VK_ENTER){
+                    isEnd = true;
+                }else if(c == KeyEvent.VK_BACKSPACE){
+                    if(charList.size() >= 1){
+                       charList.removeLast(); 
+                    }
+                }else{
+                    charList.add(c);
+                }
+                text  = "";
+                for(Character character : charList){
+                    text += character.charValue();
+                }
             }
 
         });
@@ -67,7 +76,7 @@ public class InputPopWindow extends PopUpWindow{
      
     @Override
     public boolean isEnd() {
-        return true;
+        return isEnd;
     }
     
     @Override
@@ -80,7 +89,7 @@ public class InputPopWindow extends PopUpWindow{
     @Override
     public void paint(Graphics g){
         if(point == null){
-            point = new DrawStringPoint(x, y, g, Global.FONT_INPUT,text, width, height);
+            point = new DrawStringPoint(x, y, g, font,text, width, height);
         }
         g.setFont(font);
         g.drawString(text, point.getX(), point.getY());
