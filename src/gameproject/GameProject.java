@@ -8,6 +8,8 @@ package gameproject;
 
 import Value.Global;
 import Controller.CommandSolver;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 /**
@@ -29,7 +31,11 @@ public class GameProject {
         long startTime = System.currentTimeMillis();
         long lastTime = System.currentTimeMillis();
         long UpdatedFrame = 0;
-        CommandSolver cs = new CommandSolver.Builder(Global.MILLISEC_PER_UPDATE).enableMouseTrack(gPanel).gen();
+        CommandSolver cs = new CommandSolver.Builder(Global.MILLISEC_PER_UPDATE, new int[][]{
+            {KeyEvent.VK_ENTER, Global.KEY_ENTER},
+            {KeyEvent.VK_BACK_SPACE, Global.KEY_BACK_SPACE}
+        }).enableMouseTrack(gPanel).trackChar().gen();
+        addKeyListener(frame, cs);
         cs.start();
         
         while(true){
@@ -66,6 +72,25 @@ public class GameProject {
             
         }
         
+    }
+    public static void addKeyListener(JFrame j, CommandSolver cs) {
+        j.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                cs.trig(e.getKeyChar(), true);
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                cs.trig(e.getKeyCode(), true);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                cs.trig(e.getKeyCode(), false);
+            }
+        });
+        j.setFocusable(true);
     }
     
 }

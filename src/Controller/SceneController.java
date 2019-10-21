@@ -30,6 +30,7 @@ public class SceneController {
         if(commands != null){
             commands.actionCommand(currentScene.getKeyCommandListener());
             commands.actionCommand(currentScene.getMouseCommandListener());
+            commands.actionCommand(currentScene.getTypedListener());
         }
         currentScene.sceneUpdate();
     }

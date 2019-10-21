@@ -18,18 +18,22 @@ public abstract class PopUpWindow extends GameObject{
     public static final String TYPE = "PopUpWindow";
     protected CommandSolver.KeyCommandListener keyCommandListener;
     protected CommandSolver.MouseCommandListener mouseCommandListener;
-    
+    protected CommandSolver.TypedListener typedListener;
     public PopUpWindow(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
     
     
-    public void setKeyCommandListener(CommandSolver.KeyCommandListener eyCommandListener){
+    public void setKeyCommandListener(CommandSolver.KeyCommandListener keyCommandListener){
         this.keyCommandListener = keyCommandListener;
     }
     
-    public void setMouseCommandListener(CommandSolver.KeyCommandListener eyCommandListener){
+    public void setMouseCommandListener(CommandSolver.MouseCommandListener mouseCommandListener){
         this.mouseCommandListener = mouseCommandListener;
+    }
+    
+    public void setTypedListener(CommandSolver.TypedListener typedListener){
+        this.typedListener = typedListener;
     }
     
     public CommandSolver.KeyCommandListener getKeyCommandListener(){
@@ -38,6 +42,9 @@ public abstract class PopUpWindow extends GameObject{
     
     public CommandSolver.MouseCommandListener getMouseCommandListener(){
         return mouseCommandListener;
+    }
+    public CommandSolver.TypedListener getTypedListener(){
+        return typedListener;
     }
     public abstract boolean isEnd();
     

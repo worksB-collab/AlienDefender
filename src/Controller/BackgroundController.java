@@ -8,10 +8,8 @@ package Controller;
 import Value.DrawStringPoint;
 import Value.Global;
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 
 /**
@@ -26,13 +24,24 @@ public class BackgroundController {
     public class Stage0 implements Stage{
         private ImageController imageController;
         private BufferedImage image;
+        private BufferedImage imageMeteor[];
+        private int meteorPointer;
         private DrawStringPoint[] points;
+        private Point meteorPoint;
+        private DelayCounter delay;
         public Stage0(){
             imageController = ImageController.genInstance();
-            image = imageController.tryGetImage("/Resources/Images/Background/Background_00.png");
-            
-            
+            image = imageController.tryGetImage("/Resources/Images/Background/Background_00-00.png");
+            imageMeteor = new BufferedImage[4];
+            imageMeteor[0] = imageController.tryGetImage("/Resources/Images/Background/Background_00-02.png");
+            imageMeteor[1] = imageController.tryGetImage("/Resources/Images/Background/Background_00-03.png");
+            imageMeteor[2] = imageController.tryGetImage("/Resources/Images/Background/Background_00-04.png");
+            imageMeteor[3] = imageController.tryGetImage("/Resources/Images/Background/Background_00-05.png");
+            meteorPointer = 0;
+//            image2 = imageController.tryGetImage("/Resources/Images/Background/Background_00-01.png");
+            meteorPoint = new Point(0,0);
             points = new DrawStringPoint[2];
+            delay = new DelayCounter(30);
         }
 
         @Override
@@ -44,12 +53,21 @@ public class BackgroundController {
                     }
                 }
             }
+            
+            meteorPoint.x -= 5;
+            meteorPoint.y += 5;
+            if(delay.update()){
+                meteorPointer = ++meteorPointer % 4;
+                meteorPoint.x = 0;
+                meteorPoint.y = 0;
+            }
+            
         }
 
         @Override
         public void paint(Graphics g) {
             g.drawImage(image, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-
+            g.drawImage(imageMeteor[meteorPointer], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
             if(points[0] == null){
                points[0] = new DrawStringPoint(0, 0, g, Global.FONT_00, "ALIEN", Global.FRAME_WIDTH, Global.FRAME_WIDTH);
                points[1] = new DrawStringPoint(0, 0, g, Global.FONT_00, "DEFENDER", Global.FRAME_WIDTH, Global.FRAME_WIDTH);
@@ -77,7 +95,7 @@ public class BackgroundController {
             image1 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-01.png");
             image2 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-03.png");
             jupiterVar = 0;
-            jupiterAce = 10;
+            jupiterAce = 5;
             jupiterDir = 1;
             
             speed = 10;

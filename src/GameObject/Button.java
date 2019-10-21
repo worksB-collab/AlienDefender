@@ -33,7 +33,6 @@ public class Button extends GameObject{
     private Color color;
     private DrawStringPoint point;
     private boolean isClicked;
-    private boolean isHovered;
     
     public Button(int x, int y , int width, int height,BufferedImage rootImage, BufferedImage clickImage, BufferedImage hoverImage){
         super(x, y, width, height);
@@ -90,7 +89,6 @@ public class Button extends GameObject{
             return;
         }
         nowImage = hoverImage;
-        isHovered = true;
         buttonListener.hover(x, y);
     }
     public boolean getState(){
@@ -105,7 +103,6 @@ public class Button extends GameObject{
         if(delayCounter.update()){
             nowImage = rootImage;
             isClicked = false;
-            isHovered = false;
         }
         if(point != null){
             point.update(width, height);
@@ -115,9 +112,6 @@ public class Button extends GameObject{
     public void paint(Graphics g){
        
         if(nowImage != null){
-            if(isHovered){
-                g.setXORMode(Color.yellow);
-            }
             g.drawImage(nowImage, x, y, width, height, null);
             g.setPaintMode();
             g.drawRect(x, y, width, height);

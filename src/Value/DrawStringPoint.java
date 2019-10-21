@@ -61,6 +61,9 @@ public class DrawStringPoint {
     public void setFont(Font font){
         this.font = font;
     }
+    public void setText(String text){
+        this.text = text;
+    }
     public void setGraphics(Graphics g){
         this.g = g;
     }

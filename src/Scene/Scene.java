@@ -6,9 +6,11 @@
 package Scene;
 
 
+import Controller.CommandSolver;
 import Controller.SceneController;
 import Controller.CommandSolver.KeyCommandListener;
 import Controller.CommandSolver.MouseCommandListener;
+import Controller.CommandSolver.TypedListener;
 import java.awt.Graphics;
 
 /**
@@ -28,4 +30,5 @@ public abstract class Scene {
     public abstract void paint(Graphics g);
     public KeyCommandListener getKeyCommandListener(){return null;}
     public MouseCommandListener getMouseCommandListener(){return null;}
+    public TypedListener getTypedListener(){return null;}
 }

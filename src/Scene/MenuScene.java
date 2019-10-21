@@ -148,7 +148,7 @@ public class MenuScene extends Scene{
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new RankScene(sceneController));
+                sceneController.changeScene(new PrepareScene(sceneController));
             }
 
             @Override
