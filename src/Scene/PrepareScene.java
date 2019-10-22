@@ -117,6 +117,7 @@ public class PrepareScene extends Scene{
     @Override
     public CommandSolver.TypedListener getTypedListener(){
         if(popWindow != null){
+
             return popWindow.getTypedListener();
         }
         return typedListener;

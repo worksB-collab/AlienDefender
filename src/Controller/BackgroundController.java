@@ -23,21 +23,31 @@ public class BackgroundController {
     }
     public class Stage0 implements Stage{
         private ImageController imageController;
-        private BufferedImage image;
+        private BufferedImage imageBackground[];
         private BufferedImage imageMeteor[];
-        private int meteorPointer;
+        private int meteorPointer[];
         private DrawStringPoint[] points;
         private Point meteorPoint;
         private DelayCounter delay;
         public Stage0(){
             imageController = ImageController.genInstance();
-            image = imageController.tryGetImage("/Resources/Images/Background/Background_00-00.png");
-            imageMeteor = new BufferedImage[4];
-            imageMeteor[0] = imageController.tryGetImage("/Resources/Images/Background/Background_00-02.png");
-            imageMeteor[1] = imageController.tryGetImage("/Resources/Images/Background/Background_00-03.png");
-            imageMeteor[2] = imageController.tryGetImage("/Resources/Images/Background/Background_00-04.png");
-            imageMeteor[3] = imageController.tryGetImage("/Resources/Images/Background/Background_00-05.png");
-            meteorPointer = 0;
+            imageBackground = new BufferedImage[3];
+            imageBackground[0] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_00.png");
+            imageBackground[1] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_01.png");
+            imageBackground[2] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_02.png");
+            
+            imageMeteor = new BufferedImage[8];
+            imageMeteor[0] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor00.png");
+            imageMeteor[1] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor01.png");
+            imageMeteor[2] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor02.png");
+            imageMeteor[3] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor03.png");
+            imageMeteor[4] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor04.png");
+            imageMeteor[5] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor05.png");
+            imageMeteor[6] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor06.png");
+            imageMeteor[7] = imageController.tryGetImage("/Resources/Images/Background/StartScreen/Background_00_meteor07.png");
+            meteorPointer = new int[2];
+            meteorPointer[0] = (int)(Math.random() * (imageMeteor.length));
+            meteorPointer[1] = (int)(Math.random() * (imageMeteor.length));
 //            image2 = imageController.tryGetImage("/Resources/Images/Background/Background_00-01.png");
             meteorPoint = new Point(0,0);
             points = new DrawStringPoint[2];
@@ -57,7 +67,8 @@ public class BackgroundController {
             meteorPoint.x -= 5;
             meteorPoint.y += 5;
             if(delay.update()){
-                meteorPointer = ++meteorPointer % 4;
+                meteorPointer[0] = (int)(Math.random() * (imageMeteor.length));
+                meteorPointer[1] = (int)(Math.random() * (imageMeteor.length));
                 meteorPoint.x = 0;
                 meteorPoint.y = 0;
             }
@@ -66,8 +77,11 @@ public class BackgroundController {
 
         @Override
         public void paint(Graphics g) {
-            g.drawImage(image, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            g.drawImage(imageMeteor[meteorPointer], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageBackground[0], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageMeteor[meteorPointer[0]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageMeteor[meteorPointer[1]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageBackground[1], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageBackground[2], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
             if(points[0] == null){
                points[0] = new DrawStringPoint(0, 0, g, Global.FONT_00, "ALIEN", Global.FRAME_WIDTH, Global.FRAME_WIDTH);
                points[1] = new DrawStringPoint(0, 0, g, Global.FONT_00, "DEFENDER", Global.FRAME_WIDTH, Global.FRAME_WIDTH);

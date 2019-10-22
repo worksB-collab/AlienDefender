@@ -5,6 +5,7 @@
  */
 package Scene;
 
+import Controller.AlienController;
 import Controller.BackgroundController;
 import Controller.CommandSolver;
 import Controller.CommandSolver.MouseCommandListener;
@@ -14,6 +15,7 @@ import Controller.ImageController;
 import Controller.PlayerController;
 import Controller.SceneController;
 import Controller.ScoreController;
+import Controller.TowerController;
 import GameObject.*;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
@@ -43,28 +45,17 @@ public class GameScene1 extends Scene {
     private LinkedList<Point> route;
     private LinkedList<Point> setPoint;
     private LinkedList<Button> buttonList;
-    private LinkedList<Alien> aliens;
-    private LinkedList<Alien> deadAliens;
-    private LinkedList<Tower> towers;
-    private int count;
-    private DelayCounter moveDelay, genDelay;
     private Point spot;
-    private ScoreController scoreController;
-
+    private AlienController alienController;
+    private TowerController towerController;
 
     public GameScene1(SceneController sceneController) {
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(1);
-
         buttonList = new LinkedList();
-        aliens = new LinkedList<Alien>();
-        deadAliens = new LinkedList<Alien>();
-        towers = new LinkedList<Tower>();
-        moveDelay = new DelayCounter(1);
-        genDelay = new DelayCounter(5);
-        scoreController = new ScoreController();
+
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -80,7 +71,7 @@ public class GameScene1 extends Scene {
                         }
                     }
                 }
-                if(state == MouseState.MOVED){
+                if (state == MouseState.MOVED) {
                     int x = e.getX();
                     int y = e.getY();
                     for (Button tmp : buttonList) {
@@ -115,44 +106,14 @@ public class GameScene1 extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
-        //Tower update
-        if (aliens.size() != 0) {
-            for (int i = 0; i < towers.size(); i++) {
-                for (int j = 0; j < aliens.size(); j++) {
-                    towers.get(i).detection(aliens.get(j));
-                    towers.get(i).update();
-                }
-            }
-        }else{
-            for (int i = 0; i < towers.size(); i++) {
-                LinkedList<Bullet> bullets = towers.get(i).getBullets();
-                for (int j = 0; j <bullets.size(); j++) {
-                bullets.remove(j);
-            }
-            }
+        if (alienController == null) {
+            alienController = new AlienController(route);
         }
-        //Aliens update
-        if (moveDelay.update()) {
-            if (count < 50) { // first chapter > 50 aliens
-                if (genDelay.update()) {
-                    genAlien();
-                }
-            }
-            for (int i = 0; i < aliens.size(); i++) {
-                Alien a = aliens.get(i);
-                a.update();
-                if (a.getY() >= 24 * Global.MIN_PICTURE_SIZE) {
-                    //player blood declination
-                    aliens.remove(i);
-                }
-                if (a.isDead())// kill counts
-                {
-                    scoreController.scoreCount(a.getAlienNum());
-                    System.out.println(scoreController);
-                    aliens.remove(a);
-                }
-            }
+        if (towerController == null) {
+            towerController = new TowerController(alienController);
         }
+        alienController.update();
+        towerController.update();
 
         //TowerSelectWindow
         if (towerSelectWindow != null) {
@@ -160,7 +121,7 @@ public class GameScene1 extends Scene {
             if (towerSelectWindow.isEnd()) {
                 Tower tower = towerSelectWindow.getResult();
                 if (tower != null) {
-                    towers.add(towerSelectWindow.getResult());
+                    towerController.getTowers().add(towerSelectWindow.getResult());
                 }
                 towerSelectWindow = null;
             }
@@ -172,7 +133,6 @@ public class GameScene1 extends Scene {
                 towerInformationWindow = null;
             }
         }
-
     }
 
     @Override
@@ -190,15 +150,11 @@ public class GameScene1 extends Scene {
                 button.paint(g);
             }
         }
-        //Tower paint
-        for (int i = 0; i < towers.size(); i++) {
-            towers.get(i).paint(g);
-        }
-        //Alines paint
-        for (int i = 0; i < aliens.size(); i++) {
-            aliens.get(i).paint(g);
-        }
-        if(spot != null){
+
+        alienController.paint(g);
+        towerController.paint(g);
+
+        if (spot != null) {
             g.setColor(Color.red);
             g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
@@ -208,7 +164,6 @@ public class GameScene1 extends Scene {
         } else if (towerInformationWindow != null) {
             towerInformationWindow.paint(g);
         }
-
     }
 
     @Override
@@ -241,7 +196,6 @@ public class GameScene1 extends Scene {
     }
 
     //generate
-
     private void genRandomRoad() {
         route = new LinkedList();
         setPoint = new LinkedList();
@@ -378,8 +332,8 @@ public class GameScene1 extends Scene {
                 public void onClick(int x, int y) {
                     boolean isBuilt = false;
                     Tower tower = null;
-                    for (int i = 0; i < towers.size(); i++) {
-                        tower = towers.get(i);
+                    for (int i = 0; i < towerController.getTowers().size(); i++) {
+                        tower = towerController.getTowers().get(i);
                         if (tower.getX() == x0 && tower.getY() == y0) {
                             isBuilt = true;
                             break;
@@ -400,14 +354,6 @@ public class GameScene1 extends Scene {
 
             });
             buttonList.add(button);
-        }
-    }
-
-    private void genAlien() {
-        if ((int) (Math.random() * 100) > 10) {
-            aliens.add(new Alien1(-25, 50));
-            Alien.setRoute(route);
-            count++;
         }
     }
 
