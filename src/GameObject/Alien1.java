@@ -36,4 +36,4 @@ public class Alien1 extends Alien {
         }
         aHelper.paint(g, x, y, width, height, ACT[act], hp);
     }
-}
+} 

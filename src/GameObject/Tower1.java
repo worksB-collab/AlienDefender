@@ -68,10 +68,31 @@ public class Tower1 extends Tower {
     }
 
     @Override
+    public void update() {
+        switch (upgrade) {
+            case 0:
+                break;
+            case 1:
+                attack = attack * 1.3;
+                upgrade = 0;
+                break;
+        }
+        
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).isReached()) {
+                bullets.remove(i);
+            }
+        }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).update();
+        }
+    }
+
+    @Override
     public void paint(Graphics g) {
         for (int i = 0; i < bullets.size(); i++) {
             bullets.get(i).paint(g);
         }
-        tHelper.paint(g, x, y, SIZE_GRID, SIZE_GRID, direction);
+        tHelper.paint(g, x, y, SIZE_GRID, SIZE_GRID, direction, upgradeStage);
     }
 }

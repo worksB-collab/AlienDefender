@@ -23,25 +23,25 @@ public class TowerHelper {
 
     public TowerHelper(int actor) {
         img = getActor(actor);
-        actorPosition = actor % 6;
+        actorPosition = actor % 5;
     }
 
     private BufferedImage getActor(int actor) {
         ImageController irc = ImageController.genInstance();
-        if (actor >= 0 && actor < 6) {
+        if (actor >= 0 && actor < 5) {
             return irc.tryGetImage(Path.Image.TOWER1);
         }
-        if (actor < 12) {
+        if (actor < 10) {
             return irc.tryGetImage(Path.Image.TOWER1); // not yet updated
         }
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, double direction) {
+    public void paint(Graphics g, int x, int y, int width, int height, double direction, int upgradeStage) {
         if (img == null) {
             return;
         }
-        int dx = 65 * (actorPosition);
+        int dx = 65 * (actorPosition*(upgradeStage*5));
         Graphics2D g2 = (Graphics2D) g.create();
         
         g2.rotate(direction*Math.PI/180, (x+x+width)/2, (y+y+height)/2);

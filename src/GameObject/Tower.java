@@ -17,12 +17,14 @@ import java.util.LinkedList;
  */
 public class Tower extends ActiveObject {
 
-    protected int attack;
+    protected double attack;
     protected LinkedList<Point> range;
     protected LinkedList<Bullet> bullets;
     protected int towerNum;
     protected int towerRange;
-    private DelayCounter delay;
+    protected DelayCounter delay;
+    protected int upgradeStage;
+    protected int upgrade;
 
     public Tower(int x, int y, int width, int height, int attack, int speed) {
         super(x, y, width, height, speed);
@@ -30,10 +32,21 @@ public class Tower extends ActiveObject {
         this.height = height;
         this.attack = attack;
         this.speed = speed;
-
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(30);
-        
+        upgradeStage = 0;
+    }
+    
+    public void upgrade(){
+        if(upgradeStage==2){
+            return;
+        }
+        upgradeStage++;
+        upgrade++;
+    }
+    
+    public int getUpgradeStage(){
+        return upgradeStage;
     }
 
     public void detection(Alien alien) {
@@ -48,7 +61,7 @@ public class Tower extends ActiveObject {
         }
     }
 
-    public int getAttack() {
+    public double getAttack() {
         return attack;
     }
 
@@ -103,15 +116,7 @@ public class Tower extends ActiveObject {
 
     @Override
     public void update() {
-        for (int i = 0; i < bullets.size(); i++) 
-        {
-            if(bullets.get(i).isReached()){
-                bullets.remove(i);
-            }
-        }
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).update();
-        }
+       
     }
 
     @Override

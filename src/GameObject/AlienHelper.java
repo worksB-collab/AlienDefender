@@ -25,8 +25,8 @@ public class AlienHelper {
     private int actorPosition;
     private DelayCounter delay;
     private LinkedList<Alien> aliens;
-    private int orignHP;
-    private int currentHP;
+    private double orignHP;
+    private double currentHP;
 
     public AlienHelper(int alien) {
         img = getActor(alien);
@@ -47,7 +47,7 @@ public class AlienHelper {
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, int act, int hp) {
+    public void paint(Graphics g, int x, int y, int width, int height, int act, double hp) {
         setOrignHP(hp);
         if (img == null) {
             return;
@@ -59,13 +59,13 @@ public class AlienHelper {
         bloodLine(g, x, y, width, height, hp);
     }
     
-    public void setOrignHP(int hp){
+    public void setOrignHP(double hp){
         if (orignHP==-1){
             orignHP = hp;
         }
     }
 
-    public void bloodLine(Graphics g, int x, int y, int width, int height, int hp) {
+    public void bloodLine(Graphics g, int x, int y, int width, int height, double hp) {
         g.setColor(Color.black);
         g.drawRect(x, y, width, SIZE_BLOODLINE);
         

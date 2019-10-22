@@ -17,7 +17,7 @@ import java.util.LinkedList;
 public class Alien extends ActiveObject {
 
     protected int act;
-    protected int hp;
+    protected double hp;
     public int nextPosition;
     private static LinkedList<Point> route;
     protected int alienNum;
@@ -81,7 +81,7 @@ public class Alien extends ActiveObject {
             return false;
     }
 
-    public int getHp() {
+    public double getHp() {
         return hp;
     }
 
