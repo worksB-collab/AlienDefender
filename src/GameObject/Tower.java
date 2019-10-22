@@ -36,7 +36,9 @@ public class Tower extends ActiveObject {
         delay = new DelayCounter(30);
         upgradeStage = 0;
     }
-    
+    public LinkedList getRange(){
+        return null;
+    }
     public void upgrade(){
         if(upgradeStage==2){
             return;

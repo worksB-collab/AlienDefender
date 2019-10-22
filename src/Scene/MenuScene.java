@@ -108,9 +108,9 @@ public class MenuScene extends Scene{
     
     
     private void genButton(){
-        int buttonParameter[] = {12 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE};
+        int buttonParameter[] = {Global.FRAME_WIDTH / 2, Global.FRAME_HEIGHT / 2 + 6 * Global.MIN_PICTURE_SIZE, 5 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE};
         //new Game Button
-        Button newGameButton = new Button(buttonParameter[0], buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW GAME");
+        Button newGameButton = new Button(buttonParameter[0] - 14 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW");
         newGameButton.setButtonListener(new ButtonListener(){
 
             @Override
@@ -125,7 +125,7 @@ public class MenuScene extends Scene{
             
         });
         //Load Data Button
-        Button loadGameButton = new Button(buttonParameter[0], buttonParameter[1] +  6 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "LOAD GAME");
+        Button loadGameButton = new Button(buttonParameter[0] - 6 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "LOAD");
         
         loadGameButton.setButtonListener(new ButtonListener(){
 
@@ -142,7 +142,7 @@ public class MenuScene extends Scene{
         });
         
         //Rank Game Button
-        Button rankButton = new Button(buttonParameter[0], buttonParameter[1] + 12 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "RANK");
+        Button rankButton = new Button(buttonParameter[0] + 2 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "RANK");
         
         rankButton.setButtonListener(new ButtonListener(){
 
@@ -158,7 +158,7 @@ public class MenuScene extends Scene{
             
         });
         //Exit Game Button
-        Button exitButton = new Button(buttonParameter[0], buttonParameter[1] + 18 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "EXIT");
+        Button exitButton = new Button(buttonParameter[0] + 10 * Global.MIN_PICTURE_SIZE , buttonParameter[1], buttonParameter[2], buttonParameter[3], "EXIT");
         
         exitButton.setButtonListener(new ButtonListener(){
 

@@ -41,7 +41,7 @@ public class Button extends GameObject{
         this.hoverImage = hoverImage;
         this.nowImage = rootImage;
         this.text = "";
-        this.font = Global.FONT_01;
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.ORANGE;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
@@ -49,7 +49,7 @@ public class Button extends GameObject{
     public Button(int x, int y , int width, int height, String text){
         super(x, y, width, height);
         this.text = text;
-        this.font = Global.FONT_01;
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.LIGHT_GRAY;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
@@ -105,7 +105,9 @@ public class Button extends GameObject{
             isClicked = false;
         }
         if(point != null){
-            point.update(width, height);
+            if(point.getHeight() != height){
+                point.update(width, height);
+            }
         }
     }
     @Override
@@ -117,11 +119,12 @@ public class Button extends GameObject{
             g.drawRect(x, y, width, height);
         }
         
-        g.setFont(Global.FONT_01);
+        g.setFont(font);
         if(point == null){
             point = new DrawStringPoint(x, y, g, font, text, width, height);
         }
         g.setColor(color);
+        g.drawRect(x, y, width, height);
         g.drawString(text, point.getX() , point.getY());
         g.setColor(Global.DEFAULT_FONT_COLOR);
     }

@@ -66,7 +66,11 @@ public class Tower1 extends Tower {
         return range;
 
     }
-
+    @Override
+    public LinkedList getRange(){
+        return range;
+    }
+    
     @Override
     public void update() {
         switch (upgrade) {

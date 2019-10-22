@@ -139,9 +139,9 @@ public class BackgroundController {
         @Override
         public void paint(Graphics g) {
             g.drawImage(image1, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            int width = (int)(32 * 0.807 * Global.MIN_PICTURE_SIZE);
-            int height = (int)(24 * 0.495 * Global.MIN_PICTURE_SIZE);
-            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + jupiterVar, width, height,  null);
+            int width = (int)(24 * 0.807 * Global.MIN_PICTURE_SIZE);
+            int height = (int)(18 * 0.495 * Global.MIN_PICTURE_SIZE);
+            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + jupiterVar - 6 * Global.MIN_PICTURE_SIZE, width, height,  null);
             
         }
         
