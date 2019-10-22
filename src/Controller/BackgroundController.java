@@ -133,11 +133,9 @@ public class BackgroundController {
                         jupiterDir = 1;
                     }    
                 }
-            }
-
-            
+            } 
         }
-
+    
         @Override
         public void paint(Graphics g) {
             g.drawImage(image1, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
@@ -147,6 +145,23 @@ public class BackgroundController {
             
         }
         
+    }
+    public class Stage2 implements Stage{
+            private ImageController imageController;
+            private BufferedImage image;
+            public Stage2(){
+                
+            }
+            @Override
+            public void update() {
+                
+            }
+
+            @Override
+            public void paint(Graphics g) {
+                
+            }
+            
     }
     private Stage stage;
     public BackgroundController(int number){
@@ -163,6 +178,7 @@ public class BackgroundController {
                 stage = new Stage1();
                 break;
             case 2:
+                stage = new Stage2();
                 break;
             case 3:
                 break;

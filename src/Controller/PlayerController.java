@@ -5,6 +5,9 @@
  */
 package Controller;
 
+import Value.DrawStringPoint;
+import Value.Global;
+import java.awt.Font;
 import java.awt.Graphics;
 
 /**
@@ -15,12 +18,16 @@ public class PlayerController {
     public static  PlayerController playerController;
     private String name;
     private long score;
+    private DrawStringPoint scorePoint;
+    private Font font;
     private int stage;
     
     private PlayerController(){
         this.name = "Player";
         this.score = 0;
         this.stage = 1;
+        font = Global.FONT_SCORE;
+        
     }
     
     public static PlayerController genInstance(){
@@ -48,11 +55,20 @@ public class PlayerController {
     }
     
     public void update(){
-        
+        if(scorePoint != null){
+            if(scorePoint.getHeight() != Global.FRAME_HEIGHT){
+                scorePoint.setText(Long.toString(score));
+                scorePoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
+            }
+        }
     }
     
     public void paint(Graphics g){
-        
+        if(scorePoint == null){
+            scorePoint = new DrawStringPoint(24 * Global.MIN_PICTURE_SIZE, 0, g, font, Long.toString(score), 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
+        }
+        g.setFont(font);
+        g.drawString(scorePoint.getText(), scorePoint.getX(), scorePoint.getY());
     }
     
 }
