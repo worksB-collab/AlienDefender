@@ -68,13 +68,13 @@ public class AlienController {
                     //player blood declination
                     aliens.remove(i);
                 }
-                if (a.isDead())// kill counts
-                {
-                    scoreController.scoreCount(a.getAlienNum());
-                    playerController.addScore(scoreController.countPerKill(a.getAlienNum()));
-                    System.out.println(scoreController.countPerKill(a.getAlienNum()));
-//                    aliens.remove(a);
-                }
+//                if (a.isDead()){// kill counts
+//                    System.out.println("Test1");
+//                    scoreController.scoreCount(a.getAlienNum());
+//                    playerController.addScore(scoreController.countPerKill(a.getAlienNum()));
+//                    System.out.println(scoreController.countPerKill(a.getAlienNum()));
+////                    aliens.remove(a);
+//                }
             }
         }
         if (aliens.size() <= 0 && stop == 1) { // result
@@ -85,8 +85,13 @@ public class AlienController {
     public void paint(Graphics g) {
         //Alines paint
         for (int i = 0; i < aliens.size(); i++) {
-            if (aliens.get(i).isDead()) {
-                aliens.get(i).paintDead(g);
+            Alien alien = aliens.get(i);
+            if (alien.isDead()) {
+                alien.paintDead(g);
+                if (alien.isDead()){// kill counts 
+                    scoreController.scoreCount(alien.getAlienNum());
+                    playerController.addScore((long)scoreController.countPerKill(alien.getAlienNum()));
+                }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
                     aliens.remove(i);
                 }

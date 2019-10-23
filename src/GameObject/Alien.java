@@ -77,7 +77,7 @@ public abstract class Alien extends ActiveObject {
     }
 
     public boolean isDead() {
-        if (hp <= 0) {
+        if (hp <= 0f) {
             return true;
         }
         return false;

@@ -46,11 +46,11 @@ public class PlayerController {
         this.name = name;
     }
 
-    public void setScore(long score) { //??
+    public void setScore(long score) {
         this.score = score;
     }
 
-    public void addScore(int score) {
+    public void addScore(long score) {
         this.score += score;
     }
 
