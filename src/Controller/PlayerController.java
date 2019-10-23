@@ -43,7 +43,7 @@ public class PlayerController {
     public void setName(String name){
         this.name = name;
     }
-    public void setScore(long score){
+    public void setScore(long score){ //??
         this.score = score;
     }
     public void addScore(int score){

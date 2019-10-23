@@ -23,6 +23,9 @@ public class AlienController {
     private int count;
     private ScoreController scoreController;
     private LinkedList<Point> route;
+    private PlayerController playerController;
+    private int stop; // stop generating aliens
+    // NOT YET connecting to sceneController to the next scene to zerolize stop;
 
     public AlienController(LinkedList<Point> route) {
         aliens = new LinkedList<Alien>();
@@ -30,6 +33,7 @@ public class AlienController {
         genDelay = new DelayCounter(5);
         scoreController = new ScoreController();
         this.route = route;
+        stop =0;
     }
 
     private void genAlien() {
@@ -51,6 +55,8 @@ public class AlienController {
                 if (genDelay.update()) {
                     genAlien();
                 }
+            }else{// stop generating aliens
+                stop =1;
             }
             for (int i = 0; i < aliens.size(); i++) {
                 Alien a = aliens.get(i);
@@ -67,9 +73,9 @@ public class AlienController {
                 }
             }
         }
-        if(aliens.size()<=0){
+        if(aliens.size()<=0&&stop ==1){
             PlayerController.genInstance();
-            
+            playerController.addScore(scoreController.scoreConverter());
         }
     }
 

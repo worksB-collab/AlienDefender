@@ -15,6 +15,7 @@ public class ScoreController {
 
     private ArrayList<Integer> kills;
     public static ScoreController scoreController;
+    private int totalScore;
 
     public ScoreController() {
         kills = new ArrayList<Integer>();
@@ -41,6 +42,15 @@ public class ScoreController {
                 kills.set(4, kills.get(4) + 1);
                 break;
         }
+    }
+    
+    public int scoreConverter(){
+        totalScore += kills.get(0)*1 +
+                                    kills.get(1)*2 +
+                                    kills.get(2)*3 +
+                                    kills.get(3)*4 +
+                                    kills.get(4)*5;
+        return totalScore;
     }
     
     public ArrayList<Integer> getKills(){
