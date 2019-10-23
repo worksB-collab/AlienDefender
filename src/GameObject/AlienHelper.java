@@ -5,7 +5,6 @@
  */
 package GameObject;
 
-import Controller.DelayCounter;
 import Controller.ImageController;
 import Value.Global;
 import static Value.Global.*;
@@ -23,15 +22,12 @@ public class AlienHelper {
 
     private BufferedImage img;
     private int actorPosition;
-    private DelayCounter delay;
     private LinkedList<Alien> aliens;
     private float orignHP;
-    private float currentHP;
 
     public AlienHelper(int alien) {
         img = getActor(alien);
         actorPosition = alien % 6;
-        delay = new DelayCounter(6);
         aliens = new LinkedList<Alien>();
         orignHP =-1;
     }
@@ -55,7 +51,7 @@ public class AlienHelper {
         int dy = 65 * (actorPosition);
         g.drawImage(img, (int)x, (int)y, (int)(x + width), (int)(y + height),
                 (int)(act * Global.SIZE_OBJECT), dy,
-                65 + (int)(act * Global.SIZE_OBJECT), (int)(y + Global.SIZE_OBJECT), null);
+                65 + (int)(act * Global.SIZE_OBJECT), (int)(dy + Global.SIZE_OBJECT), null);
         bloodLine(g, x, y, width, height, hp);
     }
     
@@ -79,21 +75,20 @@ public class AlienHelper {
         return (hp/orignHP);
     }
     
-    public void dead(Graphics g, float x, float y, int alien) {
-        actorPosition = alien;
-        switch (alien) {
+    public void dead(Graphics g, float x, float y, int alienNum) {
+        actorPosition = alienNum;
+        switch (alienNum) {
             case 1:
                 aliens.add(new Alien1(x, y));
                 break;
         }
-        if (delay.update()) {
+//        if (delay.update()) {
         for (int i = 0; i < 6; i++) {
             
                 g.drawImage(img, (int)x, (int)y,(int)(x + SIZE_GRID), (int)(y + SIZE_GRID),
                         (int)((i % 2 + 3) * SIZE_OBJECT), (int)(actorPosition * SIZE_OBJECT),
                         (int)((i % 2 + 4) * SIZE_OBJECT), (int)(SIZE_OBJECT + actorPosition * SIZE_OBJECT), null);
             }
-        }
-        aliens.removeFirst();
+//        }
     }
 }

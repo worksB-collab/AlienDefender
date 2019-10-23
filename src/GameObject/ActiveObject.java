@@ -21,6 +21,7 @@ public abstract class ActiveObject extends GameObject {
     public ActiveObject(float x, float y, float width, float height, float speed) {
         super(x, y, width, height);
         this.direction = RIGHT;
+        setSpeed(speed);
     }
 
     public int getDirection() {

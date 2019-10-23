@@ -31,6 +31,7 @@ public abstract class Tower extends ActiveObject {
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(10);
         upgradeStage = 0;
+        setAttack(attack);
     }
 
     public LinkedList getRange() {
@@ -81,8 +82,8 @@ public abstract class Tower extends ActiveObject {
     }
 
     public void changeDirection(Alien alien) {
-        double h = ((alien.getY() + alien.getY() + SIZE_GRID) / 2 - this.getY());
-        double w = ((alien.getX() + alien.getX() + SIZE_GRID) / 2 - this.getX());
+        double h = (alien.getY()  - this.getY());
+        double w = (alien.getX()  - this.getX());
         if (h == 0) {
             if (w > 0) {
                 super.setDirection(90);

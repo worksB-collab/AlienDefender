@@ -19,7 +19,7 @@ import java.util.LinkedList;
 public abstract class Alien extends ActiveObject {
 
     protected int act;
-    protected float hp;
+    private float hp;
     public int nextPosition;
     private static LinkedList<RoutePoint> route;
     protected int alienNum;
@@ -31,8 +31,9 @@ public abstract class Alien extends ActiveObject {
         this.height = height;
         this.width = width;
         nextPosition = 0;
-        if(route == null)
+        if (route == null) {
             route = new LinkedList<RoutePoint>();
+        }
     }
 
     public static void setRoute(LinkedList<RoutePoint> r) {
@@ -40,7 +41,7 @@ public abstract class Alien extends ActiveObject {
             route.add(r.get(i));
         }
         for (int i = 0; i < 5; i++) {
-            RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int)route.getLast().getY() + (int)SIZE_GRID);
+            RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int) route.getLast().getY() + (int) SIZE_GRID);
             route.addLast(p);
         }
     }
@@ -79,7 +80,7 @@ public abstract class Alien extends ActiveObject {
         if (hp <= 0) {
             return true;
         }
-            return false;
+        return false;
     }
 
     public float getHp() {
@@ -98,17 +99,21 @@ public abstract class Alien extends ActiveObject {
     public void move(int direction) {
         switch (direction) {
             case Global.UP:
-                super.setY(super.getY()-super.getSpeed());
+                super.setY(super.getY() - super.getSpeed());
             case Global.DOWN:
-                super.setY(super.getY()+super.getSpeed());
+                super.setY(super.getY() + super.getSpeed());
             case Global.LEFT:
-                super.setX(super.getX()-super.getSpeed());
+                super.setX(super.getX() - super.getSpeed());
             case Global.RIGHT:
-                super.setX(super.getX()+super.getSpeed());
+                super.setX(super.getX() + super.getSpeed());
         }
     }
 
+    public abstract int getDeadDelay();
 
     @Override
-    public abstract void paint(Graphics g) ;
+    public abstract void paint(Graphics g);
+
+    public abstract void paintDead(Graphics g);
+
 }

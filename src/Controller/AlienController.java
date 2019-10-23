@@ -35,7 +35,7 @@ public class AlienController {
         scoreController = new ScoreController();
         playerController = PlayerController.genInstance();
         this.route = route;
-        stop =0;
+        stop = 0;
     }
 
     private void genAlien() {
@@ -45,8 +45,8 @@ public class AlienController {
             count++;
         }
     }
-    
-    public LinkedList<Alien> getAliens(){
+
+    public LinkedList<Alien> getAliens() {
         return aliens;
     }
 
@@ -57,8 +57,8 @@ public class AlienController {
                 if (genDelay.update()) {
                     genAlien();
                 }
-            }else{// stop generating aliens
-                stop =1;
+            } else {// stop generating aliens
+                stop = 1;
             }
             for (int i = 0; i < aliens.size(); i++) {
                 Alien a = aliens.get(i);
@@ -69,13 +69,15 @@ public class AlienController {
                 }
                 if (a.isDead())// kill counts
                 {
+                    System.out.println("!");
                     scoreController.scoreCount(a.getAlienNum());
-                    System.out.println(scoreController);
-                    aliens.remove(a);
+                    playerController.addScore(scoreController.countPerKill(a.getAlienNum()));
+                    System.out.println(scoreController.countPerKill(a.getAlienNum()));
+//                    aliens.remove(a);
                 }
             }
         }
-        if(aliens.size()<=0 && stop ==1){
+        if (aliens.size() <= 0 && stop == 1) { // result
             playerController.setScore(scoreController.scoreConverter());
         }
     }
@@ -83,7 +85,14 @@ public class AlienController {
     public void paint(Graphics g) {
         //Alines paint
         for (int i = 0; i < aliens.size(); i++) {
-            aliens.get(i).paint(g);
+            if (aliens.get(i).isDead()) {
+                aliens.get(i).paintDead(g);
+                if (aliens.get(i).getDeadDelay() % 6 == 0) {
+                    aliens.remove(i);
+                }
+            } else {
+                aliens.get(i).paint(g);
+            }
         }
     }
 

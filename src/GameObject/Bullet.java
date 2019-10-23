@@ -46,37 +46,40 @@ public class Bullet extends EffectObject {
     public boolean isReached() {
         if (updateCount >= 100) {
             return true;
+        }else if(alienX + SIZE_GRID - DEVIATION >= super.getX()
+                        && alienX + DEVIATION <= super.getX() + SIZE_GRID
+                        && alienY + SIZE_GRID - DEVIATION >= super.getY()
+                        && alienY + DEVIATION <= super.getY() + SIZE_GRID){
+            return true;
         }
         return false;
     }
-    
-        public float getSpeed() {
+
+    public float getSpeed() {
         return speed;
     }
-        public void setSpeed(float speed){
-            this.speed = speed;
-        }
+
+    public void setSpeed(float speed) {
+        this.speed = speed;
+    }
 
     public void launch() {
         updateCount = 0;
         float dX = alienX - super.getX();
         float dY = alienY - super.getY();
         if (dX != 0 || dY != 0) {
-            float rateX = (dX) / (float)(Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
-            float rateY = (dY) / (float)(Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
+            float rateX = (dX) / (float) (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)));
+            float rateY = (dY) / (float) (Math.sqrt(Math.pow(dX, 2) + Math.pow(dY, 2)));
             speedX = rateX * speed;
             speedY = rateY * speed;
-            System.out.println("speed = "+ speed);
-            System.out.println("ratX" + rateX +"/ rateY" +rateY);
-            System.out.println("speedX" +speedX +"/ speedY" + speedY);
             return;
         }
     }
 
     @Override
     public void update() {
-        super.setX(super.getX()+speedX);
-        super.setY(super.getY()+speedY);
+        super.setX(super.getX() + speedX);
+        super.setY(super.getY() + speedY);
         updateCount++;
     }
 
@@ -85,12 +88,8 @@ public class Bullet extends EffectObject {
         int dx = 65 * towerNum;
         Graphics2D g2 = (Graphics2D) g.create();
         g2.rotate(direction * Math.PI / 180, (super.getX() + super.getX() + width) / 2, (super.getY() + super.getY() + height) / 2);
-        g2.drawImage(img, (int)super.getX(), (int)super.getY(), (int)(super.getX() + width), (int)(super.getY() + height),
-                dx, 0, dx + (int)SIZE_OBJECT, (int)SIZE_OBJECT, null);
-//        
-//        g2.rotate(direction * Math.PI / 180,150 + width / 2,150 + height / 2);
-//         g2.drawImage(img, 150, 150, 150 + width, 150 + height,
-//                dx, 0, dx + SIZE_OBJECT, SIZE_OBJECT, null);
+        g2.drawImage(img, (int) super.getX(), (int) super.getY(), (int) (super.getX() + width), (int) (super.getY() + height),
+                dx, 0, dx + (int) SIZE_OBJECT, (int) SIZE_OBJECT, null);
     }
 
 }
