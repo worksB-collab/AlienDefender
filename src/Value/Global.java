@@ -20,7 +20,7 @@ public class Global {
     public static final int MILLISEC_PER_UPDATE = 1000 / UPDATE_PER_SEC;
 
     //Frame Limit
-    public static final int FRAME_LIMIT = 60;
+    public static final int FRAME_LIMIT = 120;
     public static final int LIMIT_DELAY_TIME = 1000 / FRAME_LIMIT;
 
     //SPEED
@@ -61,6 +61,7 @@ public class Global {
     //Font
     public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
     public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
+    public static final Font FONT_BUTTON = new Font(Font.DIALOG, Font.PLAIN, 40);
     public static final Font FONT_INPUT = new Font(Font.DIALOG, Font.PLAIN, 30);
     public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 60);
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;

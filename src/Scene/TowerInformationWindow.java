@@ -12,9 +12,14 @@ import GameObject.Button.ButtonListener;
 import GameObject.Tower;
 import GameObject.Tower1;
 import Value.Global;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -25,6 +30,7 @@ public class TowerInformationWindow extends PopUpWindow{
     private ImageController imageController;
     private BufferedImage image;
     private LinkedList<Button> buttonList;
+    private LinkedList<Point> towerRange;
     private Tower tower;
     private boolean isEnd;
     public TowerInformationWindow(int x, int y, int width, int height, Tower tower) {
@@ -32,6 +38,7 @@ public class TowerInformationWindow extends PopUpWindow{
         this.tower = tower;
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
+        towerRange = new LinkedList();
         getButton(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
         isEnd = false;
         super.mouseCommandListener = new CommandSolver.MouseCommandListener(){
@@ -70,6 +77,17 @@ public class TowerInformationWindow extends PopUpWindow{
     
     @Override
     public void paint(Graphics g){
+        //draw Tower Area
+        towerRange = tower.getRange();
+        Graphics2D k = (Graphics2D)g;
+        k.setStroke(new BasicStroke(2f));
+        k.setColor(Color.ORANGE);
+        for(int i = 0; i < towerRange.size(); i++){
+            Point p = towerRange.get(i);
+            k.drawRect((int)p.getX(), (int)p.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
+        }
+        k.setColor(Color.BLACK);
+        //draw PopUpWindow
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
         int w = width / Global.MIN_PICTURE_SIZE;
         int h = height / Global.MIN_PICTURE_SIZE;
@@ -92,7 +110,7 @@ public class TowerInformationWindow extends PopUpWindow{
     
     private void getButton(int x, int y){
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
-        Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img, img, img);
+        Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener = new Button.ButtonListener(){
 
             @Override

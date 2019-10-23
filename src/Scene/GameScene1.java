@@ -186,9 +186,8 @@ public class GameScene1 extends Scene {
             int x0 = (int) tmp.getX();
             int y0 = (int) tmp.getY();
             Button button = new Button(x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE,
-                    imageController.tryGetImage("/Resources/Images/Background/setPoint.png"),
-                    imageController.tryGetImage("/Resources/Images/Background/setPoint.png"),
                     imageController.tryGetImage("/Resources/Images/Background/setPoint.png"));
+            
             button.setButtonListener(new ButtonListener() {
                 @Override
                 public void onClick(int x, int y) {

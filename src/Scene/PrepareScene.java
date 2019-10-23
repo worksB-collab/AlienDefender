@@ -132,9 +132,8 @@ public class PrepareScene extends Scene{
     }
     private void genButton(){
         backButton = new Button(2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE,  8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE,
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT),
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_CLICK),
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_HOVER));
+                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT));
+        
         backButton.setButtonListener(new Button.ButtonListener(){
 
             @Override

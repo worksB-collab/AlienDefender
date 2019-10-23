@@ -17,15 +17,15 @@ import java.awt.image.BufferedImage;
  *
  * @author user
  */
-public class Button extends GameObject{
-    public interface ButtonListener{
+public class Button extends GameObject {
+
+    public interface ButtonListener {
+
         public void onClick(int x, int y);
+
         public void hover(int x, int y);
     }
     private BufferedImage rootImage;
-    private BufferedImage clickImage;
-    private BufferedImage hoverImage;
-    private BufferedImage nowImage;
     private DelayCounter delayCounter;
     private ButtonListener buttonListener;
     private String text;
@@ -33,98 +33,112 @@ public class Button extends GameObject{
     private Color color;
     private DrawStringPoint point;
     private boolean isClicked;
-    
-    public Button(int x, int y , int width, int height,BufferedImage rootImage, BufferedImage clickImage, BufferedImage hoverImage){
+    private boolean isHovered;
+
+    public Button(int x, int y, int width, int height, BufferedImage rootImage) {
         super(x, y, width, height);
         this.rootImage = rootImage;
-        this.clickImage = clickImage;
-        this.hoverImage = hoverImage;
-        this.nowImage = rootImage;
         this.text = "";
-        this.font = Global.FONT_01;
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.ORANGE;
+        isHovered = false;
+        isClicked = false;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
-    public Button(int x, int y , int width, int height, String text){
+
+    public Button(int x, int y, int width, int height, String text) {
         super(x, y, width, height);
         this.text = text;
-        this.font = Global.FONT_01;
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.LIGHT_GRAY;
+        isHovered = false;
+        isClicked = false;
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
-    
+
     public void setButtonListener(ButtonListener buttonListener) {
         this.buttonListener = buttonListener;
     }
-    public void setText(String text){
+
+    public void setText(String text) {
         this.text = text;
     }
-    public void setFont(Font font){
+
+    public void setFont(Font font) {
         this.font = font;
     }
-    public void setFontColor(Color color){
+
+    public void setFontColor(Color color) {
         this.color = color;
     }
-    public boolean isRange(int x, int y){
-        if(x < this.x || x > this.x + width){
+
+    public boolean isRange(int x, int y) {
+        if (x < this.x || x > this.x + width) {
             return false;
         }
-        if(y < this.y || y > this.y + height){
+        if (y < this.y || y > this.y + height) {
             return false;
         }
         return true;
     }
-    public void click(int x, int y){
-        if(buttonListener == null){
-            return ;
+
+    public void click(int x, int y) {
+        if (buttonListener == null) {
+            return;
         }
-        nowImage = clickImage;
         isClicked = true;
         buttonListener.onClick(x, y);
     }
-    public void hover(int x, int y){
-        if(buttonListener == null){
+
+    public void hover(int x, int y) {
+        if (buttonListener == null) {
             return;
         }
-        nowImage = hoverImage;
+        isHovered = true;
         buttonListener.hover(x, y);
     }
-    public boolean getState(){
+
+    public boolean getState() {
         return isClicked;
     }
-    
+
     @Override
-    public void update(){
-        if(isClicked){
-            nowImage = clickImage;
+    public void update() {
+        if (isClicked) {
         }
-        if(delayCounter.update()){
-            nowImage = rootImage;
+        if (delayCounter.update()) {
             isClicked = false;
+            isHovered = false;
         }
-        if(point != null){
-            point.update(width, height);
+        if (point != null) {
+            if (point.getHeight() != height) {
+                point.update(width, height);
+            }
         }
     }
+
     @Override
-    public void paint(Graphics g){
-       
-        if(nowImage != null){
-            g.drawImage(nowImage, x, y, width, height, null);
-            g.setPaintMode();
-            g.drawRect(x, y, width, height);
+    public void paint(Graphics g) {
+
+        if (rootImage != null) {
+            g.drawImage(rootImage, x, y, width, height, null);
         }
-        
-        g.setFont(Global.FONT_01);
-        if(point == null){
+
+        g.setFont(font);
+        if (point == null) {
             point = new DrawStringPoint(x, y, g, font, text, width, height);
         }
         g.setColor(color);
-        g.drawString(text, point.getX() , point.getY());
+//        g.drawRect(x, y, width, height);
+        g.drawString(text, point.getX(), point.getY());
         g.setColor(Global.DEFAULT_FONT_COLOR);
+        if (isHovered) {
+            g.setColor(Color.ORANGE);
+            g.drawRoundRect(x, y, width, height, Global.MIN_PICTURE_SIZE / 2, Global.MIN_PICTURE_SIZE / 2);
+            g.setColor(Color.BLACK);
+        }
     }
-    
-    
+
 }

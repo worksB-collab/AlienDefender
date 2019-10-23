@@ -201,7 +201,7 @@ public class TowerSelectWindow extends PopUpWindow{
         int w = (width - (2 * dx ) - (spece * (img.length - 1)) ) / img.length ;
         int h = height - (2 * dy);
         for(int i = 0; i < img.length; i++){
-            Button button = new Button(x1, y1, w, h,img[i], img[i], img[i]);
+            Button button = new Button(x1, y1, w, h,img[i]);
             button.setButtonListener(buttonListener[i]);
             x1 += (w + dx);
             buttonList.add(button);

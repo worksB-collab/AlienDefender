@@ -35,28 +35,32 @@ public class MenuScene extends Scene{
         super(sceneController);
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(1);
-        buttonList = new ArrayList<Button>();
-        
         //mouse listener
         mouseCommandListener = new MouseCommandListener(){
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 //check click
                 if(state == MouseState.RELEASED || state == MouseState.CLICKED){
+                    int x = e.getX();
+                    int y = e.getY();
                     for(int i = 0; i < buttonList.size(); i++){
                         Button tmp = buttonList.get(i);
-                        if(tmp.isRange(e.getX(), e.getY())){
-                            tmp.click(e.getX(), e.getY());
+                        if(tmp.isRange(x, y)){
+                            tmp.click(x, y);
                             break;
                         }
                     }
                 }
                 //check hover
                 if(state == MouseState.MOVED){
+                    int x = e.getX();
+                    int y = e.getY();
                     for(int i = 0; i < buttonList.size(); i++){
                         Button tmp = buttonList.get(i);
-                        if(tmp.isRange(e.getX(), e.getY())){
-                            tmp.hover(e.getX(), e.getY());
+                        if(tmp.isRange(x, y)){
+                            tmp.hover(x, y);
                             break;
+                        }else{
+                            
                         }
                     }
                 }
@@ -74,7 +78,7 @@ public class MenuScene extends Scene{
     public void sceneUpdate() {
         backgroundController.update();
         
-        if(buttonList.size() != 0){
+        if(buttonList == null){
             if(buttonList.get(0).getHeight() != Global.MIN_PICTURE_SIZE * 4){
                 buttonList = new ArrayList();
                 genButton();
@@ -97,7 +101,8 @@ public class MenuScene extends Scene{
         
         if(buttonList != null){
             for(int i = 0 ; i < buttonList.size(); i++){
-            buttonList.get(i).paint(g);
+                Button btn = buttonList.get(i);
+                btn.paint(g);
             }
         }  
     }
@@ -108,9 +113,9 @@ public class MenuScene extends Scene{
     
     
     private void genButton(){
-        int buttonParameter[] = {12 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE};
+        int buttonParameter[] = {Global.FRAME_WIDTH / 2, Global.FRAME_HEIGHT / 2 + 6 * Global.MIN_PICTURE_SIZE, 5 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE};
         //new Game Button
-        Button newGameButton = new Button(buttonParameter[0], buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW GAME");
+        Button newGameButton = new Button(buttonParameter[0] - 14 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW");
         newGameButton.setButtonListener(new ButtonListener(){
 
             @Override
@@ -125,7 +130,7 @@ public class MenuScene extends Scene{
             
         });
         //Load Data Button
-        Button loadGameButton = new Button(buttonParameter[0], buttonParameter[1] +  6 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "LOAD GAME");
+        Button loadGameButton = new Button(buttonParameter[0] - 6 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "LOAD");
         
         loadGameButton.setButtonListener(new ButtonListener(){
 
@@ -142,7 +147,7 @@ public class MenuScene extends Scene{
         });
         
         //Rank Game Button
-        Button rankButton = new Button(buttonParameter[0], buttonParameter[1] + 12 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "RANK");
+        Button rankButton = new Button(buttonParameter[0] + 2 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "RANK");
         
         rankButton.setButtonListener(new ButtonListener(){
 
@@ -158,7 +163,7 @@ public class MenuScene extends Scene{
             
         });
         //Exit Game Button
-        Button exitButton = new Button(buttonParameter[0], buttonParameter[1] + 18 * Global.MIN_PICTURE_SIZE, buttonParameter[2], buttonParameter[3], "EXIT");
+        Button exitButton = new Button(buttonParameter[0] + 10 * Global.MIN_PICTURE_SIZE , buttonParameter[1], buttonParameter[2], buttonParameter[3], "EXIT");
         
         exitButton.setButtonListener(new ButtonListener(){
 
@@ -175,6 +180,7 @@ public class MenuScene extends Scene{
         });
         
         //arraylist element 1 = newGaemeButton, 2 = loadGameButton, 3 = rankButton, 4 = exitButton
+        buttonList = new ArrayList<>();
         buttonList.add(newGameButton);
         buttonList.add(loadGameButton);
         buttonList.add(rankButton);
