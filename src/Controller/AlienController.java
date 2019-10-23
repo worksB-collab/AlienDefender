@@ -64,12 +64,12 @@ public class AlienController {
                 Alien a = aliens.get(i);
                 a.update();
                 if (a.getY() >= 24f * Global.MIN_PICTURE_SIZE) {
+                    playerController.setHP(playerController.getHP()-a.getAlienNum()*5);
                     //player blood declination
                     aliens.remove(i);
                 }
                 if (a.isDead())// kill counts
                 {
-                    System.out.println("!");
                     scoreController.scoreCount(a.getAlienNum());
                     playerController.addScore(scoreController.countPerKill(a.getAlienNum()));
                     System.out.println(scoreController.countPerKill(a.getAlienNum()));

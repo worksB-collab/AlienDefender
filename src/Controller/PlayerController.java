@@ -15,66 +15,80 @@ import java.awt.Graphics;
  * @author user
  */
 public class PlayerController {
-    public static  PlayerController playerController;
+
+    public static PlayerController playerController;
     private String name;
     private long score;
     private DrawStringPoint scorePoint;
     private Font font;
     private int stage;
     private int money;
-    
-    private PlayerController(){
+    private int hp;
+
+    private PlayerController() {
         this.name = "Player";
         this.score = 0;
         this.stage = 1;
         font = Global.FONT_SCORE;
         money = 0;
-        
+        hp = 100;
     }
-    
-    public static PlayerController genInstance(){
-        if(playerController == null){
+
+    public static PlayerController genInstance() {
+        if (playerController == null) {
             playerController = new PlayerController();
         }
         return playerController;
     }
-    
+
     //setter
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
-    public void setScore(long score){ //??
+
+    public void setScore(long score) { //??
         this.score = score;
     }
-    public void addScore(int score){
+
+    public void addScore(int score) {
         this.score += score;
     }
-    public void setState(int stage){
+
+    public void setState(int stage) {
         this.stage = stage;
     }
-    public void addStage(int stage){
+
+    public void addStage(int stage) {
         this.stage += stage;
     }
-    
-    public void update(){
-        if(scorePoint != null){
-            if(scorePoint.getHeight() != Global.FRAME_HEIGHT){
+
+    public void setHP(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHP() {
+        return hp;
+    }
+
+    public void update() {
+        if (scorePoint != null) {
+            if (scorePoint.getHeight() != Global.FRAME_HEIGHT) {
                 scorePoint.setText(Long.toString(score));
                 scorePoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
             }
         }
     }
-    
-    public void gainScore(){
-        
+
+    public void gainScore() {
+
     }
-    
-    public void paint(Graphics g){
-        if(scorePoint == null){
+
+    public void paint(Graphics g) {
+        if (scorePoint == null) {
             scorePoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 0, g, font, Long.toString(score), 8f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         g.setFont(font);
-        g.drawString(scorePoint.getText(), (int)scorePoint.getX(), (int)scorePoint.getY());
+        g.drawString(scorePoint.getText(), (int) scorePoint.getX(), (int) scorePoint.getY());
     }
-    
+
 }
