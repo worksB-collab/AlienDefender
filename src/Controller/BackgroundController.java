@@ -103,7 +103,6 @@ public class BackgroundController {
         private int jupiterDir;
         private float speed;
         private int standard;
-        private DelayCounter delay;
         
         public Stage1(){
             imageController = ImageController.genInstance();
