@@ -74,9 +74,8 @@ public class RankScene extends Scene{
     
     private void genButton(){
         backButton = new Button(50, 50,  150, 100,
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT),
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_CLICK),
-                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_HOVER));
+                imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT));
+        
         backButton.setButtonListener(new ButtonListener(){
 
             @Override

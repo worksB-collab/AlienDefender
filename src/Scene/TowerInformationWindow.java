@@ -110,7 +110,7 @@ public class TowerInformationWindow extends PopUpWindow{
     
     private void getButton(int x, int y){
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
-        Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img, img, img);
+        Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener = new Button.ButtonListener(){
 
             @Override

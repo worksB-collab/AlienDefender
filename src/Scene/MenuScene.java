@@ -35,28 +35,32 @@ public class MenuScene extends Scene{
         super(sceneController);
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(1);
-        buttonList = new ArrayList<Button>();
-        
         //mouse listener
         mouseCommandListener = new MouseCommandListener(){
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 //check click
                 if(state == MouseState.RELEASED || state == MouseState.CLICKED){
+                    int x = e.getX();
+                    int y = e.getY();
                     for(int i = 0; i < buttonList.size(); i++){
                         Button tmp = buttonList.get(i);
-                        if(tmp.isRange(e.getX(), e.getY())){
-                            tmp.click(e.getX(), e.getY());
+                        if(tmp.isRange(x, y)){
+                            tmp.click(x, y);
                             break;
                         }
                     }
                 }
                 //check hover
                 if(state == MouseState.MOVED){
+                    int x = e.getX();
+                    int y = e.getY();
                     for(int i = 0; i < buttonList.size(); i++){
                         Button tmp = buttonList.get(i);
-                        if(tmp.isRange(e.getX(), e.getY())){
-                            tmp.hover(e.getX(), e.getY());
+                        if(tmp.isRange(x, y)){
+                            tmp.hover(x, y);
                             break;
+                        }else{
+                            
                         }
                     }
                 }
@@ -74,7 +78,7 @@ public class MenuScene extends Scene{
     public void sceneUpdate() {
         backgroundController.update();
         
-        if(buttonList.size() != 0){
+        if(buttonList == null){
             if(buttonList.get(0).getHeight() != Global.MIN_PICTURE_SIZE * 4){
                 buttonList = new ArrayList();
                 genButton();
@@ -97,7 +101,8 @@ public class MenuScene extends Scene{
         
         if(buttonList != null){
             for(int i = 0 ; i < buttonList.size(); i++){
-            buttonList.get(i).paint(g);
+                Button btn = buttonList.get(i);
+                btn.paint(g);
             }
         }  
     }
@@ -175,6 +180,7 @@ public class MenuScene extends Scene{
         });
         
         //arraylist element 1 = newGaemeButton, 2 = loadGameButton, 3 = rankButton, 4 = exitButton
+        buttonList = new ArrayList<>();
         buttonList.add(newGameButton);
         buttonList.add(loadGameButton);
         buttonList.add(rankButton);

@@ -98,42 +98,33 @@ public class BackgroundController {
         private ImageController imageController;
         private BufferedImage image1;
         private BufferedImage image2;
-        private int jupiterVar;
-        private int jupiterAce;
+        private float jupiterVar;
+        private float jupiterAce;
         private int jupiterDir;
-        private int speed;
+        private float speed;
+        private int standard;
         private DelayCounter delay;
         
         public Stage1(){
             imageController = ImageController.genInstance();
             image1 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-01.png");
             image2 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-03.png");
-            jupiterVar = 0;
-            jupiterAce = 5;
+            jupiterVar = standard;
+            jupiterAce = 0.1f;
             jupiterDir = 1;
+            standard = 40;
             
-            speed = 10;
-            delay = new DelayCounter(2);
+            speed = 0;
         }
         @Override
         public void update() {
-            if(delay.update()){
-                jupiterVar = jupiterVar + speed;
-                speed += 1 * jupiterDir * -1;
-                if(jupiterAce > 0){
-                    if(speed <= 0){
-                        jupiterAce *= -1;
-                        speed += jupiterAce;
-                        jupiterDir = -1;
-                    }
-                }else{
-                    if(speed >= 0){
-                        jupiterAce *= -1;
-                        speed += jupiterAce;
-                        jupiterDir = 1;
-                    }    
-                }
-            } 
+            if(jupiterVar >= standard){
+                jupiterDir = -1;
+            }else{
+                jupiterDir = 1;
+            }
+            speed += jupiterAce * jupiterDir;
+            jupiterVar += speed;
         }
     
         @Override
@@ -141,7 +132,7 @@ public class BackgroundController {
             g.drawImage(image1, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
             int width = (int)(24 * 0.807 * Global.MIN_PICTURE_SIZE);
             int height = (int)(18 * 0.495 * Global.MIN_PICTURE_SIZE);
-            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + jupiterVar - 6 * Global.MIN_PICTURE_SIZE, width, height,  null);
+            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + Math.round(jupiterVar) - 4 * Global.MIN_PICTURE_SIZE, width, height,  null);
             
         }
         

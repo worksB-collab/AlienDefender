@@ -20,7 +20,7 @@ public class Global {
     public static final int MILLISEC_PER_UPDATE = 1000 / UPDATE_PER_SEC;
 
     //Frame Limit
-    public static final int FRAME_LIMIT = 60;
+    public static final int FRAME_LIMIT = 120;
     public static final int LIMIT_DELAY_TIME = 1000 / FRAME_LIMIT;
 
     //SPEED
