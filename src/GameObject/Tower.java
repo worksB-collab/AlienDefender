@@ -36,35 +36,34 @@ public class Tower extends ActiveObject {
         delay = new DelayCounter(10);
         upgradeStage = 0;
     }
-    public LinkedList getRange(){
-        return null;
+
+    public LinkedList getRange() {
+        return range;
     }
-    public void upgrade(){
-        if(upgradeStage==2){
+
+    public void upgrade() {
+        if (upgradeStage == 2) {
             return;
         }
         upgradeStage++;
         upgrade++;
     }
-    
-    public LinkedList getRange(){
-        return null;
-    }
-    
-    public int getUpgradeStage(){
+
+    public int getUpgradeStage() {
         return upgradeStage;
     }
 
     public void detection(LinkedList<Alien> aliens) {
         for (Point range : range) {
-            for(int i = 0; i <aliens.size() ; i++)
-            if (aliens.get(i).getX() + SIZE_GRID - DEVIATION >= range.getX() &&
-                    aliens.get(i).getX() + DEVIATION <= range.getX() + SIZE_GRID&&
-                    aliens.get(i).getY() + SIZE_GRID - DEVIATION >= range.getY() &&
-                    aliens.get(i).getY() + DEVIATION <= range.getY() + SIZE_GRID) {
-                changeDirection(aliens.get(i));
-                attack(aliens.get(i));
-                return;
+            for (int i = 0; i < aliens.size(); i++) {
+                if (aliens.get(i).getX() + SIZE_GRID - DEVIATION >= range.getX()
+                        && aliens.get(i).getX() + DEVIATION <= range.getX() + SIZE_GRID
+                        && aliens.get(i).getY() + SIZE_GRID - DEVIATION >= range.getY()
+                        && aliens.get(i).getY() + DEVIATION <= range.getY() + SIZE_GRID) {
+                    changeDirection(aliens.get(i));
+                    attack(aliens.get(i));
+                    return;
+                }
             }
         }
     }
@@ -74,8 +73,8 @@ public class Tower extends ActiveObject {
     }
 
     public void changeDirection(Alien alien) {
-        double h = ((alien.getY()+alien.getY()+SIZE_GRID)/2 - this.getY());
-        double w = ((alien.getX()+alien.getX()+SIZE_GRID)/2 - this.getX());
+        double h = ((alien.getY() + alien.getY() + SIZE_GRID) / 2 - this.getY());
+        double w = ((alien.getX() + alien.getX() + SIZE_GRID) / 2 - this.getX());
         if (h == 0) {
             if (w > 0) {
                 direction = 90;
@@ -97,7 +96,7 @@ public class Tower extends ActiveObject {
             } else if (w > 0 && h > 0) {
                 direction = 90 + Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
-        } else if (w < 0 && h < 0) {
+            } else if (w < 0 && h < 0) {
                 direction = 270 + Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI);
             } else {
@@ -108,7 +107,7 @@ public class Tower extends ActiveObject {
     }
 
     public void attack(Alien alien) {
-        if(delay.update()){
+        if (delay.update()) {
             alien.isAttacked(this);
             bullets.add(new Bullet(x, y, alien, this, direction, speed));
         }
@@ -117,18 +116,19 @@ public class Tower extends ActiveObject {
     public int getTowerNum() {
         return towerNum;
     }
-    
-    public LinkedList<Bullet> getBullets(){
+
+    public LinkedList<Bullet> getBullets() {
         return bullets;
     }
 
     @Override
     public void update() {
-       for(int i = 0 ; i<bullets.size() ; i++){
-           bullets.get(i).update();
-           if(bullets.get(i).isReached())
-               bullets.remove(i);
-       }
+        for (int i = 0; i < bullets.size(); i++) {
+            bullets.get(i).update();
+            if (bullets.get(i).isReached()) {
+                bullets.remove(i);
+            }
+        }
     }
 
     @Override

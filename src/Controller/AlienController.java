@@ -32,6 +32,7 @@ public class AlienController {
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
         scoreController = new ScoreController();
+        playerController = PlayerController.genInstance();
         this.route = route;
         stop =0;
     }
@@ -74,8 +75,7 @@ public class AlienController {
             }
         }
         if(aliens.size()<=0&&stop ==1){
-            PlayerController.genInstance();
-            playerController.addScore(scoreController.scoreConverter());
+            playerController.setScore(scoreController.scoreConverter());
         }
     }
 
