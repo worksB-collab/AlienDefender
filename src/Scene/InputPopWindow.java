@@ -27,7 +27,7 @@ public class InputPopWindow extends PopUpWindow{
      private String text;
     private boolean isEnd;
    
-    public InputPopWindow(int x, int y, int width, int height, LinkedList<Character> charList) {
+    public InputPopWindow(float x, float y, float width, float height, LinkedList<Character> charList) {
         super(x, y, width, height);
         font = Global.FONT_INPUT;
         text = "";

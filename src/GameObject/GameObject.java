@@ -11,15 +11,15 @@ import java.awt.Graphics;
  *
  * @author user
  */
-public  class GameObject{
+public  abstract class GameObject{
 
-    protected int x;
-    protected int y;
-    protected int width;
-    protected int height;
+    private float x;
+    private float y;
+    protected float width;
+    protected float height;
 
     //constructor
-    public GameObject(int x, int y, int width, int height) {
+    public GameObject(float x, float y, float width, float height) {
         this.x = x;
         this.y = y;
         setWidth(width);
@@ -29,44 +29,40 @@ public  class GameObject{
 
     //setter
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
     //accessor
-    public int getX() {
+    public float getX() {
         return x;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(float width) {
         this.width = width;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
-    public int getWidth() {
+    public float getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void update() {
+    public abstract void update();
 
-    }
-
-    public void paint(Graphics g) {
-
-    }
+    public abstract void paint(Graphics g);
 }

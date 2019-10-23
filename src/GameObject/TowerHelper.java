@@ -34,15 +34,15 @@ public class TowerHelper {
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, double direction, int upgradeStage) {
+    public void paint(Graphics g, float x, float y, float width, float height, float direction, int upgradeStage) {
         if (img == null) {
             return;
         }
         int dx = 65 * (actorPosition);
         Graphics2D g2 = (Graphics2D) g.create();
         g2.rotate(direction*Math.PI/180, (x+x+width)/2, (y+y+height)/2);
-        g2.drawImage(img, x, y, x + width, y + height,
-                dx, upgradeStage*SIZE_OBJECT, dx + SIZE_OBJECT, SIZE_OBJECT+upgradeStage*SIZE_OBJECT, null);
+        g2.drawImage(img, (int)x, (int)y, (int)(x + width), (int)(y + height),
+                (int)dx, (int)(upgradeStage*SIZE_OBJECT), (int)(dx + SIZE_OBJECT), (int)(SIZE_OBJECT+upgradeStage*SIZE_OBJECT), null);
 
     }
 }

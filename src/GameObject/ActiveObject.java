@@ -8,19 +8,17 @@ package GameObject;
 import static Value.Global.*;
 import java.awt.Graphics;
 
-
 /**
  *
  * @author user
  */
-class ActiveObject extends GameObject {
+public abstract class ActiveObject extends GameObject {
 
-    protected int speed;
-    
-    protected double direction;
+    private float speed;
+    protected float direction;
 
     //constructor
-    public ActiveObject(int x, int y, int width, int height, int speed) {
+    public ActiveObject(float x, float y, float width, float height, float speed) {
         super(x, y, width, height);
         this.direction = RIGHT;
     }
@@ -29,17 +27,17 @@ class ActiveObject extends GameObject {
         return direction;
     }
 
-    public int getSpeed() {
+    public float getSpeed() {
         return speed;
     }
 
-    @Override
-    public void update() {
-
+    public void setSpeed(float speed) {
+        this.speed = speed;
     }
 
     @Override
-    public void paint(Graphics g) {
+    public abstract void update();
 
-    }
+    @Override
+    public abstract void paint(Graphics g);
 }

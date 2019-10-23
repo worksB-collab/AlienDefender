@@ -15,23 +15,19 @@ import java.util.LinkedList;
  *
  * @author user
  */
-public class Tower extends ActiveObject {
+public abstract class Tower extends ActiveObject {
 
-    protected double attack;
-    protected LinkedList<Point> range;
-    protected LinkedList<Bullet> bullets;
-    protected int towerNum;
-    protected int towerRange;
-    protected DelayCounter delay;
-    protected int upgradeStage;
-    protected int upgrade;
+    private float attack;
+    private LinkedList<Point> range;
+    private LinkedList<Bullet> bullets;
+    private int towerNum;
+    private int towerRange;
+    private DelayCounter delay;
+    private int upgradeStage;
+    private int upgrade;
 
-    public Tower(int x, int y, int width, int height, int attack, int speed) {
+    public Tower(float x, float y, float width, float height, float attack, float speed) {
         super(x, y, width, height, speed);
-        this.width = width;
-        this.height = height;
-        this.attack = attack;
-        this.speed = speed;
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(10);
         upgradeStage = 0;
@@ -40,6 +36,10 @@ public class Tower extends ActiveObject {
     public LinkedList getRange() {
         return range;
     }
+    
+    public void setRange(LinkedList<Point> range){
+        this.range = range;
+    }
 
     public void upgrade() {
         if (upgradeStage == 2) {
@@ -47,6 +47,10 @@ public class Tower extends ActiveObject {
         }
         upgradeStage++;
         upgrade++;
+    }
+    
+    public void setUpgrade(int upgrade){
+        this.upgrade = upgrade;
     }
 
     public int getUpgradeStage() {
@@ -68,8 +72,12 @@ public class Tower extends ActiveObject {
         }
     }
 
-    public double getAttack() {
+    public float getAttack() {
         return attack;
+    }
+    
+    public void setAttack(float attack){
+        this.attack = attack;
     }
 
     public void changeDirection(Alien alien) {
@@ -91,17 +99,17 @@ public class Tower extends ActiveObject {
         }
         if (w != 0 && h != 0) {
             if (w > 0 && h < 0) {
-                direction = 90 - Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI);
+                direction = 90 - (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI));
             } else if (w > 0 && h > 0) {
-                direction = 90 + Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI);
+                direction = 90 + (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI));
             } else if (w < 0 && h < 0) {
-                direction = 270 + Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI);
+                direction = 270 + (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI));
             } else {
-                direction = 270 - Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI);
+                direction = 270 - (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI));
             }
         }
     }
@@ -109,12 +117,24 @@ public class Tower extends ActiveObject {
     public void attack(Alien alien) {
         if (delay.update()) {
             alien.isAttacked(this);
-            bullets.add(new Bullet(x, y, alien, this, direction, speed));
+            bullets.add(new Bullet(super.getX(), super.getY(), alien, this, direction, super.getSpeed()));
         }
     }
 
+    public void setTowerNum(int towerNum){
+        this.towerNum = towerNum;
+    }
+    
     public int getTowerNum() {
         return towerNum;
+    }
+    
+    public void setTowerRange(int towerRange){
+        this.towerRange = towerRange;
+    }
+    
+    public int getTowerRange(){
+        return towerRange;
     }
 
     public LinkedList<Bullet> getBullets() {
@@ -132,8 +152,5 @@ public class Tower extends ActiveObject {
     }
 
     @Override
-    public void paint(Graphics g) {
-
-    }
-
+    public abstract void paint(Graphics g) ;
 }

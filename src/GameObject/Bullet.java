@@ -21,16 +21,16 @@ public class Bullet extends EffectObject {
 
     private BufferedImage img;
     private double direction;
-    private int alienX;
-    private int alienY;
-    private double speedX;
-    private double speedY;
+    private float alienX;
+    private float alienY;
+    private float speedX;
+    private float speedY;
     private int updateCount;
     private int towerNum;
     private Alien alien;
-    private int speed;
+    private float speed;
 
-    public Bullet(int x, int y, Alien alien, Tower tower, double direction, int speed) {
+    public Bullet(float x, float y, Alien alien, Tower tower, float direction, float speed) {
         super(x, y, SIZE_GRID, SIZE_GRID);
         this.alien = alien;
         ImageController irc = ImageController.genInstance();
@@ -39,7 +39,7 @@ public class Bullet extends EffectObject {
         alienX = alien.getX();
         alienY = alien.getY();
         towerNum = tower.getTowerNum();
-        this.speed = speed;
+        setSpeed(speed);
         launch();
     }
 
@@ -49,14 +49,21 @@ public class Bullet extends EffectObject {
         }
         return false;
     }
+    
+        public float getSpeed() {
+        return speed;
+    }
+        public void setSpeed(float speed){
+            this.speed = speed;
+        }
 
     public void launch() {
         updateCount = 0;
-        int dX = alienX - x;
-        int dY = alienY - y;
+        float dX = alienX - super.getX();
+        float dY = alienY - super.getY();
         if (dX != 0 || dY != 0) {
-            double rateX = (dX) / (Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
-            double rateY = (dY) / (Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
+            float rateX = (dX) / (float)(Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
+            float rateY = (dY) / (float)(Math.sqrt(Math.pow(dX, 2) +  Math.pow(dY, 2)));
             speedX = rateX * speed;
             speedY = rateY * speed;
             System.out.println("speed = "+ speed);
@@ -68,8 +75,8 @@ public class Bullet extends EffectObject {
 
     @Override
     public void update() {
-        x += speedX;
-        y += speedY;
+        super.setX(super.getX()+speedX);
+        super.setY(super.getY()+speedY);
         updateCount++;
     }
 
@@ -77,10 +84,9 @@ public class Bullet extends EffectObject {
     public void paint(Graphics g) {
         int dx = 65 * towerNum;
         Graphics2D g2 = (Graphics2D) g.create();
-        g2.rotate(direction * Math.PI / 180, (x + x + width) / 2, (y + y + height) / 2);
-        g2.drawImage(img, x, y, x + width, y + height,
-                dx, 0, dx + SIZE_OBJECT, SIZE_OBJECT, null);
-        System.out.println("x: " +x + "/ y: " + y);
+        g2.rotate(direction * Math.PI / 180, (super.getX() + super.getX() + width) / 2, (super.getY() + super.getY() + height) / 2);
+        g2.drawImage(img, (int)super.getX(), (int)super.getY(), (int)(super.getX() + width), (int)(super.getY() + height),
+                dx, 0, dx + (int)SIZE_OBJECT, (int)SIZE_OBJECT, null);
 //        
 //        g2.rotate(direction * Math.PI / 180,150 + width / 2,150 + height / 2);
 //         g2.drawImage(img, 150, 150, 150 + width, 150 + height,

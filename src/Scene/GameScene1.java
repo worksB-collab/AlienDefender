@@ -209,7 +209,7 @@ public class GameScene1 extends Scene {
                 }
 
                 @Override
-                public void hover(int x, int y) {
+                public void hover(float x, float y) {
 
                 }
 

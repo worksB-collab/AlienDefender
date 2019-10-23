@@ -11,21 +11,15 @@ import java.awt.Graphics;
  *
  * @author user
  */
-public class EffectObject extends GameObject{
-    protected int state;
+public abstract class EffectObject extends GameObject{
     
-    public EffectObject(int x, int y, int width, int height) {
+    public EffectObject(float x, float y, float width, float height) {
         super(x, y, width, height);
     }
     
+    @Override
+    public abstract void update();
     
     @Override
-    public void update(){
-        
-    }
-    
-    @Override
-    public void paint(Graphics g){
-        
-    }
+    public abstract void paint(Graphics g);
 }

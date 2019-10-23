@@ -21,7 +21,7 @@ public class Alien1 extends Alien {
     
     
 
-    public Alien1(int x, int y) {
+    public Alien1(float x, float y) {
         super(x, y, SIZE_GRID, SIZE_GRID ,100 , 1*Global.SPEED); //x, y, width, height, hp, speed
         alienNum = 1;
         aHelper = new AlienHelper(alienNum);
@@ -31,9 +31,9 @@ public class Alien1 extends Alien {
     @Override
     public void paint(Graphics g) { 
         if(isDead()){
-            aHelper.dead(g, x, y, alienNum);
+            aHelper.dead(g, super.getX(), super.getY(), alienNum);
             return;
         }
-        aHelper.paint(g, x, y, width, height, ACT[act], hp);
+        aHelper.paint(g, super.getX(), super.getY(), width, height, ACT[act], hp);
     }
 } 

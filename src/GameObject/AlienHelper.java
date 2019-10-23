@@ -25,8 +25,8 @@ public class AlienHelper {
     private int actorPosition;
     private DelayCounter delay;
     private LinkedList<Alien> aliens;
-    private double orignHP;
-    private double currentHP;
+    private float orignHP;
+    private float currentHP;
 
     public AlienHelper(int alien) {
         img = getActor(alien);
@@ -47,39 +47,39 @@ public class AlienHelper {
         return null;
     }
 
-    public void paint(Graphics g, int x, int y, int width, int height, int act, double hp) {
+    public void paint(Graphics g, float x, float y, float width, float height, int act, float hp) {
         setOrignHP(hp);
         if (img == null) {
             return;
         }
         int dy = 65 * (actorPosition);
-        g.drawImage(img, x, y, x + width, y + height,
-                act * Global.SIZE_OBJECT, dy,
-                65 + act * Global.SIZE_OBJECT, dy + Global.SIZE_OBJECT, null);
+        g.drawImage(img, (int)x, (int)y, (int)(x + width), (int)(y + height),
+                (int)(act * Global.SIZE_OBJECT), dy,
+                65 + (int)(act * Global.SIZE_OBJECT), (int)(y + Global.SIZE_OBJECT), null);
         bloodLine(g, x, y, width, height, hp);
     }
     
-    public void setOrignHP(double hp){
+    public void setOrignHP(float hp){
         if (orignHP==-1){
             orignHP = hp;
         }
     }
 
-    public void bloodLine(Graphics g, int x, int y, int width, int height, double hp) {
+    public void bloodLine(Graphics g, float x, float y, float width, float height, float hp) {
         g.setColor(Color.black);
-        g.drawRect(x, y, width, SIZE_BLOODLINE);
+        g.drawRect((int)x, (int)y, (int)width, (int)SIZE_BLOODLINE);
         
         double percentage = bloodPercentage(hp);
         g.setColor(Color.red);
-        g.fillRect(x + 1, y + 1, (int)(percentage*width)-2, SIZE_BLOODLINE - 2);
+        g.fillRect((int)(x + 1), (int)(y + 1), (int)(percentage*width)-2, (int)SIZE_BLOODLINE - 2);
         g.setColor(Color.black);
     }
 
-    public double bloodPercentage(double hp){
+    public double bloodPercentage(float hp){
         return (hp/orignHP);
     }
     
-    public void dead(Graphics g, int x, int y, int alien) {
+    public void dead(Graphics g, float x, float y, int alien) {
         actorPosition = alien;
         switch (alien) {
             case 1:
@@ -89,9 +89,9 @@ public class AlienHelper {
         if (delay.update()) {
         for (int i = 0; i < 6; i++) {
             
-                g.drawImage(img, x, y, x + SIZE_GRID, y + SIZE_GRID,
-                        (i % 2 + 3) * SIZE_OBJECT, actorPosition * SIZE_OBJECT,
-                        (i % 2 + 4) * SIZE_OBJECT, SIZE_OBJECT + actorPosition * SIZE_OBJECT, null);
+                g.drawImage(img, (int)x, (int)y,(int)(x + SIZE_GRID), (int)(y + SIZE_GRID),
+                        (int)((i % 2 + 3) * SIZE_OBJECT), (int)(actorPosition * SIZE_OBJECT),
+                        (int)((i % 2 + 4) * SIZE_OBJECT), (int)(SIZE_OBJECT + actorPosition * SIZE_OBJECT), null);
             }
         }
         aliens.removeFirst();

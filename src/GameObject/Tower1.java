@@ -18,16 +18,18 @@ import java.util.LinkedList;
 public class Tower1 extends Tower {
 
     private TowerHelper tHelper;
+    LinkedList <Bullet> bullets;
 
-    public Tower1(int x, int y) {
+    public Tower1(float x, float y) {
         super(x, y, SIZE_GRID, SIZE_GRID, 3, 1 *Global.SPEED); // x, y, width, height, attack, speed
-        towerNum = 4;
-        tHelper = new TowerHelper(towerNum);
-        towerRange = checkTowerNum(towerNum);
+        super.setTowerNum(0);
+        tHelper = new TowerHelper(super.getTowerNum());
+        super.setTowerRange((int)checkTowerNum(super.getTowerNum()));
         genRange();
+        bullets = super.getBullets();
     }
 
-    public int checkTowerNum(int towerNum) {
+    public float checkTowerNum(int towerNum) {
         switch (towerNum) {
             case 0:
                 return TOWER0_ATKRANGE;
@@ -43,12 +45,13 @@ public class Tower1 extends Tower {
         return -1;
     }
 
-    public LinkedList genRange() {
-        range = new LinkedList<Point>();
+    public void genRange() {
+        super.setRange(new LinkedList<Point>());
+        int towerRange = super.getTowerRange();
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
-                    range.add(new Point(x + i, y + j));
+                    super.getRange().add(new Point((int)(super.getX() + i), (int)(super.getY() + j)));
                 }
                 j += (SIZE_GRID - 1);
             }
@@ -57,29 +60,24 @@ public class Tower1 extends Tower {
         for (int i = towerRange; i >= 0; i--) {
             for (int j = towerRange; j >= 0; j--) {
                 if (Math.abs(i + j) <= towerRange) {
-                    range.add(new Point(x + i, y + j));
+                    super.getRange().add(new Point((int)(super.getX() + i), (int)(super.getY() + j)));
                 }
                 j -= (SIZE_GRID - 1);
             }
             i -= (SIZE_GRID - 1);
         }
-        return range;
-
     }
 
-    @Override
-    public LinkedList getRange(){
-        return range;
-    }
 
     @Override
     public void upgrade() {
-        switch (upgrade) {
+        
+        switch (super.getUpgradeStage()) {
             case 0:
                 break;
             case 1:
-                attack = attack * 1.3;
-                upgrade = 0;
+                super.setAttack(super.getAttack()*1.3f);
+                super.setUpgrade(0);
                 break;
         }
         
@@ -95,9 +93,9 @@ public class Tower1 extends Tower {
 
     @Override
     public void paint(Graphics g) {
-        for (int i = 0; i < bullets.size(); i++) {
+        for (int i = 0; i < super.getBullets().size(); i++) {
             bullets.get(i).paint(g);
         }
-        tHelper.paint(g, x, y, SIZE_GRID, SIZE_GRID, direction, upgradeStage);
+        tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, direction, super.getUpgradeStage());
     }
 }

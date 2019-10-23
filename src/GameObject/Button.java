@@ -21,9 +21,9 @@ public class Button extends GameObject {
 
     public interface ButtonListener {
 
-        public void onClick(int x, int y);
+        public void onClick(float x, float y);
 
-        public void hover(int x, int y);
+        public void hover(float x, float y);
     }
     private BufferedImage rootImage;
     private DelayCounter delayCounter;
@@ -35,7 +35,7 @@ public class Button extends GameObject {
     private boolean isClicked;
     private boolean isHovered;
 
-    public Button(int x, int y, int width, int height, BufferedImage rootImage) {
+    public Button(float x, float y, float width, float height, BufferedImage rootImage) {
         super(x, y, width, height);
         this.rootImage = rootImage;
         this.text = "";
@@ -47,7 +47,7 @@ public class Button extends GameObject {
 
     }
 
-    public Button(int x, int y, int width, int height, String text) {
+    public Button(float x, float y, float width, float height, String text) {
         super(x, y, width, height);
         this.text = text;
         this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
@@ -74,17 +74,17 @@ public class Button extends GameObject {
         this.color = color;
     }
 
-    public boolean isRange(int x, int y) {
-        if (x < this.x || x > this.x + width) {
+    public boolean isRange(float x, float y) {
+        if (x < super.getX() || x > super.getX() + width) {
             return false;
         }
-        if (y < this.y || y > this.y + height) {
+        if (y < super.getY() || y >super.getY() + height) {
             return false;
         }
         return true;
     }
 
-    public void click(int x, int y) {
+    public void click(float x, float y) {
         if (buttonListener == null) {
             return;
         }
@@ -92,7 +92,7 @@ public class Button extends GameObject {
         buttonListener.onClick(x, y);
     }
 
-    public void hover(int x, int y) {
+    public void hover(float x, float y) {
         if (buttonListener == null) {
             return;
         }
@@ -123,12 +123,12 @@ public class Button extends GameObject {
     public void paint(Graphics g) {
 
         if (rootImage != null) {
-            g.drawImage(rootImage, x, y, width, height, null);
+            g.drawImage(rootImage, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
         }
 
         g.setFont(font);
         if (point == null) {
-            point = new DrawStringPoint(x, y, g, font, text, width, height);
+            point = new DrawStringPoint((int)super.getX(), (int)super.getY(), g, font, text, (int)width, (int)height);
         }
         g.setColor(color);
 //        g.drawRect(x, y, width, height);
@@ -136,7 +136,7 @@ public class Button extends GameObject {
         g.setColor(Global.DEFAULT_FONT_COLOR);
         if (isHovered) {
             g.setColor(Color.ORANGE);
-            g.drawRoundRect(x, y, width, height, Global.MIN_PICTURE_SIZE / 2, Global.MIN_PICTURE_SIZE / 2);
+            g.drawRoundRect((int)super.getX(), (int)super.getY(), (int)width, (int)height, (int)Global.MIN_PICTURE_SIZE / 2, (int)Global.MIN_PICTURE_SIZE / 2);
             g.setColor(Color.BLACK);
         }
     }
