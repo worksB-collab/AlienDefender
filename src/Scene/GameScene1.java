@@ -13,6 +13,7 @@ import Controller.CommandSolver.MouseState;
 import Controller.ImageController;
 import Controller.PlayerController;
 import Controller.RouteController;
+import Controller.RouteController.RoutePoint;
 import Controller.SceneController;
 import Controller.ScoreController;
 import Controller.TowerController;
@@ -63,7 +64,7 @@ public class GameScene1 extends Scene {
                         if (tmp.isRange(x, y)) {
                             tmp.click(x, y);
 
-                            spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE, (y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
+                            spot = new Point((int)((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE), (int)((y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE));
                         }
                     }
                 }
@@ -73,8 +74,7 @@ public class GameScene1 extends Scene {
                     for (Button tmp : buttonList) {
                         if (tmp.isRange(x, y)) {
                             tmp.hover(x, y);
-
-                            spot = new Point((x / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE, (y / Global.MIN_PICTURE_SIZE) * Global.MIN_PICTURE_SIZE);
+                            spot = new Point((int)x / (int)Global.MIN_PICTURE_SIZE * (int)Global.MIN_PICTURE_SIZE, (int)y / (int)Global.MIN_PICTURE_SIZE * (int)Global.MIN_PICTURE_SIZE);
                         }
                     }
                 }
@@ -154,7 +154,7 @@ public class GameScene1 extends Scene {
 
         if (spot != null) {
             g.setColor(Color.red);
-            g.drawRect((int) spot.getX(), (int) spot.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
+            g.drawRect((int) spot.getX(), (int) spot.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
         }
         //player
@@ -177,14 +177,14 @@ public class GameScene1 extends Scene {
         return mouseCommandListener;
     }
     //generate
-    private void genButton(LinkedList<Point> setPoint) {
+    private void genButton(LinkedList<RoutePoint> setPoint) {
         if (buttonList.size() != 0) {
             buttonList = new LinkedList<Button>();
         }
 
-        for (Point tmp : setPoint) {
-            int x0 = (int) tmp.getX();
-            int y0 = (int) tmp.getY();
+        for (RoutePoint tmp : setPoint) {
+            float x0 = tmp.getX();
+            float y0 = tmp.getY();
             Button button = new Button(x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE,
                     imageController.tryGetImage("/Resources/Images/Background/setPoint.png"));
             
@@ -203,13 +203,13 @@ public class GameScene1 extends Scene {
                     if (!isBuilt) {
                         towerSelectWindow = new TowerSelectWindow(x0, y0, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE);
                     } else {
-                        towerInformationWindow = new TowerInformationWindow(x0, y0, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, tower);
+                        towerInformationWindow = new TowerInformationWindow(x0, y0, 24f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, tower);
                     }
 
                 }
 
                 @Override
-                public void hover(float x, float y) {
+                public void hover(int x, int y) {
 
                 }
 

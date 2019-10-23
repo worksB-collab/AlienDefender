@@ -113,9 +113,11 @@ public class MenuScene extends Scene{
     
     
     private void genButton(){
-        int buttonParameter[] = {Global.FRAME_WIDTH / 2, Global.FRAME_HEIGHT / 2 + 6 * Global.MIN_PICTURE_SIZE, 5 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE};
+        float buttonParameter[] = {Global.FRAME_WIDTH / 2f, Global.FRAME_HEIGHT / 2f + 6f * Global.MIN_PICTURE_SIZE, 5f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE};
         //new Game Button
-        Button newGameButton = new Button(buttonParameter[0] - 14 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "NEW");
+        Button newGameButton = new Button(buttonParameter[0] - 14 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3],
+                imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        newGameButton.setText("New");
         newGameButton.setButtonListener(new ButtonListener(){
 
             @Override
@@ -130,8 +132,9 @@ public class MenuScene extends Scene{
             
         });
         //Load Data Button
-        Button loadGameButton = new Button(buttonParameter[0] - 6 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "LOAD");
-        
+        Button loadGameButton = new Button(buttonParameter[0] - 6 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3],
+                imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        loadGameButton.setText("LOAD");
         loadGameButton.setButtonListener(new ButtonListener(){
 
             @Override
@@ -147,7 +150,9 @@ public class MenuScene extends Scene{
         });
         
         //Rank Game Button
-        Button rankButton = new Button(buttonParameter[0] + 2 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3], "RANK");
+        Button rankButton = new Button(buttonParameter[0] + 2 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3],
+                imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        rankButton.setText("RANK");
         
         rankButton.setButtonListener(new ButtonListener(){
 
@@ -163,8 +168,9 @@ public class MenuScene extends Scene{
             
         });
         //Exit Game Button
-        Button exitButton = new Button(buttonParameter[0] + 10 * Global.MIN_PICTURE_SIZE , buttonParameter[1], buttonParameter[2], buttonParameter[3], "EXIT");
-        
+        Button exitButton = new Button(buttonParameter[0] + 10 * Global.MIN_PICTURE_SIZE , buttonParameter[1], buttonParameter[2], buttonParameter[3], imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png")
+                );
+        exitButton.setText("EXIT");
         exitButton.setButtonListener(new ButtonListener(){
 
             @Override

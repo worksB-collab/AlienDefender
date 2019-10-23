@@ -5,6 +5,8 @@
  */
 package GameObject;
 
+import Controller.RouteController.RoutePoint;
+import Value.Global;
 import java.awt.Graphics;
 import static Value.Global.*;
 import java.awt.Point;
@@ -19,7 +21,7 @@ public abstract class Alien extends ActiveObject {
     protected int act;
     protected float hp;
     public int nextPosition;
-    private static LinkedList<Point> route;
+    private static LinkedList<RoutePoint> route;
     protected int alienNum;
 
     public Alien(float x, float y, float width, float height, float hp, float speed) {
@@ -30,15 +32,15 @@ public abstract class Alien extends ActiveObject {
         this.width = width;
         nextPosition = 0;
         if(route == null)
-            route = new LinkedList<Point>();
+            route = new LinkedList<RoutePoint>();
     }
 
-    public static void setRoute(LinkedList<Point> r) {
+    public static void setRoute(LinkedList<RoutePoint> r) {
         for (int i = 0; i < r.size(); i++) {
             route.add(r.get(i));
         }
         for (int i = 0; i < 5; i++) {
-            Point p = new Point((int) route.getLast().getX(), (int)route.getLast().getY() + (int)SIZE_GRID);
+            RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int)route.getLast().getY() + (int)SIZE_GRID);
             route.addLast(p);
         }
     }
@@ -54,7 +56,7 @@ public abstract class Alien extends ActiveObject {
         }
         if (route.get(nextPosition) != null) {
 
-            Point p = route.get(nextPosition);
+            RoutePoint p = route.get(nextPosition);
             if (super.getX() != p.getX() || super.getY() != p.getY()) {
                 if (super.getX() < p.getX()) {
                     changeDirection(RIGHT);
@@ -64,12 +66,12 @@ public abstract class Alien extends ActiveObject {
                 }
                 if (super.getX() >= p.getX() - super.getSpeed() && super.getX() <= p.getX() + super.getSpeed()
                         && super.getY() >= p.getY() - super.getSpeed() && super.getY() <= p.getY() + super.getSpeed()) {
-                    Point last = route.getLast();
+                    RoutePoint last = route.getLast();
                     nextPosition++;
                 }
             }
         }
-        move(direction);
+        move(super.getDirection());
         act = ++act % 4;
     }
 
@@ -89,19 +91,19 @@ public abstract class Alien extends ActiveObject {
     }
 
     public int changeDirection(int direction) {
-        this.direction = direction;
+        super.setDirection(direction);
         return direction;
     }
 
-    public void move(double direction) {
-        switch ((int)(direction)) {
-            case UP:
+    public void move(int direction) {
+        switch (direction) {
+            case Global.UP:
                 super.setY(super.getY()-super.getSpeed());
-            case DOWN:
+            case Global.DOWN:
                 super.setY(super.getY()+super.getSpeed());
-            case LEFT:
+            case Global.LEFT:
                 super.setX(super.getX()-super.getSpeed());
-            case RIGHT:
+            case Global.RIGHT:
                 super.setX(super.getX()+super.getSpeed());
         }
     }

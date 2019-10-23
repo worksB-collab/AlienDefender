@@ -21,9 +21,9 @@ public class Button extends GameObject {
 
     public interface ButtonListener {
 
-        public void onClick(float x, float y);
+        public void onClick(int x, int y);
 
-        public void hover(float x, float y);
+        public void hover(int x, int y);
     }
     private BufferedImage rootImage;
     private DelayCounter delayCounter;
@@ -39,7 +39,7 @@ public class Button extends GameObject {
         super(x, y, width, height);
         this.rootImage = rootImage;
         this.text = "";
-        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (int)(40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.ORANGE;
         isHovered = false;
         isClicked = false;
@@ -50,7 +50,7 @@ public class Button extends GameObject {
     public Button(float x, float y, float width, float height, String text) {
         super(x, y, width, height);
         this.text = text;
-        this.font = new Font(Font.DIALOG, Font.PLAIN, (40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
+        this.font = new Font(Font.DIALOG, Font.PLAIN, (int)(40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
         this.color = Color.LIGHT_GRAY;
         isHovered = false;
         isClicked = false;
@@ -74,7 +74,7 @@ public class Button extends GameObject {
         this.color = color;
     }
 
-    public boolean isRange(float x, float y) {
+    public boolean isRange(int x, int y) {
         if (x < super.getX() || x > super.getX() + width) {
             return false;
         }
@@ -84,7 +84,7 @@ public class Button extends GameObject {
         return true;
     }
 
-    public void click(float x, float y) {
+    public void click(int x, int y) {
         if (buttonListener == null) {
             return;
         }
@@ -92,7 +92,7 @@ public class Button extends GameObject {
         buttonListener.onClick(x, y);
     }
 
-    public void hover(float x, float y) {
+    public void hover(int x, int y) {
         if (buttonListener == null) {
             return;
         }
@@ -132,7 +132,7 @@ public class Button extends GameObject {
         }
         g.setColor(color);
 //        g.drawRect(x, y, width, height);
-        g.drawString(text, point.getX(), point.getY());
+        g.drawString(text, (int)point.getX(), (int)point.getY());
         g.setColor(Global.DEFAULT_FONT_COLOR);
         if (isHovered) {
             g.setColor(Color.ORANGE);

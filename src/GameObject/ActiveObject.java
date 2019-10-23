@@ -15,7 +15,7 @@ import java.awt.Graphics;
 public abstract class ActiveObject extends GameObject {
 
     private float speed;
-    protected float direction;
+    private int direction;
 
     //constructor
     public ActiveObject(float x, float y, float width, float height, float speed) {
@@ -23,10 +23,10 @@ public abstract class ActiveObject extends GameObject {
         this.direction = RIGHT;
     }
 
-    public double getDirection() {
+    public int getDirection() {
         return direction;
     }
-
+ 
     public float getSpeed() {
         return speed;
     }
@@ -34,7 +34,10 @@ public abstract class ActiveObject extends GameObject {
     public void setSpeed(float speed) {
         this.speed = speed;
     }
-
+    
+    public void setDirection(int direction){
+        this.direction = direction;
+    }
     @Override
     public abstract void update();
 

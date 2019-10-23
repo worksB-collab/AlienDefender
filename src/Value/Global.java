@@ -32,12 +32,12 @@ public class Global {
 
 
     //Grid
-    public static final float SIZE_GRID = 32;
+    public static final float SIZE_GRID = 32f;
     
     ///Objects
-    public static final float SIZE_OBJECT = 65;
-    public static final float DEVIATION = SIZE_GRID/11; // deviation for grid judgement
-    public static final float SIZE_BLOODLINE = SIZE_OBJECT/15;
+    public static final float SIZE_OBJECT = 65f;
+    public static final float DEVIATION = SIZE_GRID/11f; // deviation for grid judgement
+    public static final float SIZE_BLOODLINE = SIZE_OBJECT/15f;
     
     //Tower
     public static final float TOWER0_ATKRANGE = 1 * SIZE_GRID;
@@ -47,10 +47,10 @@ public class Global {
     public static final float TOWER4_ATKRANGE = 5 * SIZE_GRID;
 
     //Cailbaration
-    public static int MIN_PICTURE_SIZE = 32;
-    public static final int STANDAR_MIN_SIZE = 32;
-    public static int FRAME_WIDTH = 1024;
-    public static int FRAME_HEIGHT = 768;
+    public static float MIN_PICTURE_SIZE = 32f;
+    public static final float STANDAR_MIN_SIZE = 32f;
+    public static float FRAME_WIDTH = 1024f;
+    public static float FRAME_HEIGHT = 768f;
 
     //direction
     public static final int UP = 0;

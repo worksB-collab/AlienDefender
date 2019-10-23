@@ -77,11 +77,11 @@ public class BackgroundController {
 
         @Override
         public void paint(Graphics g) {
-            g.drawImage(imageBackground[0], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            g.drawImage(imageMeteor[meteorPointer[0]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            g.drawImage(imageMeteor[meteorPointer[1]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            g.drawImage(imageBackground[1], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
-            g.drawImage(imageBackground[2], 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(imageBackground[0], 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(imageMeteor[meteorPointer[0]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(imageMeteor[meteorPointer[1]], (int)meteorPoint.getX(), (int)meteorPoint.getY(), (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(imageBackground[1], 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(imageBackground[2], 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
             if(points[0] == null){
                points[0] = new DrawStringPoint(0, 0, g, Global.FONT_00, "ALIEN", Global.FRAME_WIDTH, Global.FRAME_WIDTH);
                points[1] = new DrawStringPoint(0, 0, g, Global.FONT_00, "DEFENDER", Global.FRAME_WIDTH, Global.FRAME_WIDTH);
@@ -89,8 +89,8 @@ public class BackgroundController {
             
             g.setColor(Color.ORANGE);
             g.setFont(Global.FONT_00);
-            g.drawString(points[0].getText(), points[0].getX(), points[0].getY() - Global.MIN_PICTURE_SIZE * 8);
-            g.drawString(points[1].getText(), points[1].getX(), points[1].getY() - Global.MIN_PICTURE_SIZE * 4);
+            g.drawString(points[0].getText(), (int)points[0].getX(), (int)points[0].getY() - (int)Global.MIN_PICTURE_SIZE * 8);
+            g.drawString(points[1].getText(), (int)points[1].getX(), (int)points[1].getY() - (int)Global.MIN_PICTURE_SIZE * 4);
             g.setColor(Color.BLACK);
         }
     }
@@ -128,10 +128,10 @@ public class BackgroundController {
     
         @Override
         public void paint(Graphics g) {
-            g.drawImage(image1, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+            g.drawImage(image1, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
             int width = (int)(24 * 0.807 * Global.MIN_PICTURE_SIZE);
             int height = (int)(18 * 0.495 * Global.MIN_PICTURE_SIZE);
-            g.drawImage(image2, (Global.FRAME_WIDTH - width) /2, (Global.FRAME_HEIGHT - height) / 2 + Math.round(jupiterVar) - 4 * Global.MIN_PICTURE_SIZE, width, height,  null);
+            g.drawImage(image2, (int)((Global.FRAME_WIDTH - width) /2), (int)((Global.FRAME_HEIGHT - height) / 2 + Math.round(jupiterVar) - 4 * Global.MIN_PICTURE_SIZE), width, height,  null);
             
         }
         

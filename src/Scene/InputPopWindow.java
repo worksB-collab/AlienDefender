@@ -89,10 +89,10 @@ public class InputPopWindow extends PopUpWindow{
     @Override
     public void paint(Graphics g){
         if(point == null){
-            point = new DrawStringPoint(x, y, g, font,text, width, height);
+            point = new DrawStringPoint(super.getX(), super.getY(), g, font, text, width, height);
         }
         g.setFont(font);
-        g.drawString(text, point.getX(), point.getY());
+        g.drawString(text, (int)point.getX(), (int)point.getY());
     }
     
 }

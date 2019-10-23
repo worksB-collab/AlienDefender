@@ -16,10 +16,34 @@ import java.util.LinkedList;
  * @author user
  */
 public class RouteController {
+    public static class RoutePoint{
+        private float x;
+        private float y;
+        
+        public RoutePoint(float x, float y){
+            this.x = x;
+            this.y = y;
+        }
+        
+        public float getX(){
+            return x;
+        }
+        public float getY(){
+            return y;
+        }
+        
+        public void setX(float x){
+            this.x = x;
+        }
+        
+        public void setY(float y){
+            this.y = y;
+        }
+    }
     private ImageController imageController;
-    private LinkedList<Point> standardRoute;
-    private LinkedList<Point> route;
-    private LinkedList<Point> setPoint;
+    private LinkedList<RoutePoint> standardRoute;
+    private LinkedList<RoutePoint> route;
+    private LinkedList<RoutePoint> setPoint;
     private BufferedImage imgRoad;
     
     
@@ -37,13 +61,13 @@ public class RouteController {
                 break;
         }
     }
-    public LinkedList<Point> getSetPoint(){
+    public LinkedList<RoutePoint> getSetPoint(){
         if(setPoint == null){
             return null;
         }
         return setPoint;
     }
-    public LinkedList<Point> getRoute(){
+    public LinkedList<RoutePoint> getRoute(){
         if(route == null){
             return null;
         }
@@ -53,15 +77,15 @@ public class RouteController {
         
     }
     public void paint(Graphics g){
-        for (Point p : route) {
-            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+        for (RoutePoint p : route) {
+            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
         }
     }
 
     private void paintSetPoint(Graphics g) {
         BufferedImage imgS = imageController.tryGetImage("/Resources/Images/Background/setPoint.png");
-        for (Point tmp : setPoint) {
-            g.drawImage(imgS, (int) tmp.getX(), (int) tmp.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+        for (RoutePoint tmp : setPoint) {
+            g.drawImage(imgS, (int) tmp.getX(), (int) tmp.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
         }
     }
     
@@ -94,11 +118,11 @@ public class RouteController {
         route = new LinkedList();
         setPoint = new LinkedList();
 
-        int x = 0;
-        int y = Global.MIN_PICTURE_SIZE * 2;
-        route.add(new Point(x, y));
-        int maxX = Global.MIN_PICTURE_SIZE * 30;
-        int maxY = Global.MIN_PICTURE_SIZE * 22;
+        float x = 0;
+        float y = Global.MIN_PICTURE_SIZE * 2;
+        route.add(new RoutePoint(x, y));
+        float maxX = Global.MIN_PICTURE_SIZE * 30;
+        float maxY = Global.MIN_PICTURE_SIZE * 22;
         int r = 0;
         while (true) {
             if (r == 0 && x <= maxX) {
@@ -112,7 +136,7 @@ public class RouteController {
                 r = 0;
 
             }
-            route.add(new Point(x, y));
+            route.add(new RoutePoint(x, y));
         }
         genSetPoint();
     }
@@ -126,21 +150,21 @@ public class RouteController {
 //    }
     
     private void genSetPoint() {
-        int maxX = 31 * Global.MIN_PICTURE_SIZE;
-        int maxY = 23 * Global.MIN_PICTURE_SIZE;
+        float maxX = 31 * Global.MIN_PICTURE_SIZE;
+        float maxY = 23 * Global.MIN_PICTURE_SIZE;
         if (setPoint != null) {
-            setPoint = new LinkedList<Point>();
+            setPoint = new LinkedList<RoutePoint>();
         }
-        for (Point p : route) {
-            addSetPoint((int) p.getX(), (int) p.getY());
+        for (RoutePoint p : route) {
+            addSetPoint(p.getX(), p.getY());
         }
         //delete route
         for (int i = 0; i < setPoint.size(); i++) {
-            Point tmp = setPoint.get(i);
+            RoutePoint tmp = setPoint.get(i);
             if (tmp.getX() < 0 || tmp.getX() > maxX || tmp.getY() < 0 || tmp.getY() > maxY) {
                 setPoint.remove(i--);
             }
-            for (Point tmp2 : route) {
+            for (RoutePoint tmp2 : route) {
                 if (tmp.getX() == tmp2.getX() && tmp.getY() == tmp2.getY()) {
                     setPoint.remove(i--);
                 }
@@ -148,9 +172,9 @@ public class RouteController {
         }
         //delete repeat point
         for (int i = 0; i < setPoint.size() - 1; i++) {
-            Point p1 = setPoint.get(i);
+            RoutePoint p1 = setPoint.get(i);
             for (int j = i + 1; j < setPoint.size(); j++) {
-                Point p2 = setPoint.get(j);
+                RoutePoint p2 = setPoint.get(j);
                 if (p1.getX() == p2.getX() && p1.getY() == p2.getY()) {
                     setPoint.remove(j--);
                 }
@@ -172,13 +196,13 @@ public class RouteController {
 //        genSetPoint();
 //    }
 
-    private void addSetPoint(int x, int y) {
+    private void addSetPoint(float x, float y) {
         //distance 25
-        setPoint.add(new Point(x, y - Global.MIN_PICTURE_SIZE));
-        setPoint.add(new Point(x, y + Global.MIN_PICTURE_SIZE));
-        setPoint.add(new Point(x - Global.MIN_PICTURE_SIZE, y));
-        setPoint.add(new Point(x + Global.MIN_PICTURE_SIZE, y));
-        setPoint.add(new Point(x + Global.MIN_PICTURE_SIZE, y - Global.MIN_PICTURE_SIZE));
-        setPoint.add(new Point(x - Global.MIN_PICTURE_SIZE, y + Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x, y - Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x, y + Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x - Global.MIN_PICTURE_SIZE, y));
+        setPoint.add(new RoutePoint(x + Global.MIN_PICTURE_SIZE, y));
+        setPoint.add(new RoutePoint(x + Global.MIN_PICTURE_SIZE, y - Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x - Global.MIN_PICTURE_SIZE, y + Global.MIN_PICTURE_SIZE));
     }
 }

@@ -85,31 +85,31 @@ public abstract class Tower extends ActiveObject {
         double w = ((alien.getX() + alien.getX() + SIZE_GRID) / 2 - this.getX());
         if (h == 0) {
             if (w > 0) {
-                direction = 90;
+                super.setDirection(90);
             } else {
-                direction = 270;
+                super.setDirection(270);
             }
         }
         if (w == 0) {
             if (h > 0) {
-                direction = 180;
+                super.setDirection(180);
             } else {
-                direction = 0;
+                super.setDirection(0);
             }
         }
         if (w != 0 && h != 0) {
             if (w > 0 && h < 0) {
-                direction = 90 - (int)(Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI));
+                super.setDirection(90 - (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI)));
             } else if (w > 0 && h > 0) {
-                direction = 90 + (int)(Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI));
+                super.setDirection(90 + (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI)));
             } else if (w < 0 && h < 0) {
-                direction = 270 + (int)(Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI));
+                super.setDirection(270 + (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI)));
             } else {
-                direction = 270 - (int)(Math.abs(Math.atan((h)
-                        / (w)) * 180 / Math.PI));
+                super.setDirection(270 - (int)(Math.abs(Math.atan((h)
+                        / (w)) * 180 / Math.PI)));
             }
         }
     }
@@ -117,7 +117,7 @@ public abstract class Tower extends ActiveObject {
     public void attack(Alien alien) {
         if (delay.update()) {
             alien.isAttacked(this);
-            bullets.add(new Bullet(super.getX(), super.getY(), alien, this, direction, super.getSpeed()));
+            bullets.add(new Bullet(super.getX(), super.getY(), alien, this, super.getDirection(), super.getSpeed()));
         }
     }
 

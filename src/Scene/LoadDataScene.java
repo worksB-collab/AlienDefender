@@ -70,7 +70,7 @@ public class LoadDataScene extends Scene{
     }
     
     private void genButton(){
-        backButton = new Button(50, 50,  150, 100,
+        backButton = new Button(50f, 50f,  150f, 100f,
                 imageController.tryGetImage(Path.Image.Button.BackButton.BACK_BUTTON_ROOT));
         
         backButton.setButtonListener(new Button.ButtonListener(){

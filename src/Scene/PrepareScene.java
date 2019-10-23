@@ -74,8 +74,8 @@ public class PrepareScene extends Scene{
     
     @Override
     public void sceneBegin() {
-        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 4) / 2 , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 8) / 2 , 
-                Global.MIN_PICTURE_SIZE * 4, Global.MIN_PICTURE_SIZE * 8, charList);
+        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 4f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 8f) / 2f , 
+                Global.MIN_PICTURE_SIZE * 4f, Global.MIN_PICTURE_SIZE * 8f, charList);
         genButton();
     }
 
@@ -99,7 +99,7 @@ public class PrepareScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, 32 * Global.MIN_PICTURE_SIZE, 24 * Global.MIN_PICTURE_SIZE, null);
+        g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
         backButton.paint(g);
         if(popWindow != null){
             popWindow.paint(g);

@@ -71,10 +71,10 @@ public class PlayerController {
     
     public void paint(Graphics g){
         if(scorePoint == null){
-            scorePoint = new DrawStringPoint(24 * Global.MIN_PICTURE_SIZE, 0, g, font, Long.toString(score), 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
+            scorePoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 0, g, font, Long.toString(score), 8f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         g.setFont(font);
-        g.drawString(scorePoint.getText(), scorePoint.getX(), scorePoint.getY());
+        g.drawString(scorePoint.getText(), (int)scorePoint.getX(), (int)scorePoint.getY());
     }
     
 }

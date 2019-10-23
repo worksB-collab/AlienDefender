@@ -96,6 +96,6 @@ public class Tower1 extends Tower {
         for (int i = 0; i < super.getBullets().size(); i++) {
             bullets.get(i).paint(g);
         }
-        tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, direction, super.getUpgradeStage());
+        tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, super.getDirection(), super.getUpgradeStage());
     }
 }

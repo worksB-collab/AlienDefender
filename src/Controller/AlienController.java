@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Controller.RouteController.RoutePoint;
 import GameObject.Alien;
 import GameObject.Alien1;
 import Value.Global;
@@ -22,12 +23,12 @@ public class AlienController {
     private DelayCounter moveDelay, genDelay;
     private int count;
     private ScoreController scoreController;
-    private LinkedList<Point> route;
+    private LinkedList<RoutePoint> route;
     private PlayerController playerController;
     private int stop; // stop generating aliens
     // NOT YET connecting to sceneController to the next scene to zerolize stop;
 
-    public AlienController(LinkedList<Point> route) {
+    public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
         moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(5);
@@ -39,7 +40,7 @@ public class AlienController {
 
     private void genAlien() {
         if ((int) (Math.random() * 100) > 10) {
-            aliens.add(new Alien1(-25, 50));
+            aliens.add(new Alien1(-25f, 50f));
             Alien.setRoute(route);
             count++;
         }
@@ -62,7 +63,7 @@ public class AlienController {
             for (int i = 0; i < aliens.size(); i++) {
                 Alien a = aliens.get(i);
                 a.update();
-                if (a.getY() >= 24 * Global.MIN_PICTURE_SIZE) {
+                if (a.getY() >= 24f * Global.MIN_PICTURE_SIZE) {
                     //player blood declination
                     aliens.remove(i);
                 }
@@ -74,7 +75,7 @@ public class AlienController {
                 }
             }
         }
-        if(aliens.size()<=0&&stop ==1){
+        if(aliens.size()<=0 && stop ==1){
             playerController.setScore(scoreController.scoreConverter());
         }
     }

@@ -19,7 +19,7 @@ public abstract class PopUpWindow extends GameObject{
     protected CommandSolver.KeyCommandListener keyCommandListener;
     protected CommandSolver.MouseCommandListener mouseCommandListener;
     protected CommandSolver.TypedListener typedListener;
-    public PopUpWindow(int x, int y, int width, int height) {
+    public PopUpWindow(float x, float y, float width, float height) {
         super(x, y, width, height);
     }
     

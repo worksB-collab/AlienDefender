@@ -33,7 +33,7 @@ public class TowerInformationWindow extends PopUpWindow{
     private LinkedList<Point> towerRange;
     private Tower tower;
     private boolean isEnd;
-    public TowerInformationWindow(int x, int y, int width, int height, Tower tower) {
+    public TowerInformationWindow(float x, float y, float width, float height, Tower tower) {
         super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height);
         this.tower = tower;
         imageController = ImageController.genInstance();
@@ -84,19 +84,19 @@ public class TowerInformationWindow extends PopUpWindow{
         k.setColor(Color.ORANGE);
         for(int i = 0; i < towerRange.size(); i++){
             Point p = towerRange.get(i);
-            k.drawRect((int)p.getX(), (int)p.getY(), Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
+            k.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
         }
         k.setColor(Color.BLACK);
         //draw PopUpWindow
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
-        int w = width / Global.MIN_PICTURE_SIZE;
-        int h = height / Global.MIN_PICTURE_SIZE;
+        float w = width / Global.MIN_PICTURE_SIZE;
+        float h = height / Global.MIN_PICTURE_SIZE;
         int x0 = 0;
         int y0 = 0;
         
         for(int i = 0; i < h; i++){
             for(int j = 0; j < w; j++){
-                g.drawImage(image, x + x0, y + y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, null);
+                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
                 x0 += Global.MIN_PICTURE_SIZE;
             }
             x0 = 0;
@@ -108,7 +108,7 @@ public class TowerInformationWindow extends PopUpWindow{
         }
     }
     
-    private void getButton(int x, int y){
+    private void getButton(float x, float y){
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
         Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener = new Button.ButtonListener(){
