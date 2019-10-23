@@ -67,6 +67,10 @@ public class AlienController {
                 }
             }
         }
+        if(aliens.size()<=0){
+            PlayerController.genInstance();
+            
+        }
     }
 
     public void paint(Graphics g) {

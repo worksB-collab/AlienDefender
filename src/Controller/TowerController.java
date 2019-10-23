@@ -34,19 +34,12 @@ public class TowerController {
         //Tower update
         if (aliens.size() != 0) {
             for (int i = 0; i < towers.size(); i++) {
-                for (int j = 0; j < aliens.size(); j++) {
-                    towers.get(i).detection(aliens.get(j));
+//                for (int j = 0; j < aliens.size(); j++) {
+                    towers.get(i).detection(aliens);
                     towers.get(i).update();
-                }
+//                }
             }
-        } else {
-            for (int i = 0; i < towers.size(); i++) {
-                LinkedList<Bullet> bullets = towers.get(i).getBullets();
-                for (int j = 0; j < bullets.size(); j++) {
-                    bullets.remove(j);
-                }
-            }
-        }
+        } 
     }
 
     public void paint(Graphics g) {

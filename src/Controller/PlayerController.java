@@ -21,12 +21,14 @@ public class PlayerController {
     private DrawStringPoint scorePoint;
     private Font font;
     private int stage;
+    private int money;
     
     private PlayerController(){
         this.name = "Player";
         this.score = 0;
         this.stage = 1;
         font = Global.FONT_SCORE;
+        money = 0;
         
     }
     
@@ -61,6 +63,10 @@ public class PlayerController {
                 scorePoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
             }
         }
+    }
+    
+    public void gainScore(){
+        
     }
     
     public void paint(Graphics g){

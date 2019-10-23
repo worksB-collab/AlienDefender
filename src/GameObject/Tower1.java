@@ -20,9 +20,9 @@ public class Tower1 extends Tower {
     private TowerHelper tHelper;
 
     public Tower1(int x, int y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 10, 1 * Global.SPEED); // x, y, width, height, attack, speed
-        tHelper = new TowerHelper(4);
-        towerNum = 0;
+        super(x, y, SIZE_GRID, SIZE_GRID, 3, 1 *Global.SPEED); // x, y, width, height, attack, speed
+        towerNum = 4;
+        tHelper = new TowerHelper(towerNum);
         towerRange = checkTowerNum(towerNum);
         genRange();
     }
@@ -66,9 +66,14 @@ public class Tower1 extends Tower {
         return range;
 
     }
+    
+    @Override
+    public LinkedList getRange(){
+        return range;
+    }
 
     @Override
-    public void update() {
+    public void upgrade() {
         switch (upgrade) {
             case 0:
                 break;

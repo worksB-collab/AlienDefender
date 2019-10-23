@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ScoreController {
 
     private ArrayList<Integer> kills;
+    public static ScoreController scoreController;
 
     public ScoreController() {
         kills = new ArrayList<Integer>();
@@ -21,7 +22,7 @@ public class ScoreController {
             kills.add(0);
         }
     }
-
+    
     public void scoreCount(int alienNum) {
         switch (alienNum) {
             case 1:
@@ -40,6 +41,10 @@ public class ScoreController {
                 kills.set(4, kills.get(4) + 1);
                 break;
         }
+    }
+    
+    public ArrayList<Integer> getKills(){
+        return kills;
     }
     
     public String toString(){

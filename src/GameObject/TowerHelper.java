@@ -31,9 +31,6 @@ public class TowerHelper {
         if (actor >= 0 && actor < 5) {
             return irc.tryGetImage(Path.Image.TOWER1);
         }
-        if (actor < 10) {
-            return irc.tryGetImage(Path.Image.TOWER1); // not yet updated
-        }
         return null;
     }
 
@@ -41,12 +38,11 @@ public class TowerHelper {
         if (img == null) {
             return;
         }
-        int dx = 65 * (actorPosition*(upgradeStage*5));
+        int dx = 65 * (actorPosition);
         Graphics2D g2 = (Graphics2D) g.create();
-        
         g2.rotate(direction*Math.PI/180, (x+x+width)/2, (y+y+height)/2);
         g2.drawImage(img, x, y, x + width, y + height,
-                dx, 0, dx + SIZE_OBJECT, SIZE_OBJECT, null);
+                dx, upgradeStage*SIZE_OBJECT, dx + SIZE_OBJECT, SIZE_OBJECT+upgradeStage*SIZE_OBJECT, null);
 
     }
 }

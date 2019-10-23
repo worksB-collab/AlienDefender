@@ -140,7 +140,7 @@ public class GameScene1 extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        backgroundController.paint(g);
+        // backgroundController.paint(g);
         routeController.paint(g);
         //Button paint
         if (buttonList != null) {

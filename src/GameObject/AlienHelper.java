@@ -31,7 +31,7 @@ public class AlienHelper {
     public AlienHelper(int alien) {
         img = getActor(alien);
         actorPosition = alien % 6;
-        delay = new DelayCounter(3);
+        delay = new DelayCounter(6);
         aliens = new LinkedList<Alien>();
         orignHP =-1;
     }
@@ -86,8 +86,9 @@ public class AlienHelper {
                 aliens.add(new Alien1(x, y));
                 break;
         }
+        if (delay.update()) {
         for (int i = 0; i < 6; i++) {
-            if (delay.update()) {
+            
                 g.drawImage(img, x, y, x + SIZE_GRID, y + SIZE_GRID,
                         (i % 2 + 3) * SIZE_OBJECT, actorPosition * SIZE_OBJECT,
                         (i % 2 + 4) * SIZE_OBJECT, SIZE_OBJECT + actorPosition * SIZE_OBJECT, null);
