@@ -74,7 +74,6 @@ public class TowerController {
             }
             i -= (SIZE_GRID - 1);
         }
-        System.out.println(range);
     }
 
     public void update() {
