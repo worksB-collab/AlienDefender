@@ -53,7 +53,7 @@ public class InputPopWindow extends PopUpWindow{
                 }else if(c == KeyEvent.VK_BACKSPACE){
                     if(charList.size() >= 1){
                        charList.removeLast(); 
-                    }
+                }
                 }else{
                     charList.add(c);
                 }

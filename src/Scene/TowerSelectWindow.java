@@ -55,6 +55,16 @@ public class TowerSelectWindow extends TowerPopUpWindow{
                         }
                     }
                 }
+                if(state == MouseState.MOVED){
+                    int x = e.getX();
+                    int y = e.getY();
+                    for(Button btn : buttonList){
+                        if(btn.isRange(x, y)){
+                            btn.hover(x, y);
+                            break;
+                        }
+                    }
+                }
             }    
         };
         genButton(x, y);
@@ -99,10 +109,14 @@ public class TowerSelectWindow extends TowerPopUpWindow{
             btn.paint(g);
         }
         if(towerRange != null){
-            towerRange = tower.getRange();
             Graphics2D k = (Graphics2D)g;
             k.setStroke(new BasicStroke(2f));
             k.setColor(Color.ORANGE);
+            for(int i = 0; i < towerRange.size(); i++){
+                Point p = towerRange.get(i);
+                k.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
+            }
+            k.setColor(Color.BLACK);
         }
     }
     
@@ -126,7 +140,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-
+                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerRange = towerController.getRange();
             }
         
         };
@@ -142,7 +157,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                
+                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerRange = towerController.getRange();
             }
         
         };
@@ -158,7 +174,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                
+                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerRange = towerController.getRange();
             }
         
         };
@@ -174,7 +191,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                
+                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerRange = towerController.getRange();
             }
         
         };
@@ -190,7 +208,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                
+                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerRange = towerController.getRange();
             }
         
         };

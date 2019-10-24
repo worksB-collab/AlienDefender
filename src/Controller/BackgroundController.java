@@ -140,7 +140,8 @@ public class BackgroundController {
             private ImageController imageController;
             private BufferedImage image;
             public Stage2(){
-                
+                imageController = ImageController.genInstance();
+                image = imageController.tryGetImage("/Resources/Images/Background/Background_02_00-04.png");
             }
             @Override
             public void update() {
@@ -149,7 +150,7 @@ public class BackgroundController {
 
             @Override
             public void paint(Graphics g) {
-                
+                g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
             }
             
     }

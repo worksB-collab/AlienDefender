@@ -48,7 +48,7 @@ public class GameScene1 extends Scene {
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
-        backgroundController = new BackgroundController(1);
+        backgroundController = new BackgroundController(2);
         routeController = new RouteController();
         buttonList = new LinkedList();
 
