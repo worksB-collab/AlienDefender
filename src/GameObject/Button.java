@@ -131,14 +131,8 @@ public class Button extends GameObject {
             point = new DrawStringPoint((int)super.getX(), (int)super.getY(), g, font, text, (int)width, (int)height);
         }
         g.setColor(color);
-//        g.drawRect(x, y, width, height);
         g.drawString(text, (int)point.getX(), (int)point.getY());
         g.setColor(Global.DEFAULT_FONT_COLOR);
-        if (isHovered) {
-            g.setColor(Color.ORANGE);
-            g.drawRoundRect((int)super.getX(), (int)super.getY(), (int)width, (int)height, (int)Global.MIN_PICTURE_SIZE / 2, (int)Global.MIN_PICTURE_SIZE / 2);
-            g.setColor(Color.BLACK);
-        }
     }
 
 }

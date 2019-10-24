@@ -100,6 +100,5 @@ public class StartScene extends Scene{
             }
         }
         );
-        buttonStart.setFont(Global.FONT_01);
     }
 }

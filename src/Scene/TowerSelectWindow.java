@@ -9,12 +9,17 @@ import Controller.CommandSolver;
 import Controller.CommandSolver.MouseCommandListener;
 import Controller.CommandSolver.MouseState;
 import Controller.ImageController;
+import Controller.TowerController;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
 import GameObject.Tower;
 import GameObject.Tower1;
 import Value.Global;
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
@@ -23,20 +28,20 @@ import java.util.LinkedList;
  *
  * @author user
  */
-public class TowerSelectWindow extends PopUpWindow{
+public class TowerSelectWindow extends TowerPopUpWindow{
     public static final String TYPE = "TowerSelectWindow";
     private ImageController imageController;
     private BufferedImage image;
     private LinkedList<Button> buttonList;
     private Tower tower;
+    private LinkedList<Point> towerRange;
     private boolean isEnd;
     
-    public TowerSelectWindow(float x, float y, float width, float height) {
-        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height);
+    public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
+        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
         isEnd = false;
-        
         super.mouseCommandListener = new MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -93,6 +98,12 @@ public class TowerSelectWindow extends PopUpWindow{
         for(Button btn : buttonList){
             btn.paint(g);
         }
+        if(towerRange != null){
+            towerRange = tower.getRange();
+            Graphics2D k = (Graphics2D)g;
+            k.setStroke(new BasicStroke(2f));
+            k.setColor(Color.ORANGE);
+        }
     }
     
     private void genButton(float x0, float y0){
@@ -103,18 +114,19 @@ public class TowerSelectWindow extends PopUpWindow{
                                 imageController.tryGetImage("/Resources/Images/Label/Tower_Icon5.png"),
                                 imageController.tryGetImage("/Resources/Images/Label/Exit.png")};
         ButtonListener buttonListener[] = new ButtonListener[6];
-        
+        TowerController towerController = super.getTowerController();
         buttonListener[0] = new ButtonListener(){
 
             @Override
             public void onClick(int x, int y) {
                 tower = new Tower1(x0, y0);
+                towerController.getTowers().add(tower);
                 isEnd = true;
             }
 
             @Override
             public void hover(int x, int y) {
-                
+
             }
         
         };
@@ -124,6 +136,7 @@ public class TowerSelectWindow extends PopUpWindow{
             @Override
             public void onClick(int x, int y) {
                 tower = new Tower1(x0, y0);
+                towerController.getTowers().add(tower);
                 isEnd = true;
             }
 
@@ -139,6 +152,7 @@ public class TowerSelectWindow extends PopUpWindow{
             @Override
             public void onClick(int x, int y) {
                 tower = new Tower1(x0, y0);
+                towerController.getTowers().add(tower);
                 isEnd = true;
             }
 
@@ -154,6 +168,7 @@ public class TowerSelectWindow extends PopUpWindow{
             @Override
             public void onClick(int x, int y) {
                 tower = new Tower1(x0, y0);
+                towerController.getTowers().add(tower);
                 isEnd = true;
             }
 
@@ -169,6 +184,7 @@ public class TowerSelectWindow extends PopUpWindow{
             @Override
             public void onClick(int x, int y) {
                 tower = new Tower1(x0, y0);
+                towerController.getTowers().add(tower);
                 isEnd = true;
             }
 

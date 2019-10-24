@@ -6,7 +6,8 @@
 package Scene;
 
 import Controller.CommandSolver;
-import Controller.ImageController;;
+import Controller.ImageController;import Controller.TowerController;
+;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
 import GameObject.Tower;
@@ -26,7 +27,7 @@ import java.util.LinkedList;
  *
  * @author user
  */
-public class TowerInformationWindow extends PopUpWindow{
+public class TowerInformationWindow extends TowerPopUpWindow{
     private ImageController imageController;
     private BufferedImage image;
     private LinkedList<Button> buttonList;
@@ -34,7 +35,7 @@ public class TowerInformationWindow extends PopUpWindow{
     private Tower tower;
     private boolean isEnd;
     public TowerInformationWindow(float x, float y, float width, float height, Tower tower) {
-        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height);
+        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
         this.tower = tower;
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
@@ -87,6 +88,9 @@ public class TowerInformationWindow extends PopUpWindow{
             k.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
         }
         k.setColor(Color.BLACK);
+
+        
+        
         //draw PopUpWindow
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
         float w = width / Global.MIN_PICTURE_SIZE;
@@ -128,4 +132,5 @@ public class TowerInformationWindow extends PopUpWindow{
         buttonList.add(button);
 
     }
+    
 }

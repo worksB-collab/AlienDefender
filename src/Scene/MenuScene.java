@@ -117,7 +117,7 @@ public class MenuScene extends Scene{
         //new Game Button
         Button newGameButton = new Button(buttonParameter[0] - 14 * Global.MIN_PICTURE_SIZE, buttonParameter[1], buttonParameter[2], buttonParameter[3],
                 imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
-        newGameButton.setText("New");
+        newGameButton.setText("NEW");
         newGameButton.setButtonListener(new ButtonListener(){
 
             @Override
