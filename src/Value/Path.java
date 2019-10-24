@@ -18,6 +18,7 @@ public class Path {
         public static final String IMAGES = ROOT + "/Images";
         public static final String GAMEOBJECT = IMAGES + "/GameObject";
         public static final String ALIEN1 = GAMEOBJECT + "/Alien1.png";
+        public static final String ALIEN2 = GAMEOBJECT + "/Alien2.png";
         public static final String TOWER1 = GAMEOBJECT + "/Tower1.png";
         public static final String BULLET1 = GAMEOBJECT + "/Bullet1.png";
         public static final String BOOM1 = GAMEOBJECT + "/Boom1.png";

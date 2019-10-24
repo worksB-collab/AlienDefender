@@ -19,6 +19,7 @@ import java.util.LinkedList;
 public class Tower1 extends Tower {
 
     private TowerHelper tHelper;
+    private UpgradeAnimation upgradeAnimation;
     private LinkedList<Bullet> bullets;
     private DelayCounter delay;
 
@@ -30,6 +31,7 @@ public class Tower1 extends Tower {
         genRange();
         bullets = super.getBullets();
         delay = new DelayCounter(1);
+        upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
     }
 
     public float checkTowerNum(int towerNum) {
@@ -72,15 +74,12 @@ public class Tower1 extends Tower {
     }
 
     @Override
-    public void upgrade() {
-        switch (super.getUpgrade()) {
-            case 0:
-                break;
-            case 1:
-                super.setAttack(super.getAttack() * 1.3f);
-                
-                super.setUpgrade(0);
-                break;
+    public void update() {
+        for (int i = 0; i < bullets.size(); i++) {
+            if (bullets.get(i).isReached()) {
+                return;
+            }
+            bullets.get(i).update();
         }
     }
 
@@ -95,5 +94,8 @@ public class Tower1 extends Tower {
             }
         }
         tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, super.getDirection(), super.getUpgradeStage());
+        if (super.getUpgradeNow() == 1) {
+            upgradeAnimation.paint(g);
+        }
     }
 }

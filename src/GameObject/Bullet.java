@@ -84,8 +84,6 @@ public class Bullet extends EffectObject {
     @Override
     public void paint(Graphics g) {
         if (isReached()) {
-
-            System.out.println(act);
             bHelper.paintBoom(g, super.getX(), super.getY(), super.getWidth(), super.getHeight(), ACT[act], towerNum, direction);
                 act = (act + 1) % 5;
             

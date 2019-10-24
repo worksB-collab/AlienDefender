@@ -32,13 +32,34 @@ public class TowerController {
         return towers;
     }
 
+    public LinkedList<Point> getRange() {
+        return range;
+    }
+    
+        public float checkTowerNum(int towerNum) {
+        switch (towerNum) {
+            case 0:
+                return TOWER0_ATKRANGE;
+            case 1:
+                return TOWER1_ATKRANGE;
+            case 2:
+                return TOWER2_ATKRANGE;
+            case 3:
+                return TOWER3_ATKRANGE;
+            case 4:
+                return TOWER4_ATKRANGE;
+        }
+        return -1;
+    }
+
     public void genRange(Point point, int towerNum) {
         range = new LinkedList<Point>();
-        int towerRange = towerNum + 1;
+        int towerRange = (int)checkTowerNum(towerNum);
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
-                    range.add(new Point((int) (point.getX() + i), (int) (point.getY() + j)));
+                    range.add(new Point((int)(point.getX() + i), (int) (point.getY() + j)));
+                    System.out.println(point);
                 }
                 j += (SIZE_GRID - 1);
             }
@@ -53,6 +74,7 @@ public class TowerController {
             }
             i -= (SIZE_GRID - 1);
         }
+        System.out.println(range);
     }
 
     public void update() {
@@ -61,7 +83,9 @@ public class TowerController {
             for (int i = 0; i < towers.size(); i++) {
                 towers.get(i).detection(aliens);
                 towers.get(i).update();
-                towers.get(i).upgrade();
+                if (towers.get(i).getUpgradeNow() == 1) {
+                    towers.get(i).upgrade();
+                }
             }
         }
     }

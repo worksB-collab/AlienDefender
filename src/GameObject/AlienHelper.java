@@ -27,18 +27,18 @@ public class AlienHelper {
 
     public AlienHelper(int alien) {
         img = getActor(alien);
-        actorPosition = alien % 6;
+        actorPosition = alien % 10;
         aliens = new LinkedList<Alien>();
         orignHP =-1;
     }
 
     private BufferedImage getActor(int alien) {
         ImageController irc = ImageController.genInstance();
-        if (alien >= 0 && alien < 6) {
-            return irc.tryGetImage(Path.Image.ALIEN1);
+        if (alien >= 0 && alien < 10) {
+            return irc.tryGetImage(Path.Image.ALIEN2);
         }
-        if (alien < 12) {
-            return irc.tryGetImage(Path.Image.ALIEN1); // not yet updated
+        if (alien < 20) {
+            return irc.tryGetImage(Path.Image.ALIEN2); // not yet updated
         }
         return null;
     }

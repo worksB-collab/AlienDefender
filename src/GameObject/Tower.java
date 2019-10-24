@@ -22,14 +22,15 @@ public abstract class Tower extends ActiveObject {
     private LinkedList<Bullet> bullets;
     private int towerNum;
     private int towerRange;
-    private DelayCounter delay;
+    private DelayCounter delay, delayForUpgrade;
     private int upgradeStage;
-    private int upgrade;
+    private int upgradeNow;
 
     public Tower(float x, float y, float width, float height, float attack, float speed) {
         super(x, y, width, height, speed);
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(10);
+        delayForUpgrade = new DelayCounter(1);
         upgradeStage = 0;
         setAttack(attack);
     }
@@ -42,24 +43,16 @@ public abstract class Tower extends ActiveObject {
         this.range = range;
     }
 
-    public void upgrade() {
-        if (upgradeStage == 2) {
-            return;
-        }
-        upgradeStage++;
-        upgrade++;
-    }
-
-    public void setUpgrade(int upgrade) {
-        this.upgrade = upgrade;
-    }
-    
-    public int getUpgrade(){
-        return upgrade;
-    }
-
     public int getUpgradeStage() {
         return upgradeStage;
+    }
+
+    public int getUpgradeNow() {
+        return upgradeNow;
+    }
+
+    public void setUpgradeNow(int upgradeNow) {
+        this.upgradeNow = upgradeNow;
     }
 
     public void detection(LinkedList<Alien> aliens) {
@@ -146,15 +139,20 @@ public abstract class Tower extends ActiveObject {
         return bullets;
     }
 
-    @Override
-    public void update() {
-        for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isReached()) {
-                return;
-            }
-            bullets.get(i).update();
+    // set upgradeNow = 1 to call this function to upgrade the tower
+    public void upgrade() {
+        upgradeStage++;
+        if (upgradeStage >= 2) {
+            return;
+        }
+        setAttack(getAttack() * 1.3f);
+        if (delayForUpgrade.update()) { // delay 1 to let animation run
+            upgradeNow = 0;
         }
     }
+
+    @Override
+    public abstract void update();
 
     @Override
     public abstract void paint(Graphics g);
