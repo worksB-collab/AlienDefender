@@ -57,9 +57,7 @@ public class AlienController {
                 if (genDelay.update()) {
                     genAlien();
                 }
-            } else {// stop generating aliens
-                stop = 1;
-            }
+            } 
             for (int i = 0; i < aliens.size(); i++) {
                 Alien a = aliens.get(i);
                 a.update();
@@ -76,9 +74,6 @@ public class AlienController {
 ////                    aliens.remove(a);
 //                }
             }
-        }
-        if (aliens.size() <= 0 && stop == 1) { // result
-            playerController.setScore(scoreController.scoreConverter());
         }
     }
 

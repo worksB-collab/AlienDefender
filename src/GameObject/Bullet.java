@@ -46,10 +46,10 @@ public class Bullet extends EffectObject {
     public boolean isReached() {
         if (updateCount >= 100) {
             return true;
-        }else if(alienX + SIZE_GRID - DEVIATION >= super.getX()
-                        && alienX + DEVIATION <= super.getX() + SIZE_GRID
-                        && alienY + SIZE_GRID - DEVIATION >= super.getY()
-                        && alienY + DEVIATION <= super.getY() + SIZE_GRID){
+        }else if(alienX + SIZE_GRID*2/3 - DEVIATION >= super.getX()
+                        && alienX+SIZE_GRID/3 + DEVIATION <= super.getX() + SIZE_GRID
+                        && alienY + SIZE_GRID*2/3 - DEVIATION >= super.getY()
+                        && alienY +SIZE_GRID/3+ DEVIATION <= super.getY() + SIZE_GRID){
             return true;
         }
         return false;
