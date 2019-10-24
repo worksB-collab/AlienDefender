@@ -59,10 +59,8 @@ public class TowerController {
         //Tower update
         if (aliens.size() != 0) {
             for (int i = 0; i < towers.size(); i++) {
-//                for (int j = 0; j < aliens.size(); j++) {
                     towers.get(i).detection(aliens);
                     towers.get(i).update();
-//                }
             }
         } 
     }

@@ -9,7 +9,6 @@ import Controller.RouteController.RoutePoint;
 import Value.Global;
 import java.awt.Graphics;
 import static Value.Global.*;
-import java.awt.Point;
 import java.util.LinkedList;
 
 /**

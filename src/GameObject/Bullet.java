@@ -5,13 +5,9 @@
  */
 package GameObject;
 
-import Controller.ImageController;
+import Controller.DelayCounter;
 import static Value.Global.*;
-import Value.Path;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.LinkedList;
 
 /**
  *
@@ -19,37 +15,39 @@ import java.util.LinkedList;
  */
 public class Bullet extends EffectObject {
 
-    private BufferedImage img;
-    private double direction;
+    private float direction;
     private float alienX;
     private float alienY;
     private float speedX;
     private float speedY;
     private int updateCount;
     private int towerNum;
-    private Alien alien;
     private float speed;
+    private BulletHelper bHelper;
+    private int ACT[] = {0, 1, 2, 3, 4};
+    private int act;
+    private DelayCounter delay;
 
     public Bullet(float x, float y, Alien alien, Tower tower, float direction, float speed) {
         super(x, y, SIZE_GRID, SIZE_GRID);
-        this.alien = alien;
-        ImageController irc = ImageController.genInstance();
-        img = irc.tryGetImage(Path.Image.BULLET1);
         this.direction = direction;
         alienX = alien.getX();
         alienY = alien.getY();
         towerNum = tower.getTowerNum();
         setSpeed(speed);
+        bHelper = new BulletHelper(towerNum);
+        act = 0;
+        delay = new DelayCounter(1);
         launch();
     }
 
     public boolean isReached() {
         if (updateCount >= 100) {
             return true;
-        }else if(alienX + SIZE_GRID*2/3 - DEVIATION >= super.getX()
-                        && alienX+SIZE_GRID/3 + DEVIATION <= super.getX() + SIZE_GRID
-                        && alienY + SIZE_GRID*2/3 - DEVIATION >= super.getY()
-                        && alienY +SIZE_GRID/3+ DEVIATION <= super.getY() + SIZE_GRID){
+        } else if (alienX + SIZE_GRID * 2 / 3 - DEVIATION >= super.getX()
+                && alienX + SIZE_GRID / 3 + DEVIATION <= super.getX() + SIZE_GRID
+                && alienY + SIZE_GRID * 2 / 3 - DEVIATION >= super.getY()
+                && alienY + SIZE_GRID / 3 + DEVIATION <= super.getY() + SIZE_GRID) {
             return true;
         }
         return false;
@@ -85,11 +83,13 @@ public class Bullet extends EffectObject {
 
     @Override
     public void paint(Graphics g) {
-        int dx = 65 * towerNum;
-        Graphics2D g2 = (Graphics2D) g.create();
-        g2.rotate(direction * Math.PI / 180, (super.getX() + super.getX() + width) / 2, (super.getY() + super.getY() + height) / 2);
-        g2.drawImage(img, (int) super.getX(), (int) super.getY(), (int) (super.getX() + width), (int) (super.getY() + height),
-                dx, 0, dx + (int) SIZE_OBJECT, (int) SIZE_OBJECT, null);
-    }
+        if (isReached()) {
 
+            System.out.println(act);
+            bHelper.paintBoom(g, super.getX(), super.getY(), width, height, ACT[act], towerNum, direction);
+                act = (act + 1) % 5;
+            
+        }
+        bHelper.paint(g, super.getX(), super.getY(), width, height, towerNum, direction);
+    }
 }

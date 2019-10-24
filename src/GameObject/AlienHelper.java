@@ -84,7 +84,6 @@ public class AlienHelper {
         }
 //        if (delay.update()) {
         for (int i = 0; i < 6; i++) {
-            
                 g.drawImage(img, (int)x, (int)y,(int)(x + SIZE_GRID), (int)(y + SIZE_GRID),
                         (int)((i % 2 + 3) * SIZE_OBJECT), (int)(actorPosition * SIZE_OBJECT),
                         (int)((i % 2 + 4) * SIZE_OBJECT), (int)(SIZE_OBJECT + actorPosition * SIZE_OBJECT), null);

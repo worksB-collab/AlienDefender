@@ -37,8 +37,8 @@ public abstract class Tower extends ActiveObject {
     public LinkedList getRange() {
         return range;
     }
-    
-    public void setRange(LinkedList<Point> range){
+
+    public void setRange(LinkedList<Point> range) {
         this.range = range;
     }
 
@@ -49,8 +49,8 @@ public abstract class Tower extends ActiveObject {
         upgradeStage++;
         upgrade++;
     }
-    
-    public void setUpgrade(int upgrade){
+
+    public void setUpgrade(int upgrade) {
         this.upgrade = upgrade;
     }
 
@@ -76,14 +76,14 @@ public abstract class Tower extends ActiveObject {
     public float getAttack() {
         return attack;
     }
-    
-    public void setAttack(float attack){
+
+    public void setAttack(float attack) {
         this.attack = attack;
     }
 
     public void changeDirection(Alien alien) {
-        double h = (alien.getY()  - this.getY());
-        double w = (alien.getX()  - this.getX());
+        double h = (alien.getY() - this.getY());
+        double w = (alien.getX() - this.getX());
         if (h == 0) {
             if (w > 0) {
                 super.setDirection(90);
@@ -100,16 +100,16 @@ public abstract class Tower extends ActiveObject {
         }
         if (w != 0 && h != 0) {
             if (w > 0 && h < 0) {
-                super.setDirection(90 - (int)(Math.abs(Math.atan((h)
+                super.setDirection(90 - (int) (Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI)));
             } else if (w > 0 && h > 0) {
-                super.setDirection(90 + (int)(Math.abs(Math.atan((h)
+                super.setDirection(90 + (int) (Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI)));
             } else if (w < 0 && h < 0) {
-                super.setDirection(270 + (int)(Math.abs(Math.atan((h)
+                super.setDirection(270 + (int) (Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI)));
             } else {
-                super.setDirection(270 - (int)(Math.abs(Math.atan((h)
+                super.setDirection(270 - (int) (Math.abs(Math.atan((h)
                         / (w)) * 180 / Math.PI)));
             }
         }
@@ -122,19 +122,19 @@ public abstract class Tower extends ActiveObject {
         }
     }
 
-    public void setTowerNum(int towerNum){
+    public void setTowerNum(int towerNum) {
         this.towerNum = towerNum;
     }
-    
+
     public int getTowerNum() {
         return towerNum;
     }
-    
-    public void setTowerRange(int towerRange){
+
+    public void setTowerRange(int towerRange) {
         this.towerRange = towerRange;
     }
-    
-    public int getTowerRange(){
+
+    public int getTowerRange() {
         return towerRange;
     }
 
@@ -145,13 +145,13 @@ public abstract class Tower extends ActiveObject {
     @Override
     public void update() {
         for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).update();
             if (bullets.get(i).isReached()) {
-                bullets.remove(i);
+                return;
             }
+            bullets.get(i).update();
         }
     }
 
     @Override
-    public abstract void paint(Graphics g) ;
+    public abstract void paint(Graphics g);
 }

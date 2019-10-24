@@ -5,6 +5,7 @@
  */
 package GameObject;
 
+import Controller.DelayCounter;
 import Value.Global;
 import static Value.Global.*;
 import java.awt.Graphics;
@@ -18,15 +19,17 @@ import java.util.LinkedList;
 public class Tower1 extends Tower {
 
     private TowerHelper tHelper;
-    LinkedList <Bullet> bullets;
+    private LinkedList<Bullet> bullets;
+    private DelayCounter delay;
 
     public Tower1(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 10, 2 *Global.SPEED); // x, y, width, height, attack, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, 10, 2 * Global.SPEED); // x, y, width, height, attack, speed
         super.setTowerNum(0);
         tHelper = new TowerHelper(super.getTowerNum());
-        super.setTowerRange((int)checkTowerNum(super.getTowerNum()));
+        super.setTowerRange((int) checkTowerNum(super.getTowerNum()));
         genRange();
         bullets = super.getBullets();
+        delay = new DelayCounter(1);
     }
 
     public float checkTowerNum(int towerNum) {
@@ -51,7 +54,7 @@ public class Tower1 extends Tower {
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
-                    super.getRange().add(new Point((int)(super.getX() + i), (int)(super.getY() + j)));
+                    super.getRange().add(new Point((int) (super.getX() + i), (int) (super.getY() + j)));
                 }
                 j += (SIZE_GRID - 1);
             }
@@ -60,7 +63,7 @@ public class Tower1 extends Tower {
         for (int i = towerRange; i >= 0; i--) {
             for (int j = towerRange; j >= 0; j--) {
                 if (Math.abs(i + j) <= towerRange) {
-                    super.getRange().add(new Point((int)(super.getX() + i), (int)(super.getY() + j)));
+                    super.getRange().add(new Point((int) (super.getX() + i), (int) (super.getY() + j)));
                 }
                 j -= (SIZE_GRID - 1);
             }
@@ -68,25 +71,15 @@ public class Tower1 extends Tower {
         }
     }
 
-
     @Override
     public void upgrade() {
         switch (super.getUpgradeStage()) {
             case 0:
                 break;
             case 1:
-                super.setAttack(super.getAttack()*1.3f);
+                super.setAttack(super.getAttack() * 1.3f);
                 super.setUpgrade(0);
                 break;
-        }
-        
-        for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isReached()) {
-                bullets.remove(i);
-            }
-        }
-        for (int i = 0; i < bullets.size(); i++) {
-            bullets.get(i).update();
         }
     }
 
@@ -94,6 +87,11 @@ public class Tower1 extends Tower {
     public void paint(Graphics g) {
         for (int i = 0; i < super.getBullets().size(); i++) {
             bullets.get(i).paint(g);
+            if (bullets.get(i).isReached()) {
+                if (delay.update()) {
+                    bullets.remove(i);
+                }
+            }
         }
         tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, super.getDirection(), super.getUpgradeStage());
     }
