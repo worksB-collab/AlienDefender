@@ -22,6 +22,7 @@ public class Path {
         public static final String BULLET1 = GAMEOBJECT + "/Bullet1.png";
         public static final String BOOM1 = GAMEOBJECT + "/Boom1.png";
         public static final String BOOM2 = GAMEOBJECT + "/Boom2.png";
+        public static final String UPGRADE = GAMEOBJECT + "/Upgrade.png";
 
         public class Button {
 

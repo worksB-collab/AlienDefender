@@ -25,20 +25,20 @@ public class TowerController {
     public TowerController(AlienController alienController) {
         towers = new LinkedList<Tower>();
         this.aliens = alienController.getAliens();
-        
+
     }
 
-    public LinkedList<Tower> getTowers(){
+    public LinkedList<Tower> getTowers() {
         return towers;
     }
-    
-        public void genRange(Point point, int towerNum) {
+
+    public void genRange(Point point, int towerNum) {
         range = new LinkedList<Point>();
-        int towerRange = towerNum+1;
+        int towerRange = towerNum + 1;
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
-                    range.add(new Point((int)(point.getX() + i), (int)(point.getY() + j)));
+                    range.add(new Point((int) (point.getX() + i), (int) (point.getY() + j)));
                 }
                 j += (SIZE_GRID - 1);
             }
@@ -47,22 +47,23 @@ public class TowerController {
         for (int i = towerRange; i >= 0; i--) {
             for (int j = towerRange; j >= 0; j--) {
                 if (Math.abs(i + j) <= towerRange) {
-                    range.add(new Point((int)(point.getX() + i), (int)(point.getY() + j)));
+                    range.add(new Point((int) (point.getX() + i), (int) (point.getY() + j)));
                 }
                 j -= (SIZE_GRID - 1);
             }
             i -= (SIZE_GRID - 1);
         }
     }
-    
+
     public void update() {
         //Tower update
         if (aliens.size() != 0) {
             for (int i = 0; i < towers.size(); i++) {
-                    towers.get(i).detection(aliens);
-                    towers.get(i).update();
+                towers.get(i).detection(aliens);
+                towers.get(i).update();
+                towers.get(i).upgrade();
             }
-        } 
+        }
     }
 
     public void paint(Graphics g) {

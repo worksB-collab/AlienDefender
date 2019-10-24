@@ -73,11 +73,12 @@ public class Tower1 extends Tower {
 
     @Override
     public void upgrade() {
-        switch (super.getUpgradeStage()) {
+        switch (super.getUpgrade()) {
             case 0:
                 break;
             case 1:
                 super.setAttack(super.getAttack() * 1.3f);
+                
                 super.setUpgrade(0);
                 break;
         }

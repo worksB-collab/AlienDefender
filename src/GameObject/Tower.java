@@ -53,6 +53,10 @@ public abstract class Tower extends ActiveObject {
     public void setUpgrade(int upgrade) {
         this.upgrade = upgrade;
     }
+    
+    public int getUpgrade(){
+        return upgrade;
+    }
 
     public int getUpgradeStage() {
         return upgradeStage;
