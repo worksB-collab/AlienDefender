@@ -157,7 +157,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerController.genRange(new Point((int)x0, (int)y0), 1);
                 towerRange = towerController.getRange();
             }
         
@@ -174,7 +174,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerController.genRange(new Point((int)x0, (int)y0), 2);
                 towerRange = towerController.getRange();
             }
         
@@ -191,7 +191,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerController.genRange(new Point((int)x0, (int)y0), 3);
                 towerRange = towerController.getRange();
             }
         
@@ -208,7 +208,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerController.genRange(new Point((int)x0, (int)y0), 4);
                 towerRange = towerController.getRange();
             }
         

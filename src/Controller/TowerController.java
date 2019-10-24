@@ -59,7 +59,6 @@ public class TowerController {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
                     range.add(new Point((int)(point.getX() + i), (int) (point.getY() + j)));
-                    System.out.println(point);
                 }
                 j += (SIZE_GRID - 1);
             }
@@ -74,7 +73,6 @@ public class TowerController {
             }
             i -= (SIZE_GRID - 1);
         }
-        System.out.println(range);
     }
 
     public void update() {

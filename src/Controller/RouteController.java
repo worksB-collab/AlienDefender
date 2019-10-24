@@ -77,9 +77,9 @@ public class RouteController {
         
     }
     public void paint(Graphics g){
-        for (RoutePoint p : route) {
-            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
-        }
+//        for (RoutePoint p : route) {
+//            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
+//        }
     }
 
     private void paintSetPoint(Graphics g) {
