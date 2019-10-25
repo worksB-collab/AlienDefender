@@ -6,6 +6,7 @@
 package Scene;
 
 
+import Controller.AudioController;
 import Controller.BackgroundController;
 import Controller.ImageController;
 import Controller.SceneController;
@@ -28,6 +29,7 @@ public class StartScene extends Scene{
     private MouseCommandListener mouseCommandListener;
     private BackgroundController backgroundController;
     private ImageController imageController;
+    private AudioController audioController;
     private Button buttonStart;
     
     
@@ -35,6 +37,7 @@ public class StartScene extends Scene{
         super(sceneController);
         backgroundController = new BackgroundController(0);
         imageController = ImageController.genInstance();
+        audioController = AudioController.genInstance();
         mouseCommandListener = new MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, MouseState state, long trigTime) {
