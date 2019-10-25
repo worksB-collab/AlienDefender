@@ -6,7 +6,8 @@
 package Scene;
 
 import Controller.CommandSolver;
-import Controller.ImageController;import Controller.TowerController;
+import Controller.ImageController;import Controller.PlayerController;
+import Controller.TowerController;
 ;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
@@ -30,14 +31,16 @@ import java.util.LinkedList;
 public class TowerInformationWindow extends TowerPopUpWindow{
     private ImageController imageController;
     private BufferedImage image;
+    private PlayerController playerController;
     private LinkedList<Button> buttonList;
     private LinkedList<Point> towerRange;
     private Tower tower;
     private boolean isEnd;
-    public TowerInformationWindow(float x, float y, float width, float height, Tower tower) {
+    public TowerInformationWindow(float x, float y, float width, float height, Tower tower, PlayerController playerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
         this.tower = tower;
         imageController = ImageController.genInstance();
+        this.playerController = playerController;
         buttonList = new LinkedList<Button>();
         towerRange = new LinkedList();
         getButton(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
@@ -138,7 +141,11 @@ public class TowerInformationWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower.upgrade();
+                if(playerController.isEnough(TowerController.costArr[tower.getTowerNum()])){
+                    tower.upgrade();
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[tower.getTowerNum()]);
+                }
+                
             }
 
             @Override

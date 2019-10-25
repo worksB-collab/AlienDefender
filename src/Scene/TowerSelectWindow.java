@@ -37,19 +37,12 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     private LinkedList<Button> buttonList;
     private Tower tower;
     private LinkedList<Point> towerRange;
-    private Long cost[];
     private boolean isEnd;
     
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
         playerController = PlayerController.genInstance();
-        cost = new Long[5];
-        cost[0] = (long)towerController.getCost(0);
-        cost[1] = (long)towerController.getCost(1);
-        cost[2] = (long)towerController.getCost(2);
-        cost[3] = (long)towerController.getCost(3);
-        cost[4] = (long)towerController.getCost(4);
        
         buttonList = new LinkedList<Button>();
         isEnd = false;
@@ -133,8 +126,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(cost[0])){
-                    playerController.setMoney(playerController.getMoney() - cost[0]);
+                if(playerController.isEnough(TowerController.costArr[0])){
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[0]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
@@ -154,8 +147,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(cost[1])){
-                    playerController.setMoney(playerController.getMoney() - cost[1]);
+                if(playerController.isEnough(TowerController.costArr[1])){
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[1]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
@@ -174,8 +167,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(cost[2])){
-                    playerController.setMoney(playerController.getMoney() - cost[2]);
+                if(playerController.isEnough(TowerController.costArr[2])){
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[2]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
@@ -194,8 +187,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(cost[3])){
-                    playerController.setMoney(playerController.getMoney() - cost[3]);
+                if(playerController.isEnough(TowerController.costArr[3])){
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[3]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
@@ -214,8 +207,8 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(cost[4])){
-                    playerController.setMoney(playerController.getMoney() - cost[4]);
+                if(playerController.isEnough(TowerController.costArr[4])){
+                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[4]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
