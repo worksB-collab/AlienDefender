@@ -174,6 +174,7 @@ public class AlienController {
                 if (alien.isDead()) {// kill counts 
                     scoreController.scoreCount(alien.getAlienNum());
                     playerController.addScore((long) scoreController.countPerKill(alien.getAlienNum()));
+                    playerController.setMoney(playerController.getMoney()+alien.getMoney());
                 }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
                     aliens.remove(i);

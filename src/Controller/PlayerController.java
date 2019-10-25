@@ -36,7 +36,7 @@ public class PlayerController {
         this.score = 0;
         this.stage = 1;
         font = Global.FONT_SCORE;
-        this.money = 0;
+        this.money = 100;
         this.hp = 100;
         this.ratio = 1f;
         imageController = ImageController.genInstance();
@@ -53,6 +53,14 @@ public class PlayerController {
     }
 
     //setter
+    
+    public void setMoney(long money){
+        this.money = money;
+    }
+    public long getMoney(){
+        return money;
+    }
+    
     public void setName(String name) {
         this.name = name;
     }
