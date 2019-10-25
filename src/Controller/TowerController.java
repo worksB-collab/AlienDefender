@@ -81,9 +81,6 @@ public class TowerController {
             for (int i = 0; i < towers.size(); i++) {
                 towers.get(i).detection(aliens);
                 towers.get(i).update();
-                if (towers.get(i).getUpgradeNow() == 1) {
-                    towers.get(i).upgrade();
-                }
             }
         }
     }

@@ -139,8 +139,9 @@ public abstract class Tower extends ActiveObject {
         return bullets;
     }
 
-    // set upgradeNow = 1 to call this function to upgrade the tower
+    // call this function to upgrade the tower
     public void upgrade() {
+        upgradeNow++;
         upgradeStage++;
         if (upgradeStage >= 2) {
             return;
