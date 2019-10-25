@@ -22,7 +22,7 @@ public abstract class Tower extends ActiveObject {
     private LinkedList<Bullet> bullets;
     private int towerNum;
     private int towerRange;
-    private DelayCounter delay, delayForUpgrade;
+    private DelayCounter delay;
     private int upgradeStage;
     private int upgradeNow;
 
@@ -30,7 +30,7 @@ public abstract class Tower extends ActiveObject {
         super(x, y, width, height, speed);
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(10);
-        delayForUpgrade = new DelayCounter(1);
+
         upgradeStage = 0;
         setAttack(attack);
     }
@@ -141,15 +141,13 @@ public abstract class Tower extends ActiveObject {
 
     // call this function to upgrade the tower
     public void upgrade() {
-        upgradeNow++;
-        upgradeStage++;
-        if (upgradeStage >= 2) {
+        if (upgradeStage == 2) {
             return;
         }
+        upgradeNow++;
+        upgradeStage++;
         setAttack(getAttack() * 1.3f);
-        if (delayForUpgrade.update()) { // delay 1 to let animation run
-            upgradeNow = 0;
-        }
+
     }
 
     @Override

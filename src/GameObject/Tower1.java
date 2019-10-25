@@ -21,7 +21,7 @@ public class Tower1 extends Tower {
     private TowerHelper tHelper;
     private UpgradeAnimation upgradeAnimation;
     private LinkedList<Bullet> bullets;
-    private DelayCounter delay;
+    private DelayCounter delay, delayForUpgrade;
 
     public Tower1(float x, float y) {
         super(x, y, SIZE_GRID, SIZE_GRID, 10, 2 * Global.SPEED); // x, y, width, height, attack, speed
@@ -31,6 +31,7 @@ public class Tower1 extends Tower {
         genRange();
         bullets = super.getBullets();
         delay = new DelayCounter(1);
+        delayForUpgrade = new DelayCounter(5);
         upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
     }
 
@@ -95,7 +96,11 @@ public class Tower1 extends Tower {
         }
         tHelper.paint(g, super.getX(), getY(), SIZE_GRID, SIZE_GRID, super.getDirection(), super.getUpgradeStage());
         if (super.getUpgradeNow() == 1) {
+
             upgradeAnimation.paint(g);
+            if (delayForUpgrade.update()) { // delay 1 to let animation run
+                super.setUpgradeNow(0);
+            }
         }
     }
 }
