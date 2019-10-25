@@ -33,7 +33,7 @@ public class Tower2 extends Tower {
         delay = new DelayCounter(1);
         delayForUpgrade = new DelayCounter(5);
         upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
-        super.setCost(40);
+        super.setCost(TOWER1_COST);
         super.setUpgradeCost(super.getCost()*1.5f);
     }
 

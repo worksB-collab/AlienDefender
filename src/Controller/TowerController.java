@@ -21,11 +21,15 @@ public class TowerController {
     private LinkedList<Tower> towers;
     private LinkedList<Alien> aliens;
     private LinkedList<Point> range;
+    public static final int costArr[] = {TOWER0_COST, TOWER1_COST, TOWER2_COST, TOWER3_COST, TOWER4_COST};
 
     public TowerController(AlienController alienController) {
         towers = new LinkedList<Tower>();
         this.aliens = alienController.getAliens();
+    }
 
+    public int[] getCostArr() {
+        return costArr;
     }
 
     public LinkedList<Tower> getTowers() {
@@ -35,16 +39,16 @@ public class TowerController {
     public LinkedList<Point> getRange() {
         return range;
     }
-    
-public float getCost(int index) {
+
+    public float getCost(int index) {
         return towers.get(index).getCost();
     }
 
     public float getUpgradeCost(int index) {
         return towers.get(index).getUpgradeCost();
     }
-    
-        public float checkTowerNum(int towerNum) {
+
+    public float checkTowerNum(int towerNum) {
         switch (towerNum) {
             case 0:
                 return TOWER0_ATKRANGE;
@@ -62,11 +66,11 @@ public float getCost(int index) {
 
     public void genRange(Point point, int towerNum) {
         range = new LinkedList<Point>();
-        int towerRange = (int)checkTowerNum(towerNum);
+        int towerRange = (int) checkTowerNum(towerNum);
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {
-                    range.add(new Point((int)(point.getX() + i), (int) (point.getY() + j)));
+                    range.add(new Point((int) (point.getX() + i), (int) (point.getY() + j)));
                 }
                 j += (SIZE_GRID - 1);
             }
