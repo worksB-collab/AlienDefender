@@ -9,6 +9,7 @@ import Controller.CommandSolver;
 import Controller.CommandSolver.MouseCommandListener;
 import Controller.CommandSolver.MouseState;
 import Controller.ImageController;
+import Controller.PlayerController;
 import Controller.TowerController;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
@@ -32,14 +33,24 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     public static final String TYPE = "TowerSelectWindow";
     private ImageController imageController;
     private BufferedImage image;
+    private PlayerController playerController;
     private LinkedList<Button> buttonList;
     private Tower tower;
     private LinkedList<Point> towerRange;
+    private Long cost[];
     private boolean isEnd;
     
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
+        playerController = PlayerController.genInstance();
+        cost = new Long[5];
+        cost[0] = (long)towerController.getCost(0);
+        cost[1] = (long)towerController.getCost(1);
+        cost[2] = (long)towerController.getCost(2);
+        cost[3] = (long)towerController.getCost(3);
+        cost[4] = (long)towerController.getCost(4);
+       
         buttonList = new LinkedList<Button>();
         isEnd = false;
         super.mouseCommandListener = new MouseCommandListener(){
@@ -92,19 +103,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     @Override
     public void paint(Graphics g){
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
-        float w = width / Global.MIN_PICTURE_SIZE;
-        float h = height / Global.MIN_PICTURE_SIZE;
-        float x0 = 0;
-        float y0 = 0;
         g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
-//        for(int i = 0; i < h; i++){
-//            for(int j = 0; j < w; j++){
-//                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
-//                x0 += Global.MIN_PICTURE_SIZE;
-//            }
-//            x0 = 0;
-//            y0 += Global.MIN_PICTURE_SIZE;
-//        }
         for(Button btn : buttonList){
             btn.paint(g);
         }
@@ -121,6 +120,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     }
     
     private void genButton(float x0, float y0){
+        
         BufferedImage img[] = { imageController.tryGetImage("/Resources/Images/Label/Tower_Icon1.png"),
                                 imageController.tryGetImage("/Resources/Images/Label/Tower_Icon2.png"),
                                 imageController.tryGetImage("/Resources/Images/Label/Tower_Icon3.png"),
@@ -133,9 +133,13 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower = new Tower1(x0, y0);
-                towerController.getTowers().add(tower);
-                isEnd = true;
+                if(playerController.isEnough(cost[0])){
+                    playerController.setMoney(playerController.getMoney() - cost[0]);
+                    tower = new Tower1(x0, y0);
+                    towerController.getTowers().add(tower);
+                    isEnd = true;
+                }
+                
             }
 
             @Override
@@ -150,9 +154,12 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower = new Tower1(x0, y0);
-                towerController.getTowers().add(tower);
-                isEnd = true;
+                if(playerController.isEnough(cost[1])){
+                    playerController.setMoney(playerController.getMoney() - cost[1]);
+                    tower = new Tower1(x0, y0);
+                    towerController.getTowers().add(tower);
+                    isEnd = true;
+                }
             }
 
             @Override
@@ -167,9 +174,12 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower = new Tower1(x0, y0);
-                towerController.getTowers().add(tower);
-                isEnd = true;
+                if(playerController.isEnough(cost[2])){
+                    playerController.setMoney(playerController.getMoney() - cost[2]);
+                    tower = new Tower1(x0, y0);
+                    towerController.getTowers().add(tower);
+                    isEnd = true;
+                }
             }
 
             @Override
@@ -184,9 +194,12 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower = new Tower1(x0, y0);
-                towerController.getTowers().add(tower);
-                isEnd = true;
+                if(playerController.isEnough(cost[3])){
+                    playerController.setMoney(playerController.getMoney() - cost[3]);
+                    tower = new Tower1(x0, y0);
+                    towerController.getTowers().add(tower);
+                    isEnd = true;
+                }
             }
 
             @Override
@@ -201,9 +214,12 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void onClick(int x, int y) {
-                tower = new Tower1(x0, y0);
-                towerController.getTowers().add(tower);
-                isEnd = true;
+                if(playerController.isEnough(cost[4])){
+                    playerController.setMoney(playerController.getMoney() - cost[4]);
+                    tower = new Tower1(x0, y0);
+                    towerController.getTowers().add(tower);
+                    isEnd = true;
+                }
             }
 
             @Override

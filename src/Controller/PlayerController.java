@@ -60,7 +60,12 @@ public class PlayerController {
     public long getMoney(){
         return money;
     }
-    
+    public boolean isEnough(long money){
+        if(this.money < money){
+            return false;
+        }
+        return true;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -127,13 +132,13 @@ public class PlayerController {
 
     public void paint(Graphics g) {
         if (scorePoint == null) {
-            scorePoint = new DrawStringPoint(25f * Global.MIN_PICTURE_SIZE, 2f*Global.MIN_PICTURE_SIZE, g, font, Long.toString(score), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
+            scorePoint = new DrawStringPoint(22f * Global.MIN_PICTURE_SIZE, 2f*Global.MIN_PICTURE_SIZE, g, font, Long.toString(score), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         if (hpPoint == null) {
             hpPoint = new DrawStringPoint(27.5f * Global.MIN_PICTURE_SIZE, 0.8f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(hp), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         if(moneyPoint == null){
-            moneyPoint = new DrawStringPoint(27f * Global.MIN_PICTURE_SIZE, 5f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
+            moneyPoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 5f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
         g.drawImage(hpImage[0], (int)(17f * Global.MIN_PICTURE_SIZE) + (int)((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE),
@@ -142,9 +147,11 @@ public class PlayerController {
                                 (int)(12f * Global.MIN_PICTURE_SIZE), (int)(1f * Global.MIN_PICTURE_SIZE), null);
         g.setColor(Color.white);
         g.drawString(hpPoint.getText() , (int) (hpPoint.getX()), (int) (hpPoint.getY()));
-        g.drawString(moneyPoint.getText() + " Coin", (int)(moneyPoint.getX()), (int)(moneyPoint.getY()));
+        g.drawString(moneyPoint.getText(), (int)(moneyPoint.getX()), (int)(moneyPoint.getY()));
+        g.drawString(" Coin", (int)(28.5f * Global.MIN_PICTURE_SIZE), (int)(6.2f*Global.MIN_PICTURE_SIZE));
         g.setFont(font);
-        g.drawString(scorePoint.getText() + " Kill", (int) (scorePoint.getX()), (int) (scorePoint.getY()));
+        g.drawString(scorePoint.getText(), (int) (scorePoint.getX()), (int) (scorePoint.getY()));
+        g.drawString(" Kill", (int)(29f * Global.MIN_PICTURE_SIZE), (int)(4.5f*Global.MIN_PICTURE_SIZE));
         g.setColor(Color.black);
     }
 

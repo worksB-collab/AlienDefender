@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,20 +19,20 @@ import javax.imageio.ImageIO;
 public class AudioController {
         public static class KeyPair{
         private String path;
-        private BufferedImage image;
+        private AudioClip  audio;
         //constructor
-        public KeyPair(String path, BufferedImage image){
+        public KeyPair(String path, AudioClip audio){
             this.path = path;
-            this.image = image;
+            this.audio = audio;
         }
     }
     
     public static AudioController audioController;
-    private ArrayList<KeyPair> imageList;
+    private ArrayList<KeyPair> audioList;
   
     //constructor
     private AudioController(){
-        imageList = new ArrayList<KeyPair>();
+        audioList = new ArrayList<KeyPair>();
     };
     
     //accessor
@@ -41,43 +43,38 @@ public class AudioController {
         return audioController;
     }
     
-    public BufferedImage tryGetImage(String path){
-        BufferedImage image = searchImage(path);
-        if(image == null){
-            image = addImage(path);
+    public AudioClip tryGetAudio(String path){
+        AudioClip audio = searchAudio(path);
+        if(audio == null){
+            audio = addAudio(path);
         }
-        return image;
+        return audio;
     }
-    public void clearImage(){
-        imageList.clear();
+    public void clearAudio(){
+        audioList.clear();
     }
     
-    private BufferedImage addImage(String path){
-        try{
-            BufferedImage image = ImageIO.read(getClass().getResource(path));
-            if(image == null){
-                return null;
-            }
-            imageList.add(new KeyPair(path, image));
-            return image;
-        }catch(IOException e){
-            
+    private AudioClip addAudio(String path){
+        AudioClip audio =  Applet.newAudioClip(getClass().getResource(path));
+        if(audio == null){
+            return null;
         }
-        return null;
+        audioList.add(new KeyPair(path, audio));
+        return audio;
     }
     
     
-    private BufferedImage searchImage(String path){
+    private AudioClip searchAudio(String path){
         KeyPair key = null;
-        for(int i = 0; i < imageList.size(); i++){
-            if(imageList.get(i).path.equals(path)){
-                key = imageList.get(i);
+        for(int i = 0; i < audioList.size(); i++){
+            if(audioList.get(i).path.equals(path)){
+                key = audioList.get(i);
                 break;
             }
         }
         if(key == null){
             return null;
         }
-        return key.image;
+        return key.audio;
     }
 }
