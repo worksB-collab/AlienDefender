@@ -112,9 +112,11 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         }
     }
     
-    private void getButton(float x, float y){
+    private void getButton(float x0, float y0){
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
-        Button button = new Button(x + 22 * Global.MIN_PICTURE_SIZE, y, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
+        BufferedImage img2 = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
+        
+        Button button = new Button(x0 + 22 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener = new Button.ButtonListener(){
 
             @Override
@@ -129,7 +131,24 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         
         };
         button.setButtonListener(buttonListener);
+        
+        Button upgradeButton = new Button(x0 + 20 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img2);
+        ButtonListener buttonListener2 = new Button.ButtonListener(){
+
+            @Override
+            public void onClick(int x, int y) {
+                tower.upgrade();
+            }
+
+            @Override
+            public void hover(int x, int y) {
+                
+            }
+        
+        };
+        upgradeButton.setButtonListener(buttonListener2);
         buttonList.add(button);
+        buttonList.add(upgradeButton);
 
     }
     
