@@ -22,12 +22,12 @@ public class PlayerController {
     public static PlayerController playerController;
     private String name;
     private long score;
-    private DrawStringPoint scorePoint, hpPoint;
+    private DrawStringPoint scorePoint, hpPoint, moneyPoint;
     private ImageController imageController;
     private BufferedImage hpImage[];
     private Font font;
     private int stage;
-    private int money;
+    private long money;
     private int hp;
     private float ratio;
 
@@ -87,15 +87,21 @@ public class PlayerController {
 
     public void update() {
         if (scorePoint != null) {
+            scorePoint.setText(Long.toString(score));
             if (scorePoint.getHeight() != Global.FRAME_HEIGHT) {
-                scorePoint.setText(Long.toString(score));
                 scorePoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
             }
         }
         if (hpPoint != null) {
+            hpPoint.setText(Long.toString(hp));
             if (hpPoint.getHeight() != Global.FRAME_HEIGHT) {
-                hpPoint.setText(Long.toString(hp));
                 hpPoint.update(4 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
+            }
+        }
+        if(moneyPoint != null){
+            moneyPoint.setText(Long.toString(money));
+            if (moneyPoint.getHeight() != Global.FRAME_HEIGHT){
+                moneyPoint.update(2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE);
             }
         }
         
@@ -113,21 +119,24 @@ public class PlayerController {
 
     public void paint(Graphics g) {
         if (scorePoint == null) {
-            scorePoint = new DrawStringPoint(23f * Global.MIN_PICTURE_SIZE, 2f*Global.MIN_PICTURE_SIZE, g, font, Long.toString(score), 8f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
+            scorePoint = new DrawStringPoint(25f * Global.MIN_PICTURE_SIZE, 2f*Global.MIN_PICTURE_SIZE, g, font, Long.toString(score), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         if (hpPoint == null) {
-            hpPoint = new DrawStringPoint(20.5f * Global.MIN_PICTURE_SIZE, 0.8f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(score), 2f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
+            hpPoint = new DrawStringPoint(27.5f * Global.MIN_PICTURE_SIZE, 0.8f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(hp), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
+        }
+        if(moneyPoint == null){
+            moneyPoint = new DrawStringPoint(27f * Global.MIN_PICTURE_SIZE, 5f * Global.MIN_PICTURE_SIZE, g, FONT_HP, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
-        g.drawImage(hpImage[0], (int)(10f * Global.MIN_PICTURE_SIZE) + (int)((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE),
+        g.drawImage(hpImage[0], (int)(17f * Global.MIN_PICTURE_SIZE) + (int)((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE),
                                 (int)( ratio * (12f * Global.MIN_PICTURE_SIZE) ), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        g.drawImage(hpImage[1], (int)(10f * Global.MIN_PICTURE_SIZE),  (int)(2 * Global.MIN_PICTURE_SIZE), 
+        g.drawImage(hpImage[1], (int)(17f * Global.MIN_PICTURE_SIZE),  (int)(2 * Global.MIN_PICTURE_SIZE), 
                                 (int)(12f * Global.MIN_PICTURE_SIZE), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        
         g.setColor(Color.white);
-        g.drawString(hpPoint.getText(), (int) (hpPoint.getX()), (int) (hpPoint.getY()));
+        g.drawString(hpPoint.getText() , (int) (hpPoint.getX()), (int) (hpPoint.getY()));
+        g.drawString(moneyPoint.getText() + " Coin", (int)(moneyPoint.getX()), (int)(moneyPoint.getY()));
         g.setFont(font);
-        g.drawString(scorePoint.getText() + " kill", (int) (scorePoint.getX()), (int) (scorePoint.getY()));
+        g.drawString(scorePoint.getText() + " Kill", (int) (scorePoint.getX()), (int) (scorePoint.getY()));
         g.setColor(Color.black);
     }
 
