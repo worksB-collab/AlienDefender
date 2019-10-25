@@ -38,7 +38,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     private boolean isEnd;
     
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
-        super(6 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
+        super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
         isEnd = false;
