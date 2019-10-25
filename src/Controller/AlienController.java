@@ -20,60 +20,67 @@ import java.util.LinkedList;
  * @author billy
  */
 public class AlienController {
-    public static class AlienSet{
+
+    public static class AlienSet {
+
         private float x;
         private float y;
-        private  int type;
-        private  int number;
+        private int type;
+        private int number;
         private int generateNumber;
         private float frequency;
         private boolean isEnd;
-        public AlienSet(float x, float y, int type, int number, float frequency){
+
+        public AlienSet(float x, float y, int type, int number, float frequency) {
             this.x = x;
             this.y = y;
             this.type = type;
             this.number = number;
             this.frequency = frequency;
             generateNumber = 0;
-            this.isEnd = false; 
+            this.isEnd = false;
         }
-        public int getNumber(){
+
+        public int getNumber() {
             return number;
         }
-        public int getType(){
+
+        public int getType() {
             return type;
         }
-        public float getFrequency(){
+
+        public float getFrequency() {
             return frequency;
         }
-        public boolean isEnd(){
+
+        public boolean isEnd() {
             return isEnd;
         }
-        
+
         private Alien genAlien() {
             Alien alien = null;
             if ((Math.random() * 100) > 100 - frequency) {
                 switch (type) {
                     case 1:
-                        alien =   new Alien1(x, y);
+                        alien = new Alien1(x, y);
                     case 2:
-                        alien =   new Alien2(x, y);
-                 }
-            generateNumber++;
-            if(generateNumber >= number){
-                isEnd = true;
-            }
+                        alien = new Alien2(x, y);
+                }
+                generateNumber++;
+                if (generateNumber >= number) {
+                    isEnd = true;
+                }
 
-            return alien;
-        }
-        return null;
-       
+                return alien;
+            }
+            return null;
+
         }
     }
-    
+
     private LinkedList<Alien> aliens;
     private LinkedList<AlienSet> alienPairs;
-    private AlienSet  presentAlienSet;
+    private AlienSet presentAlienSet;
     private Iterator<AlienSet> iter;
     private DelayCounter moveDelay, genDelay;
     private int count;
@@ -96,10 +103,14 @@ public class AlienController {
         stop = 0;
     }
 
+    public float getMoney(int index) {
+        return aliens.get(index).getMoney();
+    }
+
     public LinkedList<Alien> getAliens() {
         return aliens;
     }
-    
+
     public void gameLevelSetting(float x, float y, float frequency, int alienNum, int alienQuantity) {
         this.x = x; //
         this.y = y;//
@@ -120,28 +131,28 @@ public class AlienController {
 
     public void update() {
         //Aliens genearate Setting
-         if(iter == null){
-             iter = alienPairs.listIterator();
-             if(iter.hasNext()){
-                 presentAlienSet = iter.next();
-             }
-         }
-         if(presentAlienSet.isEnd){
-             if(iter.hasNext()){
-                 presentAlienSet = iter.next();
-             }
-         }
-        
+        if (iter == null) {
+            iter = alienPairs.listIterator();
+            if (iter.hasNext()) {
+                presentAlienSet = iter.next();
+            }
+        }
+        if (presentAlienSet.isEnd) {
+            if (iter.hasNext()) {
+                presentAlienSet = iter.next();
+            }
+        }
+
         //Aliens update
-         if(genDelay.update()){
-             //Aliens genearate
-             if(!presentAlienSet.isEnd){
+        if (genDelay.update()) {
+            //Aliens genearate
+            if (!presentAlienSet.isEnd) {
                 Alien alien = presentAlienSet.genAlien();
-                if(alien != null){
+                if (alien != null) {
                     aliens.add(alien);
                 }
-             }
-         }
+            }
+        }
         if (moveDelay.update()) {
             for (int i = 0; i < aliens.size(); i++) {
                 Alien a = aliens.get(i);

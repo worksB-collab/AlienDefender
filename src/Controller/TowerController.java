@@ -36,6 +36,14 @@ public class TowerController {
         return range;
     }
     
+public float getCost(int index) {
+        return towers.get(index).getCost();
+    }
+
+    public float getUpgradeCost(int index) {
+        return towers.get(index).getUpgradeCost();
+    }
+    
         public float checkTowerNum(int towerNum) {
         switch (towerNum) {
             case 0:
