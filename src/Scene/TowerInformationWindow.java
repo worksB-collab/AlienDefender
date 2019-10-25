@@ -92,20 +92,21 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         
         
         //draw PopUpWindow
-        image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
-        float w = width / Global.MIN_PICTURE_SIZE;
-        float h = height / Global.MIN_PICTURE_SIZE;
-        int x0 = 0;
-        int y0 = 0;
+        image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
         
-        for(int i = 0; i < h; i++){
-            for(int j = 0; j < w; j++){
-                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
-                x0 += Global.MIN_PICTURE_SIZE;
-            }
-            x0 = 0;
-            y0 += Global.MIN_PICTURE_SIZE;
-        }
+        g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
+//        float w = width / Global.MIN_PICTURE_SIZE;
+//        float h = height / Global.MIN_PICTURE_SIZE;
+//        int x0 = 0;
+//        int y0 = 0;
+//        for(int i = 0; i < h; i++){
+//            for(int j = 0; j < w; j++){
+//                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
+//                x0 += Global.MIN_PICTURE_SIZE;
+//            }
+//            x0 = 0;
+//            y0 += Global.MIN_PICTURE_SIZE;
+//        }
         
         for(Button btn : buttonList){
             btn.paint(g);
@@ -116,7 +117,7 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
         BufferedImage img2 = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
         
-        Button button = new Button(x0 + 22 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
+        Button button = new Button(x0 + 22 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE,  2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener = new Button.ButtonListener(){
 
             @Override
@@ -132,7 +133,7 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         };
         button.setButtonListener(buttonListener);
         
-        Button upgradeButton = new Button(x0 + 20 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img2);
+        Button upgradeButton = new Button(x0 + 20 * Global.MIN_PICTURE_SIZE, y0,  2 * Global.MIN_PICTURE_SIZE,  2 * Global.MIN_PICTURE_SIZE, img2);
         ButtonListener buttonListener2 = new Button.ButtonListener(){
 
             @Override

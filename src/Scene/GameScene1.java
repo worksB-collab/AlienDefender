@@ -212,9 +212,9 @@ public class GameScene1 extends Scene {
                         }
                     }
                     if (!isBuilt) {
-                        popUpWindow = new TowerSelectWindow(x0, y0, 24 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, towerController);
+                        popUpWindow = new TowerSelectWindow(x0, y0, 137/7 * Global.MIN_PICTURE_SIZE, 41/20 * Global.MIN_PICTURE_SIZE, towerController);
                     } else {
-                        popUpWindow = new TowerInformationWindow(x0, y0, 24f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, tower);
+                        popUpWindow = new TowerInformationWindow(x0, y0, 137/7 * Global.MIN_PICTURE_SIZE, 41/20 * Global.MIN_PICTURE_SIZE, tower);
                     }
 
                 }

@@ -7,6 +7,7 @@ package Controller;
 
 import Value.DrawStringPoint;
 import Value.Global;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -110,7 +111,9 @@ public class PlayerController {
         g.drawImage(hpImage[0], (int)(12f * Global.MIN_PICTURE_SIZE) + (int)((1f -ratio) * (8f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE), (int)( ratio * (8f * Global.MIN_PICTURE_SIZE) ), (int)(1f * Global.MIN_PICTURE_SIZE), null);
         g.drawImage(hpImage[1], (int)(12f * Global.MIN_PICTURE_SIZE),  (int)(2 * Global.MIN_PICTURE_SIZE), (int)(8f * Global.MIN_PICTURE_SIZE), (int)(1f * Global.MIN_PICTURE_SIZE), null);
         g.setFont(font);
-        g.drawString(scorePoint.getText(), (int) scorePoint.getX(), (int) scorePoint.getY());
+        g.setColor(Color.white);
+        g.drawString(scorePoint.getText(), (int) (27f * Global.MIN_PICTURE_SIZE), (int) (4f * Global.MIN_PICTURE_SIZE));
+        g.setColor(Color.black);
     }
 
 }
