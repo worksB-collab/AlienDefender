@@ -22,14 +22,18 @@ public class Alien2 extends Alien {
     private DelayCounter delay;
     private int deadDelay;
 
+
     public Alien2(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 150, 1 * Global.SPEED); //x, y, width, height, hp, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, 150, 1.5f * Global.SPEED); //x, y, width, height, hp, speed
         alienNum = 1;
         aHelper = new AlienHelper(alienNum);
         act = 0;
         delay = new DelayCounter(5);
         deadDelay = 0;
+        super.setMoney(10);
     }
+    
+
     
     public int getDeadDelay(){
         return deadDelay;

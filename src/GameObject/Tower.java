@@ -25,14 +25,30 @@ public abstract class Tower extends ActiveObject {
     private DelayCounter delay;
     private int upgradeStage;
     private int upgradeNow;
+    private float cost, upgradeCost;
 
     public Tower(float x, float y, float width, float height, float attack, float speed) {
         super(x, y, width, height, speed);
         bullets = new LinkedList<Bullet>();
         delay = new DelayCounter(10);
-
         upgradeStage = 0;
         setAttack(attack);
+    }
+
+    public void setCost(float cost) {
+        this.cost = cost;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public void setUpgradeCost(float upgradeCost) {
+        this.upgradeCost = upgradeCost;
+    }
+
+    public float getUpgradeCost() {
+        return upgradeCost;
     }
 
     public LinkedList getRange() {
@@ -147,7 +163,7 @@ public abstract class Tower extends ActiveObject {
         upgradeNow++;
         upgradeStage++;
         setAttack(getAttack() * 1.3f);
-
+        setUpgradeCost(getCost()*1.3f);
     }
 
     @Override

@@ -16,16 +16,16 @@ import java.util.LinkedList;
  *
  * @author billy
  */
-public class Tower1 extends Tower {
+public class Tower5 extends Tower {
 
     private TowerHelper tHelper;
     private UpgradeAnimation upgradeAnimation;
     private LinkedList<Bullet> bullets;
     private DelayCounter delay, delayForUpgrade;
 
-    public Tower1(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 10, 2 * Global.SPEED); // x, y, width, height, attack, speed
-        super.setTowerNum(0);
+    public Tower5(float x, float y) {
+        super(x, y, SIZE_GRID, SIZE_GRID, 50, 2 * Global.SPEED); // x, y, width, height, attack, speed
+        super.setTowerNum(4);
         tHelper = new TowerHelper(super.getTowerNum());
         super.setTowerRange((int) checkTowerNum(super.getTowerNum()));
         genRange();
@@ -33,7 +33,7 @@ public class Tower1 extends Tower {
         delay = new DelayCounter(1);
         delayForUpgrade = new DelayCounter(5);
         upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
-        super.setCost(30);
+        super.setCost(70);
         super.setUpgradeCost(super.getCost()*1.5f);
     }
 

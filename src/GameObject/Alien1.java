@@ -22,6 +22,7 @@ public class Alien1 extends Alien {
     private DelayCounter delay;
     private int deadDelay;
 
+
     public Alien1(float x, float y) {
         super(x, y, SIZE_GRID, SIZE_GRID, 100, 1 * Global.SPEED); //x, y, width, height, hp, speed
         alienNum = 0;
@@ -29,7 +30,10 @@ public class Alien1 extends Alien {
         act = 0;
         delay = new DelayCounter(5);
         deadDelay = 0;
+        super.setMoney(5);
     }
+    
+
     
     public int getDeadDelay(){
         return deadDelay;

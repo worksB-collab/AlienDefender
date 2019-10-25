@@ -22,6 +22,7 @@ public abstract class Alien extends ActiveObject {
     public int nextPosition;
     private static LinkedList<RoutePoint> route = new LinkedList<RoutePoint>();
     protected int alienNum;
+    private int money;
 
     public Alien(float x, float y, float width, float height, float hp, float speed) {
         super(x, y, width, height, speed);
@@ -30,8 +31,14 @@ public abstract class Alien extends ActiveObject {
         this.height = height;
         this.width = width;
         nextPosition = 0;
+    }
 
-        
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getMoney() {
+        return money;
     }
 
     public static void setRoute(LinkedList<RoutePoint> r) {
