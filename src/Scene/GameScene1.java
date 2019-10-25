@@ -86,6 +86,8 @@ public class GameScene1 extends Scene {
     public void sceneBegin() {
         routeController.genRoad(1);
         genButton(routeController.getSetPoint());
+        alienController = new AlienController(routeController.getRoute());
+        alienController.gameLevelSetting(-25, 50, 80, 1, 50);
     }
 
     @Override
@@ -101,9 +103,9 @@ public class GameScene1 extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
-        if (alienController == null) {
-            alienController = new AlienController(routeController.getRoute());
-        }
+        
+        alienController.update();
+        
         if (towerController == null) {
             towerController = new TowerController(alienController);
         }

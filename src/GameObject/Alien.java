@@ -20,7 +20,7 @@ public abstract class Alien extends ActiveObject {
     protected int act;
     private float hp;
     public int nextPosition;
-    private static LinkedList<RoutePoint> route;
+    private static LinkedList<RoutePoint> route = new LinkedList<RoutePoint>();
     protected int alienNum;
 
     public Alien(float x, float y, float width, float height, float hp, float speed) {
@@ -30,9 +30,8 @@ public abstract class Alien extends ActiveObject {
         this.height = height;
         this.width = width;
         nextPosition = 0;
-        if (route == null) {
-            route = new LinkedList<RoutePoint>();
-        }
+
+        
     }
 
     public static void setRoute(LinkedList<RoutePoint> r) {
