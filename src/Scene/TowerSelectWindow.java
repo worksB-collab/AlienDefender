@@ -38,7 +38,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     private boolean isEnd;
     
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
-        super(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
+        super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
         buttonList = new LinkedList<Button>();
         isEnd = false;
@@ -91,20 +91,20 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     
     @Override
     public void paint(Graphics g){
-        image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label.png");
+        image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
         float w = width / Global.MIN_PICTURE_SIZE;
         float h = height / Global.MIN_PICTURE_SIZE;
         float x0 = 0;
         float y0 = 0;
-        
-        for(int i = 0; i < h; i++){
-            for(int j = 0; j < w; j++){
-                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
-                x0 += Global.MIN_PICTURE_SIZE;
-            }
-            x0 = 0;
-            y0 += Global.MIN_PICTURE_SIZE;
-        }
+        g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
+//        for(int i = 0; i < h; i++){
+//            for(int j = 0; j < w; j++){
+//                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
+//                x0 += Global.MIN_PICTURE_SIZE;
+//            }
+//            x0 = 0;
+//            y0 += Global.MIN_PICTURE_SIZE;
+//        }
         for(Button btn : buttonList){
             btn.paint(g);
         }

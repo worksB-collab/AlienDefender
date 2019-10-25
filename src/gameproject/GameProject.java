@@ -24,7 +24,7 @@ public class GameProject {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Alien Defender");
         GameJPanel gPanel = new GameJPanel();
-        frame.setBounds(400, 300, 1040, 807);
+        frame.setBounds(200, 150, 1040, 807);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(gPanel);
         frame.setVisible(true);

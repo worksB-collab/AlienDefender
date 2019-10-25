@@ -141,7 +141,7 @@ public class BackgroundController {
             private BufferedImage image;
             public Stage2(){
                 imageController = ImageController.genInstance();
-                image = imageController.tryGetImage("/Resources/Images/Background/Background_02_00_05-01.png");
+                image = imageController.tryGetImage("/Resources/Images/Background/Background_02_00_07.png");
             }
             @Override
             public void update() {
