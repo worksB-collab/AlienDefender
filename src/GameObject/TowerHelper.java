@@ -29,7 +29,7 @@ public class TowerHelper {
     private BufferedImage getActor(int actor) {
         ImageController irc = ImageController.genInstance();
         if (actor >= 0 && actor < 5) {
-            return irc.tryGetImage(Path.Image.TOWER1);
+            return irc.tryGetImage(Path.Image.TOWER2);
         }
         return null;
     }

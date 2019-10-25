@@ -36,7 +36,7 @@ public class PlayerController {
         this.score = 0;
         this.stage = 1;
         font = Global.FONT_SCORE;
-        this.money = 100;
+        this.money = 300;
         this.hp = 100;
         this.ratio = 1f;
         imageController = ImageController.genInstance();
