@@ -57,6 +57,9 @@ public class DrawStringPoint {
     public float getHeight(){
         return height;
     }
+    public Font getFont(){
+        return font;
+    }
     //setter
     public void setFont(Font font){
         this.font = font;

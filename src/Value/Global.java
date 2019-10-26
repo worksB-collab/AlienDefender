@@ -64,12 +64,15 @@ public class Global {
     public static final int RIGHT = 90;
     
     //Font
-    public static final Font FONT_HP = new Font(Font.DIALOG, Font.PLAIN, 10);
     public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
     public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
     public static final Font FONT_BUTTON = new Font(Font.DIALOG, Font.PLAIN, 40);
     public static final Font FONT_INPUT = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 40);
+    public static final Font FONT_NAME = new Font(Font.DIALOG, Font.PLAIN, 30);
+    public static final Font FONT_HP = new Font(Font.DIALOG, Font.PLAIN, 30);
+    public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 30);
+    public static final Font FONT_MONEY = new Font(Font.DIALOG, Font.PLAIN, 30);
+   
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
     
     //Key
