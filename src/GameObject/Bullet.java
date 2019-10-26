@@ -5,8 +5,11 @@
  */
 package GameObject;
 
+import Controller.AudioController;
 import Controller.DelayCounter;
 import static Value.Global.*;
+import Value.Path;
+import java.applet.AudioClip;
 import java.awt.Graphics;
 
 /**
@@ -27,6 +30,8 @@ public class Bullet extends EffectObject {
     private int ACT[] = {0, 1, 2, 3, 4};
     private int act;
     private DelayCounter delay;
+    private AudioController audioController;
+    private AudioClip audio;
 
     public Bullet(float x, float y, Alien alien, Tower tower, float direction, float speed) {
         super(x, y, SIZE_GRID, SIZE_GRID);
@@ -38,6 +43,9 @@ public class Bullet extends EffectObject {
         bHelper = new BulletHelper(towerNum);
         act = 0;
         delay = new DelayCounter(1);
+        audioController = AudioController.genInstance();
+        audio = audioController.tryGetSound(Path.Audios.Sounds.Attack.TOWER_ATTCK_SOUND);
+        audio.play();
         launch();
     }
 
@@ -61,7 +69,7 @@ public class Bullet extends EffectObject {
         this.speed = speed;
     }
 
-    public void launch() {
+    public void launch(){
         updateCount = 0;
         float dX = alienX - super.getX();
         float dY = alienY - super.getY();

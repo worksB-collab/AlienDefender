@@ -17,7 +17,7 @@ import java.awt.image.BufferedImage;
  * @author billy
  */
 public class TowerHelper {
-
+    
     private BufferedImage img;
     private int actorPosition;
 

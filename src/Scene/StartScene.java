@@ -18,7 +18,10 @@ import Controller.CommandSolver.MouseState;
 import Value.Global;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 
+    
 
 /**
  *
@@ -30,14 +33,19 @@ public class StartScene extends Scene{
     private BackgroundController backgroundController;
     private ImageController imageController;
     private AudioController audioController;
+    private Clip audio;
     private Button buttonStart;
     
     
-    public StartScene(SceneController sceneController) {
+    public StartScene(SceneController sceneController){
         super(sceneController);
         backgroundController = new BackgroundController(0);
         imageController = ImageController.genInstance();
         audioController = AudioController.genInstance();
+        audio = audioController.tryGetMusic(Path.Audios.Musics.TEST);
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
+
+        
         mouseCommandListener = new MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, MouseState state, long trigTime) {
@@ -73,6 +81,8 @@ public class StartScene extends Scene{
     public void sceneEnd() {
         buttonStart = null;
         imageController.clearImage();
+        audio.close();
+        audioController.clearAudio();
 
     }
 

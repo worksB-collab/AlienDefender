@@ -12,7 +12,6 @@ import Controller.TowerController;
 import GameObject.Button;
 import GameObject.Button.ButtonListener;
 import GameObject.Tower;
-import GameObject.Tower1;
 import Value.Global;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -21,7 +20,6 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -98,19 +96,6 @@ public class TowerInformationWindow extends TowerPopUpWindow{
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
         
         g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
-//        float w = width / Global.MIN_PICTURE_SIZE;
-//        float h = height / Global.MIN_PICTURE_SIZE;
-//        int x0 = 0;
-//        int y0 = 0;
-//        for(int i = 0; i < h; i++){
-//            for(int j = 0; j < w; j++){
-//                g.drawImage(image, (int)(super.getX() + x0), (int)(super.getY() + y0), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
-//                x0 += Global.MIN_PICTURE_SIZE;
-//            }
-//            x0 = 0;
-//            y0 += Global.MIN_PICTURE_SIZE;
-//        }
-        
         for(Button btn : buttonList){
             btn.paint(g);
         }
@@ -142,8 +127,10 @@ public class TowerInformationWindow extends TowerPopUpWindow{
             @Override
             public void onClick(int x, int y) {
                 if(playerController.isEnough(TowerController.costArr[tower.getTowerNum()])){
-                    tower.upgrade();
-                    playerController.setMoney(playerController.getMoney() - TowerController.costArr[tower.getTowerNum()]);
+                    if(tower.upgrade()){
+                        playerController.setMoney(playerController.getMoney() - TowerController.costArr[tower.getTowerNum()]);
+                    }
+                    
                 }
                 
             }

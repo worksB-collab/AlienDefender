@@ -156,14 +156,15 @@ public abstract class Tower extends ActiveObject {
     }
 
     // call this function to upgrade the tower
-    public void upgrade() {
-        if (upgradeStage == 2) {
-            return;
+    public boolean upgrade() {
+        if (upgradeStage >= 2) {
+            return false;
         }
         upgradeNow++;
         upgradeStage++;
         setAttack(getAttack() * 1.3f);
         setUpgradeCost(getCost()*1.3f);
+        return true;
     }
 
     @Override
