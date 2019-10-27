@@ -47,9 +47,9 @@ public class PrepareScene extends Scene{
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if(state == MouseState.RELEASED || state == MouseState.CLICKED){
-                    if(backButton.isRange(e.getX(), e.getY())){
-                        backButton.click(e.getX(), e.getY());
-                    }
+//                    if(backButton.isRange(e.getX(), e.getY())){
+//                        backButton.click(e.getX(), e.getY());
+//                    }
                 }
             }
         
@@ -75,16 +75,16 @@ public class PrepareScene extends Scene{
     }
 
     
-    @Override
+    @Override                               
     public void sceneBegin() {
         popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 8f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f , 
                 Global.MIN_PICTURE_SIZE * 8f, Global.MIN_PICTURE_SIZE * 4f, charList);
-        genButton();
+//        genButton();
     }
 
     @Override
     public void sceneUpdate() {
-        backButton.update();
+//        backButton.update();
         if(popWindow != null){
             popWindow.update();
             if(popWindow.isEnd()){
@@ -99,14 +99,14 @@ public class PrepareScene extends Scene{
 
     @Override
     public void sceneEnd() {
-        backButton = null;
+//        backButton = null;
         imageController.clearImage();
     }
 
     @Override
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
-        backButton.paint(g);
+//        backButton.paint(g);
         if(popWindow != null){
             popWindow.paint(g);
         }
