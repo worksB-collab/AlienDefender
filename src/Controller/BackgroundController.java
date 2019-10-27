@@ -48,7 +48,6 @@ public class BackgroundController {
             meteorPointer = new int[2];
             meteorPointer[0] = (int)(Math.random() * (imageMeteor.length));
             meteorPointer[1] = (int)(Math.random() * (imageMeteor.length));
-//            image2 = imageController.tryGetImage("/Resources/Images/Background/Background_00-01.png");
             meteorPoint = new Point(0,0);
             points = new DrawStringPoint[2];
             delay = new DelayCounter(30);

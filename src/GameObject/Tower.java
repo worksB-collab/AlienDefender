@@ -5,11 +5,14 @@
  */
 package GameObject;
 
+import Controller.AudioController;
 import Controller.DelayCounter;
 import static Value.Global.*;
+import Value.Path;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
+import javax.sound.sampled.Clip;
 
 /**
  *

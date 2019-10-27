@@ -5,13 +5,11 @@
  */
 package Controller;
 
-import Value.Path;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import javax.sound.sampled.AudioInputStream;
@@ -25,33 +23,22 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author user
  */
 public class AudioController {
-    public static class SoundKeyPair{
-        private String path;
-        private AudioClip audio;
-        //constructor
-        public SoundKeyPair(String path, AudioClip audio){
-            this.path = path;
-            this.audio = audio;
-        }
-    }
-    public static class MusicKeyPair{
+    public static class AudioKeyPair{
         private String path;
         private Clip audio;
         //Constructor
-        public MusicKeyPair(String path, Clip audio){
+        public AudioKeyPair(String path, Clip audio){
             this.path = path;
             this.audio = audio;
         }
     }
     
     public static AudioController audioController;
-    private ArrayList<SoundKeyPair> soundList;
-    private ArrayList<MusicKeyPair> musicList;
+    private ArrayList<AudioKeyPair> audioList;
   
     //constructor
     private AudioController(){
-        soundList = new ArrayList<SoundKeyPair>();
-        musicList = new ArrayList<MusicKeyPair>();
+        audioList = new ArrayList<AudioKeyPair>();
     };
     
     //accessor
@@ -64,50 +51,18 @@ public class AudioController {
     
     
     public void clearAudio(){
-        soundList.clear();
-        musicList.clear();
-    }
-    //Sound
-    public AudioClip tryGetSound(String path){
-        AudioClip sound = searchSound(path);
-        if(sound == null){
-            sound = addSound(path);
-        }
-        return sound;
+        audioList.clear();
     }
     
-    private AudioClip addSound(String path){
-            URL url = getClass().getResource(path);
-            AudioClip audio =  Applet.newAudioClip(url);
-            if(audio == null){
-                return null;
-            }
-            soundList.add(new SoundKeyPair(path, audio));
-            return audio;    
-    }
-    private AudioClip searchSound(String path){
-        SoundKeyPair key = null;
-        for(int i = 0; i < soundList.size(); i++){
-            if(soundList.get(i).path.equals(path)){
-                key = soundList.get(i);
-                break;
-            }
+    public Clip tryGetAudio(String path){
+        Clip audio = searchAudio(path);
+        if(audio == null){
+            audio = addAudio(path);
         }
-        if(key == null){
-            return null;
-        }
-        return key.audio;
-    }
-    //Mousic
-    public Clip tryGetMusic(String path){
-        Clip music = searchMusic(path);
-        if(music == null){
-            music = addMusic(path);
-        }
-        return music;
+        return audio;
     }
     
-    private Clip addMusic(String path){
+    private Clip addAudio(String path){
         try{
             URL url;
             url = getClass().getResource(path);
@@ -127,11 +82,11 @@ public class AudioController {
         }
         
     }
-    private Clip searchMusic(String path){
-        MusicKeyPair key = null;
-        for(int i = 0; i < musicList.size(); i++){
-            if(musicList.get(i).path.equals(path)){
-                key = musicList.get(i);
+    private Clip searchAudio(String path){
+        AudioKeyPair key = null;
+        for(int i = 0; i < audioList.size(); i++){
+            if(audioList.get(i).path.equals(path)){
+                key = audioList.get(i);
                 break;
             }
         }

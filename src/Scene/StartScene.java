@@ -42,7 +42,7 @@ public class StartScene extends Scene{
         backgroundController = new BackgroundController(0);
         imageController = ImageController.genInstance();
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetMusic(Path.Audios.Musics.TEST);
+        audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
 
         
