@@ -29,9 +29,7 @@ public class Path {
         public class Button {
 
             public static final String BUTTON = IMAGES + "/Button";
-            public static final String BACK_BUTTON =  BUTTON + "/BackButton.png";
-
-            
+            public static final String BACK_BUTTON = BUTTON + "/BackButton.png";
 
         }
 
@@ -49,18 +47,34 @@ public class Path {
     public class Audios {
 
         public static final String AUDIOS = ROOT + "/Audios";
-        public class Musics{
+
+        public class Musics {
+
             public static final String MUSICS = AUDIOS + "/Musics";
             public static final String TEST = MUSICS + "/test.wav";
+            public static final String TEST1 = MUSICS + "/Ed Sheeran - South of the Border (feat. Camila Cabello & Cardi B) [Official].mp3";
+            public static final String MENU = MUSICS + "/Menu/this.LOOP5_140BPM.wav";
+            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/this.Generdyn - INSTLoops - 05.wav";
+            public static final String INTHEGAME = MUSICS + "/In The Game/in the game.wav";
+            public static final String ENDING = MUSICS + "/Ending/this.LOOP35_100BPM.wav";
+            public static final String WIN = MUSICS + "/Win";
+            public static final String WIN1 = WIN + "/this.Generdyn - HITS - 01.wav";
+            public static final String WIN2 = WIN + "/this2.99sounds loop_026.wav";
+            public static final String LOSE = MUSICS + "/Lose";
+            public static final String LOSE1 = LOSE + "/this1.Generdyn - ATMOS - 11.wav";
+            public static final String LOSE2 = LOSE + "/this2.Generdyn - ATMOS - 10.wav";
+
         }
- 
-        public class Sounds{
+
+        public class Sounds {
+
             public static final String SOUNDS = AUDIOS + "/Sounds";
-            
-            public class Attack{
+
+            public class Attack {
+
                 public static final String ATTACK = SOUNDS + "/Attack";
                 public static final String TOWER_ATTCK_SOUND = ATTACK + "/laser5.wav";
-                
+
             }
         }
     }

@@ -18,7 +18,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import values.Path;
 
 /**
  *
