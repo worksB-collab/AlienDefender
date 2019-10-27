@@ -78,7 +78,7 @@ public class PrepareScene extends Scene{
     @Override                               
     public void sceneBegin() {
         popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 8f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f , 
-                Global.MIN_PICTURE_SIZE * 8f, Global.MIN_PICTURE_SIZE * 4f, charList);
+                Global.MIN_PICTURE_SIZE * 8f, Global.MIN_PICTURE_SIZE * 4f, charList, 15);
 //        genButton();
     }
 

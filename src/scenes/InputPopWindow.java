@@ -29,14 +29,16 @@ public class InputPopWindow extends PopUpWindow{
     private DrawStringPoint point;
     private Font font;
     private String text;
+    private int limitChar;
     private boolean isEnd;
    
-    public InputPopWindow(float x, float y, float width, float height, LinkedList<Character> charList) {
+    public InputPopWindow(float x, float y, float width, float height, LinkedList<Character> charList, int limitChar) {
         super(x, y, width, height);
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage("/resources/Images/Label/Tower_generate_Label5.png");
         font = Global.FONT_INPUT;
         text = "";
+        this.limitChar = limitChar;
         isEnd = false;
         super.setKeyCommandListener( new KeyCommandListener(){
 
@@ -65,7 +67,9 @@ public class InputPopWindow extends PopUpWindow{
                        charList.removeLast(); 
                 }
                 }else{
-                    charList.add(c);
+                    if(charList.size() < limitChar){
+                        charList.add(c);
+                    }
                 }
                 text  = "";
                 for(Character character : charList){
