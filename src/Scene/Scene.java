@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
 
-import Controller.CommandSolver;
-import Controller.SceneController;
-import Controller.CommandSolver.KeyCommandListener;
-import Controller.CommandSolver.MouseCommandListener;
-import Controller.CommandSolver.TypedListener;
+import controller.SceneController;
+import controller.CommandSolver.KeyCommandListener;
+import controller.CommandSolver.MouseCommandListener;
+import controller.CommandSolver.TypedListener;
 import java.awt.Graphics;
 
 /**

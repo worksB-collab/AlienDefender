@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.CommandSolver;
-import Controller.ImageController;
-import Controller.SceneController;
-import GameObject.Button;
-import Value.Path;
-import Controller.CommandSolver.MouseState;
+import controller.CommandSolver;
+import controller.ImageController;
+import controller.SceneController;
+import gameobject.Button;
+import value.Path;
+import controller.CommandSolver.MouseState;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;

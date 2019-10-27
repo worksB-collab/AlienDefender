@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import Controller.RouteController.RoutePoint;
-import GameObject.Alien;
-import GameObject.Alien1;
-import GameObject.Alien2;
-import Value.Global;
+import controller.RouteController.RoutePoint;
+import gameobject.Alien;
+import gameobject.Alien1;
+import gameobject.Alien2;
+import value.Global;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.Iterator;

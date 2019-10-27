@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GameObject;
+package gameobject;
 
-import Controller.ImageController;
-import static Value.Global.SIZE_OBJECT;
-import Value.Path;
+import controller.ImageController;
+import static value.Global.SIZE_OBJECT;
+import value.Path;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;

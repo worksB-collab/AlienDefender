@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GameObject;
+package gameobject;
 
-import Controller.AudioController;
-import Controller.DelayCounter;
-import static Value.Global.*;
-import Value.Path;
+import controller.DelayCounter;
+import static value.Global.*;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
-import javax.sound.sampled.Clip;
 
 /**
  *

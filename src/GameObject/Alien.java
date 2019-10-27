@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GameObject;
+package gameobject;
 
-import Controller.RouteController.RoutePoint;
-import Value.Global;
+import controller.RouteController.RoutePoint;
+import value.Global;
 import java.awt.Graphics;
-import static Value.Global.*;
+import static value.Global.*;
 import java.util.LinkedList;
 
 /**

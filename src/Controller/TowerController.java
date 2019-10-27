@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import GameObject.Alien;
-import GameObject.Tower;
-import static Value.Global.*;
+import gameobject.Alien;
+import gameobject.Tower;
+import static value.Global.*;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;

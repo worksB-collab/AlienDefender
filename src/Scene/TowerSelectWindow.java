@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.CommandSolver;
-import Controller.CommandSolver.MouseCommandListener;
-import Controller.CommandSolver.MouseState;
-import Controller.ImageController;
-import Controller.PlayerController;
-import Controller.TowerController;
-import GameObject.Button;
-import GameObject.Button.ButtonListener;
-import GameObject.Tower;
-import GameObject.Tower1;
-import Value.Global;
+import controller.CommandSolver;
+import controller.CommandSolver.MouseCommandListener;
+import controller.CommandSolver.MouseState;
+import controller.ImageController;
+import controller.PlayerController;
+import controller.TowerController;
+import gameobject.Button;
+import gameobject.Button.ButtonListener;
+import gameobject.Tower;
+import gameobject.Tower1;
+import value.Global;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;

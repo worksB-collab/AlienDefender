@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.CommandSolver;
-import Controller.ImageController;import Controller.PlayerController;
-import Controller.TowerController;
-;
-import GameObject.Button;
-import GameObject.Button.ButtonListener;
-import GameObject.Tower;
-import Value.Global;
+import controller.CommandSolver;
+import controller.ImageController;
+import controller.PlayerController;
+import controller.TowerController;
+import gameobject.Button;
+import gameobject.Button.ButtonListener;
+import gameobject.Tower;
+import value.Global;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;

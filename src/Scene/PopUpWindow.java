@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.CommandSolver;
-import Controller.SceneController;
-import GameObject.GameObject;
+import controller.CommandSolver;
+import controller.SceneController;
+import gameobject.GameObject;
 import java.awt.Graphics;
 
 /**

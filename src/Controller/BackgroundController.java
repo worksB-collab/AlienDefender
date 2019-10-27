@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import Value.DrawStringPoint;
-import Value.Global;
+import value.DrawStringPoint;
+import value.Global;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;

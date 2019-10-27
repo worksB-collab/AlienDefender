@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.CommandSolver;
-import Controller.CommandSolver.KeyCommandListener;
-import Controller.CommandSolver.MouseCommandListener;
-import Controller.CommandSolver.TypedListener;
-import Value.DrawStringPoint;
-import Value.Global;
+import controller.CommandSolver;
+import controller.CommandSolver.KeyCommandListener;
+import controller.CommandSolver.MouseCommandListener;
+import controller.CommandSolver.TypedListener;
+import value.DrawStringPoint;
+import value.Global;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Font;
 import java.awt.Graphics;

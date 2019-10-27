@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GameObject;
+package gameobject;
 
-import Controller.DelayCounter;
+import controller.DelayCounter;
 import java.awt.Graphics;
-import Value.Global;
-import static Value.Global.*;
+import value.Global;
+import static value.Global.*;
 
 /**
  *

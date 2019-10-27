@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GameObject;
+package gameobject;
 
-import Controller.DelayCounter;
-import Controller.ImageController;
-import Value.Global.*;
-import static Value.Global.*;
-import Value.Path;
+import controller.DelayCounter;
+import controller.ImageController;
+import value.Global.*;
+import static value.Global.*;
+import value.Path;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 

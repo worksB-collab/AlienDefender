@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package gameproject;
-import Controller.SceneController;
-import Scene.StartScene;
-import Controller.CommandSolver.CommandWrapper;
+
+import controller.SceneController;
+import scene.StartScene;
+import controller.CommandSolver.CommandWrapper;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 

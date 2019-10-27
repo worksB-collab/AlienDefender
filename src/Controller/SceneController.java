@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
 
-import Scene.Scene;
-import Controller.CommandSolver.CommandWrapper;
+import scene.Scene;
+import controller.CommandSolver.CommandWrapper;
 import java.awt.Graphics;
 
 /**

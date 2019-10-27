@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import Value.DrawStringPoint;
-import Value.Global;
-import static Value.Global.FONT_HP;
+import value.DrawStringPoint;
+import value.Global;
+import static value.Global.FONT_HP;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;

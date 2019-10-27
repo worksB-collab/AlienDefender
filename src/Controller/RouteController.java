@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package controller;
 
-import Value.Global;
+import value.Global;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;

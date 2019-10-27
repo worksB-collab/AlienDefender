@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scene;
+package scene;
 
-import Controller.AlienController;
-import Controller.BackgroundController;
-import Controller.CommandSolver;
-import Controller.CommandSolver.MouseCommandListener;
-import Controller.CommandSolver.MouseState;
-import Controller.ImageController;
-import Controller.PlayerController;
-import Controller.RouteController;
-import Controller.RouteController.RoutePoint;
-import Controller.SceneController;
-import Controller.ScoreController;
-import Controller.TowerController;
-import GameObject.*;
-import GameObject.Button;
-import GameObject.Button.ButtonListener;
-import Value.Global;
+import controller.AlienController;
+import controller.BackgroundController;
+import controller.CommandSolver;
+import controller.CommandSolver.MouseCommandListener;
+import controller.CommandSolver.MouseState;
+import controller.ImageController;
+import controller.PlayerController;
+import controller.RouteController;
+import controller.RouteController.RoutePoint;
+import controller.SceneController;
+import controller.TowerController;
+import gameobject.*;
+import gameobject.Button;
+import gameobject.Button.ButtonListener;
+import value.Global;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;

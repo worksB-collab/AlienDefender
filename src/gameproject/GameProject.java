@@ -6,8 +6,8 @@
 package gameproject;
 
 
-import Value.Global;
-import Controller.CommandSolver;
+import value.Global;
+import controller.CommandSolver;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
