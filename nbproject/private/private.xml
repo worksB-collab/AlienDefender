@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scene/TowerInformationWindow.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobject/Button.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controller/SceneController.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controller/CommandSolver.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobject/Tower1.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameproject/GameJPanel.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controller/PlayerController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scene/PrepareScene.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controller/AlienController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scene/MenuScene.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/value/Path.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scene/GameScene1.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controller/RouteController.java</file>
         </group>
     </open-files>
 </project-private>

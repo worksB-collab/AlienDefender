@@ -5,9 +5,9 @@
  */
 package gameproject;
 
-import controller.SceneController;
-import scene.StartScene;
-import controller.CommandSolver.CommandWrapper;
+import controllers.SceneController;
+import scenes.StartScene;
+import controllers.CommandSolver.CommandWrapper;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
