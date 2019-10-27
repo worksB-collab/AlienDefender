@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package parameter;
+package values;
 
 /**
  *
- * @author billy
+ * @author user
  */
-public class AlienParameter {
+public class PathBuilder {
     
 }
