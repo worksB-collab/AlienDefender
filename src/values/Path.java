@@ -52,8 +52,9 @@ public class Path {
 
             public static final String MUSICS = AUDIOS + "/Musics";
             public static final String TEST = MUSICS + "/test.wav";
+            public static final String TEST1 = MUSICS + "/Ed Sheeran - South of the Border (feat. Camila Cabello & Cardi B) [Official].mp3";
             public static final String MENU = MUSICS + "/Menu/this.LOOP5_140BPM.wav";
-            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/ this.Generdyn - INSTLoops - 05.wav";
+            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/this.Generdyn - INSTLoops - 05.wav";
             public static final String INTHEGAME = MUSICS + "/In The Game/in the game.wav";
             public static final String ENDING = MUSICS + "/Ending/this.LOOP35_100BPM.wav";
             public static final String WIN = MUSICS + "/Win";

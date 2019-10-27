@@ -7,6 +7,7 @@ package scenes;
 
 import gameobjects.Tower;
 import controllers.AlienController;
+import static controllers.AudioController.audioController;
 import controllers.BackgroundController;
 import controllers.CommandSolver;
 import controllers.CommandSolver.MouseCommandListener;
@@ -25,6 +26,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
+import javax.sound.sampled.Clip;
+import values.Path;
 
 /**
  *
@@ -42,6 +45,7 @@ public class GameScene1 extends Scene {
     private Point spot;
     private AlienController alienController;
     private TowerController towerController;
+    private Clip audio;
 
     public GameScene1(SceneController sceneController) {
         super(sceneController);
@@ -50,7 +54,8 @@ public class GameScene1 extends Scene {
         backgroundController = new BackgroundController(2);
         routeController = new RouteController();
         buttonList = new LinkedList();
-
+        audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME);
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -141,7 +146,8 @@ public class GameScene1 extends Scene {
 
     @Override
     public void sceneEnd() {
-
+        audio.close();
+        audioController.clearAudio();
     }
 
     @Override
