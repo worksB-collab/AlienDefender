@@ -48,7 +48,7 @@ public class GameScene1 extends Scene {
     private Clip audio;
 
     public GameScene1(SceneController sceneController) {
-        super(sceneController);
+        super(sceneController );
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(2);

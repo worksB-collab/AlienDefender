@@ -44,7 +44,6 @@ public class StartScene extends Scene{
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
-
         
         mouseCommandListener = new MouseCommandListener(){
             @Override
@@ -81,7 +80,7 @@ public class StartScene extends Scene{
     public void sceneEnd() {
         buttonStart = null;
         imageController.clearImage();
-        audio.close();
+//        audio.close();
         audioController.clearAudio();
 
     }
@@ -105,7 +104,7 @@ public class StartScene extends Scene{
         buttonStart.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
-                 sceneController.changeScene(new MenuScene(sceneController));
+                 sceneController.changeScene(new MenuScene(sceneController, audio));
             }
 
             @Override

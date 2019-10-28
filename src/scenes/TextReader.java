@@ -43,7 +43,7 @@ public class TextReader extends Scene{
 
     @Override
     public void sceneUpdate() {
-        if(
+        
     }
 
     @Override
@@ -64,7 +64,7 @@ public class TextReader extends Scene{
                 x += Global.MIN_PICTURE_SIZE * 2f;
             }
         }
-        g.drawString(text, pointer, pointer);
+//        g.drawString(text, pointer, pointer);
         
    
     }
