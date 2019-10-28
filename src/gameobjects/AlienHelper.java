@@ -67,6 +67,7 @@ public class AlienHelper {
         
         double percentage = bloodPercentage(hp);
         g.setColor(Color.red);
+        
         g.fillRect((int)(x + 1), (int)(y + 1), (int)(percentage*width)-2, (int)SIZE_BLOODLINE - 2);
         g.setColor(Color.black);
     }

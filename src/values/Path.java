@@ -53,16 +53,16 @@ public class Path {
             public static final String MUSICS = AUDIOS + "/Musics";
             public static final String TEST = MUSICS + "/test.wav";
             public static final String TEST1 = MUSICS + "/Ed Sheeran - South of the Border (feat. Camila Cabello & Cardi B) [Official].mp3";
-            public static final String MENU = MUSICS + "/Menu/this.LOOP5_140BPM.wav";
-            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/this.Generdyn - INSTLoops - 05.wav";
+            public static final String MENU = MUSICS + "/Menu/this.wav";
+            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/this.wav";
             public static final String INTHEGAME = MUSICS + "/In_The_Game/in_the_game.wav";
-            public static final String ENDING = MUSICS + "/Ending/this.LOOP35_100BPM.wav";
+            public static final String ENDING = MUSICS + "/Ending/this.wav";
             public static final String WIN = MUSICS + "/Win";
-            public static final String WIN1 = WIN + "/this.Generdyn - HITS - 01.wav";
-            public static final String WIN2 = WIN + "/this2.99sounds loop_026.wav";
+            public static final String WIN1 = WIN + "/this1.wav";
+            public static final String WIN2 = WIN + "/this2.wav";
             public static final String LOSE = MUSICS + "/Lose";
-            public static final String LOSE1 = LOSE + "/this1.Generdyn - ATMOS - 11.wav";
-            public static final String LOSE2 = LOSE + "/this2.Generdyn - ATMOS - 10.wav";
+            public static final String LOSE1 = LOSE + "/this1.wav";
+            public static final String LOSE2 = LOSE + "/this2.wav";
 
         }
 
