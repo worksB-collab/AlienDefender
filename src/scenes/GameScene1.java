@@ -124,24 +124,6 @@ public class GameScene1 extends Scene {
                popUpWindow = null;
            }
         }
-//        //TowerSelectWindow
-//        if (towerSelectWindow != null) {
-//            towerSelectWindow.update();
-//            if (towerSelectWindow.isEnd()) {
-//                Tower tower = towerSelectWindow.getResult();
-//                if (tower != null) {
-//                    towerController.getTowers().add(towerSelectWindow.getResult());
-//                }
-//                towerSelectWindow = null;
-//            }
-//        }
-//        //TowerInformationWindow
-//        if (towerInformationWindow != null) {
-//            towerInformationWindow.update();
-//            if (towerInformationWindow.isEnd()) {
-//                towerInformationWindow = null;
-//            }
-//        }
     }
 
     @Override
@@ -175,11 +157,7 @@ public class GameScene1 extends Scene {
         if(popUpWindow != null){
             popUpWindow.paint(g);
         }
-//        if (towerSelectWindow != null) {
-//            towerSelectWindow.paint(g);
-//        } else if (towerInformationWindow != null) {
-//            towerInformationWindow.paint(g);
-//        }
+
     }
 
     @Override
@@ -187,11 +165,6 @@ public class GameScene1 extends Scene {
         if(popUpWindow != null){
             return popUpWindow.getMouseCommandListener();
         }
-//        if (towerSelectWindow != null) {
-//            return towerSelectWindow.getMouseCommandListener();
-//        } else if (towerInformationWindow != null) {
-//            return towerInformationWindow.getMouseCommandListener();
-//        }
         return mouseCommandListener;
     }
     //generate

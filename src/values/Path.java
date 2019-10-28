@@ -78,5 +78,9 @@ public class Path {
             }
         }
     }
+    public class Texts{
+        public static final String TEXTS = ROOT + "/Text";
+        public static final String TEXT =  "C:\\Users\\user\\Documents\\NetBeansProjects\\GameProject\\src\\resources\\Texts\\text.txt";
+    }
 
 }

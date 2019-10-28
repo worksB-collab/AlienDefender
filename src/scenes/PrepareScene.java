@@ -77,8 +77,8 @@ public class PrepareScene extends Scene{
     
     @Override                               
     public void sceneBegin() {
-        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 8f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f , 
-                Global.MIN_PICTURE_SIZE * 8f, Global.MIN_PICTURE_SIZE * 4f, charList, 15);
+        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 12f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f , 
+                Global.MIN_PICTURE_SIZE * 12f, Global.MIN_PICTURE_SIZE * 4f, charList, 15);
 //        genButton();
     }
 
@@ -91,6 +91,7 @@ public class PrepareScene extends Scene{
                 //store information
                 playerController.setName(popWindow.getResult());
                 popWindow = null;
+//                sceneController.changeScene(new TextReader(sceneController, 0));
                 sceneController.changeScene(new GameScene1(sceneController));
                 
             }
@@ -101,6 +102,8 @@ public class PrepareScene extends Scene{
     public void sceneEnd() {
 //        backButton = null;
         imageController.clearImage();
+        //preLoading
+        TextContent text = TextContent.genInstance();
     }
 
     @Override

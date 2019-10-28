@@ -55,7 +55,7 @@ public class RouteController {
     public void genRoad(int stage){
         switch(stage){
             case 1:
-                genFixedRoad();
+                genFixedRoad1();
                 break;
             case 2:
                 break;
@@ -80,6 +80,11 @@ public class RouteController {
 //        for (RoutePoint p : route) {
 //            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
 //        }
+          for(RoutePoint p : setPoint){
+              g.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE );
+          }
+              
+         
     }
 
     private void paintSetPoint(Graphics g) {
@@ -114,7 +119,7 @@ public class RouteController {
 //        genSetPoint();
 //    }
 
-    private void genFixedRoad() {
+    private void genFixedRoad1() {
         route = new LinkedList();
         setPoint = new LinkedList();
 
@@ -171,7 +176,7 @@ public class RouteController {
             }
         }
         //delete repeat point
-        for (int i = 0; i < setPoint.size() - 1; i++) {
+        for (int i = 0; i < setPoint.size(); i++) {
             RoutePoint p1 = setPoint.get(i);
             for (int j = i + 1; j < setPoint.size(); j++) {
                 RoutePoint p2 = setPoint.get(j);
@@ -180,6 +185,8 @@ public class RouteController {
                 }
             }
         }
+        RoutePoint p = setPoint.getLast();
+        setPoint.add(new RoutePoint(p.getX() + Global.MIN_PICTURE_SIZE, p.getY() + Global.MIN_PICTURE_SIZE));
     }
 
 //    private void reCheckSetPoint() {
@@ -204,5 +211,7 @@ public class RouteController {
         setPoint.add(new RoutePoint(x + Global.MIN_PICTURE_SIZE, y));
         setPoint.add(new RoutePoint(x + Global.MIN_PICTURE_SIZE, y - Global.MIN_PICTURE_SIZE));
         setPoint.add(new RoutePoint(x - Global.MIN_PICTURE_SIZE, y + Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x - Global.MIN_PICTURE_SIZE, y - Global.MIN_PICTURE_SIZE));
+        setPoint.add(new RoutePoint(x + Global.MIN_PICTURE_SIZE, y + Global.MIN_PICTURE_SIZE));
     }
 }

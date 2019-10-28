@@ -3,26 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/Scene.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/GameScene1.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TextContent.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TextReader.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameproject/GameProject.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TowerInformationWindow.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/AudioController.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/PrepareScene.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/InputPopWindow.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/ImageController.java</file>
-=======
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/BackgroundController.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/AudioController.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/scenes/StartScene.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/values/PathBuilder.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/gameobjects/Tower.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/scenes/LoadDataScene.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/values/Path.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/values/DrawStringPoint.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/scenes/RankScene.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/scenes/GameScene1.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/Parameter/AlienParameter.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/Parameter/TowerParameter.java</file>
->>>>>>> 6fa27fcfce856c0ae94a37ab4fe9128705e999da
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/PrepareScene.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/values/Path.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TowerSelectWindow.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/TowerController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobjects/Tower.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/values/Global.java</file>
         </group>
     </open-files>
 </project-private>

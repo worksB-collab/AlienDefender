@@ -72,6 +72,7 @@ public class Global {
     public static final Font FONT_HP = new Font(Font.DIALOG, Font.PLAIN, 30);
     public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 30);
     public static final Font FONT_MONEY = new Font(Font.DIALOG, Font.PLAIN, 30);
+    public static final Font FONT_TEXT = new Font(Font.DIALOG, Font.PLAIN, 30);
    
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
     
