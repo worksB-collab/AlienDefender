@@ -93,8 +93,10 @@ public class PrepareScene extends Scene{
                 //store information
                 playerController.setName(popWindow.getResult());
                 popWindow = null;
-//                sceneController.changeScene(new TextReader(sceneController, 0));
-                sceneController.changeScene(new GameScene1(sceneController));
+                        //preLoading
+                TextContent text = TextContent.genInstance();
+                sceneController.changeScene(new TextReader(sceneController, 0));
+//                sceneController.changeScene(new GameScene1(sceneController));
                 
             }
         }
@@ -104,8 +106,6 @@ public class PrepareScene extends Scene{
     public void sceneEnd() {
 //        backButton = null;
         imageController.clearImage();
-        //preLoading
-        TextContent text = TextContent.genInstance();
     }
 
     @Override

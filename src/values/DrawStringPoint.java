@@ -37,7 +37,10 @@ public class DrawStringPoint {
         this.x = x0 + (width - metrics.stringWidth(text)) / 2;
         this.y = y0 + (height - metrics.getHeight()) / 2 + metrics.getAscent();
     }
-    
+    public void update(){
+        this.x = x0 + (width - metrics.stringWidth(text)) / 2;
+        this.y = y0 + (height - metrics.getHeight()) / 2 + metrics.getAscent();
+    }
     public void update(float width, float height){
         this.x = x0 + (width - metrics.stringWidth(text)) / 2;
         this.y = y0 + (height - metrics.getHeight()) / 2 + metrics.getAscent();
