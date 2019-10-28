@@ -13,6 +13,7 @@ import values.DrawStringPoint;
 import values.Global;
 import com.sun.glass.events.KeyEvent;
 import controllers.ImageController;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -113,6 +114,7 @@ public class InputPopWindow extends PopUpWindow{
             point = new DrawStringPoint(super.getX(), super.getY(), g, font, text, width, height);
         }
         g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)super.getWidth(), (int)point.getHeight(), null);
+        g.setColor(Color.orange);
         g.setFont(font);
         g.drawString(text, (int)point.getX(), (int)point.getY());
     }
