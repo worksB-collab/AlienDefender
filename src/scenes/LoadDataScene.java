@@ -16,6 +16,7 @@ import gameobjects.Button;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import javax.sound.sampled.Clip;
 import values.Global;
 import values.Path;
 
@@ -28,11 +29,12 @@ public class LoadDataScene extends Scene{
     private ImageController imageController;
     private BufferedImage image;
     private Button backButton;
-    
-    public LoadDataScene(SceneController sceneController) {
+    private Clip audio;
+    public LoadDataScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.LOAD_DATA_SCENE);
+        this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -81,7 +83,7 @@ public class LoadDataScene extends Scene{
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new MenuScene(sceneController));
+                sceneController.changeScene(new MenuScene(sceneController, audio));
             }
 
             @Override

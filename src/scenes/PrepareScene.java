@@ -20,6 +20,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -35,12 +36,13 @@ public class PrepareScene extends Scene{
     private PlayerController playerController;
     private BufferedImage image;
     private Button backButton;
-    
-    public PrepareScene(SceneController sceneController) {
+    private Clip audio;
+    public PrepareScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
         playerController = PlayerController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
+        this.audio = audio;
         charList = new LinkedList();
         
         mouseCommandListener = new MouseCommandListener(){
@@ -147,7 +149,7 @@ public class PrepareScene extends Scene{
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new MenuScene(sceneController));
+                sceneController.changeScene(new MenuScene(sceneController, audio));
             }
 
             @Override

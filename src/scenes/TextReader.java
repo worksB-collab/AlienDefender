@@ -64,6 +64,9 @@ public class TextReader extends Scene{
                 x += Global.MIN_PICTURE_SIZE * 2f;
             }
         }
+        for(int i = 0; i < nowtext.length; i++){
+            g.drawString(nowtext[i], (int)points[i].getX(), (int)points[i].getY());
+        }
 //        g.drawString(text, pointer, pointer);
         
    

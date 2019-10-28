@@ -20,7 +20,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import javax.sound.sampled.Clip;
-import values.Path;
 
 /**
  *
@@ -129,7 +128,7 @@ public class MenuScene extends Scene {
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new PrepareScene(sceneController));
+                sceneController.changeScene(new PrepareScene(sceneController, audio));
                 audio.close();
 //                audioController.clearAudio();
             }
@@ -147,7 +146,7 @@ public class MenuScene extends Scene {
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new LoadDataScene(sceneController));
+                sceneController.changeScene(new LoadDataScene(sceneController, audio));
             }
 
             @Override
@@ -166,7 +165,7 @@ public class MenuScene extends Scene {
 
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new RankScene(sceneController));
+                sceneController.changeScene(new RankScene(sceneController, audio));
             }
 
             @Override
