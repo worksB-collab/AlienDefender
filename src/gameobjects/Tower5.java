@@ -84,6 +84,7 @@ public class Tower5 extends Tower {
             }
             bullets.get(i).update();
         }
+        upgradeAnimation.update();
     }
 
     @Override

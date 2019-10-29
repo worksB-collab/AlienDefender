@@ -5,6 +5,7 @@
  */
 package scenes;
 
+import static controllers.AudioController.audioController;
 import controllers.DelayCounter;
 import controllers.ImageController;
 import controllers.SceneController;
@@ -21,34 +22,37 @@ import values.Path;
  *
  * @author user
  */
-public class TextReader extends Scene{
+public class TextReader extends Scene {
+
     private ImageController imageController;
     private BufferedImage image;
     private Clip audio;
-    private TextContent textContent;    
+    private TextContent textContent;
     private LinkedList<Character> textList[];
     private String nowtext[];
     private int pointer;
-    private DrawStringPoint  points[];
+    private DrawStringPoint points[];
     private DelayCounter delay;
+
     public TextReader(SceneController sceneController, int stage) {
         super(sceneController);
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
-        this.audio = audio;
+        audio = audioController.tryGetAudio(Path.Audios.Musics.BETWEENSCENES);
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
         textContent = TextContent.genInstance();
         String text[] = textContent.getText(stage).split("\n");
         textList = new LinkedList[text.length];
-        for(int i = 0; i < text.length; i++){
+        for (int i = 0; i < text.length; i++) {
             int count = 0;
             textList[i] = new LinkedList();
-            while(count != text[i].length()){
+            while (count != text[i].length()) {
                 textList[i].add(text[i].charAt(count++));
             }
         }
         points = new DrawStringPoint[text.length];
         nowtext = new String[points.length];
-        for(int i = 0; i < nowtext.length; i++){
+        for (int i = 0; i < nowtext.length; i++) {
             nowtext[i] = "";
         }
         pointer = 0;
@@ -57,23 +61,23 @@ public class TextReader extends Scene{
 
     @Override
     public void sceneBegin() {
-        
+
     }
 
     @Override
     public void sceneUpdate() {
-        if(points[0] != null){
+        if (points[0] != null) {
 
-            if(delay.update()){
+            if (delay.update()) {
                 nowtext[pointer] += textList[pointer].pop();
                 points[pointer].setText(nowtext[pointer]);
-                if(textList[pointer].isEmpty()){
+                if (textList[pointer].isEmpty()) {
                     pointer++;
                 }
-                if(pointer >= textList.length){
+                if (pointer >= textList.length) {
                     sceneController.changeScene(new GameScene1(sceneController));
                 }
-                for(int i = 0; i < points.length; i++){
+                for (int i = 0; i < points.length; i++) {
                     points[i].update();
                 }
             }
@@ -83,17 +87,19 @@ public class TextReader extends Scene{
     @Override
     public void sceneEnd() {
         imageController.clearImage();
+        audio.close();
+        audioController.clearAudio();
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)(32f * Global.MIN_PICTURE_SIZE), (int)(24f * Global.MIN_PICTURE_SIZE), null);
-        if(points[0] == null){
+        g.drawImage(image, 0, 0, (int) (32f * Global.MIN_PICTURE_SIZE), (int) (24f * Global.MIN_PICTURE_SIZE), null);
+        if (points[0] == null) {
             float x = 0;
             float y = 0;
-            int width = (int)((Global.FRAME_WIDTH - 2 * Global.MIN_PICTURE_SIZE)) ;
-            int height = (int)((Global.FRAME_HEIGHT - 2 * Global.MIN_PICTURE_SIZE) / points.length);
-            for(int i = 0; i < points.length; i++){
+            int width = (int) ((Global.FRAME_WIDTH - 2 * Global.MIN_PICTURE_SIZE));
+            int height = (int) ((Global.FRAME_HEIGHT - 2 * Global.MIN_PICTURE_SIZE) / points.length);
+            for (int i = 0; i < points.length; i++) {
                 points[i] = new DrawStringPoint(x, y, g, Global.FONT_TEXT, nowtext[i], width, height);
                 y += height;
             }
@@ -104,7 +110,7 @@ public class TextReader extends Scene{
             g.drawString(nowtext[i], (int)points[i].getX(), (int)points[i].getY());
         }
         g.setColor(Color.black);
-   
+
     }
-    
+
 }

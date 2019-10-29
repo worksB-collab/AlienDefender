@@ -33,7 +33,6 @@ public class MenuScene extends Scene {
     private BackgroundController backgroundController;
     private BufferedImage image;
     private Clip audio;
-    private AudioController audioController;
 
     public MenuScene(SceneController sceneController, Clip audio) {
         super(sceneController);
@@ -98,8 +97,7 @@ public class MenuScene extends Scene {
     public void sceneEnd() {
         buttonList = null;
         imageController.clearImage();
-
-    }
+            }
 
     @Override
     public void paint(Graphics g) {
@@ -129,8 +127,7 @@ public class MenuScene extends Scene {
             @Override
             public void onClick(int x, int y) {
                 sceneController.changeScene(new PrepareScene(sceneController, audio));
-                audio.close();
-//                audioController.clearAudio();
+
             }
 
             @Override

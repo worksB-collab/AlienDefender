@@ -5,6 +5,7 @@
  */
 package scenes;
 
+import static controllers.AudioController.audioController;
 import controllers.ImageController;
 import controllers.SceneController;
 import gameobjects.Button;
@@ -26,7 +27,8 @@ import javax.sound.sampled.Clip;
  *
  * @author user
  */
-public class PrepareScene extends Scene{
+public class PrepareScene extends Scene {
+
     private MouseCommandListener mouseCommandListener;
     private TypedListener typedListener;
     private KeyCommandListener keyCommandListener;
@@ -37,6 +39,7 @@ public class PrepareScene extends Scene{
     private BufferedImage image;
     private Button backButton;
     private Clip audio;
+
     public PrepareScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
@@ -44,24 +47,24 @@ public class PrepareScene extends Scene{
         image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
         this.audio = audio;
         charList = new LinkedList();
-        
-        mouseCommandListener = new MouseCommandListener(){
+
+        mouseCommandListener = new MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
+                if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
 //                    if(backButton.isRange(e.getX(), e.getY())){
 //                        backButton.click(e.getX(), e.getY());
 //                    }
                 }
             }
-        
+
         };
-        typedListener = new TypedListener(){
+        typedListener = new TypedListener() {
             @Override
             public void keyTyped(char c, long trigTime) {
             }
         };
-        keyCommandListener = new KeyCommandListener(){
+        keyCommandListener = new KeyCommandListener() {
 
             @Override
             public void keyPressed(int commandCode, long trigTime) {
@@ -72,14 +75,13 @@ public class PrepareScene extends Scene{
             public void keyReleased(int commandCode, long trigTime) {
 
             }
-            
+
         };
     }
 
-    
-    @Override                               
+    @Override
     public void sceneBegin() {
-        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 12f) / 2f , (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f , 
+        popWindow = new InputPopWindow((Global.FRAME_WIDTH - Global.MIN_PICTURE_SIZE * 12f) / 2f, (Global.FRAME_HEIGHT - Global.MIN_PICTURE_SIZE * 4f) / 2f,
                 Global.MIN_PICTURE_SIZE * 12f, Global.MIN_PICTURE_SIZE * 4f, charList, 15);
 //        genButton();
     }
@@ -87,17 +89,17 @@ public class PrepareScene extends Scene{
     @Override
     public void sceneUpdate() {
 //        backButton.update();
-        if(popWindow != null){
+        if (popWindow != null) {
             popWindow.update();
-            if(popWindow.isEnd()){
+            if (popWindow.isEnd()) {
                 //store information
                 playerController.setName(popWindow.getResult());
                 popWindow = null;
-                        //preLoading
+                //preLoading
                 TextContent text = TextContent.genInstance();
                 sceneController.changeScene(new TextReader(sceneController, 0));
 //                sceneController.changeScene(new GameScene1(sceneController));
-                
+
             }
         }
     }
@@ -106,46 +108,49 @@ public class PrepareScene extends Scene{
     public void sceneEnd() {
 //        backButton = null;
         imageController.clearImage();
+        audio.close();
+        audioController.clearAudio();
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image, 0, 0, (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
 //        backButton.paint(g);
-        if(popWindow != null){
+        if (popWindow != null) {
             popWindow.paint(g);
         }
     }
-    
+
     @Override
-    public CommandSolver.MouseCommandListener getMouseCommandListener(){
-        if(popWindow != null){
+    public CommandSolver.MouseCommandListener getMouseCommandListener() {
+        if (popWindow != null) {
             return popWindow.getMouseCommandListener();
         }
         return mouseCommandListener;
     }
-    
+
     @Override
-    public CommandSolver.TypedListener getTypedListener(){
-        if(popWindow != null){
+    public CommandSolver.TypedListener getTypedListener() {
+        if (popWindow != null) {
 
             return popWindow.getTypedListener();
         }
         return typedListener;
     }
-    
+
     @Override
-    public CommandSolver.KeyCommandListener getKeyCommandListener(){
-        if(popWindow != null){
+    public CommandSolver.KeyCommandListener getKeyCommandListener() {
+        if (popWindow != null) {
             return popWindow.getKeyCommandListener();
         }
         return keyCommandListener;
     }
-    private void genButton(){
-        backButton = new Button(2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE,  8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE,
+
+    private void genButton() {
+        backButton = new Button(2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, 8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE,
                 imageController.tryGetImage(Path.Image.Button.BACK_BUTTON));
-        
-        backButton.setButtonListener(new Button.ButtonListener(){
+
+        backButton.setButtonListener(new Button.ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
@@ -155,7 +160,7 @@ public class PrepareScene extends Scene{
             @Override
             public void hover(int x, int y) {
             }
-        
+
         });
     }
 }
