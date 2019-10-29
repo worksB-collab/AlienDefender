@@ -5,6 +5,8 @@
  */
 package gameobjects;
 
+import controllers.AudioController;
+import static controllers.AudioController.audioController;
 import controllers.DelayCounter;
 import controllers.ImageController;
 import values.Global.*;
@@ -12,6 +14,7 @@ import static values.Global.*;
 import values.Path;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -21,11 +24,15 @@ public class UpgradeAnimation extends EffectObject {
 
     private BufferedImage img;
     private DelayCounter delay;
+    private Clip audio;
+    private AudioController audioController;
 
     public UpgradeAnimation(float x, float y) {
         super(x, y, SIZE_GRID, SIZE_GRID);
         img = getImage();
-        delay = new DelayCounter(2);
+        delay = new DelayCounter(5);
+        audioController = AudioController.genInstance();
+        audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.UPGRADE);
     }
 
     private BufferedImage getImage() {
@@ -35,6 +42,10 @@ public class UpgradeAnimation extends EffectObject {
 
     @Override
     public void update() {
+        if (audio.getMicrosecondLength()== audio.getMicrosecondPosition()) {
+            audio.close();
+            audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.UPGRADE);
+        }
     }
 
     @Override
@@ -42,6 +53,7 @@ public class UpgradeAnimation extends EffectObject {
         if (img == null) {
             return;
         }
+        audio.start();
         int dy = 0;
         for (int act = 0; act < 5; act++) {
             if (delay.update()) {

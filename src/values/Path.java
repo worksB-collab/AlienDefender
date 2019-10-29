@@ -54,7 +54,7 @@ public class Path {
             public static final String TEST = MUSICS + "/test.wav";
             public static final String TEST1 = MUSICS + "/Ed Sheeran - South of the Border (feat. Camila Cabello & Cardi B) [Official].mp3";
             public static final String MENU = MUSICS + "/Menu/this.wav";
-            public static final String BETWEENSCENES = MUSICS + "/Between Scenes/this.wav";
+            public static final String BETWEENSCENES = MUSICS + "/Between_Scenes/this.wav";
             public static final String INTHEGAME = MUSICS + "/In_The_Game/in_the_game.wav";
             public static final String ENDING = MUSICS + "/Ending/this.wav";
             public static final String WIN = MUSICS + "/Win";
@@ -74,13 +74,27 @@ public class Path {
 
                 public static final String ATTACK = SOUNDS + "/Attack";
                 public static final String TOWER_ATTCK_SOUND = ATTACK + "/laser5.wav";
+                public static final String SHOT1 = ATTACK + "/shot1.wav";
+                public static final String SHOT2 = ATTACK + "/shot2.wav";
+                public static final String SHOT3 = ATTACK + "/shot3.wav";
+                public static final String SHOT4 = ATTACK + "/shot4.wav";
+                public static final String SHOT5 = ATTACK + "/shot5_lazer.wav";
+                public static final String SHOT6 = ATTACK + "/kick.wav";
 
+            }
+
+            public class Effect {
+
+                public static final String EFFECT = SOUNDS + "/Effect";
+                public static final String UPGRADE = EFFECT + "/upgrade.wav";
             }
         }
     }
-    public class Texts{
+
+    public class Texts {
+
         public static final String TEXTS = ROOT + "/Text";
-        public static final String TEXT =  "C:\\Users\\user\\Documents\\NetBeansProjects\\GameProject\\src\\resources\\Texts\\text.txt";
+        public static final String TEXT = "C:\\Users\\user\\Documents\\NetBeansProjects\\GameProject\\src\\resources\\Texts\\text.txt";
     }
 
 }

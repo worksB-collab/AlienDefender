@@ -20,7 +20,7 @@ public class TextContent {
     private String text[];
     private TextContent(){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\user\\Documents\\NetBeansProjects\\GameProject\\src\\resources\\Texts\\text.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("D:\\Sourcetree\\mid-term-project-1016\\src\\resources\\Texts\\text.txt"));
             char charArr[] = new char[500];
             br.read(charArr);
             String str = String.valueOf(charArr);
