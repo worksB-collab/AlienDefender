@@ -87,9 +87,7 @@ public class AlienController {
     private PlayerController playerController;
     private int stop; // stop generating aliens
     private float x, y, frequency;
-//    private int alienNum, alienQuantity;
     private int a = -1;
-    // NOT YET connecting to sceneController to the next scene to zerolize stop;
 
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
@@ -111,21 +109,9 @@ public class AlienController {
     }
 
     public void gameLevelSetting(float x, float y, float frequency, int alienNum, int alienQuantity) {
-        this.x = x; //
-        this.y = y;//
+        this.x = x; 
+        this.y = y;
         alienPairs.add(new AlienSet(x, y, alienNum, alienQuantity, frequency));
-//        this.frequency = frequency;
-//        this.alienNum = alienNum;
-//        this.alienQuantity += alienQuantity; //
-//        if (moveDelay.update()) {
-//            if (count < alienQuantity) {
-//                    if (genDelay.update()) {
-//                        genAlien(x, y, frequency, alienNum);
-//                        Alien.setRoute(route);
-//                        count++;
-//                    }
-//                }
-//        }
     }
 
     public void update() {

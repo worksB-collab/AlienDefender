@@ -27,6 +27,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.LinkedList;
 import javax.sound.sampled.Clip;
+import parameter.AlienParameter;
 import values.Path;
 
 /**
@@ -46,9 +47,11 @@ public class GameScene1 extends Scene {
     private AlienController alienController;
     private TowerController towerController;
     private Clip audio;
+    private int stage;
+    private AlienParameter alienParameter;
 
     public GameScene1(SceneController sceneController) {
-        super(sceneController );
+        super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(2);
@@ -91,7 +94,10 @@ public class GameScene1 extends Scene {
         routeController.genRoad(1);
         genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
-        alienController.gameLevelSetting(-25, 50, 80, 1, 50);
+        alienParameter = new AlienParameter(stage);
+        for (int i = 0; i < stage; i++) {
+            alienController.gameLevelSetting(-25, 50, 80, 1, 10);
+        }
     }
 
     @Override
@@ -107,9 +113,9 @@ public class GameScene1 extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
-        
+
         alienController.update();
-        
+
         if (towerController == null) {
             towerController = new TowerController(alienController);
         }
@@ -117,12 +123,12 @@ public class GameScene1 extends Scene {
         playerController.update();
         alienController.update();
         towerController.update();
-        
-        if(popUpWindow != null){
-           popUpWindow.update();
-           if (popUpWindow.isEnd()){
-               popUpWindow = null;
-           }
+
+        if (popUpWindow != null) {
+            popUpWindow.update();
+            if (popUpWindow.isEnd()) {
+                popUpWindow = null;
+            }
         }
     }
 
@@ -148,13 +154,13 @@ public class GameScene1 extends Scene {
 
         if (spot != null) {
             g.setColor(Color.red);
-            g.drawRect((int)spot.getX() / (int)Global.MIN_PICTURE_SIZE * (int)Global.MIN_PICTURE_SIZE, (int)spot.getY() / (int)Global.MIN_PICTURE_SIZE * (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
+            g.drawRect((int) spot.getX() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) spot.getY() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
         }
         //player
         playerController.paint(g);
         //PopUpWindow
-        if(popUpWindow != null){
+        if (popUpWindow != null) {
             popUpWindow.paint(g);
         }
 
@@ -162,12 +168,14 @@ public class GameScene1 extends Scene {
 
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener() {
-        if(popUpWindow != null){
+        if (popUpWindow != null) {
             return popUpWindow.getMouseCommandListener();
         }
         return mouseCommandListener;
     }
+
     //generate
+
     private void genButton(LinkedList<RoutePoint> setPoint) {
         if (buttonList.size() != 0) {
             buttonList = new LinkedList<Button>();
@@ -178,7 +186,7 @@ public class GameScene1 extends Scene {
             float y0 = tmp.getY();
             Button button = new Button(x0, y0, Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE,
                     imageController.tryGetImage("/Resources/Images/Background/setPoint5.png"));
-            
+
             button.setButtonListener(new ButtonListener() {
                 @Override
                 public void onClick(int x, int y) {
@@ -192,9 +200,9 @@ public class GameScene1 extends Scene {
                         }
                     }
                     if (!isBuilt) {
-                        popUpWindow = new TowerSelectWindow(x0, y0, 137/7 * Global.MIN_PICTURE_SIZE, 41/20 * Global.MIN_PICTURE_SIZE, towerController);
+                        popUpWindow = new TowerSelectWindow(x0, y0, 137 / 7 * Global.MIN_PICTURE_SIZE, 41 / 20 * Global.MIN_PICTURE_SIZE, towerController);
                     } else {
-                        popUpWindow = new TowerInformationWindow(x0, y0, 137/7 * Global.MIN_PICTURE_SIZE, 41/20 * Global.MIN_PICTURE_SIZE, tower, playerController);
+                        popUpWindow = new TowerInformationWindow(x0, y0, 137 / 7 * Global.MIN_PICTURE_SIZE, 41 / 20 * Global.MIN_PICTURE_SIZE, tower, playerController);
                     }
 
                 }

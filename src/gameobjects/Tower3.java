@@ -24,7 +24,7 @@ public class Tower3 extends Tower {
     private DelayCounter delay, delayForUpgrade;
 
     public Tower3(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 20, 3 * Global.SPEED); // x, y, width, height, attack, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, 20, 4 * Global.SPEED); // x, y, width, height, attack, speed
         super.setTowerNum(2);
         tHelper = new TowerHelper(super.getTowerNum());
         super.setTowerRange((int) checkTowerNum(super.getTowerNum()));
