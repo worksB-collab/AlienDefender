@@ -38,7 +38,7 @@ public class StartScene extends Scene{
     
     public StartScene(SceneController sceneController){
         super(sceneController);
-        backgroundController = new BackgroundController(0);
+        backgroundController = new BackgroundController(-1);
         imageController = ImageController.genInstance();
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);

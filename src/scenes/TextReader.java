@@ -75,7 +75,7 @@ public class TextReader extends Scene {
                     pointer++;
                 }
                 if (pointer >= textList.length) {
-                    sceneController.changeScene(new GameScene1(sceneController));
+                    sceneController.changeScene(new GameScene(sceneController, 1));
                 }
                 for (int i = 0; i < points.length; i++) {
                     points[i].update();

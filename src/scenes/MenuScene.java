@@ -38,7 +38,7 @@ public class MenuScene extends Scene {
         super(sceneController);
         this.audio = audio;
         imageController = ImageController.genInstance();
-        backgroundController = new BackgroundController(1);
+        backgroundController = new BackgroundController(0);
         //mouse listener
         mouseCommandListener = new MouseCommandListener() {
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {

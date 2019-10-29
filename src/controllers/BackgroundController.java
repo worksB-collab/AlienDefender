@@ -93,7 +93,7 @@ public class BackgroundController {
             g.setColor(Color.BLACK);
         }
     }
-    public class Stage1 implements Stage{
+    public class Stage00 implements Stage{
         private ImageController imageController;
         private BufferedImage image1;
         private BufferedImage image2;
@@ -103,7 +103,7 @@ public class BackgroundController {
         private float speed;
         private int standard;
         
-        public Stage1(){
+        public Stage00(){
             imageController = ImageController.genInstance();
             image1 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-01.png");
             image2 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-03.png");
@@ -135,10 +135,10 @@ public class BackgroundController {
         }
         
     }
-    public class Stage2 implements Stage{
+    public class Stage1 implements Stage{
             private ImageController imageController;
             private BufferedImage image;
-            public Stage2(){
+            public Stage1(){
                 imageController = ImageController.genInstance();
                 image = imageController.tryGetImage("/Resources/Images/Background/Background_02_00_07.png");
             }
@@ -153,6 +153,66 @@ public class BackgroundController {
             }
             
     }
+    public class Stage2 implements Stage{
+        private ImageController imageController;
+        private BufferedImage image;
+
+        @Override
+        public void update() {
+            imageController = ImageController.genInstance();
+            image = imageController.tryGetImage("/Resources/Images/Background/background-2.png");
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        }
+    }
+    public class Stage3 implements Stage{
+        private ImageController imageController;
+        private BufferedImage image;
+
+        @Override
+        public void update() {
+            imageController = ImageController.genInstance();
+            image = imageController.tryGetImage("/Resources/Images/Background/background-3.png");
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        }
+    }
+    public class Stage4 implements Stage{
+        private ImageController imageController;
+        private BufferedImage image;
+
+        @Override
+        public void update() {
+            imageController = ImageController.genInstance();
+            image = imageController.tryGetImage("/Resources/Images/Background/background-4.png");
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        }
+    }
+    public class Stage5 implements Stage{
+        private ImageController imageController;
+        private BufferedImage image;
+
+        @Override
+        public void update() {
+            imageController = ImageController.genInstance();
+            image = imageController.tryGetImage("/Resources/Images/Background/background-5.png");
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        }
+    }
     private Stage stage;
     public BackgroundController(int number){
         genStage(number);
@@ -161,8 +221,11 @@ public class BackgroundController {
     private void genStage(int number){
         
         switch(number){
-            case 0:
+            case -1:
                 stage = new Stage0();
+                break;
+            case 0:
+                stage = new Stage00();
                 break;
             case 1:
                 stage = new Stage1();
@@ -171,8 +234,14 @@ public class BackgroundController {
                 stage = new Stage2();
                 break;
             case 3:
+                stage = new Stage3();
                 break;
             case 4:
+                stage = new Stage4();
+                break;
+            case 5:
+                stage = new Stage5();
+                break;
         }
     }
     

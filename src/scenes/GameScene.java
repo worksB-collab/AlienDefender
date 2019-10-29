@@ -33,7 +33,7 @@ import values.Path;
  *
  * @author user
  */
-public class GameScene1 extends Scene {
+public class GameScene extends Scene {
 
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private PlayerController playerController;
@@ -45,13 +45,16 @@ public class GameScene1 extends Scene {
     private Point spot;
     private AlienController alienController;
     private TowerController towerController;
+    private int stage;
     private Clip audio;
 
-    public GameScene1(SceneController sceneController) {
+    public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
+        this.stage = stage;
         playerController = PlayerController.genInstance();
+        playerController.setStage(stage);
         imageController = ImageController.genInstance();
-        backgroundController = new BackgroundController(2);
+        backgroundController = new BackgroundController(stage);
         routeController = new RouteController();
         buttonList = new LinkedList();
         audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME);
@@ -88,7 +91,8 @@ public class GameScene1 extends Scene {
 
     @Override
     public void sceneBegin() {
-        routeController.genRoad(1);
+        playerController.reset();
+        routeController.genRoad(stage);
         genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
         alienController.gameLevelSetting(-25, 50, 80, 1, 50);
@@ -96,6 +100,10 @@ public class GameScene1 extends Scene {
 
     @Override
     public void sceneUpdate() {
+        //check player life
+        if(playerController.getHP() <= 0){
+            sceneController.changeScene(new GameOverScene(sceneController));
+        }
         backgroundController.update();
         if (buttonList.size() != 0) {
 
