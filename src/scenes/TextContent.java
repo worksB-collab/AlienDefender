@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import values.Path;
 
 /**
@@ -20,7 +21,9 @@ public class TextContent {
     private String text[];
     private TextContent(){
         try{
-            BufferedReader br = new BufferedReader(new FileReader("D:\\Sourcetree\\mid-term-project-1016\\src\\resources\\Texts\\text.txt"));
+            URL url = getClass().getResource(Path.Texts.TEXT);
+            
+            BufferedReader br = new BufferedReader(new FileReader(url.getPath()));
             char charArr[] = new char[500];
             br.read(charArr);
             String str = String.valueOf(charArr);

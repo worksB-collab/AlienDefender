@@ -37,10 +37,10 @@ public class Path {
 
             public static final String SCENE = IMAGES + "/Scene";
             public static final String MENU_SCENE = SCENE + "/MenuScene.png";
-            public static final String NEW_GAME_SCENE = SCENE + "/NewGameScene.png";
-            public static final String LOAD_DATA_SCENE = SCENE + "/LoadDataScene.png";
             public static final String PREPARE_SCENE = SCENE + "/PrepareScene.png";
             public static final String RANK_SCENE = SCENE + "/RankScene.png";
+            public static final String GAMEOVER_SCENE = SCENE + "/GameOverScene.png";
+            public static final String LOAD_DATA_SCENE = SCENE + "/LoadDataScene.png";
         }
     }
 
@@ -94,7 +94,7 @@ public class Path {
     public class Texts {
 
         public static final String TEXTS = ROOT + "/Text";
-        public static final String TEXT = "C:\\Users\\user\\Documents\\NetBeansProjects\\GameProject\\src\\resources\\Texts\\text.txt";
+        public static final String TEXT = "/resources/Texts/text.txt";
     }
 
 }

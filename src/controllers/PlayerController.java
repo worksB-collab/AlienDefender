@@ -50,11 +50,6 @@ public class PlayerController {
     }
     private PlayerController(String name, long score, int stage, long money) {
         this.name = name;
-        this.score = score;
-        this.stage = stage;
-        this.money = money;
-        this.hp = 100;
-        this.ratio = 1f;
         imageController = ImageController.genInstance();
         hpImage = new BufferedImage[2];
         hpImage[0] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineInner.png");
@@ -66,6 +61,18 @@ public class PlayerController {
             playerController = new PlayerController();
         }
         return playerController;
+    }
+    public void initialize(){
+        this.score = 0;
+        this.stage = 1;
+        this.money = 300;
+        this.hp = 100;
+        this.ratio = 1f;
+    }
+    public void reset(){
+        this.money = 300;
+        this.hp = 100;
+        this.ratio = 1f; 
     }
     public boolean saveData(short number){
         FileOutputStream fos ;
@@ -123,7 +130,7 @@ public class PlayerController {
         this.score += score;
     }
 
-    public void setState(int stage) {
+    public void setStage(int stage) {
         this.stage = stage;
     }
 
