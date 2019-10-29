@@ -11,10 +11,8 @@ import controllers.CommandSolver.MouseState;
 import controllers.ImageController;
 import controllers.PlayerController;
 import controllers.TowerController;
-import gameobjects.Button;
+import gameobjects.*;
 import gameobjects.Button.ButtonListener;
-import gameobjects.Tower;
-import gameobjects.Tower1;
 import values.Global;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -149,7 +147,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
             public void onClick(int x, int y) {
                 if(playerController.isEnough(TowerController.costArr[1])){
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[1]);
-                    tower = new Tower1(x0, y0);
+                    tower = new Tower2(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
                 }
@@ -169,7 +167,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
             public void onClick(int x, int y) {
                 if(playerController.isEnough(TowerController.costArr[2])){
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[2]);
-                    tower = new Tower1(x0, y0);
+                    tower = new Tower3(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
                 }
@@ -189,7 +187,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
             public void onClick(int x, int y) {
                 if(playerController.isEnough(TowerController.costArr[3])){
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[3]);
-                    tower = new Tower1(x0, y0);
+                    tower = new Tower4(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
                 }
@@ -209,7 +207,7 @@ public class TowerSelectWindow extends TowerPopUpWindow{
             public void onClick(int x, int y) {
                 if(playerController.isEnough(TowerController.costArr[4])){
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[4]);
-                    tower = new Tower1(x0, y0);
+                    tower = new Tower5(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
                 }

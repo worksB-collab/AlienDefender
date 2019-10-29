@@ -102,7 +102,6 @@ public class TextReader extends Scene{
         g.setColor(Color.white);
         for(int i = 0; i < nowtext.length; i++){
             g.drawString(nowtext[i], (int)points[i].getX(), (int)points[i].getY());
-            System.out.println((points[i].getX() + "," + points[i].getY()));
         }
         g.setColor(Color.black);
    
