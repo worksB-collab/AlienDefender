@@ -6,9 +6,7 @@
 package controllers;
 
 import controllers.RouteController.RoutePoint;
-import gameobjects.Alien;
-import gameobjects.Alien1;
-import gameobjects.Alien2;
+import gameobjects.*;
 import values.Global;
 import java.awt.Graphics;
 import java.util.Iterator;
@@ -62,8 +60,34 @@ public class AlienController {
                 switch (type) {
                     case 1:
                         alien = new Alien1(x, y);
+                        break;
                     case 2:
                         alien = new Alien2(x, y);
+                        break;
+                    case 3:
+                        alien = new Alien3(x, y);
+                        break;
+                    case 4:
+                        alien = new Alien4(x, y);
+                        break;
+                    case 5:
+                        alien = new Alien5(x, y);
+                        break;
+                    case 6:
+                        alien = new Alien6(x, y);
+                        break;
+                    case 7:
+                        alien = new Alien7(x, y);
+                        break;
+                    case 8:
+                        alien = new Alien8(x, y);
+                        break;
+                        case 9:
+                        alien = new Alien9(x, y);
+                        break;
+                    case 10:
+                        alien = new Alien10(x, y);
+                        break;
                 }
                 generateNumber++;
                 if (generateNumber >= number) {
@@ -109,7 +133,7 @@ public class AlienController {
     }
 
     public void gameLevelSetting(float x, float y, float frequency, int alienNum, int alienQuantity) {
-        this.x = x; 
+        this.x = x;
         this.y = y;
         alienPairs.add(new AlienSet(x, y, alienNum, alienQuantity, frequency));
     }
@@ -143,7 +167,7 @@ public class AlienController {
                 Alien a = aliens.get(i);
                 a.update();
                 if (a.getY() >= 24f * Global.MIN_PICTURE_SIZE) {
-                    playerController.setHP(playerController.getHP() - a.getAlienNum() * 5);
+                    playerController.setHP(playerController.getHP() - (a.getAlienNum()+1) * 2);
                     aliens.remove(i);
                 }
             }
@@ -158,8 +182,8 @@ public class AlienController {
                 alien.paintDead(g);
                 if (alien.isDead()) {// kill counts 
                     scoreController.scoreCount(alien.getAlienNum());
-                    playerController.addScore((long) scoreController.countPerKill(alien.getAlienNum()));
-                    playerController.setMoney(playerController.getMoney()+alien.getMoney());
+                    playerController.addScore((long) scoreController.scoreCount(alien.getAlienNum()+1));
+                    playerController.setMoney(playerController.getMoney() + alien.getMoney());
                 }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
                     aliens.remove(i);

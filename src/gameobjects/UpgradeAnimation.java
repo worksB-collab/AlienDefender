@@ -44,6 +44,7 @@ public class UpgradeAnimation extends EffectObject {
     public void update() {
         if (audio.getMicrosecondLength()== audio.getMicrosecondPosition()) {
             audio.close();
+            audioController.clearAudio();
             audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.UPGRADE);
         }
     }

@@ -45,11 +45,11 @@ public class Global {
     public static final float TOWER2_ATKRANGE = 3 * SIZE_GRID;
     public static final float TOWER3_ATKRANGE = 4 * SIZE_GRID;
     public static final float TOWER4_ATKRANGE = 5 * SIZE_GRID;
-    public static final int TOWER0_COST = 20;
-    public static final int TOWER1_COST = 30;
-    public static final int TOWER2_COST = 40;
-    public static final int TOWER3_COST = 50;
-    public static final int TOWER4_COST = 60;
+    public static final int TOWER0_COST = 40;
+    public static final int TOWER1_COST = 60;
+    public static final int TOWER2_COST = 80;
+    public static final int TOWER3_COST = 100;
+    public static final int TOWER4_COST = 120;
 
     //Cailbaration
     public static float MIN_PICTURE_SIZE = 32f;

@@ -14,7 +14,7 @@ import static values.Global.*;
  *
  * @author billy
  */
-public class Alien1 extends Alien {
+public class Alien5 extends Alien {
 
     private AlienHelper aHelper;
     private int ACT[] = {0, 1, 2, 1};
@@ -23,14 +23,14 @@ public class Alien1 extends Alien {
     private int deadDelay;
 
 
-    public Alien1(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 200, 1 * Global.SPEED); //x, y, width, height, hp, speed
-        alienNum = 0;
+    public Alien5(float x, float y) {
+        super(x, y, SIZE_GRID, SIZE_GRID, 350, 1.5f * Global.SPEED); //x, y, width, height, hp, speed
+        alienNum = 4;
         aHelper = new AlienHelper(alienNum);
         act = 0;
         delay = new DelayCounter(5);
         deadDelay = 0;
-        super.setMoney(10);
+        super.setMoney(15);
     }
     
 

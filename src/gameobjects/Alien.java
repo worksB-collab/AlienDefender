@@ -5,6 +5,7 @@
  */
 package gameobjects;
 
+import controllers.DelayCounter;
 import controllers.RouteController.RoutePoint;
 import values.Global;
 import java.awt.Graphics;
@@ -23,6 +24,7 @@ public abstract class Alien extends ActiveObject {
     private static LinkedList<RoutePoint> route = new LinkedList<RoutePoint>();
     protected int alienNum;
     private int money;
+    private DelayCounter delay;
 
     public Alien(float x, float y, float width, float height, float hp, float speed) {
         super(x, y, width, height, speed);
@@ -31,6 +33,7 @@ public abstract class Alien extends ActiveObject {
         this.height = height;
         this.width = width;
         nextPosition = 0;
+        delay = new DelayCounter(1);
     }
 
     public void setMoney(int money) {
@@ -78,6 +81,7 @@ public abstract class Alien extends ActiveObject {
             }
         }
         move(super.getDirection());
+        if (delay.update())
         act = ++act % 4;
     }
 

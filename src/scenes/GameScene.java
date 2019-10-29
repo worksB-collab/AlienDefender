@@ -49,10 +49,11 @@ public class GameScene extends Scene {
     private int stage;
     private Clip audio;
     private AlienParameter alienParameter;
+    int alienSet[][];
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
-        this.stage = stage;
+        this.stage = 5;
         playerController = PlayerController.genInstance();
         playerController.setStage(stage);
         imageController = ImageController.genInstance();
@@ -98,8 +99,12 @@ public class GameScene extends Scene {
         genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
         alienParameter = new AlienParameter(stage);
+        alienSet = alienParameter.setStageValue();
+        int count = 0;
         for (int i = 0; i < stage; i++) {
-            alienController.gameLevelSetting(-25, 50, 80, 1, 10);
+            alienController.gameLevelSetting(alienSet[count][0], alienSet[count][1], 
+                                        alienSet[count][2], alienSet[count][3], alienSet[count][4]);
+            count++;
         }
     }
 

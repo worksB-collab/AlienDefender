@@ -22,6 +22,7 @@ public class TowerController {
     private LinkedList<Alien> aliens;
     private LinkedList<Point> range;
     public static final int costArr[] = {TOWER0_COST, TOWER1_COST, TOWER2_COST, TOWER3_COST, TOWER4_COST};
+    public static final int upgradeCostArr[] = {TOWER0_COST/2, TOWER1_COST/2, TOWER2_COST/2, TOWER3_COST/2, TOWER4_COST/2};
 
     public TowerController(AlienController alienController) {
         towers = new LinkedList<Tower>();

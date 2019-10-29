@@ -24,24 +24,25 @@ public class ScoreController {
         }
     }
 
-    public void scoreCount(int alienNum) {
+    public int scoreCount(int alienNum) {
         switch (alienNum) {
-            case 1:
+            case 0:
                 kills.set(0, kills.get(0) + 1);
                 break;
-            case 2:
+            case 1:
                 kills.set(1, kills.get(1) + 1);
                 break;
-            case 3:
+            case 2:
                 kills.set(2, kills.get(2) + 1);
                 break;
-            case 4:
+            case 3:
                 kills.set(3, kills.get(3) + 1);
                 break;
-            case 5:
+            case 4:
                 kills.set(4, kills.get(4) + 1);
                 break;
         }
+        return 1;
     }
 
     public int scoreConverter() {
@@ -53,21 +54,21 @@ public class ScoreController {
         return totalScore;
     }
 
-    public int countPerKill(int alienNum) {
-        switch (alienNum) {
-            case 1:
-                return 1;
-            case 2:
-                return 2;
-            case 3:
-                return 3;
-            case 4:
-                return 4;
-            case 5:
-                return 5;
-        }
-        return -1;
-    }
+//    public int countPerKill(int alienNum) {
+//        switch (alienNum) {
+//            case 0:
+//                return 1;
+//            case 2:
+//                return 2;
+//            case 3:
+//                return 3;
+//            case 4:
+//                return 4;
+//            case 5:
+//                return 5;
+//        }
+//        return -1;
+//    }
 
     public ArrayList<Integer> getKills() {
         return kills;
