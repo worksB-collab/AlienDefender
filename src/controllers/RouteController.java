@@ -181,7 +181,7 @@ public class RouteController {
         route = new LinkedList();
         setPoint = new LinkedList();
 
-        float x = 14 * Global.MIN_PICTURE_SIZE;
+        float x = 11 * Global.MIN_PICTURE_SIZE;
         float y = 0;
         float maxY = Global.MIN_PICTURE_SIZE * 22;
         route.add(new RoutePoint(x, y));
@@ -195,7 +195,7 @@ public class RouteController {
         route = new LinkedList();
         setPoint = new LinkedList();
 
-        float x = 15 * Global.MIN_PICTURE_SIZE;
+        float x = 12 * Global.MIN_PICTURE_SIZE;
         float y = 0;
         float maxY = Global.MIN_PICTURE_SIZE * 22;
         route.add(new RoutePoint(x, y));
@@ -247,7 +247,7 @@ public class RouteController {
         route = new LinkedList();
         setPoint = new LinkedList();
 
-        float x = 18 * Global.MIN_PICTURE_SIZE;
+        float x = 13 * Global.MIN_PICTURE_SIZE;
         float y = 0;
         float maxY = Global.MIN_PICTURE_SIZE * 22;
         route.add(new RoutePoint(x, y));
@@ -293,7 +293,76 @@ public class RouteController {
               x -= Global.MIN_PICTURE_SIZE;
               route.add(new RoutePoint(x, y));
         }
-       
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 1 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 15 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 14 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 1 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 15 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 7 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
   
         genSetPoint();
     }
