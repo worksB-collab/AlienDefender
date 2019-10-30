@@ -96,8 +96,7 @@ public class GameScene extends Scene {
     public void sceneBegin() {
         playerController.reset();
         routeController.genRoad(stage);
-        System.out.println(stage);
-        genButton(routeController.getSetPoint());
+//        genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
         alienParameter = new AlienParameter(stage);
         alienSet = alienParameter.setStageValue();
