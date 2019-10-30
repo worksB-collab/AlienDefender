@@ -50,8 +50,8 @@ public class AlienParameter {
                 alienSet[0][3] = 3;
                 alienSet[0][4] = 15;
 
-                alienSet[1][0] = start2x;
-                alienSet[1][1] = start2y;
+                alienSet[1][0] = start3x;
+                alienSet[1][1] = start3y;
                 alienSet[1][2] = 90;
                 alienSet[1][3] = 2;
                 alienSet[1][4] = 25;

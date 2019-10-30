@@ -49,7 +49,7 @@ public class GameScene extends Scene {
     private int stage;
     private Clip audio;
     private AlienParameter alienParameter;
-    private int alienSet[][];
+    private float alienSet[][];
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
@@ -103,7 +103,7 @@ public class GameScene extends Scene {
         int count = 0;
         for (int i = 0; i < stage; i++) {
             alienController.gameLevelSetting(alienSet[count][0], alienSet[count][1], 
-                                        alienSet[count][2], alienSet[count][3], alienSet[count][4]);
+                                          alienSet[count][2], (int)alienSet[count][3], (int)alienSet[count][4]);
             count++;
         }
     }

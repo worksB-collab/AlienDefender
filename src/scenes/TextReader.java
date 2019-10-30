@@ -6,11 +6,15 @@
 package scenes;
 
 import static controllers.AudioController.audioController;
+import controllers.CommandSolver;
+import controllers.CommandSolver.MouseCommandListener;
 import controllers.DelayCounter;
 import controllers.ImageController;
 import controllers.SceneController;
+import gameobjects.Button;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import javax.sound.sampled.Clip;
@@ -23,7 +27,7 @@ import values.Path;
  * @author user
  */
 public class TextReader extends Scene {
-
+    private MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private BufferedImage image;
     private Clip audio;
@@ -33,6 +37,7 @@ public class TextReader extends Scene {
     private int pointer;
     private DrawStringPoint points[];
     private DelayCounter delay;
+    private Button buttonNext;
 
     public TextReader(SceneController sceneController, int stage) {
         super(sceneController);
@@ -57,28 +62,43 @@ public class TextReader extends Scene {
         }
         pointer = 0;
         delay = new DelayCounter(1);
+        mouseCommandListener = new CommandSolver.MouseCommandListener(){
+            @Override
+            public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
+                
+                if(state == CommandSolver.MouseState.RELEASED || state == CommandSolver.MouseState.CLICKED){
+                    if(buttonNext.isRange(e.getX(), e.getY())){
+                        buttonNext.click(e.getX(), e.getY());
+                    }
+                }else if(state == CommandSolver.MouseState.MOVED){
+                    if(buttonNext.isRange(e.getX(), e.getY())){
+                        buttonNext.hover(e.getX(), e.getY());
+                    }
+                }
+            }
+        };
     }
 
     @Override
     public void sceneBegin() {
-
+        genButton();
     }
 
     @Override
     public void sceneUpdate() {
         if (points[0] != null) {
 
-            if (delay.update()) {
-                nowtext[pointer] += textList[pointer].pop();
-                points[pointer].setText(nowtext[pointer]);
-                if (textList[pointer].isEmpty()) {
-                    pointer++;
-                }
-                if (pointer >= textList.length) {
-                    sceneController.changeScene(new GameScene(sceneController, 4));
-                }
-                for (int i = 0; i < points.length; i++) {
-                    points[i].update();
+            if (pointer < textList.length) {
+                   
+                if (delay.update()) {
+                    nowtext[pointer] += textList[pointer].pop();
+                    points[pointer].setText(nowtext[pointer]);
+                    if (textList[pointer].isEmpty()) {
+                        pointer++;
+                    }
+                    for (int i = 0; i < points.length; i++) {
+                        points[i].update();
+                    }
                 }
             }
         }
@@ -104,6 +124,7 @@ public class TextReader extends Scene {
                 y += height;
             }
         }
+        buttonNext.paint(g);
         g.setFont(Global.FONT_TEXT);
         g.setColor(Color.white);
         for(int i = 0; i < nowtext.length; i++){
@@ -111,6 +132,28 @@ public class TextReader extends Scene {
         }
         g.setColor(Color.black);
 
+    }
+    @Override
+    public MouseCommandListener getMouseCommandListener(){
+        return mouseCommandListener;
+    }
+    public void genButton(){
+        
+        buttonNext = new Button( (Global.FRAME_WIDTH / 2f) + 4 * Global.MIN_PICTURE_SIZE, (Global.FRAME_HEIGHT/ 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
+        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        buttonNext.setText("NEXT");
+        
+        buttonNext.setButtonListener(new Button.ButtonListener(){
+            @Override
+            public void onClick(int x, int y) {
+                 sceneController.changeScene(new GameScene(sceneController, 5));
+
+            }
+            @Override
+            public void hover(int x, int y) {
+            }
+        }
+        );
     }
 
 }

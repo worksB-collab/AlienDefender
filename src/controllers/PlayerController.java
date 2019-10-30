@@ -17,7 +17,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-
 /**
  *
  * @author user
@@ -30,10 +29,10 @@ public class PlayerController {
     private int stage;
     private long score;
     private long money;
-    private DrawStringPoint namePoint,scorePoint, hpPoint, moneyPoint;
+    private DrawStringPoint namePoint, scorePoint, hpPoint, moneyPoint;
     private ImageController imageController;
     private BufferedImage hpImage[];
-   
+
     private float ratio;
 
     private PlayerController() {
@@ -48,6 +47,7 @@ public class PlayerController {
         hpImage[0] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineInner.png");
         hpImage[1] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineOutter.png");
     }
+
     private PlayerController(String name, long score, int stage, long money) {
         this.name = name;
         imageController = ImageController.genInstance();
@@ -62,62 +62,69 @@ public class PlayerController {
         }
         return playerController;
     }
-    public void initialize(){
+
+    public void initialize() {
         this.score = 0;
         this.stage = 1;
         this.money = 300;
         this.hp = 100;
         this.ratio = 1f;
     }
-    public void reset(){
+
+    public void reset() {
         this.money = 300;
         this.hp = 100;
-        this.ratio = 1f; 
+        this.ratio = 1f;
     }
-    public boolean saveData(short number){
-        FileOutputStream fos ;
-        try{
+
+    public boolean saveData(short number) {
+        FileOutputStream fos;
+        try {
             fos = new FileOutputStream("savedata" + Short.toString(number) + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject( new PlayerController(name, score, stage, money));
+            oos.writeObject(new PlayerController(name, score, stage, money));
             fos.close();
             oos.close();
-        }catch(IOException ex){
+        } catch (IOException ex) {
             return false;
         }
         return true;
     }
-    public static boolean loadData(short number){
+
+    public static boolean loadData(short number) {
         FileInputStream fis;
-        try{
+        try {
             fis = new FileInputStream("savedata" + Short.toString(number) + ".ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            playerController = (PlayerController)ois.readObject();
+            playerController = (PlayerController) ois.readObject();
             fis.close();
             ois.close();
-        }catch(FileNotFoundException ex){
+        } catch (FileNotFoundException ex) {
             return false;
-        }catch(ClassNotFoundException ex){
+        } catch (ClassNotFoundException ex) {
             return false;
-        }catch(IOException ex){
+        } catch (IOException ex) {
             return false;
         }
         return true;
     }
     //setter
-    
-    public void setMoney(long money){
+
+    public void setMoney(long money) {
         this.money = money;
     }
-    public long getMoney(){
+
+    public long getMoney() {
         return money;
     }
-    public boolean isEnough(long money){
-        if(this.money < money){
+
+    public boolean isEnough(long money) {
+        if (this.money < money) {
             return false;
         }
         return true;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -139,7 +146,7 @@ public class PlayerController {
     }
 
     public void setHP(int hp) {
-        if(this.hp <= 0){
+        if (this.hp <= 0) {
             this.hp = 0;
             return;
         }
@@ -151,8 +158,8 @@ public class PlayerController {
     }
 
     public void update() {
-        if(namePoint != null){
-            if(!namePoint.getText().equals(name)){
+        if (namePoint != null) {
+            if (!namePoint.getText().equals(name)) {
                 namePoint.setText(name);
             }
         }
@@ -168,22 +175,23 @@ public class PlayerController {
                 hpPoint.update(4 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
             }
         }
-        if(moneyPoint != null){
+        if (moneyPoint != null) {
             moneyPoint.setText(Long.toString(money));
-            if (moneyPoint.getHeight() != Global.FRAME_HEIGHT){
+            if (moneyPoint.getHeight() != Global.FRAME_HEIGHT) {
                 moneyPoint.update(2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE);
             }
         }
-        
-        if(ratio >= 0){
-          ratio = ((float)hp / 100f);  
-        }else{
+
+        if (ratio >= 0) {
+            ratio = ((float) hp / 100f);
+        } else {
             ratio = 0;
         }
 
-    }                                         
+    }
+
     public void paint(Graphics g) {
-        if(namePoint == null){
+        if (namePoint == null) {
             namePoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 0, g, Global.FONT_NAME, name, 2f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         if (scorePoint == null) {
@@ -192,32 +200,33 @@ public class PlayerController {
         if (hpPoint == null) {
             hpPoint = new DrawStringPoint(28f * Global.MIN_PICTURE_SIZE, 0.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_HP, Long.toString(hp), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
-        if(moneyPoint == null){
+        if (moneyPoint == null) {
             moneyPoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 4.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_MONEY, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
-        g.drawImage(hpImage[0], (int)(21f * Global.MIN_PICTURE_SIZE) + (int)((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE),
-                                (int)( ratio * (8f * Global.MIN_PICTURE_SIZE) ), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        g.drawImage(hpImage[1], (int)(21f * Global.MIN_PICTURE_SIZE),  (int)(2 * Global.MIN_PICTURE_SIZE), 
-                                (int)(8f * Global.MIN_PICTURE_SIZE), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        
+        g.drawImage(hpImage[0], (int) (21f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)), (int) (2 * Global.MIN_PICTURE_SIZE),
+                (int) (ratio * (8f * Global.MIN_PICTURE_SIZE)), (int) (1f * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(hpImage[1], (int) (21f * Global.MIN_PICTURE_SIZE), (int) (2 * Global.MIN_PICTURE_SIZE),
+                (int) (8f * Global.MIN_PICTURE_SIZE), (int) (1f * Global.MIN_PICTURE_SIZE), null);
         g.setColor(Color.white);
+        if (stage != 1) {
+            g.setColor(Color.black);
+        }
         //drawName
         g.setFont(namePoint.getFont());
-        g.drawString(namePoint.getText(), (int)(namePoint.getX()), (int)(namePoint.getY()));
+        g.drawString(namePoint.getText(), (int) (namePoint.getX()), (int) (namePoint.getY()));
         //drawHP
         g.setFont(hpPoint.getFont());
-        g.drawString(hpPoint.getText() , (int) (hpPoint.getX()), (int) (hpPoint.getY()));
+        g.drawString(hpPoint.getText(), (int) (hpPoint.getX()), (int) (hpPoint.getY()));
         //drawMoney
         g.setFont(moneyPoint.getFont());
-        g.drawString(moneyPoint.getText(), (int)(moneyPoint.getX()), (int)(moneyPoint.getY()));
-        g.drawString(" Coin", (int)(28.5f * Global.MIN_PICTURE_SIZE), (int)(6f*Global.MIN_PICTURE_SIZE));
+        g.drawString(moneyPoint.getText(), (int) (moneyPoint.getX()), (int) (moneyPoint.getY()));
+        g.drawString(" Coin", (int) (28.5f * Global.MIN_PICTURE_SIZE), (int) (6f * Global.MIN_PICTURE_SIZE));
 
         //drawScore
-        
         g.setFont(scorePoint.getFont());
         g.drawString(scorePoint.getText(), (int) (scorePoint.getX()), (int) (scorePoint.getY()));
-        g.drawString(" Kill", (int)(29f * Global.MIN_PICTURE_SIZE), (int)(4.5f*Global.MIN_PICTURE_SIZE));
+        g.drawString(" Kill", (int) (29f * Global.MIN_PICTURE_SIZE), (int) (4.5f * Global.MIN_PICTURE_SIZE));
         //reset
         g.setColor(Color.black);
     }

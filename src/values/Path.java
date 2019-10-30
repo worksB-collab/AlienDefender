@@ -41,6 +41,7 @@ public class Path {
             public static final String RANK_SCENE = SCENE + "/RankScene.png";
             public static final String GAMEOVER_SCENE = SCENE + "/GameOverScene.png";
             public static final String LOAD_DATA_SCENE = SCENE + "/LoadDataScene.png";
+            public static final String END_SCENE = SCENE + "/EndScene.png";
         }
     }
 
