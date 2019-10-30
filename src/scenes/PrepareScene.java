@@ -97,7 +97,7 @@ public class PrepareScene extends Scene {
                 popWindow = null;
                 //preLoading
                 TextContent text = TextContent.genInstance();
-                sceneController.changeScene(new TextReader(sceneController, 0));
+                sceneController.changeScene(new TextReader(sceneController, 1));
 //                sceneController.changeScene(new GameScene1(sceneController));
 
             }

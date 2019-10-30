@@ -51,6 +51,11 @@ public class TowerInformationWindow extends TowerPopUpWindow {
                 if (state == CommandSolver.MouseState.RELEASED || state == CommandSolver.MouseState.CLICKED) {
                     int x = e.getX();
                     int y = e.getY();
+                    //check out of window's bound
+                    if(x < 6.5f * Global.MIN_PICTURE_SIZE || x > (6.5f * Global.MIN_PICTURE_SIZE + width) || y < Global.MIN_PICTURE_SIZE || y > (Global.MIN_PICTURE_SIZE + height)){
+                        isEnd = true;
+                    }
+                
                     for (Button btn : buttonList) {
                         if (btn.isRange(x, y)) {
                             btn.click(x, y);
@@ -102,26 +107,9 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     }
 
     private void getButton(float x0, float y0) {
-        BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/Exit.png");
-        BufferedImage img2 = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
-
-        Button button = new Button(x0 + 19 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
-        ButtonListener buttonListener = new Button.ButtonListener() {
-
-            @Override
-            public void onClick(int x, int y) {
-                isEnd = true;
-            }
-
-            @Override
-            public void hover(int x, int y) {
-
-            }
-
-        };
-        button.setButtonListener(buttonListener);
-
-        Button upgradeButton = new Button(x0 + 17 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img2);
+        
+        BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
+        Button upgradeButton = new Button(x0 + 19 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener2 = new Button.ButtonListener() {
 
             @Override
@@ -142,7 +130,6 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
         };
         upgradeButton.setButtonListener(buttonListener2);
-        buttonList.add(button);
         buttonList.add(upgradeButton);
 
     }

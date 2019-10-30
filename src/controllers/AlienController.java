@@ -112,6 +112,9 @@ public class AlienController {
     private int stop; // stop generating aliens
     private float x, y, frequency;
     private int a = -1;
+    private int totalEnemy;
+    private int removeCount;
+    private boolean isEnd;
 
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
@@ -122,6 +125,8 @@ public class AlienController {
         playerController = PlayerController.genInstance();
         Alien.setRoute(route);
         stop = 0;
+        isEnd = false;
+        removeCount = 0;
     }
 
     public float getMoney(int index) {
@@ -137,7 +142,12 @@ public class AlienController {
         this.y = y;
         alienPairs.add(new AlienSet(x, y, alienNum, alienQuantity, frequency));
     }
-
+    public void setEnemyAmount(int number){
+        totalEnemy = number;
+    }
+    public boolean isEnd(){
+        return isEnd;
+    }
     public void update() {
         //Aliens genearate Setting
         if (iter == null) {
@@ -151,7 +161,7 @@ public class AlienController {
                 presentAlienSet = iter.next();
             }
         }
-
+        
         //Aliens update
         if (genDelay.update()) {
             //Aliens genearate
@@ -169,8 +179,14 @@ public class AlienController {
                 if (a.getY() >= 24f * Global.MIN_PICTURE_SIZE) {
                     playerController.setHP(playerController.getHP() - (a.getAlienNum()+1) * 2);
                     aliens.remove(i);
+                    removeCount++;
                 }
             }
+        }
+        //check wheather all enemy is eliminate
+        if(removeCount == totalEnemy){
+
+            isEnd = true;
         }
     }
 
@@ -187,6 +203,7 @@ public class AlienController {
                 }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
                     aliens.remove(i);
+                    removeCount++;
                 }
             } else {
                 aliens.get(i).paint(g);

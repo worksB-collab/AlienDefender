@@ -38,15 +38,17 @@ public class TextReader extends Scene {
     private DrawStringPoint points[];
     private DelayCounter delay;
     private Button buttonNext;
+    private int stage;
 
     public TextReader(SceneController sceneController, int stage) {
         super(sceneController);
+        this.stage = stage;
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
         audio = audioController.tryGetAudio(Path.Audios.Musics.BETWEENSCENES);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         textContent = TextContent.genInstance();
-        String text[] = textContent.getText(stage).split("\n");
+        String text[] = textContent.getText(stage - 1).split("\n");
         textList = new LinkedList[text.length];
         for (int i = 0; i < text.length; i++) {
             int count = 0;
@@ -145,7 +147,7 @@ public class TextReader extends Scene {
         buttonNext.setButtonListener(new Button.ButtonListener(){
             @Override
             public void onClick(int x, int y) {
-                 sceneController.changeScene(new GameScene(sceneController, 5));
+                 sceneController.changeScene(new GameScene(sceneController, stage));
 
             }
             @Override

@@ -100,12 +100,13 @@ public class GameScene extends Scene {
         alienController = new AlienController(routeController.getRoute());
         alienParameter = new AlienParameter(stage);
         alienSet = alienParameter.setStageValue();
-        int count = 0;
+        int enemyCount = 0;
         for (int i = 0; i < stage; i++) {
-            alienController.gameLevelSetting(alienSet[count][0], alienSet[count][1], 
-                                        alienSet[count][2], alienSet[count][3], alienSet[count][4]);
-            count++;
+            alienController.gameLevelSetting(alienSet[i][0], alienSet[i][1], 
+                                        alienSet[i][2], alienSet[i][3], alienSet[i][4]);
+            enemyCount += alienSet[i][4];
         }
+        alienController.setEnemyAmount(enemyCount);
     }
 
     @Override
@@ -141,6 +142,13 @@ public class GameScene extends Scene {
             if (popUpWindow.isEnd()) {
                 popUpWindow = null;
             }
+        }
+        //check clear or not
+        if(alienController.isEnd()){
+            if(stage == 5){
+                sceneController.changeScene(new EndScene(sceneController));
+            }
+            sceneController.changeScene(new TextReader(sceneController, ++stage));
         }
     }
 
@@ -204,11 +212,13 @@ public class GameScene extends Scene {
                 public void onClick(int x, int y) {
                     boolean isBuilt = false;
                     Tower tower = null;
-                    for (int i = 0; i < towerController.getTowers().size(); i++) {
-                        tower = towerController.getTowers().get(i);
-                        if (tower.getX() == x0 && tower.getY() == y0) {
-                            isBuilt = true;
-                            break;
+                    if(towerController != null){
+                        for (int i = 0; i < towerController.getTowers().size(); i++) {
+                            tower = towerController.getTowers().get(i);
+                            if (tower.getX() == x0 && tower.getY() == y0) {
+                                isBuilt = true;
+                                break;
+                            }
                         }
                     }
                     if (!isBuilt) {

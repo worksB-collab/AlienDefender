@@ -67,7 +67,10 @@ public class AudioController {
             File file = new File(url.getPath());
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
+            AudioKeyPair key = new AudioKeyPair(path, clip);
+            audioList.add(key);
             clip.open(stream);
+            
             return clip;
         }catch(MalformedURLException ex){
             return null;
