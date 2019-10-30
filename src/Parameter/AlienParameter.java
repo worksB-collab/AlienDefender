@@ -5,7 +5,6 @@
  */
 package parameter;
 
-import controllers.AlienController;
 import static values.Global.*;
 
 /**
@@ -15,7 +14,6 @@ import static values.Global.*;
 public class AlienParameter {
 
     private float [][] alienSet;
-    private AlienController alienController;
     private int stage;
     private float start1x, start1y, start2x, start2y, start3x, start3y,start4x, start4y, start5x, start5y;
 
@@ -34,7 +32,7 @@ public class AlienParameter {
         start5y = START_POINT5[1];
     }
 
-    public float[][] setStageValue() {
+    public float[][] setStageValue() {//  x,  y,  frequency,  type,  alienQuantity
         switch (stage) {
             case 1:
                 alienSet[0][0] = start1x;
@@ -50,8 +48,8 @@ public class AlienParameter {
                 alienSet[0][3] = 3;
                 alienSet[0][4] = 15;
 
-                alienSet[1][0] = start3x;
-                alienSet[1][1] = start3y;
+                alienSet[1][0] = start2x;
+                alienSet[1][1] = start2y;
                 alienSet[1][2] = 90;
                 alienSet[1][3] = 2;
                 alienSet[1][4] = 25;

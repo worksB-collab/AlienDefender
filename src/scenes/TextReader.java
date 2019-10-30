@@ -146,7 +146,7 @@ public class TextReader extends Scene {
         buttonNext.setButtonListener(new Button.ButtonListener(){
             @Override
             public void onClick(int x, int y) {
-                 sceneController.changeScene(new GameScene(sceneController, 5));
+                 sceneController.changeScene(new GameScene(sceneController, 4));
 
             }
             @Override

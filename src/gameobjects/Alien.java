@@ -52,6 +52,8 @@ public abstract class Alien extends ActiveObject {
             RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int) route.getLast().getY() + (int) SIZE_GRID);
             route.addLast(p);
         }
+//        for(RoutePoint t : route)
+//        System.out.println("x: "+t.getX()+" "+" y" +t.getY());
     }
 
     public int getAlienNum() {
@@ -67,26 +69,36 @@ public abstract class Alien extends ActiveObject {
 
             RoutePoint p = route.get(nextPosition);
             if (super.getX() != p.getX() || super.getY() != p.getY()) {
-                if (super.getY() < p.getY()) {
+                if (super.getY() - p.getY()<0) {
                     changeDirection(DOWN);
-                }
-                if (super.getX() < p.getX()) {
+                } else if (super.getX() - p.getX()<0) {
                     changeDirection(RIGHT);
-                }
-                if (super.getX() > p.getX()) {
+                } else if (super.getX() - p.getX()>0) {
                     changeDirection(LEFT);
+                } else {
+                    changeDirection(UP);
                 }
-                
-                if (super.getX() >= p.getX() - super.getSpeed() && super.getX() <= p.getX() + super.getSpeed()
-                        && super.getY() >= p.getY() - super.getSpeed() && super.getY() <= p.getY() + super.getSpeed()) {
+//                if (super.getY() <= p.getY()) {
+//                    changeDirection(DOWN);
+//                } else if (super.getX() <= p.getX() + DEVIATION) {
+//                    changeDirection(RIGHT);
+//                } else if (super.getX() >= p.getX() + DEVIATION) {
+//                    changeDirection(LEFT);
+//                } else {
+//                    changeDirection(UP);
+//                }
+
+                if (super.getX() >= p.getX() && super.getX() <= p.getX() + SIZE_GRID
+                        && super.getY() >= p.getY() && super.getY() <= p.getY() + SIZE_GRID) {
                     RoutePoint last = route.getLast();
                     nextPosition++;
                 }
             }
         }
         move(super.getDirection());
-        if (delay.update())
-        act = ++act % 4;
+        if (delay.update()) {
+            act = ++act % 4;
+        }
     }
 
     public boolean isDead() {

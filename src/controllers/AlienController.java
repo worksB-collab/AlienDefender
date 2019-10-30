@@ -28,7 +28,7 @@ public class AlienController {
         private float frequency;
         private boolean isEnd;
 
-        public AlienSet(float x, float y, int type, int number, float frequency) {
+        public AlienSet(float x, float y, float frequency, int type, int number) {
             this.x = x;
             this.y = y;
             this.type = type;
@@ -82,7 +82,7 @@ public class AlienController {
                     case 8:
                         alien = new Alien8(x, y);
                         break;
-                        case 9:
+                    case 9:
                         alien = new Alien9(x, y);
                         break;
                     case 10:
@@ -131,7 +131,7 @@ public class AlienController {
     public void gameLevelSetting(float x, float y, float frequency, int alienNum, int alienQuantity) {
         this.x = x;
         this.y = y;
-        alienPairs.add(new AlienSet(x, y, alienNum, alienQuantity, frequency));
+        alienPairs.add(new AlienSet(x, y, frequency, alienNum, alienQuantity));
     }
 
     public void update() {
@@ -163,11 +163,12 @@ public class AlienController {
                 Alien a = aliens.get(i);
                 a.update();
                 if (a.getY() >= 24f * Global.MIN_PICTURE_SIZE) {
-                    playerController.setHP(playerController.getHP() - (a.getAlienNum()+1) * 2);
+                    playerController.setHP(playerController.getHP() - (a.getAlienNum() + 1) * 2);
                     aliens.remove(i);
                 }
             }
         }
+
     }
 
     public void paint(Graphics g) {
@@ -178,7 +179,7 @@ public class AlienController {
                 alien.paintDead(g);
                 if (alien.isDead()) {// kill counts 
                     scoreController.scoreCount(alien.getAlienNum());
-                    playerController.addScore((long) scoreController.scoreCount(alien.getAlienNum()+1));
+                    playerController.addScore((long) scoreController.scoreCount(alien.getAlienNum() + 1));
                     playerController.setMoney(playerController.getMoney() + alien.getMoney());
                 }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
@@ -186,6 +187,10 @@ public class AlienController {
                 }
             } else {
                 aliens.get(i).paint(g);
+                if (aliens != null) {
+                    System.out.println(aliens.get(0).nextPosition);
+                    System.out.println(aliens.get(0).getDirection());
+                }
             }
         }
     }
