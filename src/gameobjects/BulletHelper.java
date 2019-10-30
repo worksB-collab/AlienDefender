@@ -22,7 +22,7 @@ public class BulletHelper {
 
     public BulletHelper(int towerNum) {
         ImageController irc = ImageController.genInstance();
-        img = irc.tryGetImage(Path.Image.BULLET1);
+        img = irc.tryGetImage(Path.Image.BULLET2);
         boom = irc.tryGetImage(Path.Image.BOOM1);
     }
 

@@ -32,7 +32,7 @@ public class PlayerController {
     private DrawStringPoint namePoint, scorePoint, hpPoint, moneyPoint;
     private ImageController imageController;
     private BufferedImage hpImage[];
-    private int moneyChange, hpChange; // change color when value changes
+    private int moneyChange, hpChange, notEnough; // change color when value changes
     private DelayCounter delay;
 
     private float ratio;
@@ -124,6 +124,7 @@ public class PlayerController {
 
     public boolean isEnough(long money) {
         if (this.money < money) {
+            notEnough=1;
             return false;
         }
         return true;
@@ -235,6 +236,12 @@ public class PlayerController {
             g.setColor(Color.orange);
             if (delay.update()) {
                 moneyChange = 0;
+            }
+        }
+        if (notEnough == 1) {
+            g.setColor(Color.red);
+            if (delay.update()) {
+                notEnough = 0;
             }
         }
         g.setFont(moneyPoint.getFont());

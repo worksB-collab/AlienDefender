@@ -114,6 +114,7 @@ public class PrepareScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
+
         g.drawImage(image, 0, 0, (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
 //        backButton.paint(g);
         if (popWindow != null) {

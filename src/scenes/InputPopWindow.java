@@ -19,6 +19,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import static values.Global.FONT_BUTTON;
 
 /**
  *
@@ -121,6 +122,10 @@ public class InputPopWindow extends PopUpWindow {
         g.setColor(Color.orange);
         g.setFont(font);
         g.drawString(text, (int) point.getX(), (int) point.getY());
+        
+        g.setFont(FONT_BUTTON);
+        g.drawString("What's your name?", (int) (32 * Global.MIN_PICTURE_SIZE), (int) (20 * Global.MIN_PICTURE_SIZE)); //
+
     }
 
 }
