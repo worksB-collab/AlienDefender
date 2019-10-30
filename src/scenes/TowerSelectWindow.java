@@ -22,12 +22,15 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import values.DrawStringPoint;
+import static values.Global.*;
 
 /**
  *
  * @author user
  */
-public class TowerSelectWindow extends TowerPopUpWindow{
+public class TowerSelectWindow extends TowerPopUpWindow {
+
     public static final String TYPE = "TowerSelectWindow";
     private ImageController imageController;
     private BufferedImage image;
@@ -36,116 +39,163 @@ public class TowerSelectWindow extends TowerPopUpWindow{
     private Tower tower;
     private LinkedList<Point> towerRange;
     private boolean isEnd;
-    
+    private boolean isHovering;
+    private String atkInfo, costInfo;
+    private int hoveringTower;
+    private DrawStringPoint infoString;
+
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, towerController);
         imageController = ImageController.genInstance();
         playerController = PlayerController.genInstance();
-       
+
         buttonList = new LinkedList<Button>();
         isEnd = false;
-        super.mouseCommandListener = new MouseCommandListener(){
+        isHovering = false;
+        hoveringTower = -1;
+        super.mouseCommandListener = new MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
+                if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
                     int x = e.getX();
                     int y = e.getY();
-                    for(Button btn : buttonList){
-                        if(btn.isRange(x, y)){
+                    for (Button btn : buttonList) {
+                        if (btn.isRange(x, y)) {
                             btn.click(x, y);
                             break;
                         }
                     }
                 }
-                if(state == MouseState.MOVED){
+                if (state == MouseState.MOVED) {
                     int x = e.getX();
                     int y = e.getY();
-                    for(Button btn : buttonList){
-                        if(btn.isRange(x, y)){
+                    for (Button btn : buttonList) {
+                        if (btn.isRange(x, y)) {
                             btn.hover(x, y);
                             break;
                         }
                     }
                 }
-            }    
+            }
         };
         genButton(x, y);
     }
 
-    public Tower getResult(){
+    public Tower getResult() {
         return tower;
     }
-    
+
     @Override
-    public boolean isEnd(){
+    public boolean isEnd() {
         return isEnd;
     }
+
     @Override
-    public String getType(){
+    public String getType() {
         return TYPE;
     }
+
     @Override
-    public void update(){
-        for(Button btn : buttonList){
+    public void update() {
+        for (Button btn : buttonList) {
             btn.update();
         }
+        switch (hoveringTower) {
+            case 0:
+                atkInfo = "ATK: " + TOWER0_ATK;
+                costInfo = "Cost: " + TOWER0_COST;
+                break;
+            case 1:
+                atkInfo = "ATK: " + TOWER1_ATK;
+                costInfo = "Cost: " + TOWER1_COST;
+                break;
+            case 2:
+                atkInfo = "ATK: " + TOWER2_ATK;
+                costInfo = "Cost: " + TOWER2_COST;
+                break;
+            case 3:
+                atkInfo = "ATK: " + TOWER3_ATK;
+                costInfo = "Cost: " + TOWER3_COST;
+                break;
+            case 4:
+                atkInfo = "ATK: " + TOWER4_ATK;
+                costInfo = "Cost: " + TOWER4_COST;
+                break;
+        }
     }
-    
+
     @Override
-    public void paint(Graphics g){
+    public void paint(Graphics g) {
         image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
-        g.drawImage(image, (int)super.getX(), (int)super.getY(), (int)width, (int)height, null);
-        for(Button btn : buttonList){
+        g.drawImage(image, (int) super.getX(), (int) super.getY(), (int) width, (int) height, null);
+        for (Button btn : buttonList) {
             btn.paint(g);
         }
-        if(towerRange != null){
-            Graphics2D k = (Graphics2D)g;
+
+        //
+        if (isHovering) {
+            image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
+            g.drawImage(image, (int) super.getX() + 200, (int) super.getY() + 80, (int) SIZE_GRID * 6, (int) SIZE_GRID * 3 , null);
+            infoString = new DrawStringPoint(super.getX()+ 200, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 6, SIZE_GRID * 2);
+            g.setColor(Color.white);
+            g.setFont(FONT_INFOWINDOW);
+            g.drawString(atkInfo, (int) infoString.getX(), (int) infoString.getY());
+            g.drawString(costInfo, (int) infoString.getX(), (int) (infoString.getY()+SIZE_GRID));
+
+        }
+        //
+
+        if (towerRange != null) {
+            Graphics2D k = (Graphics2D) g;
             k.setStroke(new BasicStroke(2f));
             k.setColor(Color.ORANGE);
-            for(int i = 0; i < towerRange.size(); i++){
+            for (int i = 0; i < towerRange.size(); i++) {
                 Point p = towerRange.get(i);
-                k.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE);
+                k.drawRect((int) p.getX(), (int) p.getY(), (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE);
             }
             k.setColor(Color.BLACK);
         }
     }
-    
-    private void genButton(float x0, float y0){
-        
-        BufferedImage img[] = { imageController.tryGetImage("/Resources/Images/Label/Tower_Icon1.png"),
-                                imageController.tryGetImage("/Resources/Images/Label/Tower_Icon2.png"),
-                                imageController.tryGetImage("/Resources/Images/Label/Tower_Icon3.png"),
-                                imageController.tryGetImage("/Resources/Images/Label/Tower_Icon4.png"),
-                                imageController.tryGetImage("/Resources/Images/Label/Tower_Icon5.png"),
-                                imageController.tryGetImage("/Resources/Images/Label/Exit.png")};
+
+    private void genButton(float x0, float y0) {
+
+        BufferedImage img[] = {imageController.tryGetImage("/Resources/Images/Label/Tower_Icon1.png"),
+            imageController.tryGetImage("/Resources/Images/Label/Tower_Icon2.png"),
+            imageController.tryGetImage("/Resources/Images/Label/Tower_Icon3.png"),
+            imageController.tryGetImage("/Resources/Images/Label/Tower_Icon4.png"),
+            imageController.tryGetImage("/Resources/Images/Label/Tower_Icon5.png"),
+            imageController.tryGetImage("/Resources/Images/Label/Exit.png")};
         ButtonListener buttonListener[] = new ButtonListener[6];
         TowerController towerController = super.getTowerController();
-        buttonListener[0] = new ButtonListener(){
+
+        buttonListener[0] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(TowerController.costArr[0])){
+                if (playerController.isEnough(TowerController.costArr[0])) {
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[0]);
                     tower = new Tower1(x0, y0);
                     towerController.getTowers().add(tower);
                     isEnd = true;
                 }
-                
+
             }
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 0);
+                towerController.genRange(new Point((int) x0, (int) y0), 0);
                 towerRange = towerController.getRange();
+                isHovering = true;
+                hoveringTower = 0;
             }
-        
+
         };
-        
-        buttonListener[1] = new ButtonListener(){
+
+        buttonListener[1] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(TowerController.costArr[1])){
+                if (playerController.isEnough(TowerController.costArr[1])) {
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[1]);
                     tower = new Tower2(x0, y0);
                     towerController.getTowers().add(tower);
@@ -155,17 +205,19 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 1);
+                towerController.genRange(new Point((int) x0, (int) y0), 1);
                 towerRange = towerController.getRange();
+                isHovering = true;
+                hoveringTower = 1;
             }
-        
+
         };
-        
-        buttonListener[2] = new ButtonListener(){
+
+        buttonListener[2] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(TowerController.costArr[2])){
+                if (playerController.isEnough(TowerController.costArr[2])) {
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[2]);
                     tower = new Tower3(x0, y0);
                     towerController.getTowers().add(tower);
@@ -175,17 +227,19 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 2);
+                towerController.genRange(new Point((int) x0, (int) y0), 2);
                 towerRange = towerController.getRange();
+                isHovering = true;
+                hoveringTower = 2;
             }
-        
+
         };
-        
-        buttonListener[3] = new ButtonListener(){
+
+        buttonListener[3] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(TowerController.costArr[3])){
+                if (playerController.isEnough(TowerController.costArr[3])) {
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[3]);
                     tower = new Tower4(x0, y0);
                     towerController.getTowers().add(tower);
@@ -195,17 +249,19 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 3);
+                towerController.genRange(new Point((int) x0, (int) y0), 3);
                 towerRange = towerController.getRange();
+                isHovering = true;
+                hoveringTower = 3;
             }
-        
+
         };
-        
-        buttonListener[4] = new ButtonListener(){
+
+        buttonListener[4] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
-                if(playerController.isEnough(TowerController.costArr[4])){
+                if (playerController.isEnough(TowerController.costArr[4])) {
                     playerController.setMoney(playerController.getMoney() - TowerController.costArr[4]);
                     tower = new Tower5(x0, y0);
                     towerController.getTowers().add(tower);
@@ -215,13 +271,15 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                towerController.genRange(new Point((int)x0, (int)y0), 4);
+                towerController.genRange(new Point((int) x0, (int) y0), 4);
                 towerRange = towerController.getRange();
+                isHovering = true;
+                hoveringTower = 4;
             }
-        
+
         };
-        
-        buttonListener[5] = new ButtonListener(){
+
+        buttonListener[5] = new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
@@ -230,20 +288,20 @@ public class TowerSelectWindow extends TowerPopUpWindow{
 
             @Override
             public void hover(int x, int y) {
-                
+
             }
-        
+
         };
-        
+
         float dx = 10f;
         float dy = 5f;
         float spece = 10f;
         float x1 = super.getX() + dx;
         float y1 = super.getY() + dy;
-        float w = (width - (2f * dx ) - (spece * (img.length - 1)) ) / img.length ;
+        float w = (width - (2f * dx) - (spece * (img.length - 1))) / img.length;
         float h = height - (2f * dy);
-        for(int i = 0; i < img.length; i++){
-            Button button = new Button(x1, y1, w, h,img[i]);
+        for (int i = 0; i < img.length; i++) {
+            Button button = new Button(x1, y1, w, h, img[i]);
             button.setButtonListener(buttonListener[i]);
             x1 += (w + dx);
             buttonList.add(button);

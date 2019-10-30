@@ -49,7 +49,7 @@ public class TowerController {
         return towers.get(index).getUpgradeCost();
     }
 
-    public float checkTowerNum(int towerNum) {
+    public float checkTowerRange(int towerNum) {
         switch (towerNum) {
             case 0:
                 return TOWER0_ATKRANGE;
@@ -67,7 +67,7 @@ public class TowerController {
 
     public void genRange(Point point, int towerNum) {
         range = new LinkedList<Point>();
-        int towerRange = (int) checkTowerNum(towerNum);
+        int towerRange = (int) checkTowerRange(towerNum);
         for (int i = -towerRange; i < towerRange; i++) {
             for (int j = -towerRange; j < towerRange; j++) {
                 if (Math.abs(i) + Math.abs(j) <= towerRange) {

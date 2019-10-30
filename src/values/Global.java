@@ -15,7 +15,6 @@ import java.awt.Font;
 public class Global {
 
     //Update 
-
     public static final int UPDATE_PER_SEC = 60;
     public static final int MILLISEC_PER_UPDATE = 1000 / UPDATE_PER_SEC;
 
@@ -30,15 +29,14 @@ public class Global {
     //Delay
     public static final int BUTTON_UPDATE_DELAY = 3;
 
-
     //Grid
     public static final float SIZE_GRID = 32f;
-    
+
     ///Objects
     public static final float SIZE_OBJECT = 65f;
-    public static final float DEVIATION = SIZE_GRID/11f; // deviation for grid judgement
-    public static final float SIZE_BLOODLINE = SIZE_OBJECT/15f;
-    
+    public static final float DEVIATION = SIZE_GRID / 11f; // deviation for grid judgement
+    public static final float SIZE_BLOODLINE = SIZE_OBJECT / 15f;
+
     //Tower
     public static final float TOWER0_ATKRANGE = 1 * SIZE_GRID;
     public static final float TOWER1_ATKRANGE = 2 * SIZE_GRID;
@@ -50,6 +48,11 @@ public class Global {
     public static final int TOWER2_COST = 80;
     public static final int TOWER3_COST = 100;
     public static final int TOWER4_COST = 120;
+    public static final int TOWER0_ATK = 20;
+    public static final int TOWER1_ATK = 30;
+    public static final int TOWER2_ATK = 50;
+    public static final int TOWER3_ATK = 60;
+    public static final int TOWER4_ATK = 70;
 
     //Cailbaration
     public static float MIN_PICTURE_SIZE = 32f;
@@ -62,7 +65,7 @@ public class Global {
     public static final int DOWN = 180;
     public static final int LEFT = 270;
     public static final int RIGHT = 90;
-    
+
     //Font
     public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
     public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
@@ -73,9 +76,10 @@ public class Global {
     public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 30);
     public static final Font FONT_MONEY = new Font(Font.DIALOG, Font.PLAIN, 30);
     public static final Font FONT_TEXT = new Font(Font.DIALOG, Font.PLAIN, 30);
-   
+    public static final Font FONT_INFOWINDOW = new Font(Font.DIALOG, Font.PLAIN, 20);
+
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
-    
+
     //Key
     public static final int KEY_ENTER = 6666;
     public static final int KEY_BACK_SPACE = 6667;

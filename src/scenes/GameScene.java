@@ -53,7 +53,7 @@ public class GameScene extends Scene {
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
-        this.stage = 5;
+        this.stage = stage;
         playerController = PlayerController.genInstance();
         playerController.setStage(stage);
         imageController = ImageController.genInstance();
