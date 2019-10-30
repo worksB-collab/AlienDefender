@@ -24,7 +24,7 @@ public class Tower2 extends Tower {
     private DelayCounter delay, delayForUpgrade;
 
     public Tower2(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, TOWER1_ATK, 3 * Global.SPEED); // x, y, width, height, attack, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, TOWER1_ATK, 4 * Global.SPEED); // x, y, width, height, attack, speed
         super.setTowerNum(1);
         tHelper = new TowerHelper(super.getTowerNum());
         super.setTowerRange((int) checkTowerNum(super.getTowerNum()));
@@ -34,7 +34,7 @@ public class Tower2 extends Tower {
         delayForUpgrade = new DelayCounter(5);
         upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
         super.setCost(TOWER1_COST);
-        super.setUpgradeCost(super.getCost()*1.5f);
+        super.setUpgradeCost(super.getCost()/2);
     }
 
     public float checkTowerNum(int towerNum) {

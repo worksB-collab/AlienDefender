@@ -6,10 +6,8 @@
 package gameobjects;
 
 import controllers.AudioController;
-import static controllers.AudioController.audioController;
 import controllers.DelayCounter;
 import controllers.ImageController;
-import values.Global.*;
 import static values.Global.*;
 import values.Path;
 import java.awt.Graphics;

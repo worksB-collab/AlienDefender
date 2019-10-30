@@ -111,24 +111,24 @@ public class TowerSelectWindow extends TowerPopUpWindow {
         }
         switch (hoveringTower) {
             case 0:
-                atkInfo = "ATK: " + TOWER0_ATK;
-                costInfo = "Cost: " + TOWER0_COST;
+                atkInfo = "Attack: " + (int)TOWER0_ATK;
+                costInfo = "Cost: " + (int)TOWER0_COST;
                 break;
             case 1:
-                atkInfo = "ATK: " + TOWER1_ATK;
-                costInfo = "Cost: " + TOWER1_COST;
+                atkInfo = "Attack: " + (int)TOWER1_ATK;
+                costInfo = "Cost: " + (int)TOWER1_COST;
                 break;
             case 2:
-                atkInfo = "ATK: " + TOWER2_ATK;
-                costInfo = "Cost: " + TOWER2_COST;
+                atkInfo = "Attack: " + (int)TOWER2_ATK;
+                costInfo = "Cost: " + (int)TOWER2_COST;
                 break;
             case 3:
-                atkInfo = "ATK: " + TOWER3_ATK;
-                costInfo = "Cost: " + TOWER3_COST;
+                atkInfo = "Attack: " + (int)TOWER3_ATK;
+                costInfo = "Cost: " + (int)TOWER3_COST;
                 break;
             case 4:
-                atkInfo = "ATK: " + TOWER4_ATK;
-                costInfo = "Cost: " + TOWER4_COST;
+                atkInfo = "Attack: " + (int)TOWER4_ATK;
+                costInfo = "Cost: " + (int)TOWER4_COST;
                 break;
         }
     }
@@ -141,7 +141,6 @@ public class TowerSelectWindow extends TowerPopUpWindow {
             btn.paint(g);
         }
 
-        //
         if (isHovering) {
             image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
             towerImage = imageController.tryGetImage("/Resources/Images/GameObject/Tower2.png");
@@ -155,7 +154,6 @@ public class TowerSelectWindow extends TowerPopUpWindow {
                     (int) (infoString.getX() + SIZE_GRID * 1.5), (int) (infoString.getY() + SIZE_GRID * 1.5),
                     (int) (hoveringTower * SIZE_OBJECT), 0, (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT, null);
         }
-        //
 
         if (towerRange != null) {
             Graphics2D k = (Graphics2D) g;

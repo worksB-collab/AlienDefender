@@ -24,7 +24,7 @@ public class Alien10 extends Alien {
 
 
     public Alien10(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 900, 0.8f * Global.SPEED); //x, y, width, height, hp, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, 900,  Global.SPEED); //x, y, width, height, hp, speed
         alienNum = 9;
         aHelper = new AlienHelper(alienNum);
         act = 0;

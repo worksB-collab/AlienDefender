@@ -21,7 +21,8 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import static values.Global.SIZE_GRID;
+import values.DrawStringPoint;
+import static values.Global.*;
 
 /**
  *
@@ -30,12 +31,16 @@ import static values.Global.SIZE_GRID;
 public class TowerInformationWindow extends TowerPopUpWindow {
 
     private ImageController imageController;
-    private BufferedImage image;
+    private BufferedImage image, towerImage;
     private PlayerController playerController;
     private LinkedList<Button> buttonList;
     private LinkedList<Point> towerRange;
     private Tower tower;
+    private int upgradeStage;
     private boolean isEnd;
+    private String atkInfo, costInfo;
+    private int hoveringTower;
+    private DrawStringPoint infoString;
 
     public TowerInformationWindow(float x, float y, float width, float height, Tower tower, PlayerController playerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
@@ -44,27 +49,31 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         } else if (y < 400) {
             super.setY(500);
         } else if (y < 600) {
-            super.setY(300);}
-        else if (y < 800) {
-            super.setY(500);}
+            super.setY(300);
+        } else if (y < 800) {
+            super.setY(500);
+        }
         this.tower = tower;
+        hoveringTower = tower.getTowerNum();
+        this.upgradeStage = tower.getUpgradeStage();
         imageController = ImageController.genInstance();
         this.playerController = playerController;
         buttonList = new LinkedList<Button>();
         towerRange = new LinkedList();
-        getButton(super.getX()-2*SIZE_GRID, super.getY());
+        getButton(super.getX() - 2 * SIZE_GRID, super.getY());
         isEnd = false;
         super.mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
+            // 關閉視窗
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if (state == CommandSolver.MouseState.RELEASED || state == CommandSolver.MouseState.CLICKED) {
                     int x = e.getX();
                     int y = e.getY();
                     //check out of window's bound
-                    if(x < 6.5f * Global.MIN_PICTURE_SIZE || x > (6.5f * Global.MIN_PICTURE_SIZE + width) || y < Global.MIN_PICTURE_SIZE || y > (Global.MIN_PICTURE_SIZE + height)){
+                    if (x < 6.5f * Global.MIN_PICTURE_SIZE || x > (6.5f * Global.MIN_PICTURE_SIZE + width) || y < Global.MIN_PICTURE_SIZE || y > (Global.MIN_PICTURE_SIZE + height)) {
                         isEnd = true;
                     }
-                
+
                     for (Button btn : buttonList) {
                         if (btn.isRange(x, y)) {
                             btn.click(x, y);
@@ -91,6 +100,54 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         for (Button btn : buttonList) {
             btn.update();
         }
+        if (upgradeStage == 2) {
+            switch (hoveringTower) {
+
+                case 0:
+                    atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage));
+                    costInfo = "Max Level";
+                    return;
+                case 1:
+                    atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage));
+                    costInfo = "Max Level";
+                    return;
+                case 2:
+                    atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage));
+                    costInfo = "Max Level";
+                    return;
+                case 3:
+                    atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage));
+                    costInfo = "Max Level";
+                    return;
+                case 4:
+                    atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage));
+                    costInfo = "Max Level";
+                    return;
+            }
+        }
+        switch (hoveringTower) {
+
+            case 0:
+                atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo = "Upgrade Cost: " + (int)(TOWER0_COST / 2);
+                break;
+            case 1:
+                atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost: " + (int)(TOWER1_COST / 2);
+                break;
+            case 2:
+                atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost: " + (int)(TOWER2_COST / 2);
+                break;
+            case 3:
+                atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost: " + (int)(TOWER3_COST / 2);
+                break;
+            case 4:
+                atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost: " + (int)(TOWER4_COST / 2);
+                break;
+        }
     }
 
     @Override
@@ -107,20 +164,37 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         k.setColor(Color.BLACK);
 
         //draw PopUpWindow
-        image = imageController.tryGetImage("/Resources/Images/Label/Tower_generate_Label5.png");
+        image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
+        towerImage = imageController.tryGetImage("/Resources/Images/GameObject/Tower2.png");
+        int upgrade = upgradeStage + 1;
+        if (upgradeStage == 2) {
+            upgrade = 2;
+        }
+        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int) SIZE_GRID * 12, (int) SIZE_GRID * 3, null);
+        infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 7, SIZE_GRID * 2);
+        g.setColor(Color.white);
+        g.setFont(FONT_INFOWINDOW);
+        g.drawString(atkInfo, (int) (infoString.getX() + SIZE_GRID * 2.5), (int) (infoString.getY() - SIZE_GRID * 2.5));
+        g.drawString(costInfo, (int) (infoString.getX() + SIZE_GRID * 2.5), (int) (infoString.getY() - SIZE_GRID * 1.5));
+        g.drawImage(towerImage,
+                (int) (infoString.getX() - SIZE_GRID), (int) (infoString.getY() - SIZE_GRID * 3.5),
+                (int) (infoString.getX() + SIZE_GRID * 1.5), (int) (infoString.getY() - SIZE_GRID * 1),
+                (int) (hoveringTower * SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade),
+                (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade + 1),
+                null);
 
-        g.drawImage(image, (int) super.getX(), (int) super.getY(), (int) width, (int) height, null);
         for (Button btn : buttonList) {
             btn.paint(g);
         }
     }
 
     private void getButton(float x0, float y0) {
-        
+
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
-        Button upgradeButton = new Button(x0 + 19 * Global.MIN_PICTURE_SIZE, y0, 2 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, img);
+        Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
         ButtonListener buttonListener2 = new Button.ButtonListener() {
 
+            //
             @Override
             public void onClick(int x, int y) {
                 if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
@@ -138,9 +212,10 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             }
 
         };
-        upgradeButton.setButtonListener(buttonListener2);
-        buttonList.add(upgradeButton);
-
+        if (upgradeStage != 2) {
+            upgradeButton.setButtonListener(buttonListener2);
+            buttonList.add(upgradeButton);
+        }
     }
 
 }
