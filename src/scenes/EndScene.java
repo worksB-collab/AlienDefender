@@ -78,7 +78,7 @@ public class EndScene extends Scene{
         
         reStartButton = new Button( (Global.FRAME_WIDTH - 10f * Global.MIN_PICTURE_SIZE) / 2f, ((Global.FRAME_HEIGHT - 4f * Global.MIN_PICTURE_SIZE) / 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
         imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
-        reStartButton.setText("Retry");
+        reStartButton.setText("End");
         
         reStartButton.setButtonListener(new Button.ButtonListener(){
             @Override

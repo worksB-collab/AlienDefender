@@ -96,6 +96,7 @@ public class GameScene extends Scene {
     public void sceneBegin() {
         playerController.reset();
         routeController.genRoad(stage);
+        System.out.println(stage);
         genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
         alienParameter = new AlienParameter(stage);
@@ -145,9 +146,6 @@ public class GameScene extends Scene {
         }
         //check clear or not
         if(alienController.isEnd()){
-            if(stage == 5){
-                sceneController.changeScene(new EndScene(sceneController));
-            }
             sceneController.changeScene(new TextReader(sceneController, ++stage));
         }
     }
