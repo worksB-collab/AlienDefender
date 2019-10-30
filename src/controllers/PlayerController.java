@@ -32,6 +32,8 @@ public class PlayerController {
     private DrawStringPoint namePoint, scorePoint, hpPoint, moneyPoint;
     private ImageController imageController;
     private BufferedImage hpImage[];
+    private int moneyChange, hpChange; // change color when value changes
+    private DelayCounter delay;
 
     private float ratio;
 
@@ -46,6 +48,7 @@ public class PlayerController {
         hpImage = new BufferedImage[2];
         hpImage[0] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineInner.png");
         hpImage[1] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineOutter.png");
+        delay = new DelayCounter(5);
     }
 
     private PlayerController(String name, long score, int stage, long money) {
@@ -112,6 +115,7 @@ public class PlayerController {
 
     public void setMoney(long money) {
         this.money = money;
+        moneyChange = 1;
     }
 
     public long getMoney() {
@@ -151,6 +155,7 @@ public class PlayerController {
             return;
         }
         this.hp = hp;
+        moneyChange = 1;
     }
 
     public int getHP() {
@@ -204,11 +209,11 @@ public class PlayerController {
             moneyPoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 4.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_MONEY, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
-        g.drawImage(hpImage[0], (int)(21f * Global.MIN_PICTURE_SIZE) + (int)((1 - ratio) * (8f * Global.MIN_PICTURE_SIZE)),  (int)(2 * Global.MIN_PICTURE_SIZE),
-                                (int)( ratio * (8f * Global.MIN_PICTURE_SIZE) ), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        g.drawImage(hpImage[1], (int)(21f * Global.MIN_PICTURE_SIZE),  (int)(2 * Global.MIN_PICTURE_SIZE), 
-                                (int)(8f * Global.MIN_PICTURE_SIZE), (int)(1f * Global.MIN_PICTURE_SIZE), null);
-        
+        g.drawImage(hpImage[0], (int) (21f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (8f * Global.MIN_PICTURE_SIZE)), (int) (2 * Global.MIN_PICTURE_SIZE),
+                (int) (ratio * (8f * Global.MIN_PICTURE_SIZE)), (int) (1f * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(hpImage[1], (int) (21f * Global.MIN_PICTURE_SIZE), (int) (2 * Global.MIN_PICTURE_SIZE),
+                (int) (8f * Global.MIN_PICTURE_SIZE), (int) (1f * Global.MIN_PICTURE_SIZE), null);
+
         g.setColor(Color.white);
         if (stage != 1) {
             g.setColor(Color.black);
@@ -217,9 +222,21 @@ public class PlayerController {
         g.setFont(namePoint.getFont());
         g.drawString(namePoint.getText(), (int) (namePoint.getX()), (int) (namePoint.getY()));
         //drawHP
+        if (hpChange == 1) {
+            g.setColor(Color.red);
+            if (delay.update()) {
+                hpChange = 0;
+            }
+        }
         g.setFont(hpPoint.getFont());
         g.drawString(hpPoint.getText(), (int) (hpPoint.getX()), (int) (hpPoint.getY()));
         //drawMoney
+        if (moneyChange == 1) {
+            g.setColor(Color.orange);
+            if (delay.update()) {
+                moneyChange = 0;
+            }
+        }
         g.setFont(moneyPoint.getFont());
         g.drawString(moneyPoint.getText(), (int) (moneyPoint.getX()), (int) (moneyPoint.getY()));
         g.drawString(" Coin", (int) (28.5f * Global.MIN_PICTURE_SIZE), (int) (6f * Global.MIN_PICTURE_SIZE));
