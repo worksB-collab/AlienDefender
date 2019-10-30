@@ -5,7 +5,7 @@
  */
 package parameter;
 
-import controllers.AlienController;
+import static values.Global.*;
 
 /**
  *
@@ -13,36 +13,26 @@ import controllers.AlienController;
  */
 public class AlienParameter {
 
-    private int[][] alienSet;
-    private AlienController alienController;
+    private float [][] alienSet;
     private int stage;
-    private int start1x;
-    private int start1y;
-    private int start2x;
-    private int start2y;
-    private int start3x;
-    private int start3y;
-    private int start4x;
-    private int start4y;
-    private int start5x;
-    private int start5y;
+    private float start1x, start1y, start2x, start2y, start3x, start3y,start4x, start4y, start5x, start5y;
 
     public AlienParameter(int stage) {
         this.stage = stage;
-        alienSet = new int[5][5];
-        start1x = -25;
-        start1y = 50;
-        start2x = 0;
-        start2y = 0;
-        start3x = 0;
-        start3y = 0;
-        start4x = 0;
-        start4y = 0;
-        start5x = 0;
-        start5y = 0;
+        alienSet = new float[5][5];
+        start1x = START_POINT1[0];
+        start1y = START_POINT1[1];
+        start2x = START_POINT2[0];
+        start2y = START_POINT2[1];
+        start3x = START_POINT3[0];
+        start3y = START_POINT3[1];
+        start4x = START_POINT4[0];
+        start4y = START_POINT4[1];
+        start5x = START_POINT5[0];
+        start5y = START_POINT5[1];
     }
 
-    public int[][] setStageValue() {
+    public float[][] setStageValue() {//  x,  y,  frequency,  type,  alienQuantity
         switch (stage) {
             case 1:
                 alienSet[0][0] = start1x;

@@ -89,6 +89,7 @@ public class TextReader extends Scene {
     @Override
     public void sceneUpdate() {
         if (points[0] != null) {
+
             if (pointer < textList.length) {
                    
                 if (delay.update()) {
@@ -148,7 +149,6 @@ public class TextReader extends Scene {
             @Override
             public void onClick(int x, int y) {
                  sceneController.changeScene(new GameScene(sceneController, stage));
-
             }
             @Override
             public void hover(int x, int y) {

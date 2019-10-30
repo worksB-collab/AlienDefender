@@ -54,6 +54,13 @@ public class Global {
     public static final int TOWER3_ATK = 60;
     public static final int TOWER4_ATK = 70;
 
+    //Alien
+    public static float [] START_POINT1 = {-SIZE_GRID, SIZE_GRID*2};
+    public static float [] START_POINT2 = {-SIZE_GRID, SIZE_GRID*2};
+    public static float [] START_POINT3 = {SIZE_GRID*11, -SIZE_GRID};
+    public static float [] START_POINT4 = {SIZE_GRID*12, -SIZE_GRID};
+    public static float [] START_POINT5 = {SIZE_GRID*13, -SIZE_GRID};
+    
     //Cailbaration
     public static float MIN_PICTURE_SIZE = 32f;
     public static final float STANDAR_MIN_SIZE = 32f;

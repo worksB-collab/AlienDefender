@@ -49,7 +49,7 @@ public class GameScene extends Scene {
     private int stage;
     private Clip audio;
     private AlienParameter alienParameter;
-    private int alienSet[][];
+    private float alienSet[][];
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
@@ -103,7 +103,7 @@ public class GameScene extends Scene {
         int enemyCount = 0;
         for (int i = 0; i < stage; i++) {
             alienController.gameLevelSetting(alienSet[i][0], alienSet[i][1], 
-                                        alienSet[i][2], alienSet[i][3], alienSet[i][4]);
+                                          alienSet[i][2], (int)alienSet[i][3], (int)alienSet[i][4]);
             enemyCount += alienSet[i][4];
         }
         alienController.setEnemyAmount(enemyCount);
