@@ -21,6 +21,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import static values.Global.SIZE_GRID;
 
 /**
  *
@@ -38,12 +39,20 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
     public TowerInformationWindow(float x, float y, float width, float height, Tower tower, PlayerController playerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
+        if (y < 200) {
+            super.setY(300);
+        } else if (y < 400) {
+            super.setY(500);
+        } else if (y < 600) {
+            super.setY(300);}
+        else if (y < 800) {
+            super.setY(500);}
         this.tower = tower;
         imageController = ImageController.genInstance();
         this.playerController = playerController;
         buttonList = new LinkedList<Button>();
         towerRange = new LinkedList();
-        getButton(4 * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE);
+        getButton(super.getX()-2*SIZE_GRID, super.getY());
         isEnd = false;
         super.mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
@@ -126,7 +135,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
             @Override
             public void onClick(int x, int y) {
-                if (playerController.isEnough(TowerController.costArr[tower.getTowerNum()])) {
+                if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
                     if (tower.upgrade()) {
                         playerController.setMoney(playerController.getMoney() - TowerController.upgradeCostArr[tower.getTowerNum()]);
                     }

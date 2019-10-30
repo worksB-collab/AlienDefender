@@ -13,7 +13,6 @@ import controllers.PlayerController;
 import controllers.TowerController;
 import gameobjects.*;
 import gameobjects.Button.ButtonListener;
-import values.Global.*;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -46,44 +45,50 @@ public class TowerSelectWindow extends TowerPopUpWindow {
 
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
         super(6.5f * MIN_PICTURE_SIZE, MIN_PICTURE_SIZE, width, height, towerController);
-        if (y > 400) {
-            super.setX(x);
-            super.setY(400);
-        }
-        imageController = ImageController.genInstance();
-        playerController = PlayerController.genInstance();
+        if (y < 200) {
+            super.setY(300);
+        } else if (y < 400) {
+            super.setY(500);
+        } else if (y < 600) {
+            super.setY(300);}
+        else if (y < 800) {
+            super.setY(500);}
+            imageController = ImageController.genInstance();
+            playerController = PlayerController.genInstance();
 
-        buttonList = new LinkedList<Button>();
-        isEnd = false;
-        isHovering = false;
-        hoveringTower = -1;
-        super.mouseCommandListener = new MouseCommandListener() {
-            @Override
-            public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
-                    int x = e.getX();
-                    int y = e.getY();
-                    for (Button btn : buttonList) {
-                        if (btn.isRange(x, y)) {
-                            btn.click(x, y);
-                            break;
+            buttonList = new LinkedList<Button>();
+            isEnd = false;
+            isHovering = false;
+            hoveringTower = -1;
+            super.mouseCommandListener = new MouseCommandListener() {
+                @Override
+                public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
+                    if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
+                        int x = e.getX();
+                        int y = e.getY();
+                        for (Button btn : buttonList) {
+                            if (btn.isRange(x, y)) {
+                                btn.click(x, y);
+                                break;
+                            }
+                        }
+                    }
+                    if (state == MouseState.MOVED) {
+                        int x = e.getX();
+                        int y = e.getY();
+                        for (Button btn : buttonList) {
+                            if (btn.isRange(x, y)) {
+                                btn.hover(x, y);
+                                break;
+                            }
                         }
                     }
                 }
-                if (state == MouseState.MOVED) {
-                    int x = e.getX();
-                    int y = e.getY();
-                    for (Button btn : buttonList) {
-                        if (btn.isRange(x, y)) {
-                            btn.hover(x, y);
-                            break;
-                        }
-                    }
-                }
-            }
-        };
-        genButton(x, y);
-    }
+            };
+            genButton(x, y);
+        }
+
+    
 
     public Tower getResult() {
         return tower;
@@ -140,8 +145,8 @@ public class TowerSelectWindow extends TowerPopUpWindow {
         if (isHovering) {
             image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
             towerImage = imageController.tryGetImage("/Resources/Images/GameObject/Tower2.png");
-            g.drawImage(image, (int) super.getX() + 200, (int) super.getY() + 80, (int) SIZE_GRID * 8, (int) SIZE_GRID * 3, null);
-            infoString = new DrawStringPoint(super.getX() + 200, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 6, SIZE_GRID * 2);
+            g.drawImage(image, (int) super.getX() + 180, (int) super.getY() + 80, (int) SIZE_GRID * 8, (int) SIZE_GRID * 3, null);
+            infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 6, SIZE_GRID * 2);
             g.setColor(Color.white);
             g.setFont(FONT_INFOWINDOW);
             g.drawString(atkInfo, (int) (infoString.getX() + SIZE_GRID * 2.5), (int) infoString.getY());

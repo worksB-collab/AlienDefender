@@ -106,12 +106,9 @@ public class AlienController {
     private AlienSet presentAlienSet;
     private Iterator<AlienSet> iter;
     private DelayCounter moveDelay, genDelay;
-    private int count;
     private ScoreController scoreController;
     private PlayerController playerController;
-    private int stop; // stop generating aliens
-    private float x, y, frequency;
-    private int a = -1;
+    private float x, y;
 
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
@@ -121,7 +118,6 @@ public class AlienController {
         scoreController = new ScoreController();
         playerController = PlayerController.genInstance();
         Alien.setRoute(route);
-        stop = 0;
     }
 
     public float getMoney(int index) {
