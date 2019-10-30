@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/MenuScene.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/Scene.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/LoadDataScene.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/RouteController.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobjects/Tower1.java</file>
             <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/GameScene.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TextReader.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/PlayerController.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/StartScene.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/values/Path.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/GameOverScene.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/controllers/BackgroundController.java</file>
-            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/values/Global.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/scenes/TowerInformationWindow.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobjects/Button.java</file>
+            <file>file:/C:/Users/user/Documents/NetBeansProjects/GameProject/src/gameobjects/TowerHelper.java</file>
         </group>
     </open-files>
 </project-private>

@@ -49,7 +49,7 @@ public class GameScene extends Scene {
     private int stage;
     private Clip audio;
     private AlienParameter alienParameter;
-    int alienSet[][];
+    private int alienSet[][];
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );

@@ -58,6 +58,16 @@ public class RouteController {
                 genFixedRoad1();
                 break;
             case 2:
+                genFixedRoad2();
+                break;
+            case 3:
+                genFixedRoad3();
+                break;
+            case 4:
+                genFixedRoad4();
+                break;
+            case 5:
+                genFixedRoad5();
                 break;
         }
     }
@@ -80,10 +90,6 @@ public class RouteController {
 //        for (RoutePoint p : route) {
 //            g.drawImage(imgRoad, (int) p.getX(), (int) p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE, null);
 //        }
-          for(RoutePoint p : setPoint){
-              g.drawRect((int)p.getX(), (int)p.getY(), (int)Global.MIN_PICTURE_SIZE, (int)Global.MIN_PICTURE_SIZE );
-          }
-              
          
     }
 
@@ -145,7 +151,154 @@ public class RouteController {
         }
         genSetPoint();
     }
+    private void genFixedRoad2(){
+        route = new LinkedList();
+        setPoint = new LinkedList();
 
+        float x = 0;
+        float y = Global.MIN_PICTURE_SIZE * 2;
+        route.add(new RoutePoint(x, y));
+        for(int i = 0; i < 6 ; i++){
+             x += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 12 ; i++){
+             y += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 10 ; i++){
+             x += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 12 ; i++){
+             y += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+//        route.add(new RoutePoint(x, y));
+        genSetPoint();
+    }
+    private void genFixedRoad3(){
+        route = new LinkedList();
+        setPoint = new LinkedList();
+
+        float x = 14 * Global.MIN_PICTURE_SIZE;
+        float y = 0;
+        float maxY = Global.MIN_PICTURE_SIZE * 22;
+        route.add(new RoutePoint(x, y));
+        while(y <= maxY){
+             y += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        genSetPoint();
+    }
+    private void genFixedRoad4(){
+        route = new LinkedList();
+        setPoint = new LinkedList();
+
+        float x = 15 * Global.MIN_PICTURE_SIZE;
+        float y = 0;
+        float maxY = Global.MIN_PICTURE_SIZE * 22;
+        route.add(new RoutePoint(x, y));
+        for(int i = 0; i < 4 ; i++){
+             y += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 7 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 4 ; i++){
+             y += Global.MIN_PICTURE_SIZE;
+             route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 4 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 4 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 6 ; i++){
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        genSetPoint();
+    }
+    private void genFixedRoad5(){
+        route = new LinkedList();
+        setPoint = new LinkedList();
+
+        float x = 18 * Global.MIN_PICTURE_SIZE;
+        float y = 0;
+        float maxY = Global.MIN_PICTURE_SIZE * 22;
+        route.add(new RoutePoint(x, y));
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 7 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 1 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 15 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 2 ; i++){
+              x += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 1 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+              y += Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+        for(int i = 0; i < 15 ; i++){
+              x -= Global.MIN_PICTURE_SIZE;
+              route.add(new RoutePoint(x, y));
+        }
+       
+  
+        genSetPoint();
+    }
+    
+    
 //    private void genStandardRoute() {
 //        standardRoute = new LinkedList<Point>();
 //        for (int i = 0; i < route.size(); i++) {
@@ -186,7 +339,7 @@ public class RouteController {
             }
         }
         RoutePoint p = setPoint.getLast();
-        setPoint.add(new RoutePoint(p.getX() + Global.MIN_PICTURE_SIZE, p.getY() + Global.MIN_PICTURE_SIZE));
+//        setPoint.add(new RoutePoint(p.getX() + Global.MIN_PICTURE_SIZE, p.getY() + Global.MIN_PICTURE_SIZE));
     }
 
 //    private void reCheckSetPoint() {
