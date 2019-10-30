@@ -54,8 +54,8 @@ public abstract class Alien extends ActiveObject {
         }
 //        for(RoutePoint t : route)
 //        System.out.println("x: "+t.getX()+" "+" y" +t.getY());
+//    }
     }
-
     public int getAlienNum() {
         return alienNum;
     }
