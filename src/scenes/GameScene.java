@@ -49,11 +49,11 @@ public class GameScene extends Scene {
     private int stage;
     private Clip audio;
     private AlienParameter alienParameter;
-    int alienSet[][];
+    private int alienSet[][];
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController );
-        this.stage = 5;
+        this.stage = stage;
         playerController = PlayerController.genInstance();
         playerController.setStage(stage);
         imageController = ImageController.genInstance();
