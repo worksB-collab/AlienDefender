@@ -67,12 +67,16 @@ public abstract class Alien extends ActiveObject {
 
             RoutePoint p = route.get(nextPosition);
             if (super.getX() != p.getX() || super.getY() != p.getY()) {
-                if (super.getX() < p.getX()) {
-                    changeDirection(RIGHT);
-                }
                 if (super.getY() < p.getY()) {
                     changeDirection(DOWN);
                 }
+                if (super.getX() < p.getX()) {
+                    changeDirection(RIGHT);
+                }
+                if (super.getX() > p.getX()) {
+                    changeDirection(LEFT);
+                }
+                
                 if (super.getX() >= p.getX() - super.getSpeed() && super.getX() <= p.getX() + super.getSpeed()
                         && super.getY() >= p.getY() - super.getSpeed() && super.getY() <= p.getY() + super.getSpeed()) {
                     RoutePoint last = route.getLast();

@@ -20,7 +20,7 @@ public abstract class ActiveObject extends GameObject{
     //constructor
     public ActiveObject(float x, float y, float width, float height, float speed) {
         super(x, y, width, height);
-        this.direction = RIGHT;
+        this.direction = DOWN;
         setSpeed(speed);
     }
 
