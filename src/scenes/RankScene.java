@@ -15,6 +15,7 @@ import controllers.CommandSolver;
 import controllers.CommandSolver.MouseState;
 import controllers.RankController;
 import controllers.RankController.Rank;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -89,6 +90,7 @@ public class RankScene extends Scene{
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
         backButton.paint(g);
+        g.setColor(Color.orange);
         if(points[0] == null){
             float x = 0;
             float y = 2 * Global.MIN_PICTURE_SIZE;

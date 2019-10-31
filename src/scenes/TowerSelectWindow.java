@@ -145,15 +145,10 @@ public class TowerSelectWindow extends TowerPopUpWindow {
             image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
             towerImage = imageController.tryGetImage("/Resources/Images/GameObject/Tower2.png");
             g.drawImage(image, (int) super.getX() + 150, (int) super.getY() + 80, (int) SIZE_GRID * 9, (int) SIZE_GRID * 3, null);
-            
-//            infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 5, SIZE_GRID * 2);
             g.setColor(Color.white);
             g.setFont(FONT_INFOWINDOW);
-            
-            
-            
-            g.drawString(atkInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY()+SIZE_GRID*3.5));
-            g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY() + SIZE_GRID*4.5));
+            g.drawString(atkInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY()+SIZE_GRID*3.8));
+            g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY() + SIZE_GRID*4.8));
             //draw preview tower image
             g.drawImage(towerImage, (int) (super.getX() + SIZE_GRID*5.5), (int) (super.getY() + SIZE_GRID*3),
                     (int) (super.getX() + SIZE_GRID * 7.5), (int) (super.getY() + SIZE_GRID * 5),
