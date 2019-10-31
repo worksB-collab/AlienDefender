@@ -219,7 +219,7 @@ public class PlayerController {
             moneyPoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 4.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_MONEY, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
-        g.drawImage(hpImage[0], (int) (19f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (8f * Global.MIN_PICTURE_SIZE)), (int) (1.42 * Global.MIN_PICTURE_SIZE),
+        g.drawImage(hpImage[0], (int) (19f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (12f * Global.MIN_PICTURE_SIZE)), (int) (1.42 * Global.MIN_PICTURE_SIZE),
                 (int) (ratio * (12f * Global.MIN_PICTURE_SIZE)), (int) (2f * Global.MIN_PICTURE_SIZE), null);
 
         //drawHP

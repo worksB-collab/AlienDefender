@@ -5,6 +5,7 @@
  */
 package scenes;
 
+import controllers.AudioController;
 import controllers.CommandSolver;
 import controllers.ImageController;
 import controllers.PlayerController;
@@ -28,6 +29,7 @@ public class EndScene extends Scene{
     private PlayerController playerController;
     private RankController rankController;
     private ImageController imageController;
+    private AudioController audioController;
     private BufferedImage image;
     private Button reStartButton;
     private Clip audio;
@@ -36,6 +38,9 @@ public class EndScene extends Scene{
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
+        audioController = AudioController.genInstance();
+//        audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
+        audio.start();
         image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
         this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
@@ -64,6 +69,10 @@ public class EndScene extends Scene{
     @Override
     public void sceneUpdate() {
         reStartButton.update();
+        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
+            audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
+            audio.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     @Override
