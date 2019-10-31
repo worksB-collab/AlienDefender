@@ -96,7 +96,7 @@ public class GameScene extends Scene {
     public void sceneBegin() {
         playerController.reset();
         routeController.genRoad(stage);
-//        genButton(routeController.getSetPoint());
+        genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());
         alienParameter = new AlienParameter(stage);
         alienSet = alienParameter.setStageValue();
@@ -107,6 +107,9 @@ public class GameScene extends Scene {
             enemyCount += alienSet[i][4];
         }
         alienController.setEnemyAmount(enemyCount);
+//        alienController.gameLevelSetting(alienSet[3][0], alienSet[3][1], 80, 1, 1);
+//        alienController.setEnemyAmount(1);
+
     }
 
     @Override

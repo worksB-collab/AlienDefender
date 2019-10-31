@@ -151,10 +151,10 @@ public class TextReader extends Scene {
                 if(stage == 5){
                     sceneController.changeScene(new EndScene(sceneController));
                 }else{
-//                    sceneController.changeScene(new GameScene(sceneController, stage));
-                    sceneController.changeScene(new GameScene(sceneController, 4));
+                    sceneController.changeScene(new GameScene(sceneController, stage));
+//                    sceneController.changeScene(new GameScene(sceneController, 4));
                 }
-                
+                        
                  
             }
             @Override
