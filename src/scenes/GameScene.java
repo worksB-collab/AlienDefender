@@ -248,7 +248,7 @@ public class GameScene extends Scene {
         }
         
         
-        buttonNext = new Button( (Global.FRAME_WIDTH / 2f) + 10 * Global.MIN_PICTURE_SIZE, (Global.FRAME_HEIGHT/ 2f) + 10f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
+        buttonNext = new Button( (Global.FRAME_WIDTH / 2f) + 10 * Global.MIN_PICTURE_SIZE, (Global.FRAME_HEIGHT/ 2f) + 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
         imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
         buttonNext.setFont(Global.FONT_INFOWINDOW);
         buttonNext.setText("NEXT");

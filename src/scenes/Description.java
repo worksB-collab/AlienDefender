@@ -24,13 +24,13 @@ import values.Path;
  *
  * @author user
  */
-public class LoadDataScene extends Scene{
+public class Description extends Scene{
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private BufferedImage image;
     private Button backButton;
     private Clip audio;
-    public LoadDataScene(SceneController sceneController, Clip audio) {
+    public Description(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.LOAD_DATA_SCENE);
