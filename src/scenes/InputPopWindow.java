@@ -126,9 +126,9 @@ public class InputPopWindow extends PopUpWindow {
         g.drawString(text, (int) point.getX(), (int) point.getY());
 
         g.setFont(FONT_BUTTON);
-        g.drawString("What's your name?", 350, 300);
+        g.drawString("What's your name?", 333, 300);
         g.setFont(FONT_INFOWINDOW);
-        g.drawString("< English and Numbers Only >", 380, 485);
+        g.drawString("< English and Numbers Only >", 335, 485);
     }
 
 }

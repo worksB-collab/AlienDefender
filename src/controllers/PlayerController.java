@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import static values.Global.MIN_PICTURE_SIZE;
 
 /**
  *
@@ -210,19 +211,13 @@ public class PlayerController {
             moneyPoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 4.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_MONEY, Long.toString(money), 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
         //drawHp
-        g.drawImage(hpImage[0], (int) (21f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (8f * Global.MIN_PICTURE_SIZE)), (int) (2 * Global.MIN_PICTURE_SIZE),
-                (int) (ratio * (8f * Global.MIN_PICTURE_SIZE)), (int) (1f * Global.MIN_PICTURE_SIZE), null);
-        g.drawImage(hpImage[1], (int) (21f * Global.MIN_PICTURE_SIZE), (int) (2 * Global.MIN_PICTURE_SIZE),
-                (int) (8f * Global.MIN_PICTURE_SIZE), (int) (1f * Global.MIN_PICTURE_SIZE), null);
-
-        g.setColor(Color.white);
-        if (stage != 1) {
-            g.setColor(Color.black);
-        }
+        g.drawImage(hpImage[0], (int) (19f * Global.MIN_PICTURE_SIZE) + (int) ((1 - ratio) * (8f * Global.MIN_PICTURE_SIZE)), (int) (1.42 * Global.MIN_PICTURE_SIZE),
+                (int) (ratio * (12f * Global.MIN_PICTURE_SIZE)), (int) (2f * Global.MIN_PICTURE_SIZE), null);
         //drawName
         g.setFont(namePoint.getFont());
-        g.drawString(namePoint.getText(), (int) (namePoint.getX()), (int) (namePoint.getY()));
+        g.drawString(namePoint.getText(), (int) (namePoint.getX()+MIN_PICTURE_SIZE*0.5f), (int) (namePoint.getY()+10));
         //drawHP
+        g.setColor(Color.white);
         if (hpChange == 1) {
             g.setColor(Color.red);
             if (delay.update()) {
@@ -230,7 +225,11 @@ public class PlayerController {
             }
         }
         g.setFont(hpPoint.getFont());
-        g.drawString(hpPoint.getText(), (int) (hpPoint.getX()), (int) (hpPoint.getY()));
+        g.drawString(hpPoint.getText()+"%", (int) (hpPoint.getX()-MIN_PICTURE_SIZE*0.7f), (int) (hpPoint.getY()));
+        g.setColor(Color.white);
+        if (stage != 1) {
+            g.setColor(Color.black);
+        }
         //drawMoney
         if (moneyChange == 1) {
             g.setColor(Color.orange);
@@ -245,13 +244,13 @@ public class PlayerController {
             }
         }
         g.setFont(moneyPoint.getFont());
-        g.drawString(moneyPoint.getText(), (int) (moneyPoint.getX()), (int) (moneyPoint.getY()));
-        g.drawString(" Coin", (int) (28.5f * Global.MIN_PICTURE_SIZE), (int) (6f * Global.MIN_PICTURE_SIZE));
+        g.drawString(moneyPoint.getText(), (int) (moneyPoint.getX()+0.5*MIN_PICTURE_SIZE), (int) (moneyPoint.getY()));
+        g.drawString(" Coin", (int) (28.5f * MIN_PICTURE_SIZE), (int) (5.841f * MIN_PICTURE_SIZE));
 
         //drawScore
         g.setFont(scorePoint.getFont());
-        g.drawString(scorePoint.getText(), (int) (scorePoint.getX()), (int) (scorePoint.getY()));
-        g.drawString(" Kill", (int) (29f * Global.MIN_PICTURE_SIZE), (int) (4.5f * Global.MIN_PICTURE_SIZE));
+        g.drawString(scorePoint.getText(), (int) (scorePoint.getX()+0.5*MIN_PICTURE_SIZE), (int) (scorePoint.getY()));
+        g.drawString(" Kill", (int) (29f * MIN_PICTURE_SIZE), (int) (4.341f * MIN_PICTURE_SIZE));
         //reset
         g.setColor(Color.black);
     }

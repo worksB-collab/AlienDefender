@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import static values.Global.FONT_BUTTON;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Button extends GameObject {
         super(x, y, width, height);
         this.rootImage = rootImage;
         this.text = "";
-        this.font = new Font("JackeyFont", Font.PLAIN, (int)(40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
+        this.font = FONT_BUTTON;
         this.color = Color.ORANGE;
         isHovered = false;
         isClicked = false;
@@ -50,7 +51,7 @@ public class Button extends GameObject {
     public Button(float x, float y, float width, float height, String text) {
         super(x, y, width, height);
         this.text = text;
-        this.font = new Font("JackeyFont", Font.PLAIN, (int)(40 * (Global.STANDAR_MIN_SIZE / Global.MIN_PICTURE_SIZE)));
+        this.font = FONT_BUTTON;
         this.color = Color.LIGHT_GRAY;
         isHovered = false;
         isClicked = false;

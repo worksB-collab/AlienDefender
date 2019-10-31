@@ -74,16 +74,22 @@ public class Global {
     public static final int RIGHT = 90;
 
     //Font
-    public static final Font FONT_00 = new Font("JackeyFont", Font.PLAIN, 100);
-    public static final Font FONT_01 = new Font("JackeyFont", Font.PLAIN, 120);
-    public static final Font FONT_BUTTON = new Font("JackeyFont", Font.PLAIN, 40);
-    public static final Font FONT_INPUT = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_NAME = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_HP = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_SCORE = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_MONEY = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_TEXT = new Font("JackeyFont", Font.PLAIN, 30);
-    public static final Font FONT_INFOWINDOW = new Font("JackeyFont", Font.PLAIN, 20);
+    public static final Loadfont.CyFont cf1 = new Loadfont.CyFont();
+    public static final Loadfont.CyFont cf2 = new Loadfont.CyFont();
+    public static final Loadfont.CyFont cf3 = new Loadfont.CyFont();
+    public static final Loadfont.CyFont cf4 = new Loadfont.CyFont();
+    public static final Loadfont.CyFont cf5 = new Loadfont.CyFont();
+    
+    public static final Font FONT_00 = cf1.getDefinedFont(1, 60f);
+    public static final Font FONT_01 = cf2.getDefinedFont(1, 120f);
+    public static final Font FONT_BUTTON = cf3.getDefinedFont(1, 40f);
+    public static final Font FONT_INPUT = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_NAME = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_HP = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_SCORE = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_MONEY = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_TEXT = cf4.getDefinedFont(1, 30f);
+    public static final Font FONT_INFOWINDOW = cf5.getDefinedFont(1, 25f);
 
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
 
