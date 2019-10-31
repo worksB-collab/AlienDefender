@@ -46,6 +46,7 @@ public abstract class Alien extends ActiveObject {
     }
 
     public static void setRoute(LinkedList<RoutePoint> r) {
+        route.clear();
         for (int i = 0; i < r.size(); i++) {
             route.add(r.get(i));
         }

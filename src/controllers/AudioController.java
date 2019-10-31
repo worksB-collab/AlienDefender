@@ -68,7 +68,7 @@ public class AudioController {
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             AudioKeyPair key = new AudioKeyPair(path, clip);
-            audioList.add(key);
+//            audioList.add(key);
             clip.open(stream);
             
             return clip;
