@@ -17,6 +17,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
+import values.DrawStringPoint;
 import values.Global;
 import values.Path;
 
@@ -32,6 +33,8 @@ public class EndScene extends Scene{
     private AudioController audioController;
     private BufferedImage image;
     private Button reStartButton;
+    private String scoreString;
+    private DrawStringPoint point;
     private Clip audio;
     public EndScene(SceneController sceneController) {
         super(sceneController);
@@ -39,10 +42,10 @@ public class EndScene extends Scene{
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
         audioController = AudioController.genInstance();
-//        audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
+        audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
         audio.start();
+        scoreString = "Total socre : " + Long.toString(playerController.getScore());
         image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
-        this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -70,8 +73,11 @@ public class EndScene extends Scene{
     public void sceneUpdate() {
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-            audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
+            audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
             audio.loop(Clip.LOOP_CONTINUOUSLY);
+        }
+        if(point != null){
+            point.update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
         }
     }
 
@@ -85,6 +91,12 @@ public class EndScene extends Scene{
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
         reStartButton.paint(g);
+        if(point == null){
+            point = new DrawStringPoint(0, 0, g, Global.FONT_SCORE, scoreString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+        }
+        g.setFont(Global.FONT_SCORE);
+        g.drawString(point.getText(), (int)point.getX(), (int)point.getY());
+       
     }
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener(){
