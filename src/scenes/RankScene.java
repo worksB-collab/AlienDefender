@@ -5,7 +5,6 @@
  */
 package scenes;
 
-
 import controllers.ImageController;
 import controllers.SceneController;
 import gameobjects.Button;
@@ -28,56 +27,60 @@ import values.Global;
  *
  * @author user
  */
-public class RankScene extends Scene{
+public class RankScene extends Scene {
+
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private RankController rankController;
     private ArrayList<Rank> rankList;
     private DrawStringPoint points[];
     private String text[];
-    private BufferedImage image;
+    private BufferedImage image, image2;
     private Button backButton;
     private Clip audio;
+    private int sX;
+
     public RankScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
-        image = imageController.tryGetImage(Path.Image.Scene.RANK_SCENE);
+        image = imageController.tryGetImage(Path.Image.Scene.SPACE1);
+        image2 = imageController.tryGetImage(Path.Image.Scene.SPACE2);
         this.audio = audio;
         rankController = RankController.genInstance();
         rankList = rankController.getList();
         text = new String[rankList.size()];
-        for(int i = 0; i < rankList.size(); i++){
+        for (int i = 0; i < rankList.size(); i++) {
             Rank tmp = rankList.get(i);
             text[i] = "Name: " + tmp.getName() + "       Score: " + tmp.getScore();
         }
         points = new DrawStringPoint[rankList.size()];
 
-        
-        
-        
-        mouseCommandListener = new CommandSolver.MouseCommandListener(){
+        mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                if(state == MouseState.RELEASED || state == MouseState.CLICKED){
-                    if(backButton.isRange(e.getX(), e.getY())){
+                if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
+                    if (backButton.isRange(e.getX(), e.getY())) {
                         backButton.click(e.getX(), e.getY());
                     }
                 }
             }
-        
+
         };
     }
 
     @Override
-    public void sceneBegin(){
+    public void sceneBegin() {
         genButton();
-        
+
     }
 
     @Override
     public void sceneUpdate() {
         backButton.update();
-  
+        if (sX == -(int) (32 * Global.MIN_PICTURE_SIZE)) {
+            sX = 0;
+        }
+        sX -= 1;
     }
 
     @Override
@@ -88,10 +91,16 @@ public class RankScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)(32 * Global.MIN_PICTURE_SIZE), (int)(24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image, 
+                sX, 0, 
+                (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image2, 
+                sX+(int) (32 * Global.MIN_PICTURE_SIZE), 0, 
+                (int) (32* Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+//        backButton.paint(g);
         backButton.paint(g);
         g.setColor(Color.orange);
-        if(points[0] == null){
+        if (points[0] == null) {
             float x = 0;
             float y = 2 * Global.MIN_PICTURE_SIZE;
             int width = (int) ((Global.FRAME_WIDTH - 2 * Global.MIN_PICTURE_SIZE));
@@ -101,21 +110,21 @@ public class RankScene extends Scene{
                 y += height;
             }
         }
-        for(int i = 0 ; i < points.length; i++){
-            g.drawString(points[i].getText(), (int)points[i].getX(), (int)points[i].getY());
+        for (int i = 0; i < points.length; i++) {
+            g.drawString(points[i].getText(), (int) points[i].getX(), (int) points[i].getY());
         }
     }
-    
+
     @Override
-    public CommandSolver.MouseCommandListener getMouseCommandListener(){
+    public CommandSolver.MouseCommandListener getMouseCommandListener() {
         return mouseCommandListener;
     }
-    
-    private void genButton(){
-        backButton = new Button(50, 50,  150, 100,
+
+    private void genButton() {
+        backButton = new Button(50, 50, 150, 100,
                 imageController.tryGetImage(Path.Image.Button.BACK_BUTTON));
-        
-        backButton.setButtonListener(new ButtonListener(){
+
+        backButton.setButtonListener(new ButtonListener() {
 
             @Override
             public void onClick(int x, int y) {
@@ -125,8 +134,8 @@ public class RankScene extends Scene{
             @Override
             public void hover(int x, int y) {
             }
-        
+
         });
     }
-    
+
 }

@@ -109,7 +109,6 @@ public class PrepareScene extends Scene {
             sX=0;
         }
         sX -=1;
-        
     }
 
     @Override
