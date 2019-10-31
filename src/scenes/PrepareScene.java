@@ -36,17 +36,20 @@ public class PrepareScene extends Scene {
     private LinkedList<Character> charList;
     private ImageController imageController;
     private PlayerController playerController;
-    private BufferedImage image;
+    private BufferedImage image, image2;
     private Button backButton;
     private Clip audio;
+    private int sX;
 
     public PrepareScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
         playerController = PlayerController.genInstance();
-        image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
+        image = imageController.tryGetImage(Path.Image.Scene.SPACE1);
+        image2 = imageController.tryGetImage(Path.Image.Scene.SPACE2);
         this.audio = audio;
         charList = new LinkedList();
+        sX = 0;
 
         mouseCommandListener = new MouseCommandListener() {
             @Override
@@ -99,9 +102,14 @@ public class PrepareScene extends Scene {
                 TextContent text = TextContent.genInstance();
                 sceneController.changeScene(new TextReader(sceneController, 1));
 //                sceneController.changeScene(new GameScene1(sceneController));
-
+                
             }
         }
+        if(sX ==-(int) (32 * Global.MIN_PICTURE_SIZE)){
+            sX=0;
+        }
+        sX -=1;
+        
     }
 
     @Override
@@ -115,10 +123,16 @@ public class PrepareScene extends Scene {
     @Override
     public void paint(Graphics g) {
 
-        g.drawImage(image, 0, 0, (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image, 
+                sX, 0, 
+                (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image2, 
+                sX+(int) (32 * Global.MIN_PICTURE_SIZE), 0, 
+                (int) (32* Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
 //        backButton.paint(g);
         if (popWindow != null) {
             popWindow.paint(g);
+            
         }
     }
 

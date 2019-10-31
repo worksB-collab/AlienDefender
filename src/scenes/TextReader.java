@@ -29,7 +29,7 @@ import values.Path;
 public class TextReader extends Scene {
     private MouseCommandListener mouseCommandListener;
     private ImageController imageController;
-    private BufferedImage image;
+    private BufferedImage image, image2;
     private Clip audio;
     private TextContent textContent;
     private LinkedList<Character> textList[];
@@ -39,12 +39,14 @@ public class TextReader extends Scene {
     private DelayCounter delay;
     private Button buttonNext;
     private int stage;
+    private int sX;
 
     public TextReader(SceneController sceneController, int stage) {
         super(sceneController);
         this.stage = stage;
         imageController = ImageController.genInstance();
-        image = imageController.tryGetImage(Path.Image.Scene.PREPARE_SCENE);
+        image = imageController.tryGetImage(Path.Image.Scene.SPACE1);
+        image2 = imageController.tryGetImage(Path.Image.Scene.SPACE2);
         audio = audioController.tryGetAudio(Path.Audios.Musics.BETWEENSCENES);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         textContent = TextContent.genInstance();
@@ -104,6 +106,10 @@ public class TextReader extends Scene {
                 }
             }
         }
+        if(sX ==-(int) (32 * Global.MIN_PICTURE_SIZE)){
+            sX=0;
+        }
+        sX -=1;
     }
 
     @Override
@@ -115,7 +121,13 @@ public class TextReader extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int) (32f * Global.MIN_PICTURE_SIZE), (int) (24f * Global.MIN_PICTURE_SIZE), null);
+        
+         g.drawImage(image, 
+                sX, 0, 
+                (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+        g.drawImage(image2, 
+                sX+(int) (32 * Global.MIN_PICTURE_SIZE), 0, 
+                (int) (32* Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
         if (points[0] == null) {
             float x = 0;
             float y = 0;

@@ -38,12 +38,12 @@ public class PlayerController {
 
     private float ratio;
 
-    private PlayerController() {
+    private PlayerController(int money, int hp) {
         this.name = "Player";
         this.score = 0;
         this.stage = 1;
-        this.money = 300;
-        this.hp = 100;
+        this.money = money;
+        this.hp = hp;
         this.ratio = 1f;
         imageController = ImageController.genInstance();
         hpImage = new BufferedImage[2];
@@ -62,7 +62,7 @@ public class PlayerController {
 
     public static PlayerController genInstance() {
         if (playerController == null) {
-            playerController = new PlayerController();
+            playerController = new PlayerController(300,100);
         }
         return playerController;
     }
@@ -165,7 +165,7 @@ public class PlayerController {
             return;
         }
         this.hp = hp;
-        moneyChange = 1;
+        hpChange = 1;
     }
 
     public int getHP() {

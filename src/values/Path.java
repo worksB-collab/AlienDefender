@@ -27,6 +27,8 @@ public class Path {
         public static final String BOOM2 = GAMEOBJECT + "/Boom2.png";
         public static final String UPGRADE = GAMEOBJECT + "/Upgrade.png";
         public static final String TROPHY = GAMEOBJECT + "/Trophy.png";
+        public static final String DEAD = GAMEOBJECT + "/Dead.png";
+
 
         public class Button {
 
@@ -44,6 +46,8 @@ public class Path {
             public static final String GAMEOVER_SCENE = SCENE + "/GameOverScene.png";
             public static final String LOAD_DATA_SCENE = SCENE + "/LoadDataScene.png";
             public static final String END_SCENE = SCENE + "/EndScene.png";
+            public static final String SPACE1 = SCENE + "/space.png";
+            public static final String SPACE2 = SCENE + "/space2.png";
         }
     }
 
