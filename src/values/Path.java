@@ -60,7 +60,7 @@ public class Path {
             public static final String INTHEGAME = MUSICS + "/In_The_Game/in_the_game.wav";
             public static final String ENDING = MUSICS + "/Ending/this.wav";
             public static final String WIN = MUSICS + "/Win";
-            public static final String WIN1 = WIN + "/this1.wav";
+            public static final String WIN1 = WIN + "/this.wav";
             public static final String WIN2 = WIN + "/this2.wav";
             public static final String LOSE = MUSICS + "/Lose";
             public static final String LOSE1 = LOSE + "/this1.wav";
