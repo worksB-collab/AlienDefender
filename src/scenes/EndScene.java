@@ -10,6 +10,7 @@ import controllers.ImageController;
 import controllers.PlayerController;
 import controllers.SceneController;
 import gameobjects.Button;
+import gameobjects.Button.ButtonListener;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -74,13 +75,17 @@ public class EndScene extends Scene{
         g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
         reStartButton.paint(g);
     }
+    @Override
+    public CommandSolver.MouseCommandListener getMouseCommandListener(){
+        return mouseCommandListener;
+    }
     public void genButton(){
         
         reStartButton = new Button( (Global.FRAME_WIDTH - 10f * Global.MIN_PICTURE_SIZE) / 2f, ((Global.FRAME_HEIGHT - 4f * Global.MIN_PICTURE_SIZE) / 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
         imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
         reStartButton.setText("End");
         
-        reStartButton.setButtonListener(new Button.ButtonListener(){
+        reStartButton.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
                 playerController.initialize();

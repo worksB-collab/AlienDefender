@@ -43,6 +43,7 @@ public class GameScene extends Scene {
     private RouteController routeController;
     private PopUpWindow popUpWindow;
     private LinkedList<Button> buttonList;
+    private Button buttonNext;
     private Point spot;
     private AlienController alienController;
     private TowerController towerController;
@@ -75,6 +76,9 @@ public class GameScene extends Scene {
 
                             spot = new Point(x, y);
                         }
+                    }
+                    if(buttonNext.isRange(x, y)){
+                        buttonNext.click(x, y);
                     }
                 }
                 if (state == MouseState.MOVED) {
@@ -129,6 +133,8 @@ public class GameScene extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
+        
+        buttonNext.update();    
 
         alienController.update();
 
@@ -168,7 +174,10 @@ public class GameScene extends Scene {
                 button.paint(g);
             }
         }
-
+        buttonNext.paint(g);
+        
+        
+        
         alienController.paint(g);
         towerController.paint(g);
 
@@ -237,5 +246,23 @@ public class GameScene extends Scene {
             });
             buttonList.add(button);
         }
+        
+        
+        buttonNext = new Button( (Global.FRAME_WIDTH / 2f) + 10 * Global.MIN_PICTURE_SIZE, (Global.FRAME_HEIGHT/ 2f) + 10f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
+        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        buttonNext.setFont(Global.FONT_INFOWINDOW);
+        buttonNext.setText("NEXT");
+        
+        buttonNext.setButtonListener(new Button.ButtonListener(){
+            @Override
+            public void onClick(int x, int y) {
+                sceneController.changeScene(new TextReader(sceneController, ++stage));
+
+            }
+            @Override
+            public void hover(int x, int y) {
+            }
+        }
+        );
     }
 }
