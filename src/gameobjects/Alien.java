@@ -25,6 +25,7 @@ public abstract class Alien extends ActiveObject {
     protected int alienNum;
     private int money;
     private DelayCounter delay;
+    private RoutePoint nextPoint;
 
     public Alien(float x, float y, float width, float height, float hp, float speed) {
         super(x, y, width, height, speed);
@@ -48,13 +49,15 @@ public abstract class Alien extends ActiveObject {
         for (int i = 0; i < r.size(); i++) {
             route.add(r.get(i));
         }
-//        for (int i = 0; i < 5; i++) {
-//            RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int) route.getLast().getY() + (int) SIZE_GRID);
-//            route.addLast(p);
+        for (int i = 0; i < 5; i++) {
+            RoutePoint p = new RoutePoint((int) route.getLast().getX(), (int) route.getLast().getY() + (int) SIZE_GRID);
+            route.addLast(p);
+        }
+//        int i = 0;
+//        for(RoutePoint t : route){
+//            i++;
+//            System.out.println(i + "\tx: "+t.getX()+" "+" y" +t.getY());
 //        }
-//        for(RoutePoint t : route)
-//        System.out.println("x: "+t.getX()+" "+" y" +t.getY());
-//    }
     }
     public int getAlienNum() {
         return alienNum;
@@ -66,18 +69,62 @@ public abstract class Alien extends ActiveObject {
             return;
         }
         if (route.get(nextPosition) != null) {
-
-            RoutePoint p = route.get(nextPosition);
-            if (super.getX() != p.getX() || super.getY() != p.getY()) {
-                if (super.getY() - p.getY() <0 ) {
-                    changeDirection(DOWN);
-                } else if (super.getX() - p.getX() < 0) {
-                    changeDirection(RIGHT);
-                } else if (super.getX() - p.getX() > 0) {
-                    changeDirection(LEFT);
-                } else if(super.getY() - p.getY() > 0){
-                    changeDirection(UP);
+            nextPoint = route.get(nextPosition);  
+            float vx = Math.abs(super.getX() - nextPoint.getX());
+            float vy = Math.abs(super.getY() - nextPoint.getY());
+            
+            if (vx != 0 ) {
+                if(vy != 0){
+                    if(vx > vy){
+                        if(super.getX() < nextPoint.getX()){
+                            changeDirection(RIGHT);
+                        }
+                        else if(super.getX() > nextPoint.getX()){
+                            changeDirection(LEFT);
+                        }
+                    }else{
+                        if(super.getY() < nextPoint.getY()){
+                            changeDirection(DOWN);
+                        }else if(super.getY() > nextPoint.getY()){
+                            changeDirection(UP);
+                        }
+                    }
+                }else{
+                    if(super.getX() < nextPoint.getX()){
+                            changeDirection(RIGHT);
+                     }else if(super.getX() > nextPoint.getX()){
+                            changeDirection(LEFT);
+                    }
                 }
+
+            }else if(vy != 0){
+                if(vx != 0){
+                    if(vy > vx){
+                        if(super.getY() < nextPoint.getY()){
+                            changeDirection(DOWN);
+                        }else if(super.getY() > nextPoint.getY()){
+                            changeDirection(UP);
+                        }
+                    }else{
+                        if(super.getX() < nextPoint.getX()){
+                            changeDirection(RIGHT);
+                        }
+                        else if(super.getX() > nextPoint.getX()){
+                            changeDirection(LEFT);
+                        }
+                    }
+                }else{
+                    if(super.getY() < nextPoint.getY()){
+                            changeDirection(DOWN);
+                    }else if(super.getY() > nextPoint.getY()){
+                            changeDirection(UP);
+                    }
+                }
+                
+            }
+            
+                
+                
 //                if (super.getY() <= p.getY()) {
 //                    changeDirection(DOWN);
 //                } else if (super.getX() <= p.getX() + DEVIATION) {
@@ -87,15 +134,16 @@ public abstract class Alien extends ActiveObject {
 //                } else {
 //                    changeDirection(UP);
 //                }
+       
 
-                if (super.getX() >= p.getX() && super.getX() <= p.getX() + SIZE_GRID
-                        && super.getY() >= p.getY() && super.getY() <= p.getY() + SIZE_GRID) {
-                    RoutePoint last = route.getLast();
-                    nextPosition++;
-                }
-            }
         }
         move(super.getDirection());
+        if (super.getX() == nextPoint.getX() && super.getY() == nextPoint.getY()) {
+           nextPosition++;
+
+        }
+
+
         if (delay.update()) {
             act = ++act % 4;
         }
@@ -122,35 +170,47 @@ public abstract class Alien extends ActiveObject {
     }
 
     public void move(int direction) {
-        switch (direction) {
-            case Global.UP:
-                super.setY(super.getY() - 1f);
-                break;
-            case Global.DOWN:
-                super.setY(super.getY() + 1f);
-                break;
-            case Global.LEFT:
-                super.setX(super.getX() - 1f);
-                break;
-            case Global.RIGHT:
-                super.setX(super.getX() + 1f);
-                break;
-        } 
-    
 //        switch (direction) {
 //            case Global.UP:
-//                super.setY(super.getY() - super.getSpeed());
+//                super.setY(super.getY() - 1f);
 //                break;
 //            case Global.DOWN:
-//                super.setY(super.getY() + super.getSpeed());
+//                super.setY(super.getY() + 1f);
 //                break;
 //            case Global.LEFT:
-//                super.setX(super.getX() - super.getSpeed());
+//                super.setX(super.getX() - 1f);
 //                break;
 //            case Global.RIGHT:
-//                super.setX(super.getX() + super.getSpeed());
+//                super.setX(super.getX() + 1f);
 //                break;
-//        }   
+//        } 
+    
+        switch (direction) {
+            case Global.UP:
+                super.setY(super.getY() - super.getSpeed());
+                if(super.getY() < nextPoint.getY()){
+                    super.setY(nextPoint.getY());
+                }
+                break;
+            case Global.DOWN:
+                super.setY(super.getY() + super.getSpeed());
+                if(super.getY() > nextPoint.getY()){
+                    super.setY(nextPoint.getY());
+                }
+                break;
+            case Global.LEFT:
+                super.setX(super.getX() - super.getSpeed());
+                if(super.getX() < nextPoint.getX()){
+                    super.setX(nextPoint.getX());
+                }
+                break;
+            case Global.RIGHT:
+                super.setX(super.getX() + super.getSpeed());
+                if(super.getX() > nextPoint.getX()){
+                    super.setX(nextPoint.getX());
+                }
+                break;
+        }
     }
 
     public abstract int getDeadDelay();
