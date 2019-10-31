@@ -74,16 +74,16 @@ public class Global {
     public static final int RIGHT = 90;
 
     //Font
-    public static final Font FONT_00 = new Font(Font.DIALOG, Font.PLAIN, 100);
-    public static final Font FONT_01 = new Font(Font.DIALOG, Font.PLAIN, 120);
-    public static final Font FONT_BUTTON = new Font(Font.DIALOG, Font.PLAIN, 40);
-    public static final Font FONT_INPUT = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_NAME = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_HP = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_SCORE = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_MONEY = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_TEXT = new Font(Font.DIALOG, Font.PLAIN, 30);
-    public static final Font FONT_INFOWINDOW = new Font(Font.DIALOG, Font.PLAIN, 20);
+    public static final Font FONT_00 = new Font("微軟正黑體", Font.PLAIN, 100);
+    public static final Font FONT_01 = new Font("微軟正黑體", Font.PLAIN, 120);
+    public static final Font FONT_BUTTON = new Font("微軟正黑體", Font.PLAIN, 40);
+    public static final Font FONT_INPUT = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_NAME = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_HP = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_SCORE = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_MONEY = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_TEXT = new Font("微軟正黑體", Font.PLAIN, 30);
+    public static final Font FONT_INFOWINDOW = new Font("微軟正黑體", Font.PLAIN, 20);
 
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
 
