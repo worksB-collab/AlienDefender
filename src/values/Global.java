@@ -44,15 +44,15 @@ public class Global {
     public static final float TOWER3_ATKRANGE = 4 * SIZE_GRID;
     public static final float TOWER4_ATKRANGE = 5 * SIZE_GRID;
     public static final float TOWER0_COST = 40;
-    public static final float TOWER1_COST = 60;
+    public static final float TOWER1_COST = 50;
     public static final float TOWER2_COST = 80;
-    public static final float TOWER3_COST = 100;
-    public static final float TOWER4_COST = 120;
+    public static final float TOWER3_COST = 120;
+    public static final float TOWER4_COST = 150;
     public static final float TOWER0_ATK = 20;
-    public static final float TOWER1_ATK = 30;
-    public static final float TOWER2_ATK = 50;
-    public static final float TOWER3_ATK = 60;
-    public static final float TOWER4_ATK = 70;
+    public static final float TOWER1_ATK = 15;
+    public static final float TOWER2_ATK = 30;
+    public static final float TOWER3_ATK = 35;
+    public static final float TOWER4_ATK = 40;
 
     //Alien
     public static float [] START_POINT1 = {-SIZE_GRID, SIZE_GRID*2};
@@ -74,16 +74,16 @@ public class Global {
     public static final int RIGHT = 90;
 
     //Font
-    public static final Font FONT_00 = new Font("微軟正黑體", Font.PLAIN, 100);
-    public static final Font FONT_01 = new Font("微軟正黑體", Font.PLAIN, 120);
-    public static final Font FONT_BUTTON = new Font("微軟正黑體", Font.PLAIN, 40);
-    public static final Font FONT_INPUT = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_NAME = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_HP = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_SCORE = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_MONEY = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_TEXT = new Font("微軟正黑體", Font.PLAIN, 30);
-    public static final Font FONT_INFOWINDOW = new Font("微軟正黑體", Font.PLAIN, 20);
+    public static final Font FONT_00 = new Font("JackeyFont", Font.PLAIN, 100);
+    public static final Font FONT_01 = new Font("JackeyFont", Font.PLAIN, 120);
+    public static final Font FONT_BUTTON = new Font("JackeyFont", Font.PLAIN, 40);
+    public static final Font FONT_INPUT = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_NAME = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_HP = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_SCORE = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_MONEY = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_TEXT = new Font("JackeyFont", Font.PLAIN, 30);
+    public static final Font FONT_INFOWINDOW = new Font("JackeyFont", Font.PLAIN, 20);
 
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
 

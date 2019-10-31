@@ -10,6 +10,7 @@ import scenes.StartScene;
 import controllers.CommandSolver.CommandWrapper;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import values.Loadfont;
 
 /**
  *
@@ -17,12 +18,17 @@ import javax.swing.JPanel;
  */
 public class GameJPanel extends JPanel{ 
     private SceneController sceneController;
+//    private Loadfont f;
     
     public GameJPanel() {
         sceneController = new SceneController();
         
         sceneController.changeScene(new StartScene(sceneController));
-          
+//        if(f == null) {
+//            f = new Loadfont();
+//        }
+        
+//        Loadfont.loadFont("JackeyFont", 100);
     }
     
     public void update(CommandWrapper commands) {

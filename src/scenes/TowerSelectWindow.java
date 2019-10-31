@@ -111,24 +111,24 @@ public class TowerSelectWindow extends TowerPopUpWindow {
         }
         switch (hoveringTower) {
             case 0:
-                atkInfo = "Attack: " + (int)TOWER0_ATK;
-                costInfo = "Cost: " + (int)TOWER0_COST;
+                atkInfo = "Attack : " + (int)TOWER0_ATK;
+                costInfo = "Cost : " + (int)TOWER0_COST;
                 break;
             case 1:
-                atkInfo = "Attack: " + (int)TOWER1_ATK;
-                costInfo = "Cost: " + (int)TOWER1_COST;
+                atkInfo = "Attack : " + (int)TOWER1_ATK;
+                costInfo = "Cost : " + (int)TOWER1_COST;
                 break;
             case 2:
-                atkInfo = "Attack: " + (int)TOWER2_ATK;
-                costInfo = "Cost: " + (int)TOWER2_COST;
+                atkInfo = "Attack : " + (int)TOWER2_ATK;
+                costInfo = "Cost : " + (int)TOWER2_COST;
                 break;
             case 3:
-                atkInfo = "Attack: " + (int)TOWER3_ATK;
-                costInfo = "Cost: " + (int)TOWER3_COST;
+                atkInfo = "Attack : " + (int)TOWER3_ATK;
+                costInfo = "Cost : " + (int)TOWER3_COST;
                 break;
             case 4:
-                atkInfo = "Attack: " + (int)TOWER4_ATK;
-                costInfo = "Cost: " + (int)TOWER4_COST;
+                atkInfo = "Attack : " + (int)TOWER4_ATK;
+                costInfo = "Cost : " + (int)TOWER4_COST;
                 break;
         }
     }
@@ -148,8 +148,8 @@ public class TowerSelectWindow extends TowerPopUpWindow {
             infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 6, SIZE_GRID * 2);
             g.setColor(Color.white);
             g.setFont(FONT_INFOWINDOW);
-            g.drawString(atkInfo, (int) (infoString.getX() + SIZE_GRID * 2.5), (int) infoString.getY());
-            g.drawString(costInfo, (int) (infoString.getX() + SIZE_GRID * 2.5), (int) (infoString.getY() + SIZE_GRID));
+            g.drawString(atkInfo, (int) (infoString.getX() + SIZE_GRID * 2), (int) infoString.getY());
+            g.drawString(costInfo, (int) (infoString.getX() + SIZE_GRID * 2), (int) (infoString.getY() + SIZE_GRID));
             g.drawImage(towerImage, (int) (infoString.getX() - SIZE_GRID), (int) (infoString.getY() - SIZE_GRID),
                     (int) (infoString.getX() + SIZE_GRID * 1.5), (int) (infoString.getY() + SIZE_GRID * 1.5),
                     (int) (hoveringTower * SIZE_OBJECT), 0, (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT, null);

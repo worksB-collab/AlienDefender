@@ -53,7 +53,7 @@ public class TextReader extends Scene {
         for (int i = 0; i < text.length; i++) {
             int count = 0;
             textList[i] = new LinkedList();
-            while (count != text[i].length()) {
+            while (count != text[i].length()) { 
                 textList[i].add(text[i].charAt(count++));
             }
         }

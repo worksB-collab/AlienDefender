@@ -104,23 +104,23 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             switch (hoveringTower) {
 
                 case 0:
-                    atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack : " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 1:
-                    atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack : " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 2:
-                    atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack : " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 3:
-                    atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack : " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 4:
-                    atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack : " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage));
                     costInfo = "Max Level";
                     return;
             }
@@ -128,24 +128,24 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         switch (hoveringTower) {
 
             case 0:
-                atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage + 1));
-                costInfo = "Upgrade Cost: " + (int)(TOWER0_COST / 2);
+                atkInfo = "Attack : " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo = "Upgrade Cost : " + (int)(TOWER0_COST / 2);
                 break;
             case 1:
-                atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage + 1));
-                costInfo =  "Upgrade Cost: " + (int)(TOWER1_COST / 2);
+                atkInfo = "Attack : " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost : " + (int)(TOWER1_COST / 2);
                 break;
             case 2:
-                atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage + 1));
-                costInfo =  "Upgrade Cost: " + (int)(TOWER2_COST / 2);
+                atkInfo = "Attack : " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost : " + (int)(TOWER2_COST / 2);
                 break;
             case 3:
-                atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage + 1));
-                costInfo =  "Upgrade Cost: " + (int)(TOWER3_COST / 2);
+                atkInfo = "Attack : " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost : " + (int)(TOWER3_COST / 2);
                 break;
             case 4:
-                atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage + 1));
-                costInfo =  "Upgrade Cost: " + (int)(TOWER4_COST / 2);
+                atkInfo = "Attack : " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage)) + " 🢖🢖 " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage + 1));
+                costInfo =  "Upgrade Cost : " + (int)(TOWER4_COST / 2);
                 break;
         }
     }
@@ -170,7 +170,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         if (upgradeStage == 2) {
             upgrade = 2;
         }
-        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int) SIZE_GRID * 12, (int) SIZE_GRID * 3, null);
+        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int)(SIZE_GRID * 12.5), (int) SIZE_GRID * 3, null);
         infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 7, SIZE_GRID * 2);
         g.setColor(Color.white);
         g.setFont(FONT_INFOWINDOW);
