@@ -171,17 +171,16 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             upgrade = 2;
         }
         // info window
-        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int)(SIZE_GRID * 14), (int) SIZE_GRID * 3, null);
-        infoString = new DrawStringPoint(super.getX() + 180, (int) super.getY() + 80, g, FONT_INFOWINDOW, atkInfo, SIZE_GRID * 100, SIZE_GRID * 2);
+        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int)(SIZE_GRID * 12), (int) SIZE_GRID * 3, null);
         g.setColor(Color.white);
         g.setFont(FONT_INFOWINDOW);
         // strings
-        g.drawString(atkInfo, (int) (infoString.getX() + SIZE_GRID * 1.5), (int) (infoString.getY() - SIZE_GRID * 2.5));
-        g.drawString(costInfo, (int) (infoString.getX() + SIZE_GRID * 1.5), (int) (infoString.getY() - SIZE_GRID * 1.5));
+        g.drawString(atkInfo, (int) (super.getX() + SIZE_GRID * 8.8), (int) (super.getY() + SIZE_GRID * 1.2));
+        g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 8.8), (int) (super.getY() + SIZE_GRID * 2.2));
         // tower images
         g.drawImage(towerImage,
-                (int) (infoString.getX() - SIZE_GRID*1.5), (int) (infoString.getY() - SIZE_GRID * 3.5),
-                (int) (infoString.getX() + SIZE_GRID * 0.5), (int) (infoString.getY() - SIZE_GRID * 1),
+                (int) (super.getX() + SIZE_GRID*6.2), (int) (super.getY() + SIZE_GRID * 0.5),
+                (int) (super.getX() + SIZE_GRID * 8.2), (int) (super.getY() + SIZE_GRID * 2.5),
                 (int) (hoveringTower * SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade),
                 (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade + 1),
                 null);

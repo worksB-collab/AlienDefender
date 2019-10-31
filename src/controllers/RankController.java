@@ -91,6 +91,7 @@ public class RankController {
             System.out.println(text);
             bw.flush();
             bw.close();
+            System.out.println("!!!!");
         }catch(IOException ex){
             Logger.getLogger(RankController.class.getName()).log(Level.SEVERE, null, ex);
         }
