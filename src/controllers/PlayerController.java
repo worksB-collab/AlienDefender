@@ -121,7 +121,13 @@ public class PlayerController {
     public long getMoney() {
         return money;
     }
-
+    
+    public String getName(){
+        return name;
+    }
+    public long getScore(){
+        return score;
+    }
     public boolean isEnough(long money) {
         if (this.money < money) {
             notEnough=1;

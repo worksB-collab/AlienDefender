@@ -97,6 +97,7 @@ public class Path {
 
         public static final String TEXTS = ROOT + "/Text";
         public static final String TEXT = "/resources/Texts/text.txt";
+        public static final String RANK = "/resources/Texts/rank.txt";
     }
 
 }
