@@ -8,6 +8,7 @@ package scenes;
 import controllers.CommandSolver;
 import controllers.ImageController;
 import controllers.PlayerController;
+import controllers.RankController;
 import controllers.SceneController;
 import gameobjects.Button;
 import gameobjects.Button.ButtonListener;
@@ -25,6 +26,7 @@ import values.Path;
 public class EndScene extends Scene{
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private PlayerController playerController;
+    private RankController rankController;
     private ImageController imageController;
     private BufferedImage image;
     private Button reStartButton;
@@ -33,10 +35,10 @@ public class EndScene extends Scene{
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
+        rankController = RankController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
         this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
-
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 
@@ -88,6 +90,7 @@ public class EndScene extends Scene{
         reStartButton.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
+                rankController.addRank(playerController.getName(), playerController.getScore());
                 playerController.initialize();
                 sceneController.changeScene(new StartScene(sceneController));
             }
@@ -99,4 +102,9 @@ public class EndScene extends Scene{
         );
     }
     
+    public void wirteRank(){
+
+        
+        
+    }
 }
