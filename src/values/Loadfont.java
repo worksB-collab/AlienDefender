@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 /**
  *
@@ -27,7 +28,8 @@ public class Loadfont {
             String fontUrl = "";
             switch (ft) {
                 case 1:
-                    fontUrl = "C:\\Users\\billy\\AppData\\Local\\Microsoft\\Windows\\Fonts\\jackeyfont.ttf";//華文行楷
+                    URL url = getClass().getResource("/resources/Fonts/jackeyfont.ttf");
+                    fontUrl = url.getPath();//華文行楷
                     break;
 //                case 2:
 //                    fontUrl = "/opt/hwkt.ttf";//華文楷體
