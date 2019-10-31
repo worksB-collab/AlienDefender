@@ -39,7 +39,7 @@ public class EndScene extends Scene{
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
+//        audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.start();
         image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
         this.audio = audio;
