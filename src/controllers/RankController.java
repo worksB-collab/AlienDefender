@@ -42,7 +42,8 @@ public class RankController {
     private RankController(){
         rankList = new ArrayList();
         try{
-            BufferedReader br = new BufferedReader(new FileReader(getClass().getResource(Path.Texts.RANK).getPath()));
+//            BufferedReader br = new BufferedReader(new FileReader(getClass().getResource(Path.Texts.RANK).getPath()));
+            BufferedReader br = new BufferedReader(new FileReader("rank.txt"));
             while(br.ready()){
                 String str[] = br.readLine().split(",");
                 if(str.length < 2){
@@ -80,7 +81,8 @@ public class RankController {
         }
         
         try{
-            BufferedWriter bw = new BufferedWriter(new FileWriter(getClass().getResource(Path.Texts.RANK).getPath()));
+//            BufferedWriter bw = new BufferedWriter(new FileWriter(getClass().getResource(Path.Texts.RANK).getPath()));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("rank.txt"));
             String text = "";
             for(int i = 0; i < rankList.size(); i++){ 
                 Rank tmp = rankList.get(i);
@@ -98,7 +100,6 @@ public class RankController {
     }
     
     private void sort(){
-        System.out.println("test");
         for(int i = 1; i < rankList.size(); i++){
             for(int j = 0; j < rankList.size() - i; j++){
                 if(rankList.get(j).score < rankList.get(j + 1).score){
