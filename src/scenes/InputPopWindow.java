@@ -19,7 +19,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
-import static values.Global.FONT_00;
 import static values.Global.FONT_BUTTON;
 import static values.Global.FONT_INFOWINDOW;
 
@@ -66,12 +65,15 @@ public class InputPopWindow extends PopUpWindow {
                     for (Character character : charList) {
                         text += character.charValue();
                     }
-                    isEnd = true;
+                    if(text.length() > 1){
+                        isEnd = true;
+                    }
+                    
                 } else if (c == KeyEvent.VK_BACKSPACE) {
                     if (charList.size() >= 1) {
                         charList.removeLast();
                     }
-                } else {
+                } else if( (c >= 65 && c <= 90) || (c >= 97 && c <= 122)){
                     if (charList.size() < limitChar) {
                         charList.add(c);
                     }

@@ -153,10 +153,10 @@ public class TextReader extends Scene {
     }
     public void genButton(){
         
-        buttonNext = new Button( (Global.FRAME_WIDTH / 2f) + 6 * Global.MIN_PICTURE_SIZE, (Global.FRAME_HEIGHT/ 2f) + 8f * Global.MIN_PICTURE_SIZE, 6f * Global.MIN_PICTURE_SIZE, 3f * Global.MIN_PICTURE_SIZE,
+        buttonNext = new Button(27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
         imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+        buttonNext.setFont(Global.FONT_INFOWINDOW);
         buttonNext.setText("NEXT");
-        
         buttonNext.setButtonListener(new Button.ButtonListener(){
             @Override
             public void onClick(int x, int y) {

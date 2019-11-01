@@ -24,14 +24,14 @@ import values.Path;
  *
  * @author user
  */
-public class Description extends Scene{
+public class DescriptionScene extends Scene{
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private BufferedImage image, image2;
     private Button backButton;
     private Clip audio;
     private int sX;
-    public Description(SceneController sceneController, Clip audio) {
+    public DescriptionScene(SceneController sceneController, Clip audio) {
         super(sceneController);
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.SPACE1);
@@ -91,9 +91,9 @@ public class Description extends Scene{
     }
     
     private void genButton(){
-        backButton = new Button(50f, 50f,  150f, 100f,
+        backButton = new Button(27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
                 imageController.tryGetImage(Path.Image.Button.BACK_BUTTON));
-        
+        backButton.setText("Back");
         backButton.setButtonListener(new Button.ButtonListener(){
 
             @Override
