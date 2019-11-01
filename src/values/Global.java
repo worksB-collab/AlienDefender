@@ -44,15 +44,15 @@ public class Global {
     public static final float TOWER3_ATKRANGE = 4 * SIZE_GRID;
     public static final float TOWER4_ATKRANGE = 5 * SIZE_GRID;
     public static final float TOWER0_COST = 40;
-    public static final float TOWER1_COST = 50;
+    public static final float TOWER1_COST = 60;
     public static final float TOWER2_COST = 80;
-    public static final float TOWER3_COST = 120;
-    public static final float TOWER4_COST = 150;
+    public static final float TOWER3_COST = 100;
+    public static final float TOWER4_COST = 120;
     public static final float TOWER0_ATK = 20;
-    public static final float TOWER1_ATK = 15;
-    public static final float TOWER2_ATK = 30;
-    public static final float TOWER3_ATK = 35;
-    public static final float TOWER4_ATK = 40;
+    public static final float TOWER1_ATK = 20;
+    public static final float TOWER2_ATK = 20;
+    public static final float TOWER3_ATK = 20;
+    public static final float TOWER4_ATK = 20;
 
     //Alien
     public static float [] START_POINT1 = {-SIZE_GRID, SIZE_GRID*2};
@@ -60,6 +60,10 @@ public class Global {
     public static float [] START_POINT3 = {SIZE_GRID*11, -SIZE_GRID};
     public static float [] START_POINT4 = {SIZE_GRID*12, -SIZE_GRID};
     public static float [] START_POINT5 = {SIZE_GRID*13, -SIZE_GRID};
+    public static float [] ALIEN_SPEED = {1.5f*SPEED, 1*SPEED, 1.5f*SPEED,
+                                                                            1*SPEED, 0.8f*SPEED, 2f*SPEED,
+                                                                            1*SPEED,0.8f*SPEED, 3*SPEED,
+                                                                            1*SPEED};
     
     //Cailbaration
     public static float MIN_PICTURE_SIZE = 32f;

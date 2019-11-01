@@ -118,7 +118,7 @@ public class AlienController {
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
         alienPairs = new LinkedList<AlienSet>();
-        moveDelay = new DelayCounter(2);
+        moveDelay = new DelayCounter(1);
         genDelay = new DelayCounter(40);
         scoreController = new ScoreController();
         playerController = PlayerController.genInstance();

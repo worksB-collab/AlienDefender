@@ -24,13 +24,13 @@ public class Alien2 extends Alien {
 
 
     public Alien2(float x, float y) {
-        super(x, y, SIZE_GRID, SIZE_GRID, 180, Global.SPEED); //x, y, width, height, hp, speed
+        super(x, y, SIZE_GRID, SIZE_GRID, 350, ALIEN_SPEED[1]); //x, y, width, height, hp, speed
         alienNum = 1;
         aHelper = new AlienHelper(alienNum);
         act = 0;
         delay = new DelayCounter(5);
         deadDelay = 0;
-        super.setMoney(10);
+        super.setMoney((int)super.getHp()/20);
     }
     
 

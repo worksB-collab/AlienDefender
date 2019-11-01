@@ -58,7 +58,7 @@ public class Description extends Scene{
     @Override
     public void sceneUpdate() {
         backButton.update();
-        if(sX ==-(int) (32 * Global.MIN_PICTURE_SIZE)){
+        if(sX ==-(int) (2*32 * Global.MIN_PICTURE_SIZE)){
             sX=0;
         }
         sX -=1;
@@ -72,12 +72,15 @@ public class Description extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 
-                sX, 0, 
-                (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
-        g.drawImage(image2, 
-                sX+(int) (32 * Global.MIN_PICTURE_SIZE), 0, 
-                (int) (32* Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image,
+                    sX, 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image2,
+                    sX + (int) (32 * Global.MIN_PICTURE_SIZE), 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image,
+                    sX + (int) (2*32 * Global.MIN_PICTURE_SIZE), 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
         backButton.paint(g);
         
     }

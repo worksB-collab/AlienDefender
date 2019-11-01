@@ -98,7 +98,7 @@ public class GameScene extends Scene {
 
     @Override
     public void sceneBegin() {
-//        playerController.reset();
+        playerController.reset();
         routeController.genRoad(stage);
         genButton(routeController.getSetPoint());
         alienController = new AlienController(routeController.getRoute());

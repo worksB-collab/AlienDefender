@@ -105,7 +105,6 @@ public class BackgroundController {
     public class Stage00 implements Stage {
 
         private ImageController imageController;
-        private BufferedImage image1;
         private BufferedImage image2;
         private BufferedImage image3;
         private BufferedImage image4;
@@ -118,7 +117,6 @@ public class BackgroundController {
 
         public Stage00() {
             imageController = ImageController.genInstance();
-            image1 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-01.png");
             image2 = imageController.tryGetImage("/Resources/Images/Background/Background_01_00-03.png");
             image3 = imageController.tryGetImage(Path.Image.Scene.SPACE1);
             image4 = imageController.tryGetImage(Path.Image.Scene.SPACE2);
@@ -138,7 +136,7 @@ public class BackgroundController {
             }
             speed += jupiterAce * jupiterDir;
             jupiterVar += speed;
-            if (sX == -(int) (32 * Global.MIN_PICTURE_SIZE)) {
+            if (sX == -(int) (2*32 * Global.MIN_PICTURE_SIZE)) {
                 sX = 0;
             }
             sX -= 1;
@@ -146,18 +144,19 @@ public class BackgroundController {
 
         @Override
         public void paint(Graphics g) {
-            g.drawImage(image1, 0, 0, (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
             g.drawImage(image3,
                     sX, 0,
                     (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
             g.drawImage(image4,
                     sX + (int) (32 * Global.MIN_PICTURE_SIZE), 0,
                     (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image3,
+                    sX + (int) (2*32 * Global.MIN_PICTURE_SIZE), 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            
             int width = (int) (24 * 0.807 * Global.MIN_PICTURE_SIZE);
             int height = (int) (18 * 0.495 * Global.MIN_PICTURE_SIZE);
             g.drawImage(image2, (int) ((Global.FRAME_WIDTH - width) / 2), (int) ((Global.FRAME_HEIGHT - height) / 2 + Math.round(jupiterVar) - 4 * Global.MIN_PICTURE_SIZE), width, height, null);
-
-            
         }
 
     }
