@@ -44,7 +44,7 @@ public class Bullet extends EffectObject {
         act = 0;
         delay = new DelayCounter(1);
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Sounds.Attack.TOWER_ATTCK_SOUND);
+        audio = audioController.tryGetAudio(Path.Audios.Sounds.Attack.SHOT4);
         launch();
     }
 

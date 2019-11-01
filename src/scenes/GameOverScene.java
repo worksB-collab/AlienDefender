@@ -38,7 +38,8 @@ public class GameOverScene extends Scene{
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.GAMEOVER_SCENE);
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE1);
+        audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE3);
+//        audio.loop(Clip.LOOP_CONTINUOUSLY);
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -67,9 +68,8 @@ public class GameOverScene extends Scene{
     public void sceneUpdate() {
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE2);
-            audio.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
+            }
     }
 
     @Override

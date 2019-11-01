@@ -71,7 +71,8 @@ public class Path {
             public static final String LOSE = MUSICS + "/Lose";
             public static final String LOSE1 = LOSE + "/this1.wav";
             public static final String LOSE2 = LOSE + "/this2.wav";
-            
+            public static final String LOSE3 = LOSE + "/this3.wav";
+            public static final String LOSE4 = LOSE + "/this4.wav";
 
         }
 

@@ -44,15 +44,15 @@ public class Global {
     public static final float TOWER3_ATKRANGE = 4 * SIZE_GRID;
     public static final float TOWER4_ATKRANGE = 5 * SIZE_GRID;
     public static final float TOWER0_COST = 40;
-    public static final float TOWER1_COST = 60;
-    public static final float TOWER2_COST = 80;
-    public static final float TOWER3_COST = 100;
-    public static final float TOWER4_COST = 120;
+    public static final float TOWER1_COST = 55;
+    public static final float TOWER2_COST = 70;
+    public static final float TOWER3_COST = 85;
+    public static final float TOWER4_COST = 100;
     public static final float TOWER0_ATK = 20;
-    public static final float TOWER1_ATK = 20;
-    public static final float TOWER2_ATK = 20;
-    public static final float TOWER3_ATK = 20;
-    public static final float TOWER4_ATK = 20;
+    public static final float TOWER1_ATK = 25;
+    public static final float TOWER2_ATK = 30;
+    public static final float TOWER3_ATK = 35;
+    public static final float TOWER4_ATK = 40;
 
     //Alien
     public static float [] START_POINT1 = {-SIZE_GRID, SIZE_GRID*2};
@@ -60,9 +60,9 @@ public class Global {
     public static float [] START_POINT3 = {SIZE_GRID*11, -SIZE_GRID};
     public static float [] START_POINT4 = {SIZE_GRID*12, -SIZE_GRID};
     public static float [] START_POINT5 = {SIZE_GRID*13, -SIZE_GRID};
-    public static float [] ALIEN_SPEED = {1.5f*SPEED, 1*SPEED, 1.5f*SPEED,
-                                                                            1*SPEED, 0.8f*SPEED, 2f*SPEED,
-                                                                            1*SPEED,0.8f*SPEED, 3*SPEED,
+    public static float [] ALIEN_SPEED = {1.2f*SPEED, 1*SPEED, 1.5f*SPEED,
+                                                                            0.5f*SPEED, 0.8f*SPEED, 0.8f*SPEED,
+                                                                            1*SPEED,0.6f*SPEED, 2.8f*SPEED,
                                                                             1*SPEED};
     
     //Cailbaration
@@ -83,6 +83,7 @@ public class Global {
     public static final Loadfont.CyFont cf3 = new Loadfont.CyFont();
     public static final Loadfont.CyFont cf4 = new Loadfont.CyFont();
     public static final Loadfont.CyFont cf5 = new Loadfont.CyFont();
+    public static final Loadfont.CyFont cf6 = new Loadfont.CyFont();
     
     public static final Font FONT_00 = cf1.getDefinedFont(1, 60f);
     public static final Font FONT_01 = cf2.getDefinedFont(1, 120f);
@@ -94,6 +95,7 @@ public class Global {
     public static final Font FONT_MONEY = cf4.getDefinedFont(1, 30f);
     public static final Font FONT_TEXT = cf4.getDefinedFont(1, 30f);
     public static final Font FONT_INFOWINDOW = cf5.getDefinedFont(1, 25f);
+    public static final Font FONT_WIN = cf6.getDefinedFont(1, 125f);
 
     public static final Color DEFAULT_FONT_COLOR = Color.BLACK;
 

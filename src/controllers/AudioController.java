@@ -64,6 +64,7 @@ public class AudioController {
         try{
             URL url;
             url = getClass().getResource(path);
+            
             File file = new File(url.getPath());
             AudioInputStream stream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();

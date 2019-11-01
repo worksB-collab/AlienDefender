@@ -91,7 +91,6 @@ public class PrepareScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-//        backButton.update();
         if (popWindow != null) {
             popWindow.update();
             if (popWindow.isEnd()) {
@@ -113,7 +112,6 @@ public class PrepareScene extends Scene {
 
     @Override
     public void sceneEnd() {
-//        backButton = null;
         imageController.clearImage();
         audio.close();
         audioController.clearAudio();
@@ -131,10 +129,8 @@ public class PrepareScene extends Scene {
             g.drawImage(image,
                     sX + (int) (2*32 * Global.MIN_PICTURE_SIZE), 0,
                     (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
-//        backButton.paint(g);
         if (popWindow != null) {
             popWindow.paint(g);
-            
         }
     }
 

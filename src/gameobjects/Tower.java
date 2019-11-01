@@ -164,8 +164,8 @@ public abstract class Tower extends ActiveObject {
         }
         upgradeNow++;
         upgradeStage++;
-        setAttack(getAttack() * 1.3f);
-        setUpgradeCost(getCost() * 1.3f);
+        setAttack(getAttack() * 1.5f);
+        setUpgradeCost(getCost() * 0.5f);
         return true;
     }
 

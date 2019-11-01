@@ -44,20 +44,20 @@ public class AlienParameter {
             case 2:
                 alienSet[0][0] = start2x;
                 alienSet[0][1] = start2y;
-                alienSet[0][2] = 80;
+                alienSet[0][2] = 60;
                 alienSet[0][3] = 3;
                 alienSet[0][4] = 25;
 
                 alienSet[1][0] = start2x;
                 alienSet[1][1] = start2y;
-                alienSet[1][2] = 90;
+                alienSet[1][2] = 80;
                 alienSet[1][3] = 2;
                 alienSet[1][4] = 25;
                 return alienSet;
             case 3:
                 alienSet[0][0] = start3x;
                 alienSet[0][1] = start3y;
-                alienSet[0][2] = 80;
+                alienSet[0][2] = 60;
                 alienSet[0][3] = 4;
                 alienSet[0][4] = 20;
 
@@ -69,20 +69,20 @@ public class AlienParameter {
 
                 alienSet[2][0] = start3x;
                 alienSet[2][1] = start3y;
-                alienSet[2][2] = 90;
+                alienSet[2][2] = 80;
                 alienSet[2][3] = 6;
                 alienSet[2][4] = 10;
                 return alienSet;
             case 4:
                 alienSet[0][0] = start4x;
                 alienSet[0][1] = start4y;
-                alienSet[0][2] = 80;
+                alienSet[0][2] = 70;
                 alienSet[0][3] = 1;
                 alienSet[0][4] = 5;
 
                 alienSet[1][0] = start4x;
                 alienSet[1][1] = start4y;
-                alienSet[1][2] = 70;
+                alienSet[1][2] = 50;
                 alienSet[1][3] = 5;
                 alienSet[1][4] = 10;
 
@@ -94,7 +94,7 @@ public class AlienParameter {
 
                 alienSet[3][0] = start4x;
                 alienSet[3][1] = start4y;
-                alienSet[3][2] = 70;
+                alienSet[3][2] = 60;
                 alienSet[3][3] = 8;
                 alienSet[3][4] = 20;
 
@@ -102,31 +102,31 @@ public class AlienParameter {
             case 5:
                 alienSet[0][0] = start5x;
                 alienSet[0][1] = start5y;
-                alienSet[0][2] = 80;
+                alienSet[0][2] = 70;
                 alienSet[0][3] = 6;
                 alienSet[0][4] = 10;
 
                 alienSet[1][0] = start5x;
                 alienSet[1][1] = start5y;
-                alienSet[1][2] = 90;
+                alienSet[1][2] = 80;
                 alienSet[1][3] = 7;
                 alienSet[1][4] = 10;
 
                 alienSet[2][0] = start5x;
                 alienSet[2][1] = start5y;
-                alienSet[2][2] = 80;
+                alienSet[2][2] = 60;
                 alienSet[2][3] = 8;
                 alienSet[2][4] = 10;
 
                 alienSet[3][0] = start5x;
                 alienSet[3][1] = start5y;
-                alienSet[3][2] = 70;
+                alienSet[3][2] = 60;
                 alienSet[3][3] = 9;
                 alienSet[3][4] = 10;
 
                 alienSet[4][0] = start5x;
                 alienSet[4][1] = start5y;
-                alienSet[4][2] = 80;
+                alienSet[4][2] = 70;
                 alienSet[4][3] = 10;
                 alienSet[4][4] = 10;
                 return alienSet;

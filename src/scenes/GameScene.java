@@ -12,6 +12,7 @@ import controllers.BackgroundController;
 import controllers.CommandSolver;
 import controllers.CommandSolver.MouseCommandListener;
 import controllers.CommandSolver.MouseState;
+import controllers.DelayCounter;
 import controllers.ImageController;
 import controllers.PlayerController;
 import controllers.RouteController;
@@ -25,9 +26,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import javax.sound.sampled.Clip;
 import parameter.AlienParameter;
+import static values.Global.FONT_01;
+import static values.Global.FONT_WIN;
 import values.Path;
 
 /**
@@ -48,12 +52,15 @@ public class GameScene extends Scene {
     private AlienController alienController;
     private TowerController towerController;
     private int stage;
-    private Clip audio;
+    private Clip audio, winAudio;
     private AlienParameter alienParameter;
     private float alienSet[][];
+    private BufferedImage trophy;
+    private int winState;
+    private DelayCounter winDelay;
 
     public GameScene(SceneController sceneController, int stage) {
-        super(sceneController );
+        super(sceneController);
         this.stage = stage;
         playerController = PlayerController.genInstance();
         playerController.setStage(stage);
@@ -62,7 +69,10 @@ public class GameScene extends Scene {
         routeController = new RouteController();
         buttonList = new LinkedList();
         audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME);
+        winAudio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
+        trophy = imageController.tryGetImage(Path.Image.TROPHY);
+        winDelay = new DelayCounter(100);
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -77,7 +87,7 @@ public class GameScene extends Scene {
                             spot = new Point(x, y);
                         }
                     }
-                    if(buttonNext.isRange(x, y)){
+                    if (buttonNext.isRange(x, y)) {
                         buttonNext.click(x, y);
                     }
                 }
@@ -106,8 +116,8 @@ public class GameScene extends Scene {
         alienSet = alienParameter.setStageValue();
         int enemyCount = 0;
         for (int i = 0; i < stage; i++) {
-            alienController.gameLevelSetting(alienSet[i][0], alienSet[i][1], 
-                                          alienSet[i][2], (int)alienSet[i][3], (int)alienSet[i][4]);
+            alienController.gameLevelSetting(alienSet[i][0], alienSet[i][1],
+                    alienSet[i][2], (int) alienSet[i][3], (int) alienSet[i][4]);
             enemyCount += alienSet[i][4];
         }
         alienController.setEnemyAmount(enemyCount);
@@ -119,7 +129,7 @@ public class GameScene extends Scene {
     @Override
     public void sceneUpdate() {
         //check player life
-        if(playerController.getHP() <= 0){
+        if (playerController.getHP() <= 0) {
             sceneController.changeScene(new GameOverScene(sceneController));
         }
         backgroundController.update();
@@ -133,8 +143,8 @@ public class GameScene extends Scene {
         for (Button button : buttonList) {
             button.update();
         }
-        
-        buttonNext.update();    
+
+        buttonNext.update();
 
         alienController.update();
 
@@ -153,14 +163,19 @@ public class GameScene extends Scene {
             }
         }
         //check clear or not
-        if(alienController.isEnd()){
-            sceneController.changeScene(new TextReader(sceneController, ++stage));
+        if (alienController.isEnd()) {
+            winState = 1;
+            if (winDelay.update()) {
+//                sceneController.changeScene(new TextReader(sceneController, ++stage));
+                winState = 0;
+            }
         }
     }
 
     @Override
     public void sceneEnd() {
         audio.close();
+        winAudio.close();
         audioController.clearAudio();
     }
 
@@ -175,12 +190,8 @@ public class GameScene extends Scene {
             }
         }
         buttonNext.paint(g);
-        
-        
-        
         alienController.paint(g);
         towerController.paint(g);
-
         if (spot != null) {
             g.setColor(Color.red);
             g.drawRect((int) spot.getX() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) spot.getY() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE);
@@ -192,7 +203,18 @@ public class GameScene extends Scene {
         if (popUpWindow != null) {
             popUpWindow.paint(g);
         }
-
+        //win trophy
+        if (winState == 1) {
+            audio.stop();
+            winAudio.start();
+            g.setFont(FONT_WIN);
+            g.setColor(Color.black);
+            g.drawString("You Win", 300, 420);
+            g.setFont(FONT_WIN);
+            g.setColor(Color.orange);
+            g.drawString("You Win", 310, 425);
+            
+        }
     }
 
     @Override
@@ -204,7 +226,6 @@ public class GameScene extends Scene {
     }
 
     //generate
-
     private void genButton(LinkedList<RoutePoint> setPoint) {
         if (buttonList.size() != 0) {
             buttonList = new LinkedList<Button>();
@@ -221,7 +242,7 @@ public class GameScene extends Scene {
                 public void onClick(int x, int y) {
                     boolean isBuilt = false;
                     Tower tower = null;
-                    if(towerController != null){
+                    if (towerController != null) {
                         for (int i = 0; i < towerController.getTowers().size(); i++) {
                             tower = towerController.getTowers().get(i);
                             if (tower.getX() == x0 && tower.getY() == y0) {
@@ -246,19 +267,19 @@ public class GameScene extends Scene {
             });
             buttonList.add(button);
         }
-        
-        
-        buttonNext = new Button(  27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
-        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
+
+        buttonNext = new Button(27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
+                imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
         buttonNext.setFont(Global.FONT_INFOWINDOW);
         buttonNext.setText("NEXT");
-        
-        buttonNext.setButtonListener(new Button.ButtonListener(){
+
+        buttonNext.setButtonListener(new Button.ButtonListener() {
             @Override
             public void onClick(int x, int y) {
                 sceneController.changeScene(new TextReader(sceneController, ++stage));
 
             }
+
             @Override
             public void hover(int x, int y) {
             }

@@ -104,23 +104,23 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             switch (hoveringTower) {
 
                 case 0:
-                    atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.5, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 1:
-                    atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.5, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 2:
-                    atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.5, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 3:
-                    atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.5, upgradeStage));
                     costInfo = "Max Level";
                     return;
                 case 4:
-                    atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage));
+                    atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.5, upgradeStage));
                     costInfo = "Max Level";
                     return;
             }
@@ -128,23 +128,23 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         switch (hoveringTower) {
 
             case 0:
-                atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage)) + "→" + (int) (TOWER0_ATK * Math.pow(1.3, upgradeStage + 1));
+                atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER0_ATK * Math.pow(1.5, upgradeStage + 1));
                 costInfo = "Upgrade $: " + (int)(TOWER0_COST / 2);
                 break;
             case 1:
-                atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage)) + "→" + (int) (TOWER1_ATK * Math.pow(1.3, upgradeStage + 1));
+                atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER1_ATK * Math.pow(1.5, upgradeStage + 1));
                 costInfo =  "Upgrade $: " + (int)(TOWER1_COST / 2);
                 break;
             case 2:
-                atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage)) + "→" + (int) (TOWER2_ATK * Math.pow(1.3, upgradeStage + 1));
+                atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER2_ATK * Math.pow(1.5, upgradeStage + 1));
                 costInfo =  "Upgrade $: " + (int)(TOWER2_COST / 2);
                 break;
             case 3:
-                atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage)) + "→" + (int) (TOWER3_ATK * Math.pow(1.3, upgradeStage + 1));
+                atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER3_ATK * Math.pow(1.5, upgradeStage + 1));
                 costInfo =  "Upgrade $: " + (int)(TOWER3_COST / 2);
                 break;
             case 4:
-                atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage)) + "→" + (int) (TOWER4_ATK * Math.pow(1.3, upgradeStage + 1));
+                atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER4_ATK * Math.pow(1.5, upgradeStage + 1));
                 costInfo =  "Upgrade $: " + (int)(TOWER4_COST / 2);
                 break;
         }
