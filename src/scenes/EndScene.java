@@ -6,6 +6,7 @@
 package scenes;
 
 import controllers.AudioController;
+import controllers.BackgroundController;
 import controllers.CommandSolver;
 import controllers.ImageController;
 import controllers.PlayerController;
@@ -13,6 +14,7 @@ import controllers.RankController;
 import controllers.SceneController;
 import gameobjects.Button;
 import gameobjects.Button.ButtonListener;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -31,21 +33,26 @@ public class EndScene extends Scene{
     private RankController rankController;
     private ImageController imageController;
     private AudioController audioController;
+    private BackgroundController backgroundController;
     private BufferedImage image;
     private Button reStartButton;
+    private String nameString;
     private String scoreString;
-    private DrawStringPoint point;
+    private DrawStringPoint point[];
     private Clip audio;
     public EndScene(SceneController sceneController) {
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
+        backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.start();
+        nameString = playerController.getName();
         scoreString = "Total socre : " + Long.toString(playerController.getScore());
-        image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
+        point = new DrawStringPoint[2];
+        image = imageController.tryGetImage(Path.Image.TROPHY);
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -71,13 +78,15 @@ public class EndScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        backgroundController.update();
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
             audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
             audio.loop(Clip.LOOP_CONTINUOUSLY);
         }
-        if(point != null){
-            point.update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+        if(point[0] != null){
+            point[0].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+            point[1].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
         }
     }
 
@@ -91,14 +100,17 @@ public class EndScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
-        reStartButton.paint(g);
-        if(point == null){
-            point = new DrawStringPoint(0, 0, g, Global.FONT_SCORE, scoreString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+        backgroundController.paint(g);
+        if(point[0] == null){
+            point[0] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, scoreString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+            point[1] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, nameString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
         }
-        g.setFont(Global.FONT_SCORE);
-        g.drawString(point.getText(), (int)point.getX(), (int)point.getY());
-       
+        reStartButton.paint(g);
+        g.setFont(Global.FONT_BUTTON);
+        g.setColor(Color.YELLOW);
+        g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 4f * Global.MIN_PICTURE_SIZE));
+        g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()));
+        g.drawImage(image, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[1].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
     }
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener(){
@@ -106,10 +118,8 @@ public class EndScene extends Scene{
     }
     public void genButton(){
         
-        reStartButton = new Button( (Global.FRAME_WIDTH - 10f * Global.MIN_PICTURE_SIZE) / 2f, ((Global.FRAME_HEIGHT - 4f * Global.MIN_PICTURE_SIZE) / 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
-        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
-        reStartButton.setText("End");
-        
+        reStartButton = new Button( 0, 0, Global.FRAME_WIDTH, Global.FRAME_WIDTH + 10 * Global.MIN_PICTURE_SIZE, "Press anywhere to continue !");
+        reStartButton.setFont(Global.FONT_SCORE);
         reStartButton.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
