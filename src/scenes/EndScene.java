@@ -6,6 +6,7 @@
 package scenes;
 
 import controllers.AudioController;
+import controllers.BackgroundController;
 import controllers.CommandSolver;
 import controllers.ImageController;
 import controllers.PlayerController;
@@ -32,8 +33,8 @@ public class EndScene extends Scene{
     private RankController rankController;
     private ImageController imageController;
     private AudioController audioController;
+    private BackgroundController backgroundController;
     private BufferedImage image;
-    private BufferedImage image2;
     private Button reStartButton;
     private String nameString;
     private String scoreString;
@@ -44,14 +45,14 @@ public class EndScene extends Scene{
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
+        backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.start();
         nameString = playerController.getName();
         scoreString = "Total socre : " + Long.toString(playerController.getScore());
         point = new DrawStringPoint[2];
-        image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
-        image2 = imageController.tryGetImage(Path.Image.TROPHY);
+        image = imageController.tryGetImage(Path.Image.TROPHY);
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -77,6 +78,7 @@ public class EndScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        backgroundController.update();
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
             audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
@@ -98,7 +100,7 @@ public class EndScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
+        backgroundController.paint(g);
         if(point[0] == null){
             point[0] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, scoreString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
             point[1] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, nameString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
@@ -108,7 +110,7 @@ public class EndScene extends Scene{
         g.setColor(Color.YELLOW);
         g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 4f * Global.MIN_PICTURE_SIZE));
         g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()));
-        g.drawImage(image2, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[1].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
+        g.drawImage(image, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[1].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
     }
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener(){

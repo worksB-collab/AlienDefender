@@ -250,6 +250,46 @@ public class BackgroundController {
             g.drawImage(image, 0, 0, (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
         }
     }
+    public class Stage6 implements Stage{
+        private ImageController imageController;
+        private BufferedImage image2;
+        private BufferedImage image3;
+        private BufferedImage image4;
+        private float jupiterVar;
+        private float jupiterAce;
+        private int jupiterDir;
+        private float speed;
+        private int standard;
+        private int sX;
+
+        public Stage6() {
+            imageController = ImageController.genInstance();
+            image3 = imageController.tryGetImage(Path.Image.Scene.SPACE1);
+            image4 = imageController.tryGetImage(Path.Image.Scene.SPACE2);
+
+        }
+
+        @Override
+        public void update() {
+            if (sX == -(int) (2*32 * Global.MIN_PICTURE_SIZE)) {
+                sX = 0;
+            }
+            sX -= 1;
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            g.drawImage(image3,
+                    sX, 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image4,
+                    sX + (int) (32 * Global.MIN_PICTURE_SIZE), 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+            g.drawImage(image3,
+                    sX + (int) (2*32 * Global.MIN_PICTURE_SIZE), 0,
+                    (int) (32 * Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
+        }
+    }
     private Stage stage;
 
     public BackgroundController(int number) {
@@ -279,6 +319,9 @@ public class BackgroundController {
                 break;
             case 5:
                 stage = new Stage5();
+                break;
+            case 6:
+                stage = new Stage6();
                 break;
         }
     }

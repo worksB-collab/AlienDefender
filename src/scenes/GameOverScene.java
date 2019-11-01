@@ -6,6 +6,7 @@
 package scenes;
 
 import controllers.AudioController;
+import controllers.BackgroundController;
 import controllers.CommandSolver;
 import controllers.CommandSolver.MouseCommandListener;
 import controllers.ImageController;
@@ -31,7 +32,7 @@ public class GameOverScene extends Scene{
     private PlayerController playerController;
     private ImageController imageController;
     private AudioController audioController;
-    private BufferedImage image;
+    private BackgroundController backgroundController;
     private DrawStringPoint point;
     private Button reStartButton;
     private Clip audio;
@@ -39,10 +40,9 @@ public class GameOverScene extends Scene{
         super(sceneController);
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
-        image = imageController.tryGetImage(Path.Image.Scene.GAMEOVER_SCENE);
+        backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE1);
-        System.out.println(audio);
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -69,6 +69,7 @@ public class GameOverScene extends Scene{
 
     @Override
     public void sceneUpdate() {
+        backgroundController.update();
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
             audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE2);
@@ -85,10 +86,10 @@ public class GameOverScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
+        backgroundController.paint(g);
         if(point == null){
             point = new DrawStringPoint(0, 0, g, Global.FONT_01, "GAME OVER", (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT);
         }
-        g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
         g.setFont(Global.FONT_01);
         g.setColor(Color.YELLOW);
         g.drawString(point.getText(), (int)point.getX(), (int)point.getY());
