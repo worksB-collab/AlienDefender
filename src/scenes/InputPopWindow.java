@@ -65,7 +65,7 @@ public class InputPopWindow extends PopUpWindow {
                     for (Character character : charList) {
                         text += character.charValue();
                     }
-                    if(text.length() > 1){
+                    if(text.length() > 0){
                         isEnd = true;
                     }
                     
