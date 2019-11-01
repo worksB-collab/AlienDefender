@@ -96,9 +96,8 @@ public class StartScene extends Scene{
     
     public void genButton(){
         
-        buttonStart = new Button( (Global.FRAME_WIDTH - 10f * Global.MIN_PICTURE_SIZE) / 2f, ((Global.FRAME_HEIGHT - 4f * Global.MIN_PICTURE_SIZE) / 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
-        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
-        buttonStart.setText("START");
+        buttonStart = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 16 * Global.MIN_PICTURE_SIZE),
+        "Press anywhere to start");
         
         buttonStart.setButtonListener(new ButtonListener(){
             @Override

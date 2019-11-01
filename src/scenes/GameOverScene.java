@@ -13,10 +13,12 @@ import controllers.PlayerController;
 import controllers.SceneController;
 import gameobjects.Button;
 import gameobjects.Button.ButtonListener;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
+import values.DrawStringPoint;
 import values.Global;
 import values.Path;
 
@@ -30,6 +32,7 @@ public class GameOverScene extends Scene{
     private ImageController imageController;
     private AudioController audioController;
     private BufferedImage image;
+    private DrawStringPoint point;
     private Button reStartButton;
     private Clip audio;
     public GameOverScene(SceneController sceneController) {
@@ -39,6 +42,7 @@ public class GameOverScene extends Scene{
         image = imageController.tryGetImage(Path.Image.Scene.GAMEOVER_SCENE);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE1);
+        System.out.println(audio);
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -81,7 +85,14 @@ public class GameOverScene extends Scene{
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, (int)Global.FRAME_HEIGHT, (int)Global.FRAME_WIDTH, null);
+        if(point == null){
+            point = new DrawStringPoint(0, 0, g, Global.FONT_01, "GAME OVER", (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT);
+        }
+        g.drawImage(image, 0, 0, (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT, null);
+        g.setFont(Global.FONT_01);
+        g.setColor(Color.YELLOW);
+        g.drawString(point.getText(), (int)point.getX(), (int)point.getY());
+        g.setColor(Color.BLACK);
         reStartButton.paint(g);
     }
     @Override
@@ -90,10 +101,8 @@ public class GameOverScene extends Scene{
     }
     public void genButton(){
         
-        reStartButton = new Button( (Global.FRAME_WIDTH - 10f * Global.MIN_PICTURE_SIZE) / 2f, ((Global.FRAME_HEIGHT - 4f * Global.MIN_PICTURE_SIZE) / 2f) + 8f * Global.MIN_PICTURE_SIZE, 10f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE,
-        imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
-        reStartButton.setText("Retry");
-        
+        reStartButton = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE),"Press anywhere to retry !");
+
         reStartButton.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
