@@ -42,7 +42,7 @@ public class EndScene extends Scene{
         imageController = ImageController.genInstance();
         rankController = RankController.genInstance();
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
+        audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.start();
         scoreString = "Total socre : " + Long.toString(playerController.getScore());
         image = imageController.tryGetImage(Path.Image.Scene.END_SCENE);
@@ -73,7 +73,7 @@ public class EndScene extends Scene{
     public void sceneUpdate() {
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-            audio = audioController.tryGetAudio(Path.Audios.Musics.TEST);
+            audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
             audio.loop(Clip.LOOP_CONTINUOUSLY);
         }
         if(point != null){
@@ -85,6 +85,8 @@ public class EndScene extends Scene{
     public void sceneEnd() {
         reStartButton = null;
         imageController.clearImage();
+        audio.close();
+        audioController.clearAudio();
     }
 
     @Override

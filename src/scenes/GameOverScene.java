@@ -5,6 +5,7 @@
  */
 package scenes;
 
+import controllers.AudioController;
 import controllers.CommandSolver;
 import controllers.CommandSolver.MouseCommandListener;
 import controllers.ImageController;
@@ -27,6 +28,7 @@ public class GameOverScene extends Scene{
     private MouseCommandListener mouseCommandListener;
     private PlayerController playerController;
     private ImageController imageController;
+    private AudioController audioController;
     private BufferedImage image;
     private Button reStartButton;
     private Clip audio;
@@ -35,7 +37,8 @@ public class GameOverScene extends Scene{
         playerController = PlayerController.genInstance();
         imageController = ImageController.genInstance();
         image = imageController.tryGetImage(Path.Image.Scene.GAMEOVER_SCENE);
-        this.audio = audio;
+        audioController = AudioController.genInstance();
+        audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE1);
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -63,11 +66,17 @@ public class GameOverScene extends Scene{
     @Override
     public void sceneUpdate() {
         reStartButton.update();
+        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
+            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE2);
+            audio.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     @Override
     public void sceneEnd() {
-
+        imageController.clearImage();
+        audio.close();
+        audioController.clearAudio();
     }
 
     @Override
