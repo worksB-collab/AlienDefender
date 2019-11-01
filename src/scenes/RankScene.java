@@ -33,8 +33,8 @@ public class RankScene extends Scene {
     private ImageController imageController;
     private RankController rankController;
     private ArrayList<Rank> rankList;
-    private DrawStringPoint points[];
-    private String text[];
+    private DrawStringPoint points[][];
+    private String text[][];
     private BufferedImage image, image2;
     private Button backButton;
     private Clip audio;
@@ -48,12 +48,19 @@ public class RankScene extends Scene {
         this.audio = audio;
         rankController = RankController.genInstance();
         rankList = rankController.getList();
-        text = new String[rankList.size()];
-        for (int i = 0; i < rankList.size(); i++) {
-            Rank tmp = rankList.get(i);
-            text[i] = "Name: " + tmp.getName() + "       Score: " + tmp.getScore();
+        text = new String[rankList.size() + 1][2];
+        for (int i = 0; i < rankList.size() + 1; i++) {
+            
+            if(i == 0){
+                text[i][0] = "Player"; 
+                text[i][1] = "Score";
+            }else{
+                Rank tmp = rankList.get(i - 1);
+                text[i][0] = tmp.getName();
+                text[i][1] = Long.toString(tmp.getScore());
+            }
         }
-        points = new DrawStringPoint[rankList.size()];
+        points = new DrawStringPoint[rankList.size() + 1][2];
 
         mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
@@ -97,21 +104,24 @@ public class RankScene extends Scene {
         g.drawImage(image2, 
                 sX+(int) (32 * Global.MIN_PICTURE_SIZE), 0, 
                 (int) (32* Global.MIN_PICTURE_SIZE), (int) (24 * Global.MIN_PICTURE_SIZE), null);
-//        backButton.paint(g);
         backButton.paint(g);
         g.setColor(Color.orange);
-        if (points[0] == null) {
+        if (points[0][0] == null) {
             float x = 0;
             float y = 2 * Global.MIN_PICTURE_SIZE;
-            int width = (int) ((Global.FRAME_WIDTH - 2 * Global.MIN_PICTURE_SIZE));
-            int height = (int) ((Global.FRAME_HEIGHT - 3 * Global.MIN_PICTURE_SIZE) / points.length);
+            int width = (int) (Global.FRAME_WIDTH) / 2;
+            int height = (int) ((Global.FRAME_HEIGHT - 5 * Global.MIN_PICTURE_SIZE) / points.length);
             for (int i = 0; i < points.length; i++) {
-                points[i] = new DrawStringPoint(x, y, g, Global.FONT_TEXT, text[i], width, height);
+                points[i][0] = new DrawStringPoint(x, y, g, Global.FONT_TEXT, text[i][0], width, height);
+                points[i][1] = new DrawStringPoint(x +  16 * Global.MIN_PICTURE_SIZE, y, g, Global.FONT_TEXT, text[i][1], width, height);
                 y += height;
             }
+            
+
         }
         for (int i = 0; i < points.length; i++) {
-            g.drawString(points[i].getText(), (int) points[i].getX(), (int) points[i].getY());
+            g.drawString(points[i][0].getText(), (int) points[i][0].getX(), (int) points[i][0].getY());
+            g.drawString(points[i][1].getText(), (int) points[i][1].getX(), (int) points[i][1].getY());
         }
     }
 
@@ -121,9 +131,9 @@ public class RankScene extends Scene {
     }
 
     private void genButton() {
-        backButton = new Button(50, 50, 150, 100,
+        backButton = new Button(27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
                 imageController.tryGetImage(Path.Image.Button.BACK_BUTTON));
-
+        backButton.setText("Back");
         backButton.setButtonListener(new ButtonListener() {
 
             @Override

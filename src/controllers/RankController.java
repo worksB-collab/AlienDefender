@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import values.Path;
 
 /**
  *
@@ -76,7 +75,7 @@ public class RankController {
         Rank rank = new Rank(name, score);
         rankList.add(rank);
         sort();
-        while(rankList.size() > 10){
+        while(rankList.size() > 5){
             rankList.remove(rankList.size() - 1);
         }
         
@@ -90,10 +89,8 @@ public class RankController {
             }
             
             bw.write(text);
-            System.out.println(text);
             bw.flush();
             bw.close();
-            System.out.println("!!!!");
         }catch(IOException ex){
             Logger.getLogger(RankController.class.getName()).log(Level.SEVERE, null, ex);
         }

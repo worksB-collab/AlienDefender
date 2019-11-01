@@ -1,10 +1,5 @@
-aae24457&&&,64
+aae,64
 A,0
-test,0
-test,0
-test,0
-test,0
-test,0
 test,0
 test,0
 test,0
