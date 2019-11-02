@@ -22,6 +22,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import values.DrawStringPoint;
+import values.Global;
 import static values.Global.*;
 
 /**
@@ -44,7 +45,7 @@ public class TowerSelectWindow extends TowerPopUpWindow {
     private DrawStringPoint infoString;
 
     public TowerSelectWindow(float x, float y, float width, float height, TowerController towerController) {
-        super(6.5f * MIN_PICTURE_SIZE, MIN_PICTURE_SIZE, width, height, towerController);
+        super(10f * MIN_PICTURE_SIZE, MIN_PICTURE_SIZE, width, height, towerController);
         if (y < 200) {
             super.setY(300);
         } else if (y < 400) {
@@ -60,6 +61,8 @@ public class TowerSelectWindow extends TowerPopUpWindow {
             isEnd = false;
             isHovering = false;
             hoveringTower = -1;
+            atkInfo = "";
+            costInfo = "";
             super.mouseCommandListener = new MouseCommandListener() {
                 @Override
                 public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -144,14 +147,14 @@ public class TowerSelectWindow extends TowerPopUpWindow {
         if (isHovering) {
             image = imageController.tryGetImage("/Resources/Images/Label/Tower_info_Label.png");
             towerImage = imageController.tryGetImage("/Resources/Images/GameObject/Tower2.png");
-            g.drawImage(image, (int) super.getX() + 150, (int) super.getY() + 80, (int) SIZE_GRID * 9, (int) SIZE_GRID * 3, null);
+            g.drawImage(image, (int) (super.getX() + 1.75f * Global.MIN_PICTURE_SIZE) , (int) super.getY() + 80, (int) SIZE_GRID * 9, (int) SIZE_GRID * 3, null);
             g.setColor(Color.white);
             g.setFont(FONT_INFOWINDOW);
-            g.drawString(atkInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY()+SIZE_GRID*3.8));
-            g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 8.5), (int) (super.getY() + SIZE_GRID*4.8));
+            g.drawString(atkInfo, (int) (super.getX() + SIZE_GRID * 5.5), (int) (super.getY()+ SIZE_GRID*3.8));
+            g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 5.5), (int) (super.getY() + SIZE_GRID*4.8));
             //draw preview tower image
-            g.drawImage(towerImage, (int) (super.getX() + SIZE_GRID*5.5), (int) (super.getY() + SIZE_GRID*3),
-                    (int) (super.getX() + SIZE_GRID * 7.5), (int) (super.getY() + SIZE_GRID * 5),
+            g.drawImage(towerImage, (int) (super.getX() + SIZE_GRID*2.5), (int) (super.getY() + SIZE_GRID*3),
+                    (int) (super.getX() + SIZE_GRID * 4.5), (int) (super.getY() + SIZE_GRID * 5),
                     (int) (hoveringTower * SIZE_OBJECT), 0, (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT, null);
         }
 
@@ -303,17 +306,14 @@ public class TowerSelectWindow extends TowerPopUpWindow {
 
         };
 
-        float dx = 10f;
-        float dy = 5f;
-        float spece = 10f;
-        float x1 = super.getX() + dx;
-        float y1 = super.getY() + dy;
-        float w = (width - (2f * dx) - (spece * (img.length - 1))) / img.length;
-        float h = height - (2f * dy);
+        float x1 = super.getX();
+        float y1 = super.getY();           
+        float w =  2f * Global.MIN_PICTURE_SIZE;
+        float h = 2f * Global.MIN_PICTURE_SIZE;
         for (int i = 0; i < img.length; i++) {
             Button button = new Button(x1, y1, w, h, img[i]);
             button.setButtonListener(buttonListener[i]);
-            x1 += (w + dx);
+            x1 += w;
             buttonList.add(button);
         }
     }

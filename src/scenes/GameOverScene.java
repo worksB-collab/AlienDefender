@@ -43,7 +43,7 @@ public class GameOverScene extends Scene{
         backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE3);
-//        audio.loop(Clip.LOOP_CONTINUOUSLY);
+        audio.start();
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -74,7 +74,8 @@ public class GameOverScene extends Scene{
         reStartButton.update();
         if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
             audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
-            }
+            audio.loop(Clip.LOOP_CONTINUOUSLY);
+        }
     }
 
     @Override

@@ -30,7 +30,6 @@ import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import javax.sound.sampled.Clip;
 import parameter.AlienParameter;
-import static values.Global.FONT_01;
 import static values.Global.FONT_WIN;
 import values.Path;
 
@@ -252,9 +251,9 @@ public class GameScene extends Scene {
                         }
                     }
                     if (!isBuilt) {
-                        popUpWindow = new TowerSelectWindow(x0, y0, 137 / 7 * Global.MIN_PICTURE_SIZE, 41 / 20 * Global.MIN_PICTURE_SIZE, towerController);
+                        popUpWindow = new TowerSelectWindow(x0, y0, 12 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, towerController);
                     } else {
-                        popUpWindow = new TowerInformationWindow(x0, y0, 137 / 7 * Global.MIN_PICTURE_SIZE, 41 / 20 * Global.MIN_PICTURE_SIZE, tower, playerController);
+                        popUpWindow = new TowerInformationWindow(x0, y0, 12 * Global.MIN_PICTURE_SIZE, 2 * Global.MIN_PICTURE_SIZE, tower, playerController);
                     }
 
                 }
