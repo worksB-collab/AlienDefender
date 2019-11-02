@@ -40,6 +40,7 @@ public class EndScene extends Scene{
     private String scoreString;
     private DrawStringPoint point[];
     private Clip audio;
+    private int thankUScene;
     public EndScene(SceneController sceneController) {
         super(sceneController);
         playerController = PlayerController.genInstance();
@@ -108,24 +109,31 @@ public class EndScene extends Scene{
         reStartButton.paint(g);
         g.setFont(Global.FONT_BUTTON);
         g.setColor(Color.YELLOW);
+        if(thankUScene ==0){
         g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 4f * Global.MIN_PICTURE_SIZE));
         g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()));
         g.drawImage(image, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[1].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
-    }
+        }else if( thankUScene==1){
+            g.drawString("Thank you for playing :)", (int)point[0].getX()-80, (int)(point[0].getY()+ 4f));
+        }
+        }
     @Override
     public CommandSolver.MouseCommandListener getMouseCommandListener(){
         return mouseCommandListener;
     }
     public void genButton(){
         
-        reStartButton = new Button( 0, 0, Global.FRAME_WIDTH, Global.FRAME_WIDTH + 10 * Global.MIN_PICTURE_SIZE, "Press anywhere to continue !");
+        reStartButton = new Button( 0, 0, Global.FRAME_WIDTH, Global.FRAME_WIDTH + 10 * Global.MIN_PICTURE_SIZE, "Click to Continue");
         reStartButton.setFont(Global.FONT_SCORE);
         reStartButton.setButtonListener(new ButtonListener(){
             @Override
             public void onClick(int x, int y) {
+                thankUScene ++;
+                if(thankUScene==2){
                 rankController.addRank(playerController.getName(), playerController.getScore());
                 playerController.initialize();
                 sceneController.changeScene(new StartScene(sceneController));
+                }
             }
 
             @Override
