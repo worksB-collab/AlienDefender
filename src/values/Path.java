@@ -29,7 +29,6 @@ public class Path {
         public static final String TROPHY = GAMEOBJECT + "/Trophy.png";
         public static final String DEAD = GAMEOBJECT + "/Dead.png";
 
-
         public class Button {
 
             public static final String BUTTON = IMAGES + "/Button";
@@ -48,6 +47,14 @@ public class Path {
             public static final String END_SCENE = SCENE + "/EndScene.png";
             public static final String SPACE1 = SCENE + "/space.png";
             public static final String SPACE2 = SCENE + "/space2.png";
+        }
+
+        public class Description {
+
+            public static final String DESCRIPTION = IMAGES + "/Description";
+            public static final String DESCRIPTION1 = DESCRIPTION + "/description1.png";
+            public static final String DESCRIPTION2 = DESCRIPTION + "/description2.png";
+            public static final String DESCRIPTION3 = DESCRIPTION + "/description3.png";
         }
     }
 
