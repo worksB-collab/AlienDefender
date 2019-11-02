@@ -5,12 +5,12 @@
  */
 package gameobjects;
 
-import controllers.AudioController;
+import controllers.AudioControllerForAudioClip;
 import controllers.DelayCounter;
 import static values.Global.*;
 import values.Path;
 import java.awt.Graphics;
-import javax.sound.sampled.Clip;
+import javafx.scene.media.AudioClip;
 
 /**
  *
@@ -30,8 +30,8 @@ public class Bullet extends EffectObject {
     private int ACT[] = {0, 1, 2, 3, 4};
     private int act;
     private DelayCounter delay;
-    private AudioController audioController;
-    private Clip audio;
+    private AudioClip audio;
+    private AudioControllerForAudioClip audioController;
     
     public Bullet(float x, float y, Alien alien, Tower tower, float direction, float speed) {
         super(x, y, SIZE_GRID, SIZE_GRID);
@@ -43,7 +43,7 @@ public class Bullet extends EffectObject {
         bHelper = new BulletHelper(towerNum);
         act = 0;
         delay = new DelayCounter(1);
-        audioController = AudioController.genInstance();
+        audioController = AudioControllerForAudioClip.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Sounds.Attack.SHOT4);
         launch();
     }
@@ -69,7 +69,7 @@ public class Bullet extends EffectObject {
     }
 
     public void launch(){
-        audio.start();
+        audio.play();
         updateCount = 0;
         float dX = alienX - super.getX();
         float dY = alienY - super.getY();

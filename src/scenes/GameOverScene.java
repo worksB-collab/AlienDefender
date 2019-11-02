@@ -42,8 +42,8 @@ public class GameOverScene extends Scene{
         imageController = ImageController.genInstance();
         backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE3);
-        audio.start();
+        audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
         mouseCommandListener = new MouseCommandListener(){
 
             @Override
@@ -72,10 +72,10 @@ public class GameOverScene extends Scene{
     public void sceneUpdate() {
         backgroundController.update();
         reStartButton.update();
-        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
-            audio.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+//        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
+//            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
+//            audio.loop(Clip.LOOP_CONTINUOUSLY);
+//        }
     }
 
     @Override
@@ -92,7 +92,7 @@ public class GameOverScene extends Scene{
             point = new DrawStringPoint(0, 0, g, Global.FONT_01, "GAME OVER", (int)Global.FRAME_WIDTH, (int)Global.FRAME_HEIGHT);
         }
         g.setFont(Global.FONT_01);
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.orange);
         g.drawString(point.getText(), (int)point.getX(), (int)point.getY());
         g.setColor(Color.BLACK);
         reStartButton.paint(g);
@@ -103,7 +103,7 @@ public class GameOverScene extends Scene{
     }
     public void genButton(){
         
-        reStartButton = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE),"Press anywhere to retry !");
+        reStartButton = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE),"Click to Retry");
 
         reStartButton.setButtonListener(new ButtonListener(){
             @Override

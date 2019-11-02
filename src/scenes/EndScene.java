@@ -108,7 +108,7 @@ public class EndScene extends Scene{
         }
         reStartButton.paint(g);
         g.setFont(Global.FONT_BUTTON);
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.orange);
         if(thankUScene ==0){
         g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 4f * Global.MIN_PICTURE_SIZE));
         g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()));

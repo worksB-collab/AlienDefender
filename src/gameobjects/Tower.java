@@ -5,11 +5,14 @@
  */
 package gameobjects;
 
+import controllers.AudioControllerForAudioClip;
 import controllers.DelayCounter;
 import static values.Global.*;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.LinkedList;
+import javafx.scene.media.AudioClip;
+import values.Path;
 
 /**
  *
@@ -26,6 +29,8 @@ public abstract class Tower extends ActiveObject {
     private int upgradeStage;
     private int upgradeNow;
     private float cost, upgradeCost;
+    private AudioClip audio;
+    private AudioControllerForAudioClip audioController;
 
     public Tower(float x, float y, float width, float height, float attack, float speed) {
         super(x, y, width, height, speed);
@@ -33,6 +38,8 @@ public abstract class Tower extends ActiveObject {
         delay = new DelayCounter(10);
         upgradeStage = 0;
         setAttack(attack);
+        audioController = AudioControllerForAudioClip.genInstance();
+        audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.UPGRADE);
     }
 
     public void setCost(float cost) {
@@ -162,6 +169,7 @@ public abstract class Tower extends ActiveObject {
         if (upgradeStage >= 2) {
             return false;
         }
+        audio.play();
         upgradeNow++;
         upgradeStage++;
         setAttack(getAttack() * 1.5f);
