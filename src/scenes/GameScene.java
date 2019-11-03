@@ -54,7 +54,7 @@ public class GameScene extends Scene {
     private Clip audio, winAudio;
     private AlienParameter alienParameter;
     private float alienSet[][];
-    private BufferedImage trophy;
+    private BufferedImage trophy, mask;
     private int winState;
     private DelayCounter winDelay;
 
@@ -71,6 +71,7 @@ public class GameScene extends Scene {
         winAudio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         trophy = imageController.tryGetImage(Path.Image.TROPHY);
+        mask = imageController.tryGetImage(Path.Image.Scene.MASK);
         winDelay = new DelayCounter(100);
         mouseCommandListener = new MouseCommandListener() {
 
@@ -188,7 +189,7 @@ public class GameScene extends Scene {
                 button.paint(g);
             }
         }
-        buttonNext.paint(g);
+
         alienController.paint(g);
         towerController.paint(g);
         if (spot != null) {
@@ -206,14 +207,15 @@ public class GameScene extends Scene {
         if (winState == 1) {
             audio.stop();
             winAudio.start();
+            g.drawImage(mask, 0, 0, null);
             g.setFont(FONT_WIN);
             g.setColor(Color.black);
             g.drawString("You Win", 300, 420);
             g.setFont(FONT_WIN);
             g.setColor(Color.orange);
             g.drawString("You Win", 310, 425);
-            
         }
+        buttonNext.paint(g);
     }
 
     @Override

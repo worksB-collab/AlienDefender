@@ -27,7 +27,7 @@ public class DescriptionScene extends Scene {
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private ImageController imageController;
     private BufferedImage image, image2, description1, description2, description3;
-    private Button backButton;
+    private Button backButton, continueButton;
     private Clip audio;
     private int sX;
     private int page;
@@ -49,6 +49,9 @@ public class DescriptionScene extends Scene {
                     if (backButton.isRange(e.getX(), e.getY())) {
                         backButton.click(e.getX(), e.getY());
                     }
+                    if (continueButton.isRange(e.getX(), e.getY())) {
+                        continueButton.click(e.getX(), e.getY());
+                    }
                 }
             }
 
@@ -63,6 +66,7 @@ public class DescriptionScene extends Scene {
     @Override
     public void sceneUpdate() {
         backButton.update();
+        continueButton.update();
         if (sX == -(int) (2 * 32 * MIN_PICTURE_SIZE)) {
             sX = 0;
         }
@@ -72,6 +76,7 @@ public class DescriptionScene extends Scene {
     @Override
     public void sceneEnd() {
         backButton = null;
+        continueButton = null;
         imageController.clearImage();
     }
 
@@ -91,18 +96,18 @@ public class DescriptionScene extends Scene {
 
         switch (page) {
             case 1:
-                g.drawImage(description1, 100, 50, 915, 670, 0, 0, 895, 674, null);
+                g.drawImage(description1, 120, 80, 895, 650, 0, 0, 895, 674, null);
                 break;
             case 2:
-                g.drawImage(description2, 100, 50, 915, 670, 0, 0, 895, 674, null);
+                g.drawImage(description2, 120, 80, 895, 650, 0, 0, 895, 674, null);
                 break;
             case 3:
-                g.drawImage(description3, 100, 50, 915, 670, 0, 0, 895, 674, null);
+                g.drawImage(description3, 120, 80, 895, 650, 0, 0, 895, 674, null);
                 break;
         }
-        System.out.println("!");
         g.setFont(FONT_TEXT);
-        g.drawString("Click to Continue", (int) FRAME_WIDTH, (int) (FRAME_WIDTH + 10 * MIN_PICTURE_SIZE));
+        g.setColor(Color.LIGHT_GRAY);
+        g.drawString("Click to Continue", 400, 710);
     }
 
     @Override
@@ -115,11 +120,13 @@ public class DescriptionScene extends Scene {
                 imageController.tryGetImage(Path.Image.Button.BACK_BUTTON));
         backButton.setText("Back");
         backButton.setButtonListener(new Button.ButtonListener() {
-
             @Override
             public void onClick(int x, int y) {
-                sceneController.changeScene(new MenuScene(sceneController, audio));
                 page++;
+                if (page < 2) {
+                    sceneController.changeScene(new MenuScene(sceneController, audio));
+                }
+
             }
 
             @Override

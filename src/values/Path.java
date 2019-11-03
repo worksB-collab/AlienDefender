@@ -47,6 +47,8 @@ public class Path {
             public static final String END_SCENE = SCENE + "/EndScene.png";
             public static final String SPACE1 = SCENE + "/space.png";
             public static final String SPACE2 = SCENE + "/space2.png";
+            public static final String MASK = SCENE + "/mask.png";
+            public static final String HURT_MASK = SCENE + "/hurtMask.png";
         }
 
         public class Description {
@@ -104,6 +106,7 @@ public class Path {
 
                 public static final String EFFECT = SOUNDS + "/Effect";
                 public static final String UPGRADE = EFFECT + "/upgrade.wav";
+                public static final String HURT = EFFECT + "/hurt.wav";
             }
         }
     }

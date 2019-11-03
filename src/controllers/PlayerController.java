@@ -16,7 +16,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import javafx.scene.media.AudioClip;
 import static values.Global.MIN_PICTURE_SIZE;
+import values.Path;
 
 /**
  *
@@ -32,11 +34,12 @@ public class PlayerController {
     private long money;
     private DrawStringPoint namePoint, scorePoint, hpPoint, moneyPoint;
     private ImageController imageController;
-    private BufferedImage hpImage[];
+    private BufferedImage hpImage[], hurtMask;
     private int moneyChange, hpChange, notEnough; // change color when value changes
-    private DelayCounter delay;
-
+    private DelayCounter delay, hurtDelay;
     private float ratio;
+    private AudioClip audio;
+    private AudioControllerForAudioClip audioController;
 
     private PlayerController(int money, int hp) {
         this.name = "Player";
@@ -49,7 +52,11 @@ public class PlayerController {
         hpImage = new BufferedImage[2];
         hpImage[0] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineInner.png");
         hpImage[1] = imageController.tryGetImage("/Resources/Images/GameObject/BloodLineOutter.png");
+        hurtMask = imageController.tryGetImage(Path.Image.Scene.HURT_MASK);
         delay = new DelayCounter(5);
+        hurtDelay = new DelayCounter(2);
+        audioController = AudioControllerForAudioClip.genInstance();
+        audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.HURT);
     }
 
     private PlayerController(String name, long score, int stage, long money) {
@@ -62,7 +69,7 @@ public class PlayerController {
 
     public static PlayerController genInstance() {
         if (playerController == null) {
-            playerController = new PlayerController(300,100);
+            playerController = new PlayerController(300, 100);
         }
         return playerController;
     }
@@ -165,6 +172,7 @@ public class PlayerController {
             return;
         }
         this.hp = hp;
+        audio.play();
         hpChange = 1;
     }
 
@@ -225,8 +233,8 @@ public class PlayerController {
         //drawHP
         g.setColor(Color.white);
         if (hpChange == 1) {
-            g.setColor(Color.red);
-            if (delay.update()) {
+            g.drawImage(hurtMask, 0, 0, null);
+            if (hurtDelay.update()) {
                 hpChange = 0;
             }
         }
@@ -238,8 +246,8 @@ public class PlayerController {
         }
         //drawName
         g.setFont(namePoint.getFont());
-        g.drawString(namePoint.getText(), (int) (namePoint.getX() + MIN_PICTURE_SIZE * 0.5f), (int) (namePoint.getY() ));
-        
+        g.drawString(namePoint.getText(), (int) (namePoint.getX() + MIN_PICTURE_SIZE * 0.5f), (int) (namePoint.getY()));
+
         //drawMoney
         if (moneyChange == 1) {
             g.setColor(Color.orange);
