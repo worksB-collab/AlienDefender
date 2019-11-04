@@ -114,7 +114,7 @@ public class AlienParameter {
 
                 alienSet[2][0] = start5x;
                 alienSet[2][1] = start5y;
-                alienSet[2][2] = 60;
+                alienSet[2][2] = 70;
                 alienSet[2][3] = 8;
                 alienSet[2][4] = 10;
 

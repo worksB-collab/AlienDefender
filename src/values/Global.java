@@ -50,9 +50,9 @@ public class Global {
     public static final float TOWER4_COST = 100;
     public static final float TOWER0_ATK = 20;
     public static final float TOWER1_ATK = 25;
-    public static final float TOWER2_ATK = 30;
-    public static final float TOWER3_ATK = 35;
-    public static final float TOWER4_ATK = 40;
+    public static final float TOWER2_ATK = 29;
+    public static final float TOWER3_ATK = 32;
+    public static final float TOWER4_ATK = 34;
 
     //Alien
     public static float [] START_POINT1 = {-SIZE_GRID, SIZE_GRID*2};
