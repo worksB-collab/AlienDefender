@@ -72,6 +72,11 @@ public class Path {
             public static final String MENU = MUSICS + "/Menu/this.wav";
             public static final String BETWEENSCENES = MUSICS + "/Between_Scenes/this.wav";
             public static final String INTHEGAME = MUSICS + "/In_The_Game/in_the_game.wav";
+            public static final String INTHEGAME1 = MUSICS + "/In_The_Game/1.wav";
+            public static final String INTHEGAME2 = MUSICS + "/In_The_Game/2.wav";
+            public static final String INTHEGAME3 = MUSICS + "/In_The_Game/3.wav";
+            public static final String INTHEGAME4 = MUSICS + "/In_The_Game/4.wav";
+            public static final String INTHEGAME5 = MUSICS + "/In_The_Game/5.wav";
             public static final String ENDING = MUSICS + "/Ending/this.wav";
             public static final String WIN = MUSICS + "/Win";
 //            public static final String WIN1 = WIN + "/this.wav";

@@ -67,7 +67,24 @@ public class GameScene extends Scene {
         backgroundController = new BackgroundController(stage);
         routeController = new RouteController();
         buttonList = new LinkedList();
-        audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME);
+        switch (stage) {
+            case 1:
+                audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME1);
+                break;
+            case 2:
+                audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME2);
+                break;
+            case 3:
+                audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME3);
+                break;
+            case 4:
+                audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME4);
+                break;
+            case 5:
+                audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME5);
+                break;
+
+        }
         winAudio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         trophy = imageController.tryGetImage(Path.Image.TROPHY);
