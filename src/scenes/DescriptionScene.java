@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
+import values.Global;
 import static values.Global.*;
 import values.Path;
 
@@ -46,11 +47,17 @@ public class DescriptionScene extends Scene {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
-                    if (backButton.isRange(e.getX(), e.getY())) {
-                        backButton.click(e.getX(), e.getY());
+                    int x = e.getX();
+                    int y = e.getY();
+                    if(backButton != null){
+                        if (backButton.isRange(x, y)) {
+                            backButton.click(x, y);
+                        }
                     }
-                    if (continueButton.isRange(e.getX(), e.getY())) {
-                        continueButton.click(e.getX(), e.getY());
+                    if(continueButton != null){
+                        if (continueButton.isRange(x, y)) {
+                            continueButton.click(x, y);
+                        }
                     }
                 }
             }
@@ -122,10 +129,7 @@ public class DescriptionScene extends Scene {
         backButton.setButtonListener(new Button.ButtonListener() {
             @Override
             public void onClick(int x, int y) {
-                page++;
-                if (page < 2) {
-                    sceneController.changeScene(new MenuScene(sceneController, audio));
-                }
+                sceneController.changeScene(new MenuScene(sceneController, audio));
 
             }
 
@@ -134,5 +138,19 @@ public class DescriptionScene extends Scene {
             }
 
         });
+        
+        continueButton = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE),"Click to Retry");
+
+        continueButton.setButtonListener(new Button.ButtonListener(){
+            @Override
+            public void onClick(int x, int y) {
+                page++;
+            }
+
+            @Override
+            public void hover(int x, int y) {
+            }
+        }
+        );
     }
 }
