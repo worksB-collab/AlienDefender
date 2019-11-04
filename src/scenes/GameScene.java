@@ -164,6 +164,7 @@ public class GameScene extends Scene {
         }
         //check clear or not
         if (alienController.isEnd()) {
+            popUpWindow = null;
             winState = 1;
             if (winDelay.update()) {
 //                sceneController.changeScene(new TextReader(sceneController, ++stage));
