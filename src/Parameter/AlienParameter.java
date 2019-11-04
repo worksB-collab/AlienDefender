@@ -44,7 +44,7 @@ public class AlienParameter {
             case 2:
                 alienSet[0][0] = start2x;
                 alienSet[0][1] = start2y;
-                alienSet[0][2] = 60;
+                alienSet[0][2] = 70;
                 alienSet[0][3] = 3;
                 alienSet[0][4] = 25;
 
