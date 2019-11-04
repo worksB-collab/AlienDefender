@@ -206,10 +206,6 @@ public class AlienController {
                 }
             } else {
                 aliens.get(i).paint(g);
-                if (aliens != null) {
-//                    System.out.println(aliens.get(0).nextPosition);
-//                    System.out.println(aliens.get(0).getDirection());
-                }
             }
         }
     }
