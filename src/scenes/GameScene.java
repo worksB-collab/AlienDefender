@@ -193,7 +193,7 @@ public class GameScene extends Scene {
         alienController.paint(g);
         towerController.paint(g);
         if (spot != null) {
-            g.setColor(Color.red);
+            g.setColor(Color.LIGHT_GRAY);
             g.drawRect((int) spot.getX() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) spot.getY() / (int) Global.MIN_PICTURE_SIZE * (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE, (int) Global.MIN_PICTURE_SIZE);
             g.setColor(Color.BLACK);
         }
@@ -209,7 +209,7 @@ public class GameScene extends Scene {
             winAudio.start();
             g.drawImage(mask, 0, 0, null);
             g.setFont(FONT_WIN);
-            g.setColor(Color.black);
+            g.setColor(Color.gray);
             g.drawString("You Win", 300, 420);
             g.setFont(FONT_WIN);
             g.setColor(Color.orange);
