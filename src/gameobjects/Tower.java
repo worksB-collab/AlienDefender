@@ -80,7 +80,7 @@ public abstract class Tower extends ActiveObject {
 
     public void detection(LinkedList<Alien> aliens) {
         for (Point range : range) {
-            for (int i = 0; i < aliens.size(); i++) {
+            for (int i = 0; (aliens != null) & i < aliens.size(); i++) {
                 if (aliens.get(i) != null) {
                     if (aliens.get(i).getX() + SIZE_GRID - DEVIATION >= range.getX()
                             && aliens.get(i).getX() + DEVIATION <= range.getX() + SIZE_GRID
