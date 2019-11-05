@@ -18,6 +18,7 @@ import controllers.PlayerController;
 import controllers.RouteController;
 import controllers.RouteController.RoutePoint;
 import controllers.SceneController;
+import controllers.ScoreController;
 import controllers.TowerController;
 import gameobjects.Button;
 import gameobjects.Button.ButtonListener;
@@ -57,6 +58,7 @@ public class GameScene extends Scene {
     private BufferedImage trophy, mask;
     private int winState;
     private DelayCounter winDelay;
+    private ScoreController scoreController;
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController);
@@ -67,6 +69,7 @@ public class GameScene extends Scene {
         backgroundController = new BackgroundController(stage);
         routeController = new RouteController();
         buttonList = new LinkedList();
+        scoreController = ScoreController.genInstance();
         switch (stage) {
             case 1:
                 audio = audioController.tryGetAudio(Path.Audios.Musics.INTHEGAME1);
@@ -195,6 +198,8 @@ public class GameScene extends Scene {
         audio.close();
         winAudio.close();
         audioController.clearAudio();
+        scoreController.setScore(scoreController.getScore()+(playerController.getHP()/10)+
+                                                          (int)(playerController.getMoney())/10);
     }
 
     @Override

@@ -17,11 +17,22 @@ public class ScoreController {
     public static ScoreController scoreController;
     private int totalScore;
 
-    public ScoreController() {
+    private ScoreController() {
         kills = new ArrayList<Integer>();
         for (int i = 0; i < 5; i++) {
             kills.add(0);
         }
+    }
+
+    public static ScoreController genInstance() {
+        if (scoreController == null) {
+            scoreController = new ScoreController();
+        }
+        return scoreController;
+    }
+
+    public void setScore(int score) {
+        totalScore = score;
     }
 
     public int scoreCount(int alienNum) {
@@ -69,9 +80,12 @@ public class ScoreController {
 //        }
 //        return -1;
 //    }
-
     public ArrayList<Integer> getKills() {
         return kills;
+    }
+    
+    public int getScore(){
+        return totalScore;
     }
 
     public String toString() {
