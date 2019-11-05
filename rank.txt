@@ -3,4 +3,3 @@ sssa,250
 Shelly,220
 laomo,205
 Arumi,160
-Tom,150
