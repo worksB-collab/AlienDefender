@@ -77,13 +77,13 @@ public class PlayerController {
     public void initialize() {
         this.score = 0;
         this.stage = 1;
-        this.money = 500; // test
+        this.money = 300; // test
         this.hp = 100;
         this.ratio = 1f;
     }
 
     public void reset() {
-        this.money = 500; // test
+        this.money = 300; // test
         this.hp = 100;
         this.ratio = 1f;
     }

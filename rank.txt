@@ -1,5 +1,6 @@
+Maluma,250
 sssa,250
-aae,64
-A,0
-test,0
-test,0
+Shelly,220
+laomo,205
+Arumi,160
+Tom,150
