@@ -19,7 +19,7 @@ public class ScoreController {
 
     private ScoreController() {
         kills = new ArrayList<Integer>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             kills.add(0);
         }
     }
@@ -52,16 +52,37 @@ public class ScoreController {
             case 4:
                 kills.set(4, kills.get(4) + 1);
                 break;
+                case 5:
+                kills.set(5, kills.get(5) + 1);
+                break;
+            case 6:
+                kills.set(6, kills.get(6) + 1);
+                break;
+            case 7:
+                kills.set(7, kills.get(7) + 1);
+                break;
+            case 8:
+                kills.set(8, kills.get(8) + 1);
+                break;
+            case 9:
+                kills.set(9, kills.get(9) + 1);
+                break;
+        
         }
         return 1;
     }
 
     public int scoreConverter() {
-        totalScore += kills.get(0) * 1
+        totalScore += kills.get(0) * 2
                 + kills.get(1) * 2
                 + kills.get(2) * 3
                 + kills.get(3) * 4
-                + kills.get(4) * 5;
+                + kills.get(4) * 5
+                + kills.get(5) * 2
+                + kills.get(6) * 3
+                + kills.get(7) * 4
+                + kills.get(8) * 5
+                + kills.get(9) * 5;
         return totalScore;
     }
 
