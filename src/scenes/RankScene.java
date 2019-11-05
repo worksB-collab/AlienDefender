@@ -48,19 +48,22 @@ public class RankScene extends Scene {
         this.audio = audio;
         rankController = RankController.genInstance();
         rankList = rankController.getList();
-        text = new String[rankList.size() + 1][2];
-        for (int i = 0; i < rankList.size() + 1; i++) {
+        text = new String[rankList.size() + 2][2];
+        for (int i = 0; i < rankList.size() + 2; i++) {
             
             if(i == 0){
                 text[i][0] = "Player"; 
-                text[i][1] = "Score";
+                text[i][1] = "Score";  
+            }else if( i == 1){
+                text[i][0] = "";
+                text[i][1] = "";
             }else{
-                Rank tmp = rankList.get(i - 1);
+                Rank tmp = rankList.get(i - 2);
                 text[i][0] = tmp.getName();
                 text[i][1] = Long.toString(tmp.getScore());
             }
         }
-        points = new DrawStringPoint[rankList.size() + 1][2];
+        points = new DrawStringPoint[rankList.size() + 2][2];
 
         mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
