@@ -72,10 +72,6 @@ public class GameOverScene extends Scene{
     public void sceneUpdate() {
         backgroundController.update();
         reStartButton.update();
-//        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-//            audio = audioController.tryGetAudio(Path.Audios.Musics.LOSE4);
-//            audio.loop(Clip.LOOP_CONTINUOUSLY);
-//        }
     }
 
     @Override

@@ -90,10 +90,12 @@ public class TowerController {
 
     public void update() {
         //Tower update
-        if (aliens.size() != 0) {
-            for (int i = 0; i < towers.size(); i++) {
-                towers.get(i).detection(aliens);
-                towers.get(i).update();
+        if(aliens != null){
+            if (aliens.size() != 0) {
+                for (int i = 0; i < towers.size(); i++) {
+                    towers.get(i).detection(aliens);
+                    towers.get(i).update();
+                }
             }
         }
     }

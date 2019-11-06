@@ -69,6 +69,9 @@ public class TowerSelectWindow extends TowerPopUpWindow {
                     if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
                         int x = e.getX();
                         int y = e.getY();
+                        if (x < 6.5f * Global.MIN_PICTURE_SIZE || x > (6.5f * Global.MIN_PICTURE_SIZE + width) || y < Global.MIN_PICTURE_SIZE || y > (Global.MIN_PICTURE_SIZE + height)) {
+                            isEnd = true;
+                        }
                         for (Button btn : buttonList) {
                             if (btn.isRange(x, y)) {
                                 btn.click(x, y);
