@@ -60,6 +60,7 @@ public class GameScene extends Scene {
     private DelayCounter winDelay;
     private PlayerController plyaerController;
     private ScoreController scoreController;
+    private int notEnough;
 
     public GameScene(SceneController sceneController, int stage) {
         super(sceneController);
@@ -95,6 +96,7 @@ public class GameScene extends Scene {
         trophy = imageController.tryGetImage(Path.Image.TROPHY);
         mask = imageController.tryGetImage(Path.Image.Scene.MASK);
         winDelay = new DelayCounter(100);
+        notEnough = 1;
         mouseCommandListener = new MouseCommandListener() {
 
             @Override
@@ -126,6 +128,10 @@ public class GameScene extends Scene {
             }
         };
 
+    }
+
+    public int getNotEnough() {
+        return notEnough;
     }
 
     @Override
@@ -179,6 +185,7 @@ public class GameScene extends Scene {
         towerController.update();
 
         if (popUpWindow != null) {
+            playerController.setNotEnough(popUpWindow.getNotEnough());
             popUpWindow.update();
             if (popUpWindow.isEnd()) {
                 popUpWindow = null;
@@ -200,8 +207,8 @@ public class GameScene extends Scene {
         audio.close();
         winAudio.close();
         audioController.clearAudio();
-        playerController.setScore(playerController.getScore()+(playerController.getHP()/10)+
-                                                          (int)(playerController.getMoney())/10);
+        playerController.setScore(playerController.getScore() + (playerController.getHP() / 10)
+                + (int) (playerController.getMoney()) / 10);
         System.out.println(scoreController.getKills());
     }
 

@@ -5,6 +5,7 @@
  */
 package scenes;
 
+import controllers.AudioControllerForAudioClip;
 import controllers.CommandSolver;
 import controllers.ImageController;
 import controllers.PlayerController;
@@ -21,8 +22,10 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
+import javafx.scene.media.AudioClip;
 import values.DrawStringPoint;
 import static values.Global.*;
+import values.Path;
 
 /**
  *
@@ -41,6 +44,10 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     private String atkInfo, costInfo;
     private int hoveringTower;
     private DrawStringPoint infoString;
+    private AudioClip noMoneyAudio;
+    private AudioControllerForAudioClip audioController;
+    private int notEnough;
+    private BufferedImage grayImg;
 
     public TowerInformationWindow(float x, float y, float width, float height, Tower tower, PlayerController playerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
@@ -62,6 +69,9 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         towerRange = new LinkedList();
         getButton(super.getX() - 2 * SIZE_GRID, super.getY());
         isEnd = false;
+        audioController = AudioControllerForAudioClip.genInstance();
+        noMoneyAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.NOMONEY);
+        grayImg = imageController.tryGetImage("/Resources/Images/Label/grayUpgrade.png");
         super.mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
             // 關閉視窗
@@ -84,6 +94,11 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             }
         };
     }
+    
+    @Override
+    public int getNotEnough() {
+        return notEnough;
+    }
 
     @Override
     public boolean isEnd() {
@@ -97,7 +112,11 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
     @Override
     public void update() {
+        buttonList.get(buttonList.size()-1).setImage(grayImg); // not sure if getting the right botton
+        if (notEnough == 1) {
+        }
         for (Button btn : buttonList) {
+            
             btn.update();
         }
         if (upgradeStage == 2) {
@@ -129,23 +148,23 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
             case 0:
                 atkInfo = "Attack: " + (int) (TOWER0_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER0_ATK * Math.pow(1.5, upgradeStage + 1));
-                costInfo = "Upgrade $: " + (int)(TOWER0_COST / 2);
+                costInfo = "Upgrade $: " + (int) (TOWER0_COST / 2);
                 break;
             case 1:
                 atkInfo = "Attack: " + (int) (TOWER1_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER1_ATK * Math.pow(1.5, upgradeStage + 1));
-                costInfo =  "Upgrade $: " + (int)(TOWER1_COST / 2);
+                costInfo = "Upgrade $: " + (int) (TOWER1_COST / 2);
                 break;
             case 2:
                 atkInfo = "Attack: " + (int) (TOWER2_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER2_ATK * Math.pow(1.5, upgradeStage + 1));
-                costInfo =  "Upgrade $: " + (int)(TOWER2_COST / 2);
+                costInfo = "Upgrade $: " + (int) (TOWER2_COST / 2);
                 break;
             case 3:
                 atkInfo = "Attack: " + (int) (TOWER3_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER3_ATK * Math.pow(1.5, upgradeStage + 1));
-                costInfo =  "Upgrade $: " + (int)(TOWER3_COST / 2);
+                costInfo = "Upgrade $: " + (int) (TOWER3_COST / 2);
                 break;
             case 4:
                 atkInfo = "Attack: " + (int) (TOWER4_ATK * Math.pow(1.5, upgradeStage)) + "→" + (int) (TOWER4_ATK * Math.pow(1.5, upgradeStage + 1));
-                costInfo =  "Upgrade $: " + (int)(TOWER4_COST / 2);
+                costInfo = "Upgrade $: " + (int) (TOWER4_COST / 2);
                 break;
         }
     }
@@ -171,7 +190,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             upgrade = 2;
         }
         // info window
-        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int)(SIZE_GRID * 12), (int) SIZE_GRID * 3, null);
+        g.drawImage(image, (int) super.getX() + 180, (int) super.getY(), (int) (SIZE_GRID * 12), (int) SIZE_GRID * 3, null);
         g.setColor(Color.white);
         g.setFont(FONT_INFOWINDOW);
         // strings
@@ -179,7 +198,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         g.drawString(costInfo, (int) (super.getX() + SIZE_GRID * 8.8), (int) (super.getY() + SIZE_GRID * 2.2));
         // tower images
         g.drawImage(towerImage,
-                (int) (super.getX() + SIZE_GRID*6.2), (int) (super.getY() + SIZE_GRID * 0.5),
+                (int) (super.getX() + SIZE_GRID * 6.2), (int) (super.getY() + SIZE_GRID * 0.5),
                 (int) (super.getX() + SIZE_GRID * 8.2), (int) (super.getY() + SIZE_GRID * 2.5),
                 (int) (hoveringTower * SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade),
                 (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade + 1),
@@ -193,17 +212,22 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     private void getButton(float x0, float y0) {
 
         BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
-        Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
+         Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
+        
         ButtonListener buttonListener2 = new Button.ButtonListener() {
 
             //
             @Override
             public void onClick(int x, int y) {
                 if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
+                    notEnough = 0;
                     if (tower.upgrade()) {
                         playerController.setMoney(playerController.getMoney() - TowerController.upgradeCostArr[tower.getTowerNum()]);
                     }
 
+                } else {
+                    noMoneyAudio.play();
+                    notEnough = 1;
                 }
 
             }

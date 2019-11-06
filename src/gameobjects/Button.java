@@ -58,6 +58,10 @@ public class Button extends GameObject {
         delayCounter = new DelayCounter(Global.BUTTON_UPDATE_DELAY);
 
     }
+    
+    public void setImage(BufferedImage rootImage){
+        this.rootImage = rootImage;
+    }
 
     public void setButtonListener(ButtonListener buttonListener) {
         this.buttonListener = buttonListener;

@@ -6,10 +6,10 @@
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/gameobjects/Alien10.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/values/Global.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/gameobjects/Tower.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/gameobjects/Tower3.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/scenes/GameScene.java</file>
-            <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/AlienController.java</file>
+            <file>file:/D:/Sourcetree/mid-term-project-1016/src/gameobjects/Tower3.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/values/Path.java</file>
+            <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/AlienController.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/TowerController.java</file>
             <file>file:/D:/Sourcetree/mid-term-project-1016/src/controllers/PlayerController.java</file>
         </group>
