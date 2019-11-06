@@ -132,7 +132,7 @@ public class AlienController {
         isEnd = false;
         removeCount = 0;
         audioController = AudioControllerForAudioClip.genInstance();
-        killAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.UPGRADE);
+        killAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.KILL);
     }
 
     public float getMoney(int index) {
