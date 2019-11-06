@@ -38,7 +38,7 @@ public class PlayerController {
     private int moneyChange, hpChange, notEnough; // change color when value changes
     private DelayCounter delay, hurtDelay;
     private float ratio;
-    private AudioClip audio;
+    private AudioClip audio, buyAudio, noMoneyAudio;
     private AudioControllerForAudioClip audioController;
 
     private PlayerController(int money, int hp) {
@@ -57,6 +57,8 @@ public class PlayerController {
         hurtDelay = new DelayCounter(2);
         audioController = AudioControllerForAudioClip.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.HURT);
+        noMoneyAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.NOMONEY);
+        buyAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.BUY);
     }
 
     private PlayerController(String name, long score, int stage, long money) {
@@ -141,8 +143,10 @@ public class PlayerController {
     public boolean isEnough(long money) {
         if (this.money < money) {
             notEnough = 1;
+            noMoneyAudio.play();
             return false;
         }
+        buyAudio.play();
         return true;
     }
 

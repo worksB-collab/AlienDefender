@@ -62,8 +62,8 @@ public class Global {
     public static float [] START_POINT5 = {SIZE_GRID*13, -SIZE_GRID};
     public static float [] ALIEN_SPEED = {1.2f*SPEED, 1*SPEED, 1.5f*SPEED,
                                                                             0.5f*SPEED, 0.8f*SPEED, 0.8f*SPEED,
-                                                                            1*SPEED,0.6f*SPEED, 2.8f*SPEED,
-                                                                            1*SPEED};
+                                                                            1.2f*SPEED,0.6f*SPEED, 2.8f*SPEED,
+                                                                            1.5f*SPEED};
     
     //Cailbaration
     public static float MIN_PICTURE_SIZE = 32f;
