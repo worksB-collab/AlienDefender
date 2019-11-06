@@ -11,6 +11,8 @@ import values.Global;
 import java.awt.Graphics;
 import java.util.Iterator;
 import java.util.LinkedList;
+import javafx.scene.media.AudioClip;
+import values.Path;
 
 /**
  *
@@ -36,6 +38,7 @@ public class AlienController {
             this.frequency = frequency;
             generateNumber = 0;
             this.isEnd = false;
+
         }
 
         public int getNumber() {
@@ -114,7 +117,9 @@ public class AlienController {
     private int totalEnemy;
     private int removeCount;
     private boolean isEnd;
-
+    private AudioClip killAudio;
+    private AudioControllerForAudioClip audioController;
+    
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
         alienPairs = new LinkedList<AlienSet>();
@@ -126,6 +131,8 @@ public class AlienController {
         stop = 0;
         isEnd = false;
         removeCount = 0;
+        audioController = AudioControllerForAudioClip.genInstance();
+        killAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.KILL);
     }
 
     public float getMoney(int index) {
@@ -141,12 +148,15 @@ public class AlienController {
         this.y = y;
         alienPairs.add(new AlienSet(x, y, frequency, alienNum, alienQuantity));
     }
-    public void setEnemyAmount(int number){
+
+    public void setEnemyAmount(int number) {
         totalEnemy = number;
     }
-    public boolean isEnd(){
+
+    public boolean isEnd() {
         return isEnd;
     }
+
     public void update() {
         //Aliens genearate Setting
         if (iter == null) {
@@ -160,7 +170,7 @@ public class AlienController {
                 presentAlienSet = iter.next();
             }
         }
-        
+
         //Aliens update
         if (genDelay.update()) {
             //Aliens genearate
@@ -183,7 +193,7 @@ public class AlienController {
             }
         }
         //check wheather all enemy is eliminate
-        if(removeCount == totalEnemy){
+        if (removeCount == totalEnemy) {
 
             isEnd = true;
         }
@@ -199,6 +209,7 @@ public class AlienController {
                     scoreController.scoreCount(alien.getAlienNum());
                     playerController.addScore((long) scoreController.scoreCount(alien.getAlienNum() + 1));
                     playerController.setMoney(playerController.getMoney() + alien.getMoney());
+                    killAudio.play();
                 }
                 if (aliens.get(i).getDeadDelay() % 6 == 0) {
                     aliens.remove(i);

@@ -58,6 +58,7 @@ public class GameScene extends Scene {
     private BufferedImage trophy, mask;
     private int winState;
     private DelayCounter winDelay;
+    private PlayerController plyaerController;
     private ScoreController scoreController;
 
     public GameScene(SceneController sceneController, int stage) {
@@ -69,6 +70,7 @@ public class GameScene extends Scene {
         backgroundController = new BackgroundController(stage);
         routeController = new RouteController();
         buttonList = new LinkedList();
+        playerController = PlayerController.genInstance();
         scoreController = ScoreController.genInstance();
         switch (stage) {
             case 1:
@@ -198,8 +200,9 @@ public class GameScene extends Scene {
         audio.close();
         winAudio.close();
         audioController.clearAudio();
-        scoreController.setScore(scoreController.getScore()+(playerController.getHP()/10)+
+        playerController.setScore(playerController.getScore()+(playerController.getHP()/10)+
                                                           (int)(playerController.getMoney())/10);
+        System.out.println(scoreController.getKills());
     }
 
     @Override

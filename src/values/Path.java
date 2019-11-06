@@ -112,6 +112,11 @@ public class Path {
                 public static final String EFFECT = SOUNDS + "/Effect";
                 public static final String UPGRADE = EFFECT + "/upgrade.wav";
                 public static final String HURT = EFFECT + "/hurt.wav";
+                public static final String BUY = EFFECT + "/buy.wav";
+                public static final String BUYMP3 = EFFECT + "/buy.mp3";
+                public static final String NOMONEY = EFFECT + "/noMoney.wav";
+                public static final String KILL = EFFECT + "/kill.wav";
+                public static final String KILLMP3 = EFFECT + "/kill.mp3";
             }
         }
     }

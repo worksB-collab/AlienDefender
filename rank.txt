@@ -3,3 +3,8 @@ sssa,250
 winnie,239
 dds,237
 Shelly,220
+<<<<<<< HEAD
+=======
+laomo,205
+ff,176
+>>>>>>> 1eb80b9856717a39736bc35c654956ff87e80ae0
