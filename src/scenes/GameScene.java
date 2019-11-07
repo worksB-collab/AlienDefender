@@ -91,7 +91,7 @@ public class GameScene extends Scene {
                 break;
 
         }
-        winAudio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
+        winAudio = audioController.tryGetAudio(Path.Audios.Musics.WIN_IN_GAME);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         trophy = imageController.tryGetImage(Path.Image.TROPHY);
         mask = imageController.tryGetImage(Path.Image.Scene.MASK);

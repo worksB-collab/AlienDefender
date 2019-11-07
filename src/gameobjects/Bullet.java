@@ -30,11 +30,13 @@ public class Bullet extends EffectObject {
     private int ACT[] = {0, 1, 2, 3, 4};
     private int act;
     private DelayCounter delay;
-    private AudioClip audio;
+    private AudioClip level1, level2, level3;
     private AudioControllerForAudioClip audioController;
-    
+    private Tower tower;
+
     public Bullet(float x, float y, Alien alien, Tower tower, float direction, float speed) {
         super(x, y, SIZE_GRID, SIZE_GRID);
+        this.tower = tower;
         this.direction = direction;
         alienX = alien.getX();
         alienY = alien.getY();
@@ -44,7 +46,9 @@ public class Bullet extends EffectObject {
         act = 0;
         delay = new DelayCounter(1);
         audioController = AudioControllerForAudioClip.genInstance();
-        audio = audioController.tryGetAudio(Path.Audios.Sounds.Attack.SHOT4);
+        level1 = audioController.tryGetAudio(Path.Audios.Sounds.Attack.SHOT4);
+        level2 = audioController.tryGetAudio(Path.Audios.Sounds.Attack.LEVEL2);
+        level3 = audioController.tryGetAudio(Path.Audios.Sounds.Attack.LEVEL3);
         launch();
     }
 
@@ -68,8 +72,18 @@ public class Bullet extends EffectObject {
         this.speed = speed;
     }
 
-    public void launch(){
-        audio.play();
+    public void launch() {
+        switch (tower.getUpgradeStage()) {
+            case 0:
+                level1.play();
+                break;
+            case 1:
+                level2.play();
+                break;
+            case 2:
+                level3.play();
+                break;
+        }
         updateCount = 0;
         float dX = alienX - super.getX();
         float dY = alienY - super.getY();
@@ -93,8 +107,8 @@ public class Bullet extends EffectObject {
     public void paint(Graphics g) {
         if (isReached()) {
             bHelper.paintBoom(g, super.getX(), super.getY(), super.getWidth(), super.getHeight(), ACT[act], towerNum, direction);
-                act = (act + 1) % 5;
-            
+            act = (act + 1) % 5;
+
         }
         bHelper.paint(g, super.getX(), super.getY(), super.getWidth(), super.getHeight(), towerNum, direction);
     }

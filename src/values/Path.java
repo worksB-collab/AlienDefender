@@ -81,6 +81,7 @@ public class Path {
             public static final String ENDING = MUSICS + "/Ending/this.wav";
             public static final String WIN = MUSICS + "/Win";
 //            public static final String WIN1 = WIN + "/this.wav";
+            public static final String WIN_IN_GAME = "/resources/Audios/Musics/Win/winInGame.wav";
             public static final String WIN1 = "/resources/Audios/Musics/Win/this.wav";
             public static final String WIN2 = WIN + "/this2.wav";
             public static final String LOSE = MUSICS + "/Lose";
@@ -105,7 +106,8 @@ public class Path {
                 public static final String SHOT4 = ATTACK + "/shot4.wav";
                 public static final String SHOT5 = ATTACK + "/shot5_lazer.wav";
                 public static final String SHOT6 = ATTACK + "/kick.wav";
-
+                public static final String LEVEL2 = ATTACK + "/level2.wav";
+                public static final String LEVEL3 = ATTACK + "/level3.wav";
             }
 
             public class Effect {
