@@ -207,8 +207,10 @@ public class GameScene extends Scene {
         audio.close();
         winAudio.close();
         audioController.clearAudio();
-        playerController.setScore(playerController.getScore() + (playerController.getHP() / 10)
+        scoreController.scoreConverter();
+        playerController.addScore(scoreController.getScore() + (playerController.getHP() / 10)
                 + (int) (playerController.getMoney()) / 10);
+        scoreController.clearScore();
     }
 
     @Override

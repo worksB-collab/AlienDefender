@@ -35,6 +35,13 @@ public class ScoreController {
         totalScore = score;
     }
 
+    public void clearScore() {
+        totalScore = 0;
+        for (int i = 0; i < 10; i++) {
+            kills.set(i, 0);
+        }
+    }
+
     public int scoreCount(int alienNum) {
         switch (alienNum) {
             case 0:
@@ -52,7 +59,7 @@ public class ScoreController {
             case 4:
                 kills.set(4, kills.get(4) + 1);
                 break;
-                case 5:
+            case 5:
                 kills.set(5, kills.get(5) + 1);
                 break;
             case 6:
@@ -67,15 +74,15 @@ public class ScoreController {
             case 9:
                 kills.set(9, kills.get(9) + 1);
                 break;
-        
+
         }
         return 1;
     }
 
     public int scoreConverter() {
         totalScore += kills.get(0) * 2
-                + kills.get(1) * 2
-                + kills.get(2) * 3
+                + kills.get(1) * 3
+                + kills.get(2) * 2
                 + kills.get(3) * 4
                 + kills.get(4) * 5
                 + kills.get(5) * 2
@@ -104,8 +111,8 @@ public class ScoreController {
     public ArrayList<Integer> getKills() {
         return kills;
     }
-    
-    public int getScore(){
+
+    public int getScore() {
         return totalScore;
     }
 
@@ -113,7 +120,7 @@ public class ScoreController {
         String str = "";
         int count = 1;
         for (int kill : kills) {
-            str += "Alien *" + kill + "\n";
+            str += "Alien" + count + "*" + kill + "\n";
             count++;
         }
         return str;

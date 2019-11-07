@@ -49,6 +49,7 @@ public class EndScene extends Scene{
         backgroundController = new BackgroundController(6);
         audioController = AudioController.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
+        audio.loop(Clip.LOOP_CONTINUOUSLY);
         audio.start();
         nameString = playerController.getName();
         scoreString = "Total socre : " + Long.toString(playerController.getScore());
@@ -81,10 +82,10 @@ public class EndScene extends Scene{
     public void sceneUpdate() {
         backgroundController.update();
         reStartButton.update();
-        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
-            audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
-            audio.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+//        if(audio.getMicrosecondLength() == audio.getMicrosecondPosition()){
+//            audio = audioController.tryGetAudio(Path.Audios.Musics.WIN2);
+//            audio.loop(Clip.LOOP_CONTINUOUSLY);
+//        }
         if(point[0] != null){
             point[0].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
             point[1].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);

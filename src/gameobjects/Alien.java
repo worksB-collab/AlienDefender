@@ -214,11 +214,11 @@ public abstract class Alien extends ActiveObject {
         }
     }
 
-    public abstract int getDeadDelay();
+//    public abstract int getDeadDelay();
 
     @Override
     public abstract void paint(Graphics g);
 
-    public abstract void paintDead(Graphics g);
+//    public abstract void paintDead(Graphics g);
 
 }

@@ -44,12 +44,12 @@ public class Alien7 extends Alien {
         aHelper.paint(g, super.getX(), super.getY(), width, height, ACT[act], super.getHp());
     }
 
-    @Override
-    public void paintDead(Graphics g) {
-        if (delay.update()) {
-            aHelper.dead(g, super.getX(), super.getY(), alienNum);
-            deadDelay ++;
-            
-        }
-    }
+//    @Override
+//    public void paintDead(Graphics g) {
+//        if (delay.update()) {
+//            aHelper.dead(g, super.getX(), super.getY(), alienNum);
+//            deadDelay ++;
+//            
+//        }
+//    }
 }

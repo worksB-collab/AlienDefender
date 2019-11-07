@@ -119,7 +119,7 @@ public class AlienController {
     private boolean isEnd;
     private AudioClip killAudio;
     private AudioControllerForAudioClip audioController;
-    
+
     public AlienController(LinkedList<RoutePoint> route) {
         aliens = new LinkedList<Alien>();
         alienPairs = new LinkedList<AlienSet>();
@@ -204,17 +204,17 @@ public class AlienController {
         for (int i = 0; i < aliens.size(); i++) {
             Alien alien = aliens.get(i);
             if (alien.isDead()) {
-                alien.paintDead(g);
+//                alien.paintDead(g);
                 if (alien.isDead()) {// kill counts 
+
                     scoreController.scoreCount(alien.getAlienNum());
-                    playerController.addScore((long) scoreController.scoreCount(alien.getAlienNum() + 1));
                     playerController.setMoney(playerController.getMoney() + alien.getMoney());
                     killAudio.play();
                 }
-                if (aliens.get(i).getDeadDelay() % 6 == 0) {
-                    aliens.remove(i);
-                    removeCount++;
-                }
+//                if (aliens.get(i).getDeadDelay() % 6 == 0) {
+                aliens.remove(i);
+                removeCount++;
+//                }
             } else {
                 aliens.get(i).paint(g);
             }
