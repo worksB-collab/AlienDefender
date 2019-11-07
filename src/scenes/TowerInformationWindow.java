@@ -86,11 +86,15 @@ public class TowerInformationWindow extends TowerPopUpWindow {
                         isEnd = true;
                     }
 
-                    for (Button btn : buttonList) {
-                        if (btn.isRange(x, y)) {
-                            btn.click(x, y);
-                            break;
+                    for (int i = 0; i < buttonList.size(); i++) {
+                        Button btn = buttonList.get(i);
+                        if(btn != null){
+                            if (btn.isRange(x, y)) {
+                                btn.click(x, y);
+                                break;
+                            }
                         }
+                        
                     }
                 }
             }
@@ -115,13 +119,22 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     @Override
     public void update() {
         if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
-            buttonList.get(0).setImage(img);
+            Button btn = buttonList.get(buttonList.size() - 1);
+            if(btn != null){
+               btn.setImage(img); 
+            }
+            
         } else {
-            buttonList.get(0).setImage(grayImg);
+            Button btn = buttonList.get(buttonList.size() - 1);
+            if(btn != null){
+               btn.setImage(grayImg);
+            }
         }
-        for (Button btn : buttonList) {
-
-            btn.update();
+        for (int i = 0; i < buttonList.size(); i++) {
+            Button btn = buttonList.get(i);
+            if(btn != null){
+                btn.update();
+            }
         }
         if (upgradeStage == 2) {
             switch (hoveringTower) {
