@@ -12,6 +12,7 @@ import controllers.ImageController;
 import controllers.PlayerController;
 import controllers.RankController;
 import controllers.SceneController;
+import controllers.ScoreController;
 import gameobjects.Button;
 import gameobjects.Button.ButtonListener;
 import java.awt.Color;
@@ -37,10 +38,11 @@ public class EndScene extends Scene{
     private BufferedImage image;
     private Button reStartButton;
     private String nameString;
-    private String scoreString;
+    private String killString, scoreString;
     private DrawStringPoint point[];
     private Clip audio;
     private int thankUScene;
+    private ScoreController scoreController;
     public EndScene(SceneController sceneController) {
         super(sceneController);
         playerController = PlayerController.genInstance();
@@ -51,9 +53,11 @@ public class EndScene extends Scene{
         audio = audioController.tryGetAudio(Path.Audios.Musics.WIN1);
         audio.loop(Clip.LOOP_CONTINUOUSLY);
         audio.start();
+        scoreController = ScoreController.genInstance();
         nameString = playerController.getName();
-        scoreString = "Total socre : " + Long.toString(playerController.getScore());
-        point = new DrawStringPoint[2];
+        killString = "Total Kill : " + Long.toString(scoreController.getTotalKill());
+        scoreString = "Total Socre : " + Long.toString(playerController.getScore());
+        point = new DrawStringPoint[3];
         image = imageController.tryGetImage(Path.Image.TROPHY);
         mouseCommandListener = new CommandSolver.MouseCommandListener(){
             @Override
@@ -89,6 +93,7 @@ public class EndScene extends Scene{
         if(point[0] != null){
             point[0].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
             point[1].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+            point[2].update(Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
         }
     }
 
@@ -105,15 +110,17 @@ public class EndScene extends Scene{
         backgroundController.paint(g);
         if(point[0] == null){
             point[0] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, scoreString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
-            point[1] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, nameString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+            point[1] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, killString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+            point[2] = new DrawStringPoint(0, 0, g, Global.FONT_BUTTON, nameString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
         }
         reStartButton.paint(g);
         g.setFont(Global.FONT_BUTTON);
         g.setColor(Color.orange);
         if(thankUScene ==0){
-        g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 4f * Global.MIN_PICTURE_SIZE));
-        g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()));
-        g.drawImage(image, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[1].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
+        g.drawString(point[0].getText(), (int)point[0].getX(), (int)(point[0].getY()+ 6f * Global.MIN_PICTURE_SIZE));
+        g.drawString(point[1].getText(), (int)point[1].getX(), (int)(point[1].getY()+ 4f * Global.MIN_PICTURE_SIZE));
+        g.drawString(point[2].getText(), (int)point[2].getX(), (int)(point[2].getY()));
+        g.drawImage(image, (int)((Global.FRAME_WIDTH  - (Global.MIN_PICTURE_SIZE * 4f) )/ 2), (int)(point[2].getY() - 6 * Global.MIN_PICTURE_SIZE), (int)(Global.MIN_PICTURE_SIZE * 4f), (int) (Global.MIN_PICTURE_SIZE * 4f), null);
         }else if( thankUScene==1){
             g.drawString("Thank you for playing :)", (int)point[0].getX()-80, (int)(point[0].getY()+ 4f));
         }

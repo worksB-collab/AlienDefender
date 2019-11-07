@@ -32,7 +32,7 @@ public class PlayerController {
     private int stage;
     private long score;
     private long money;
-    private DrawStringPoint namePoint, scorePoint, hpPoint, moneyPoint;
+    private DrawStringPoint namePoint, killPoint, hpPoint, moneyPoint;
     private ImageController imageController;
     private BufferedImage hpImage[], hurtMask;
     private int moneyChange, hpChange, notEnough; // change color when value changes
@@ -40,6 +40,7 @@ public class PlayerController {
     private float ratio;
     private AudioClip audio;
     private AudioControllerForAudioClip audioController;
+    private int kill;
 
     private PlayerController(int money, int hp) {
         this.name = "Player";
@@ -57,7 +58,7 @@ public class PlayerController {
         hurtDelay = new DelayCounter(2);
         audioController = AudioControllerForAudioClip.genInstance();
         audio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.HURT);
-        
+        kill =0;
         
     }
 
@@ -123,9 +124,17 @@ public class PlayerController {
     }
     //setter
 
+    public void setKill(int kill){
+        this.kill = kill;
+    }
+    
     public void setMoney(long money) {
         this.money = money;
         moneyChange = 1;
+    }
+    
+    public int getKill(){
+        return kill;
     }
 
     public long getMoney() {
@@ -191,10 +200,10 @@ public class PlayerController {
                 namePoint.setText(name);
             }
         }
-        if (scorePoint != null) {
-            scorePoint.setText(Long.toString(score));
-            if (scorePoint.getHeight() != Global.FRAME_HEIGHT) {
-                scorePoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
+        if (killPoint != null) {
+            killPoint.setText(Long.toString(kill));
+            if (killPoint.getHeight() != Global.FRAME_HEIGHT) {
+                killPoint.update(8 * Global.MIN_PICTURE_SIZE, 4 * Global.MIN_PICTURE_SIZE);
             }
         }
         if (hpPoint != null) {
@@ -222,8 +231,8 @@ public class PlayerController {
         if (namePoint == null) {
             namePoint = new DrawStringPoint(24f * Global.MIN_PICTURE_SIZE, 0, g, Global.FONT_NAME, name, 2f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE);
         }
-        if (scorePoint == null) {
-            scorePoint = new DrawStringPoint(21f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, g, Global.FONT_SCORE, Long.toString(score), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
+        if (killPoint == null) {
+            killPoint = new DrawStringPoint(21f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE, g, Global.FONT_SCORE, Long.toString(score), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
         }
         if (hpPoint == null) {
             hpPoint = new DrawStringPoint(28f * Global.MIN_PICTURE_SIZE, 0.5f * Global.MIN_PICTURE_SIZE, g, Global.FONT_HP, Long.toString(hp), 4f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE);
@@ -275,8 +284,8 @@ public class PlayerController {
         }
         
         //drawScore
-        g.setFont(scorePoint.getFont());
-        g.drawString(scorePoint.getText(), (int) (scorePoint.getX() + 0.5 * MIN_PICTURE_SIZE), (int) (scorePoint.getY()));
+        g.setFont(killPoint.getFont());
+        g.drawString(killPoint.getText(), (int) (killPoint.getX() + 0.5 * MIN_PICTURE_SIZE), (int) (killPoint.getY()));
         g.drawString(" Kill", (int) (29f * MIN_PICTURE_SIZE), (int) (4.341f * MIN_PICTURE_SIZE));
         //reset
         g.setColor(Color.black);
