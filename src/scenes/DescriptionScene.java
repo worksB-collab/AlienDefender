@@ -15,6 +15,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import javax.sound.sampled.Clip;
+import values.DrawStringPoint;
 import values.Global;
 import static values.Global.*;
 import values.Path;
@@ -32,6 +33,8 @@ public class DescriptionScene extends Scene {
     private Clip audio;
     private int sX;
     private int page;
+    private String pageString;
+    private DrawStringPoint pagePoint;
 
     public DescriptionScene(SceneController sceneController, Clip audio) {
         super(sceneController);
@@ -43,6 +46,7 @@ public class DescriptionScene extends Scene {
         description3 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION3);
         description4 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION4);
         page = 1;
+        pageString = Integer.toString(page) + " / " + "4";
         this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
@@ -73,6 +77,11 @@ public class DescriptionScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+        if(pagePoint != null){
+            pageString = Integer.toString(page) + " / " + "4";
+            pagePoint.setText(pageString);
+            pagePoint.update(Global.FRAME_WIDTH, Global.FRAME_WIDTH);
+        }
         backButton.update();
         continueButton.update();
         if (sX == -(int) (2 * 32 * MIN_PICTURE_SIZE)) {
@@ -115,10 +124,16 @@ public class DescriptionScene extends Scene {
             case 4:
                 g.drawImage(description4, 120, 80, 895, 650, 0, 0, 895, 674, null);
                 break;
+                
         }
         g.setFont(FONT_TEXT);
         g.setColor(Color.LIGHT_GRAY);
         g.drawString("Click to Continue", 400, 710);
+        
+        if(pagePoint == null){
+            pagePoint = new DrawStringPoint(0, 0, g, Global.FONT_SCORE, pageString, Global.FRAME_WIDTH, Global.FRAME_HEIGHT);
+        }
+        g.drawString(pagePoint.getText(), (int)(pagePoint.getX()- 11 * Global.MIN_PICTURE_SIZE), (int)(pagePoint.getY() - 14 * Global.MIN_PICTURE_SIZE));
     }
 
     @Override
@@ -149,6 +164,9 @@ public class DescriptionScene extends Scene {
             @Override
             public void onClick(int x, int y) {
                 page++;
+                if(page > 4){
+                    page = 1;
+                }
             }
 
             @Override
