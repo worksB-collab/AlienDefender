@@ -48,6 +48,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     private AudioControllerForAudioClip audioController;
     private int notEnough;
     private BufferedImage grayImg;
+    BufferedImage img;
 
     public TowerInformationWindow(float x, float y, float width, float height, Tower tower, PlayerController playerController) {
         super(6.5f * Global.MIN_PICTURE_SIZE, Global.MIN_PICTURE_SIZE, width, height, null);
@@ -72,6 +73,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         audioController = AudioControllerForAudioClip.genInstance();
         noMoneyAudio = audioController.tryGetAudio(Path.Audios.Sounds.Effect.NOMONEY);
         grayImg = imageController.tryGetImage("/Resources/Images/Label/grayUpgrade.png");
+        img = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
         super.mouseCommandListener = new CommandSolver.MouseCommandListener() {
             @Override
             // 關閉視窗
@@ -94,7 +96,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
             }
         };
     }
-    
+
     @Override
     public int getNotEnough() {
         return notEnough;
@@ -112,11 +114,13 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
     @Override
     public void update() {
-        buttonList.get(buttonList.size()-1).setImage(grayImg); // not sure if getting the right botton
-        if (notEnough == 1) {
+        if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
+            buttonList.get(0).setImage(img);
+        } else {
+            buttonList.get(0).setImage(grayImg);
         }
         for (Button btn : buttonList) {
-            
+
             btn.update();
         }
         if (upgradeStage == 2) {
@@ -170,7 +174,8 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paint(Graphics g
+    ) {
         //draw Tower Area
         towerRange = tower.getRange();
         Graphics2D k = (Graphics2D) g;
@@ -211,9 +216,8 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
     private void getButton(float x0, float y0) {
 
-        BufferedImage img = imageController.tryGetImage("/Resources/Images/Label/upgrade.png");
-         Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
-        
+        Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
+
         ButtonListener buttonListener2 = new Button.ButtonListener() {
 
             //

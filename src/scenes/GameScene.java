@@ -209,7 +209,6 @@ public class GameScene extends Scene {
         audioController.clearAudio();
         playerController.setScore(playerController.getScore() + (playerController.getHP() / 10)
                 + (int) (playerController.getMoney()) / 10);
-        System.out.println(scoreController.getKills());
     }
 
     @Override
