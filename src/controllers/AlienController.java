@@ -206,9 +206,9 @@ public class AlienController {
             if (alien.isDead()) {
 //                alien.paintDead(g);
                 if (alien.isDead()) {// kill counts 
-
                     scoreController.scoreCount(alien.getAlienNum());
                     playerController.setMoney(playerController.getMoney() + alien.getMoney());
+                    playerController.setKill(playerController.getKill()+1);
                     killAudio.play();
                 }
 //                if (aliens.get(i).getDeadDelay() % 6 == 0) {

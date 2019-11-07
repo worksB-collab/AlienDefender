@@ -16,12 +16,14 @@ public class ScoreController {
     private ArrayList<Integer> kills;
     public static ScoreController scoreController;
     private int totalScore;
+    private int totalKill;
 
     private ScoreController() {
         kills = new ArrayList<Integer>();
         for (int i = 0; i < 10; i++) {
             kills.add(0);
         }
+        totalKill = 0;
     }
 
     public static ScoreController genInstance() {
@@ -41,8 +43,13 @@ public class ScoreController {
             kills.set(i, 0);
         }
     }
+    
+    public int getTotalKill(){
+        return totalKill;
+    }
 
     public int scoreCount(int alienNum) {
+        totalKill++;
         switch (alienNum) {
             case 0:
                 kills.set(0, kills.get(0) + 1);

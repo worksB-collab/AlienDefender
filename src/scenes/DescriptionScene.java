@@ -27,7 +27,7 @@ public class DescriptionScene extends Scene {
 
     private CommandSolver.MouseCommandListener mouseCommandListener;
     private ImageController imageController;
-    private BufferedImage image, image2, description1, description2, description3;
+    private BufferedImage image, image2, description1, description2, description3, description4;
     private Button backButton, continueButton;
     private Clip audio;
     private int sX;
@@ -41,6 +41,7 @@ public class DescriptionScene extends Scene {
         description1 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION1);
         description2 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION2);
         description3 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION3);
+        description4 = imageController.tryGetImage(Path.Image.Description.DESCRIPTION4);
         page = 1;
         this.audio = audio;
         mouseCommandListener = new CommandSolver.MouseCommandListener() {
@@ -49,12 +50,12 @@ public class DescriptionScene extends Scene {
                 if (state == MouseState.RELEASED || state == MouseState.CLICKED) {
                     int x = e.getX();
                     int y = e.getY();
-                    if(backButton != null){
+                    if (backButton != null) {
                         if (backButton.isRange(x, y)) {
                             backButton.click(x, y);
                         }
                     }
-                    if(continueButton != null){
+                    if (continueButton != null) {
                         if (continueButton.isRange(x, y)) {
                             continueButton.click(x, y);
                         }
@@ -111,6 +112,9 @@ public class DescriptionScene extends Scene {
             case 3:
                 g.drawImage(description3, 120, 80, 895, 650, 0, 0, 895, 674, null);
                 break;
+            case 4:
+                g.drawImage(description4, 120, 80, 895, 650, 0, 0, 895, 674, null);
+                break;
         }
         g.setFont(FONT_TEXT);
         g.setColor(Color.LIGHT_GRAY);
@@ -138,10 +142,10 @@ public class DescriptionScene extends Scene {
             }
 
         });
-        
-        continueButton = new Button(0, 0, (int)(Global.FRAME_WIDTH), (int)(Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE),"Click to Retry");
 
-        continueButton.setButtonListener(new Button.ButtonListener(){
+        continueButton = new Button(0, 0, (int) (Global.FRAME_WIDTH), (int) (Global.FRAME_HEIGHT + 14 * Global.MIN_PICTURE_SIZE), "Click to Retry");
+
+        continueButton.setButtonListener(new Button.ButtonListener() {
             @Override
             public void onClick(int x, int y) {
                 page++;

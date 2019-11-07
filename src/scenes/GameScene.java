@@ -210,6 +210,7 @@ public class GameScene extends Scene {
         scoreController.scoreConverter();
         playerController.addScore(scoreController.getScore() + (playerController.getHP() / 10)
                 + (int) (playerController.getMoney()) / 10);
+        playerController.setKill(0);
         scoreController.clearScore();
     }
 

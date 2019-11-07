@@ -57,6 +57,7 @@ public class Path {
             public static final String DESCRIPTION1 = DESCRIPTION + "/description1.png";
             public static final String DESCRIPTION2 = DESCRIPTION + "/description2.png";
             public static final String DESCRIPTION3 = DESCRIPTION + "/description3.png";
+            public static final String DESCRIPTION4 = DESCRIPTION + "/description4.png";
         }
     }
 

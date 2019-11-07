@@ -36,7 +36,7 @@ public class TowerInformationWindow extends TowerPopUpWindow {
     private ImageController imageController;
     private BufferedImage image, towerImage;
     private PlayerController playerController;
-    private LinkedList<Button> buttonList;
+    private Button upgradeButton;
     private LinkedList<Point> towerRange;
     private Tower tower;
     private int upgradeStage;
@@ -66,7 +66,6 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         this.upgradeStage = tower.getUpgradeStage();
         imageController = ImageController.genInstance();
         this.playerController = playerController;
-        buttonList = new LinkedList<Button>();
         towerRange = new LinkedList();
         getButton(super.getX() - 2 * SIZE_GRID, super.getY());
         isEnd = false;
@@ -86,16 +85,11 @@ public class TowerInformationWindow extends TowerPopUpWindow {
                         isEnd = true;
                     }
 
-                    for (int i = 0; i < buttonList.size(); i++) {
-                        Button btn = buttonList.get(i);
-                        if(btn != null){
-                            if (btn.isRange(x, y)) {
-                                btn.click(x, y);
-                                break;
+                        if(upgradeButton != null){
+                            if (upgradeButton.isRange(x, y)) {
+                                upgradeButton.click(x, y);
                             }
                         }
-                        
-                    }
                 }
             }
         };
@@ -118,23 +112,19 @@ public class TowerInformationWindow extends TowerPopUpWindow {
 
     @Override
     public void update() {
-        if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])) {
-            Button btn = buttonList.get(buttonList.size() - 1);
-            if(btn != null){
-               btn.setImage(img); 
+        if (playerController.isEnough(TowerController.upgradeCostArr[tower.getTowerNum()])  && upgradeStage < 2) {
+            if(upgradeButton != null){
+               upgradeButton.setImage(img); 
             }
             
         } else {
-            Button btn = buttonList.get(buttonList.size() - 1);
-            if(btn != null){
-               btn.setImage(grayImg);
+            if(upgradeButton != null){
+               upgradeButton.setImage(grayImg);
             }
         }
-        for (int i = 0; i < buttonList.size(); i++) {
-            Button btn = buttonList.get(i);
-            if(btn != null){
-                btn.update();
-            }
+        if(upgradeButton != null){
+              upgradeButton.update();
+    
         }
         if (upgradeStage == 2) {
             switch (hoveringTower) {
@@ -222,14 +212,14 @@ public class TowerInformationWindow extends TowerPopUpWindow {
                 (int) (hoveringTower * SIZE_OBJECT + SIZE_OBJECT), (int) SIZE_OBJECT * (upgrade + 1),
                 null);
 
-        for (Button btn : buttonList) {
-            btn.paint(g);
+        if(upgradeButton != null){
+            upgradeButton.paint(g);
         }
     }
 
     private void getButton(float x0, float y0) {
 
-        Button upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
+       upgradeButton = new Button(x0 - 2 * MIN_PICTURE_SIZE + 19 * MIN_PICTURE_SIZE, y0 + (int) (0.5 * MIN_PICTURE_SIZE), 2 * MIN_PICTURE_SIZE, 2 * MIN_PICTURE_SIZE, img);
 
         ButtonListener buttonListener2 = new Button.ButtonListener() {
 
@@ -257,7 +247,6 @@ public class TowerInformationWindow extends TowerPopUpWindow {
         };
         if (upgradeStage != 2) {
             upgradeButton.setButtonListener(buttonListener2);
-            buttonList.add(upgradeButton);
         }
     }
 
