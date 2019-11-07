@@ -102,31 +102,31 @@ public class AlienParameter {
             case 5:
                 alienSet[0][0] = start5x;
                 alienSet[0][1] = start5y;
-                alienSet[0][2] = 70;
+                alienSet[0][2] = 60;
                 alienSet[0][3] = 6;
                 alienSet[0][4] = 10;
 
                 alienSet[1][0] = start5x;
                 alienSet[1][1] = start5y;
-                alienSet[1][2] = 80;
+                alienSet[1][2] = 70;
                 alienSet[1][3] = 7;
                 alienSet[1][4] = 10;
 
                 alienSet[2][0] = start5x;
                 alienSet[2][1] = start5y;
-                alienSet[2][2] = 70;
+                alienSet[2][2] = 80;
                 alienSet[2][3] = 8;
                 alienSet[2][4] = 10;
 
                 alienSet[3][0] = start5x;
                 alienSet[3][1] = start5y;
-                alienSet[3][2] = 60;
+                alienSet[3][2] = 90;
                 alienSet[3][3] = 9;
                 alienSet[3][4] = 10;
 
                 alienSet[4][0] = start5x;
                 alienSet[4][1] = start5y;
-                alienSet[4][2] = 70;
+                alienSet[4][2] = 80;
                 alienSet[4][3] = 10;
                 alienSet[4][4] = 10;
                 return alienSet;
