@@ -34,7 +34,7 @@ public class Tower2 extends Tower {
         delayForUpgrade = new DelayCounter(5);
         upgradeAnimation = new UpgradeAnimation(super.getX(), getY());
         super.setCost(TOWER1_COST);
-        super.setUpgradeCost(super.getCost()/2);
+        super.setUpgradeCost(super.getCost() / 2);
     }
 
     public float checkTowerNum(int towerNum) {
@@ -79,8 +79,10 @@ public class Tower2 extends Tower {
     @Override
     public void update() {
         for (int i = 0; i < bullets.size(); i++) {
-            if (bullets.get(i).isReached()) {
-                return;
+            if (bullets.get(i) != null) {
+                if (bullets.get(i).isReached()) {
+                    return;
+                }
             }
             bullets.get(i).update();
         }

@@ -208,7 +208,7 @@ public class GameScene extends Scene {
         winAudio.close();
         audioController.clearAudio();
         scoreController.scoreConverter();
-        playerController.addScore(scoreController.getScore() + (playerController.getHP() / 10)
+        playerController.addScore(scoreController.getScore() + (playerController.getHP())
                 + (int) (playerController.getMoney()) / 10);
         playerController.setKill(0);
         scoreController.clearScore();
@@ -307,7 +307,7 @@ public class GameScene extends Scene {
         buttonNext = new Button(27 * Global.MIN_PICTURE_SIZE, 21f * Global.MIN_PICTURE_SIZE, 4f * Global.MIN_PICTURE_SIZE, 2f * Global.MIN_PICTURE_SIZE,
                 imageController.tryGetImage("/Resources/Images/Button/Button_01_1.png"));
         buttonNext.setFont(Global.FONT_INFOWINDOW);
-        buttonNext.setText("NEXT");
+        buttonNext.setText("Skip");
 
         buttonNext.setButtonListener(new Button.ButtonListener() {
             @Override
